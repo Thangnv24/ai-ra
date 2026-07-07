@@ -1,0 +1,110 @@
+[
+  {
+    "text": "đau đầu",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      165,
+      172
+    ]
+  },
+  {
+    "text": "đau đầu",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      263,
+      270
+    ]
+  },
+  {
+    "text": "đau đầu",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      703,
+      710
+    ]
+  },
+  {
+    "text": "não úng thủy, có biểu hiện tăng đau đầu , triệu chứng cải thiện khi nằm ngửa",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      968,
+      1044
+    ],
+    "candidates": []
+  },
+  {
+    "text": "đau đầu",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      1109,
+      1116
+    ]
+  },
+  {
+    "text": "đau đầu",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      1361,
+      1368
+    ]
+  },
+  {
+    "text": "đau đầu",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      1411,
+      1418
+    ]
+  },
+  {
+    "text": "đau đầu",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      1494,
+      1501
+    ]
+  },
+  {
+    "text": "đau đầu",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1614,
+      1621
+    ]
+  },
+  {
+    "text": "khác",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      1976,
+      1980
+    ],
+    "candidates": []
+  }
+]

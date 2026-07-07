@@ -1,0 +1,85 @@
+[
+  {
+    "text": "tăng lipid máu",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      66,
+      80
+    ],
+    "candidates": [
+      "E78.5"
+    ]
+  },
+  {
+    "text": "hạ huyết áp",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      814,
+      825
+    ],
+    "candidates": [
+      "I95.9"
+    ]
+  },
+  {
+    "text": "mệt mỏi",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      1466,
+      1473
+    ]
+  },
+  {
+    "text": "mệt mỏi",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated",
+      "isHistorical"
+    ],
+    "position": [
+      1772,
+      1779
+    ]
+  },
+  {
+    "text": "hạ huyết áp",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      2014,
+      2025
+    ],
+    "candidates": [
+      "I95.9"
+    ]
+  },
+  {
+    "text": "hạ huyết áp",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      2572,
+      2583
+    ],
+    "candidates": [
+      "I95.9"
+    ]
+  },
+  {
+    "text": "hình ảnh",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      2747,
+      2755
+    ],
+    "candidates": []
+  }
+]

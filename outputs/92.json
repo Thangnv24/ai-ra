@@ -1,0 +1,32 @@
+[
+  {
+    "text": "xét nghiệm máu",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      225,
+      239
+    ]
+  },
+  {
+    "text": "Bạch cầu",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      472,
+      480
+    ]
+  },
+  {
+    "text": "hình ảnh: chụp ctchưa phát hiện bất thường trên phim chụp",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      508,
+      565
+    ],
+    "candidates": []
+  }
+]

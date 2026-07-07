@@ -1,0 +1,194 @@
+{
+  "drugGroup": {
+    "name": null,
+    "conceptGroup": [
+      {
+        "tty": "BPCK"
+      },
+      {
+        "tty": "GPCK"
+      },
+      {
+        "tty": "SBD",
+        "conceptProperties": [
+          {
+            "rxcui": "210325",
+            "name": "nystatin 1000000 UNT Oral Capsule [Bio-Statin]",
+            "synonym": "Bio-Statin 1000000 UNT Oral Capsule",
+            "tty": "SBD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "210390",
+            "name": "nystatin 500000 UNT Oral Capsule [Bio-Statin]",
+            "synonym": "Bio-Statin 500000 UNT Oral Capsule",
+            "tty": "SBD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "261178",
+            "name": "nystatin 100 UNT/MG Topical Powder [Nystop]",
+            "synonym": "Nystop 100 UNT/MG Topical Powder",
+            "tty": "SBD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "584414",
+            "name": "nystatin 100 UNT/MG Topical Powder [Nyamyc]",
+            "synonym": "Nyamyc 100 UNT/MG Topical Powder",
+            "tty": "SBD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          }
+        ]
+      },
+      {
+        "tty": "SCD",
+        "conceptProperties": [
+          {
+            "rxcui": "1053697",
+            "name": "nystatin 100 UNT/MG / triamcinolone acetonide 0.001 MG/MG Topical Ointment",
+            "synonym": "nystatin 100,000 UNT/GM / triamcinolone acetonide 0.1 % Topical Ointment",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1053753",
+            "name": "nystatin 100000 UNT/ML / triamcinolone acetonide 1 MG/ML Topical Cream",
+            "synonym": "nystatin 100,000 UNT/ML / triamcinolone acetonide 1 MG/ML Topical Cream",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "2105780",
+            "name": "neomycin 0.025 MG/MG / nystatin 100 UNT/MG / thiostrepton 2.5 UNT/MG / triamcinolone 0.001 MG/MG Topical Ointment",
+            "synonym": "neomycin 2.5 MG / nystatin 100,000 UNT / thiostrepton 2500 UNT / triamcinolone acetonide 1 MG per 1 GM Topical Ointment",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "239241",
+            "name": "nystatin 1000000 UNT Oral Capsule",
+            "synonym": "",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "250711",
+            "name": "nystatin 100000 UNT/ML / tolnaftate 10 MG/ML Topical Cream",
+            "synonym": "",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "312055",
+            "name": "nystatin 100000 UNT/ML Oral Suspension",
+            "synonym": "nystatin 100,000 UNT/ML Oral Suspension",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "312056",
+            "name": "nystatin 200000 UNT Oral Lozenge",
+            "synonym": "",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "312058",
+            "name": "nystatin 500000 UNT Oral Capsule",
+            "synonym": "",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "312059",
+            "name": "nystatin 500000 UNT Oral Tablet",
+            "synonym": "nystatin 500,000 UNT Oral Tablet",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "392197",
+            "name": "nystatin 0.1 UNT/MG Topical Ointment",
+            "synonym": "nystatin 100 UNT/GM Topical Ointment",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "543546",
+            "name": "nystatin 100000 UNT/ML Topical Cream",
+            "synonym": "nystatin 100,000 UNT/GM Topical Cream",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "646456",
+            "name": "nystatin 100 UNT/MG Topical Powder",
+            "synonym": "nystatin 100,000 UNT/GM Topical Powder",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "724568",
+            "name": "nystatin 100000 UNT Vaginal Insert",
+            "synonym": "nystatin 100,000 UNT Vaginal Insert",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "724575",
+            "name": "nystatin 100000 UNT Oral Lozenge",
+            "synonym": "",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "884308",
+            "name": "nystatin 100 UNT/MG Topical Ointment",
+            "synonym": "nystatin 100,000 UNT/GM Topical Ointment",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          }
+        ]
+      }
+    ]
+  }
+}

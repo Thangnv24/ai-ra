@@ -1,0 +1,71 @@
+[
+  {
+    "text": "bạch cầu",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      62,
+      70
+    ]
+  },
+  {
+    "text": "tăng huyết áp",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      132,
+      145
+    ],
+    "candidates": [
+      "I10"
+    ]
+  },
+  {
+    "text": "đau",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      304,
+      307
+    ]
+  },
+  {
+    "text": "đau",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated",
+      "isHistorical"
+    ],
+    "position": [
+      584,
+      587
+    ]
+  },
+  {
+    "text": "đau",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated",
+      "isHistorical"
+    ],
+    "position": [
+      735,
+      738
+    ]
+  },
+  {
+    "text": "đau",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      1300,
+      1303
+    ]
+  }
+]

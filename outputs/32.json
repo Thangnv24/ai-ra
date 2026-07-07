@@ -1,0 +1,262 @@
+[
+  {
+    "text": "ho",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      43,
+      45
+    ]
+  },
+  {
+    "text": "bạch cầu",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      51,
+      59
+    ]
+  },
+  {
+    "text": "Tăng huyết áp",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      80,
+      93
+    ],
+    "candidates": [
+      "I10"
+    ]
+  },
+  {
+    "text": "ho",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      119,
+      121
+    ]
+  },
+  {
+    "text": "Rung nhĩ",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      122,
+      130
+    ],
+    "candidates": [
+      "I48.91"
+    ]
+  },
+  {
+    "text": "Khó thở",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      222,
+      229
+    ]
+  },
+  {
+    "text": "sốt",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      358,
+      361
+    ]
+  },
+  {
+    "text": "sốt",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated",
+      "isHistorical"
+    ],
+    "position": [
+      414,
+      417
+    ]
+  },
+  {
+    "text": "khó thở",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      504,
+      511
+    ]
+  },
+  {
+    "text": "sốt",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      640,
+      643
+    ]
+  },
+  {
+    "text": "đau",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      647,
+      650
+    ]
+  },
+  {
+    "text": "tăng huyết áp",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      715,
+      728
+    ],
+    "candidates": [
+      "I10"
+    ]
+  },
+  {
+    "text": "nhiễm khuẩn huyết do tụ cầu vàng nhạy cảm methicillin, nghi liên quan đến đường truyền tĩnh mạch trung tâm ngoại vi (PICC)",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      991,
+      1113
+    ],
+    "candidates": []
+  },
+  {
+    "text": "ho",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1393,
+      1395
+    ]
+  },
+  {
+    "text": "guaifenesin",
+    "type": "THUỐC",
+    "assertions": [],
+    "position": [
+      1487,
+      1498
+    ],
+    "candidates": [
+      "392085"
+    ]
+  },
+  {
+    "text": "Khó thở",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1651,
+      1658
+    ]
+  },
+  {
+    "text": "Ho",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1711,
+      1713
+    ]
+  },
+  {
+    "text": "sốt",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      1775,
+      1778
+    ]
+  },
+  {
+    "text": "ho",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      1869,
+      1871
+    ]
+  },
+  {
+    "text": "khó thở",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated",
+      "isHistorical"
+    ],
+    "position": [
+      2048,
+      2055
+    ]
+  },
+  {
+    "text": "đau ngực",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated",
+      "isHistorical"
+    ],
+    "position": [
+      2060,
+      2068
+    ]
+  },
+  {
+    "text": "ho",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      2074,
+      2076
+    ]
+  },
+  {
+    "text": "khác",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      2108,
+      2112
+    ],
+    "candidates": []
+  }
+]

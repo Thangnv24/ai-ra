@@ -1,0 +1,218 @@
+[
+  {
+    "text": "đau",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      188,
+      191
+    ]
+  },
+  {
+    "text": "táo bón",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated",
+      "isHistorical"
+    ],
+    "position": [
+      508,
+      515
+    ]
+  },
+  {
+    "text": "đau",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      609,
+      612
+    ]
+  },
+  {
+    "text": "đau",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      662,
+      665
+    ]
+  },
+  {
+    "text": "đau bụng",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      741,
+      749
+    ]
+  },
+  {
+    "text": "đau",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      830,
+      833
+    ]
+  },
+  {
+    "text": "táo bón",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      878,
+      885
+    ]
+  },
+  {
+    "text": "đổ mồ hôi",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      919,
+      928
+    ]
+  },
+  {
+    "text": "sốt",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated",
+      "isHistorical"
+    ],
+    "position": [
+      958,
+      961
+    ]
+  },
+  {
+    "text": "chóng mặt",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated",
+      "isHistorical"
+    ],
+    "position": [
+      974,
+      983
+    ]
+  },
+  {
+    "text": "đau",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      1099,
+      1102
+    ]
+  },
+  {
+    "text": "gian",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1160,
+      1164
+    ]
+  },
+  {
+    "text": "1",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1166,
+      1167
+    ]
+  },
+  {
+    "text": "đổ mồ hôi",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      1206,
+      1215
+    ]
+  },
+  {
+    "text": "đau",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1315,
+      1318
+    ]
+  },
+  {
+    "text": "sốt",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      1430,
+      1433
+    ]
+  },
+  {
+    "text": "chóng mặt",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      1446,
+      1455
+    ]
+  },
+  {
+    "text": "đổ mồ hôi",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1572,
+      1581
+    ]
+  },
+  {
+    "text": "sốt",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      1611,
+      1614
+    ]
+  },
+  {
+    "text": "hình ảnh: Nhiều lần chụp chụp cắt lớp vi tính trong lần nhập viện trước cho thấy viêm túi mật không biến chứng",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      1637,
+      1747
+    ],
+    "candidates": []
+  }
+]

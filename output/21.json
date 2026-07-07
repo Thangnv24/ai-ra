@@ -1,0 +1,1 @@
+[{"text": "Tăng huyết áp", "type": "CHẨN_ĐOÁN", "assertions": ["isHistorical"], "position": [48, 61], "candidates": ["I10"]}, {"text": "phình động mạch chủ", "type": "CHẨN_ĐOÁN", "assertions": ["isHistorical"], "position": [231, 250], "candidates": ["I71.9"]}]

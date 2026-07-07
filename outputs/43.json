@@ -1,0 +1,87 @@
+[
+  {
+    "text": "nhồi máu cơ tim",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      391,
+      406
+    ],
+    "candidates": [
+      "I21.9"
+    ]
+  },
+  {
+    "text": "khó thở",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      977,
+      984
+    ]
+  },
+  {
+    "text": "đau ngực",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      986,
+      994
+    ]
+  },
+  {
+    "text": "khó thở khi nằm",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      996,
+      1011
+    ]
+  },
+  {
+    "text": "khó thở",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1013,
+      1020
+    ]
+  },
+  {
+    "text": "ngất xỉu",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1034,
+      1042
+    ]
+  },
+  {
+    "text": "hình ảnh",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      1176,
+      1184
+    ],
+    "candidates": []
+  },
+  {
+    "text": "khác",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      1412,
+      1416
+    ],
+    "candidates": []
+  }
+]

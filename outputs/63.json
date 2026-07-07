@@ -1,0 +1,177 @@
+[
+  {
+    "text": "đau bụng",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      230,
+      238
+    ]
+  },
+  {
+    "text": "đau",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      295,
+      298
+    ]
+  },
+  {
+    "text": "táo bón",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      355,
+      362
+    ]
+  },
+  {
+    "text": "đau",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      535,
+      538
+    ]
+  },
+  {
+    "text": "đau",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      630,
+      633
+    ]
+  },
+  {
+    "text": "đau",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      695,
+      698
+    ]
+  },
+  {
+    "text": "đau bụng",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      743,
+      751
+    ]
+  },
+  {
+    "text": "táo bón",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      758,
+      765
+    ]
+  },
+  {
+    "text": "buồn nôn",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      772,
+      780
+    ]
+  },
+  {
+    "text": "đau",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      820,
+      823
+    ]
+  },
+  {
+    "text": "đau",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      863,
+      866
+    ]
+  },
+  {
+    "text": "buồn nôn",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      933,
+      941
+    ]
+  },
+  {
+    "text": "đau",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1092,
+      1095
+    ]
+  },
+  {
+    "text": "đau",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1137,
+      1140
+    ]
+  },
+  {
+    "text": "creatinine",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1407,
+      1417
+    ]
+  },
+  {
+    "text": "hình ảnh: chụp ct bụng, chậu, không thuốc cản quang cho thấy một lượng nhỏ dịch và mỡ bao quanh một quai ruột kết sigma, gợi ý viêm túi mật cấp tính không biến chứng",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      1440,
+      1605
+    ],
+    "candidates": []
+  },
+  {
+    "text": "khác: viêm túi mật cấp tính không biến chứng",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      1632,
+      1676
+    ],
+    "candidates": []
+  }
+]

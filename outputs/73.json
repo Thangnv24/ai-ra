@@ -1,0 +1,267 @@
+[
+  {
+    "text": "đau ngực",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      71,
+      79
+    ]
+  },
+  {
+    "text": "đau ngực",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      81,
+      89
+    ]
+  },
+  {
+    "text": "Nhồi máu cơ tim",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      101,
+      116
+    ],
+    "candidates": [
+      "I21.9"
+    ]
+  },
+  {
+    "text": "tăng huyết áp",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      193,
+      206
+    ],
+    "candidates": [
+      "I10"
+    ]
+  },
+  {
+    "text": "Tăng huyết áp",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      229,
+      242
+    ],
+    "candidates": [
+      "I10"
+    ]
+  },
+  {
+    "text": "tăng lipid máu",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isFamily",
+      "isHistorical"
+    ],
+    "position": [
+      250,
+      264
+    ],
+    "candidates": [
+      "E78.5"
+    ]
+  },
+  {
+    "text": "tăng lipid máu",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isNegated",
+      "isHistorical"
+    ],
+    "position": [
+      282,
+      296
+    ],
+    "candidates": [
+      "E78.5"
+    ]
+  },
+  {
+    "text": "Đái tháo đường type 2",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isNegated",
+      "isHistorical"
+    ],
+    "position": [
+      320,
+      341
+    ],
+    "candidates": [
+      "E11.9"
+    ]
+  },
+  {
+    "text": "bệnh tim mạch do xơ vữa động mạch",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isNegated",
+      "isHistorical"
+    ],
+    "position": [
+      469,
+      502
+    ],
+    "candidates": [
+      "I25.10"
+    ]
+  },
+  {
+    "text": "bệnh tim mạch do xơ vữa động mạch",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      504,
+      537
+    ],
+    "candidates": [
+      "I25.10"
+    ]
+  },
+  {
+    "text": "aspirin 81",
+    "type": "THUỐC",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      760,
+      770
+    ],
+    "candidates": [
+      "243670",
+      "1191"
+    ]
+  },
+  {
+    "text": "metoprolol succinate 100",
+    "type": "THUỐC",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      860,
+      884
+    ],
+    "candidates": [
+      "866436"
+    ]
+  },
+  {
+    "text": "atorvastatin 80",
+    "type": "THUỐC",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      946,
+      961
+    ],
+    "candidates": [
+      "617314"
+    ]
+  },
+  {
+    "text": "lisinopril 2.5",
+    "type": "THUỐC",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      986,
+      1000
+    ],
+    "candidates": [
+      "197361"
+    ]
+  },
+  {
+    "text": "đau ngực",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      1103,
+      1111
+    ]
+  },
+  {
+    "text": "đau ngực",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      1315,
+      1323
+    ]
+  },
+  {
+    "text": "đau ngực",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isFamily",
+      "isHistorical"
+    ],
+    "position": [
+      1410,
+      1418
+    ]
+  },
+  {
+    "text": "đau ngực",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated",
+      "isHistorical"
+    ],
+    "position": [
+      1573,
+      1581
+    ]
+  },
+  {
+    "text": "khó thở",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated",
+      "isHistorical"
+    ],
+    "position": [
+      1583,
+      1590
+    ]
+  },
+  {
+    "text": "đánh trống ngực",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated",
+      "isHistorical"
+    ],
+    "position": [
+      1592,
+      1607
+    ]
+  }
+]

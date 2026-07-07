@@ -1,0 +1,149 @@
+{
+  "drugGroup": {
+    "name": null,
+    "conceptGroup": [
+      {
+        "tty": "BPCK"
+      },
+      {
+        "tty": "GPCK"
+      },
+      {
+        "tty": "SBD",
+        "conceptProperties": [
+          {
+            "rxcui": "206157",
+            "name": "clonazepam 0.5 MG Oral Tablet [Klonopin]",
+            "synonym": "Klonopin 0.5 MG Oral Tablet",
+            "tty": "SBD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "206159",
+            "name": "clonazepam 1 MG Oral Tablet [Klonopin]",
+            "synonym": "Klonopin 1 MG Oral Tablet",
+            "tty": "SBD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "206160",
+            "name": "clonazepam 2 MG Oral Tablet [Klonopin]",
+            "synonym": "Klonopin 2 MG Oral Tablet",
+            "tty": "SBD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          }
+        ]
+      },
+      {
+        "tty": "SCD",
+        "conceptProperties": [
+          {
+            "rxcui": "197527",
+            "name": "clonazepam 0.5 MG Oral Tablet",
+            "synonym": "",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "197528",
+            "name": "clonazepam 1 MG Oral Tablet",
+            "synonym": "",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "197529",
+            "name": "clonazepam 2 MG Oral Tablet",
+            "synonym": "",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "204892",
+            "name": "clonazepam 0.25 MG Oral Tablet",
+            "synonym": "",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "349194",
+            "name": "clonazepam 0.125 MG Disintegrating Oral Tablet",
+            "synonym": "",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "349195",
+            "name": "clonazepam 0.25 MG Disintegrating Oral Tablet",
+            "synonym": "",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "349196",
+            "name": "clonazepam 1 MG Disintegrating Oral Tablet",
+            "synonym": "",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "349197",
+            "name": "clonazepam 2 MG Disintegrating Oral Tablet",
+            "synonym": "",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "349198",
+            "name": "clonazepam 0.5 MG Disintegrating Oral Tablet",
+            "synonym": "",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "387007",
+            "name": "clonazepam 0.1 MG/ML Oral Solution",
+            "synonym": "",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "387008",
+            "name": "clonazepam 0.4 MG/ML Oral Solution",
+            "synonym": "",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          }
+        ]
+      }
+    ]
+  }
+}

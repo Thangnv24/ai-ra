@@ -1,0 +1,73 @@
+[
+  {
+    "text": "ho",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      113,
+      115
+    ]
+  },
+  {
+    "text": "đau bụng",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      126,
+      134
+    ]
+  },
+  {
+    "text": "tiêu chảy",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      142,
+      151
+    ]
+  },
+  {
+    "text": "hình ảnh",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      314,
+      322
+    ],
+    "candidates": []
+  },
+  {
+    "text": "được do không có mỡ nào trong cơ thể",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isNegated",
+      "isFamily",
+      "isHistorical"
+    ],
+    "position": [
+      363,
+      399
+    ],
+    "candidates": []
+  },
+  {
+    "text": "khác",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      618,
+      622
+    ],
+    "candidates": []
+  }
+]

@@ -1,0 +1,124 @@
+[
+  {
+    "text": "Đái tháo đường type 2",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      57,
+      78
+    ],
+    "candidates": [
+      "E11.9"
+    ]
+  },
+  {
+    "text": "Tăng huyết áp",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      85,
+      98
+    ],
+    "candidates": [
+      "I10"
+    ]
+  },
+  {
+    "text": "ng",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      159,
+      161
+    ]
+  },
+  {
+    "text": "5",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      163,
+      164
+    ]
+  },
+  {
+    "text": "đau đầu",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      261,
+      268
+    ]
+  },
+  {
+    "text": "mệt mỏi",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      284,
+      291
+    ]
+  },
+  {
+    "text": "tiêu chảy",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      298,
+      307
+    ]
+  },
+  {
+    "text": "tiêu chảy",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      339,
+      348
+    ]
+  },
+  {
+    "text": "tiêu chảy",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      359,
+      368
+    ]
+  },
+  {
+    "text": "tiêu chảy",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      418,
+      427
+    ]
+  },
+  {
+    "text": "khác: hạ kali máu rõ rệt trong bối cảnh tiêu chảy và có khả năng nhiễm trùng đường hô hấp trên cấp, không xác định",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      1197,
+      1311
+    ],
+    "candidates": []
+  }
+]

@@ -1,0 +1,139 @@
+[
+  {
+    "text": "Tăng huyết áp",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      73,
+      86
+    ],
+    "candidates": [
+      "I10"
+    ]
+  },
+  {
+    "text": "tăng huyết áp",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      88,
+      101
+    ],
+    "candidates": [
+      "I10"
+    ]
+  },
+  {
+    "text": "chóng mặt",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      325,
+      334
+    ]
+  },
+  {
+    "text": "khó thở",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      337,
+      344
+    ]
+  },
+  {
+    "text": "khó thở",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      346,
+      353
+    ]
+  },
+  {
+    "text": "đổ mồ hôi",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      357,
+      366
+    ]
+  },
+  {
+    "text": "chóng mặt",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      637,
+      646
+    ]
+  },
+  {
+    "text": "khó thở",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      648,
+      655
+    ]
+  },
+  {
+    "text": "đổ mồ hôi",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      657,
+      666
+    ]
+  },
+  {
+    "text": "đau",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      796,
+      799
+    ]
+  },
+  {
+    "text": "điện tâm đồ",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      820,
+      831
+    ]
+  },
+  {
+    "text": "khác",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isFamily"
+    ],
+    "position": [
+      1235,
+      1239
+    ],
+    "candidates": []
+  }
+]

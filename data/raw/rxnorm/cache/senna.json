@@ -1,0 +1,419 @@
+{
+  "drugGroup": {
+    "name": null,
+    "conceptGroup": [
+      {
+        "tty": "BPCK"
+      },
+      {
+        "tty": "GPCK"
+      },
+      {
+        "tty": "SBD",
+        "conceptProperties": [
+          {
+            "rxcui": "1039965",
+            "name": "sennosides, USP 17.2 MG Oral Tablet [Senokot]",
+            "synonym": "Senokot 17.2 MG Oral Tablet",
+            "tty": "SBD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1248013",
+            "name": "docusate sodium 50 MG / sennosides, USP 8.6 MG Oral Tablet [Senexon S]",
+            "synonym": "DOSS Sodium 50 MG / sennosides, USP 8.6 MG Oral Tablet [Senexon S]",
+            "tty": "SBD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1248015",
+            "name": "docusate sodium 50 MG / sennosides, USP 8.6 MG Oral Tablet [SENOKOT-S]",
+            "synonym": "SENOKOT-S Oral Tablet",
+            "tty": "SBD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1248017",
+            "name": "docusate sodium 50 MG / sennosides, USP 8.6 MG Oral Tablet [SenoSol-SS]",
+            "synonym": "SenoSol-SS Oral Tablet",
+            "tty": "SBD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1489245",
+            "name": "sennosides, USP 8.5 MG Oral Tablet [Swiss Kriss]",
+            "synonym": "Swiss Kriss 8.5 MG Oral Tablet",
+            "tty": "SBD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1741585",
+            "name": "sennosides, USP 8.6 MG Oral Tablet [Black Draught]",
+            "synonym": "Black Draught 8.6 MG Oral Tablet",
+            "tty": "SBD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1872920",
+            "name": "docusate sodium 50 MG / sennosides, USP 8.6 MG Oral Tablet [Colace w/Sennosides]",
+            "synonym": "DOSS Sodium 50 MG / sennosides, USP 8.6 MG Oral Tablet [Colace w/Sennosides]",
+            "tty": "SBD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "210241",
+            "name": "sennosides, USP 33.3 MG/ML Oral Solution [Fletchers Castoria]",
+            "synonym": "Fletchers Castoria 33.3 MG/ML Oral Solution",
+            "tty": "SBD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "2106884",
+            "name": "docusate sodium 50 MG / sennosides, USP 8.6 MG Oral Tablet [Laxacin]",
+            "synonym": "Laxacin 50 MG / 8.6 MG Oral Tablet",
+            "tty": "SBD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "213071",
+            "name": "sennosides, USP 15 MG Chewable Tablet [Ex-Lax Chocolated]",
+            "synonym": "Ex-Lax Chocolated 15 MG Chewable Tablet",
+            "tty": "SBD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "213072",
+            "name": "sennosides, USP 15 MG Oral Tablet [Ex-Lax Regular Strength Pills]",
+            "synonym": "Ex-Lax Regular Strength Pills 15 MG Oral Tablet",
+            "tty": "SBD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "213073",
+            "name": "sennosides, USP 25 MG Oral Tablet [Ex-Lax Maximum Relief Formula]",
+            "synonym": "Ex-Lax Maximum Relief Formula 25 MG Oral Tablet",
+            "tty": "SBD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "404186",
+            "name": "sennosides, USP 8.6 MG Oral Tablet [Senokot]",
+            "synonym": "Senokot 8.6 MG Oral Tablet",
+            "tty": "SBD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "404318",
+            "name": "sennosides, USP 15 MG Oral Tablet [Perdiem Overnight]",
+            "synonym": "Perdiem Overnight 15 MG Oral Tablet",
+            "tty": "SBD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "602795",
+            "name": "sennosides, USP 8.6 MG Oral Tablet [SenoSol]",
+            "synonym": "SenoSol 8.6 MG Oral Tablet",
+            "tty": "SBD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "602800",
+            "name": "sennosides, USP 17 MG Oral Tablet [SenoSol]",
+            "synonym": "SenoSol 17 MG Oral Tablet",
+            "tty": "SBD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "755277",
+            "name": "sennosides, USP 1.76 MG/ML Oral Solution [Senexon]",
+            "synonym": "Senexon 1.76 MG/ML Oral Solution",
+            "tty": "SBD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "763296",
+            "name": "sennosides, USP 8.6 MG Oral Tablet [Senna-Time]",
+            "synonym": "Senna-Time 8.6 MG Oral Tablet",
+            "tty": "SBD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "796413",
+            "name": "sennosides, USP 8.6 MG Oral Film [Pedia-Lax]",
+            "synonym": "Pedia-Lax 8.6 MG Oral Film",
+            "tty": "SBD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          }
+        ]
+      },
+      {
+        "tty": "SCD",
+        "conceptProperties": [
+          {
+            "rxcui": "1092363",
+            "name": "sennosides, USP 0.013 MG/MG Oral Flakes",
+            "synonym": "sennosides, USP 13 MG per GM Oral Flakes",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1092367",
+            "name": "sennosides, USP 8.5 MG Oral Tablet",
+            "synonym": "",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1235252",
+            "name": "docusate sodium 8.33 MG / sennosides, USP 1.36 MG Oral Tablet",
+            "synonym": "DOSS Sodium 8.33 MG / sennosides, USP 1.36 MG Oral Tablet",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1791612",
+            "name": "docusate sodium 50 MG / sennosides, USP 8.6 MG Oral Capsule",
+            "synonym": "DOSS Sodium 50 MG / sennosides, USP 8.6 MG Oral Capsule",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1858414",
+            "name": "sennosides, USP 1.67 MG/ML Oral Suspension",
+            "synonym": "sennosides, USP 8.3 MG per 5 ML Oral Suspension",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "200162",
+            "name": "sennosides, USP 15 MG Oral Tablet",
+            "synonym": "",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "2169295",
+            "name": "sennosides, USP 17.2 MG Oral Capsule",
+            "synonym": "sennosides 17.2 MG Oral Capsule",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "2268214",
+            "name": "sennosides, USP 3 MG Chewable Tablet",
+            "synonym": "sennosides 3 MG Chewable Tablet",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "237931",
+            "name": "sennosides, USP 65 MG/ML Oral Solution",
+            "synonym": "",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "243374",
+            "name": "sennosides, USP 12 MG Oral Tablet",
+            "synonym": "",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "249956",
+            "name": "sennosides, USP 7.5 MG Oral Tablet",
+            "synonym": "",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "251020",
+            "name": "sennosides, USP 15 MG Chewable Tablet",
+            "synonym": "",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "251292",
+            "name": "sennosides, USP 25 MG Oral Tablet",
+            "synonym": "",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "259126",
+            "name": "sennosides, USP 33.3 MG/ML Oral Solution",
+            "synonym": "sennosides, USP 167 MG per 5 ML Oral Solution",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "282742",
+            "name": "sennosides, USP 325 MG Oral Tablet",
+            "synonym": "",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "283325",
+            "name": "sennosides, USP 17 MG Oral Tablet",
+            "synonym": "",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "283719",
+            "name": "sennosides, USP 10 MG Chewable Tablet",
+            "synonym": "",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "312935",
+            "name": "sennosides, USP 8.6 MG Oral Tablet",
+            "synonym": "sennosides A and B 8.6 MG Oral Tablet",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "476827",
+            "name": "sennosides, USP 8.6 MG Oral Capsule",
+            "synonym": "",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "602802",
+            "name": "sennosides, USP 17.2 MG Oral Tablet",
+            "synonym": "",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "702311",
+            "name": "sennosides, USP 1.76 MG/ML Oral Solution",
+            "synonym": "sennosides 8.8 MG per 5 mL Oral Syrup",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "790473",
+            "name": "sennosides, USP 8.6 MG Oral Film",
+            "synonym": "",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "883720",
+            "name": "sennosides, USP 217 MG Oral Tablet",
+            "synonym": "",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "883726",
+            "name": "sennosides, USP 35.2 MG/ML Oral Solution",
+            "synonym": "senna, USP 176 MG per 5 ML Oral Solution",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "998740",
+            "name": "docusate sodium 50 MG / sennosides, USP 8.6 MG Oral Tablet",
+            "synonym": "DOSS Sodium 50 MG / sennosides, USP 8.6 MG Oral Tablet",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          }
+        ]
+      }
+    ]
+  }
+}

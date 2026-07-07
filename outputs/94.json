@@ -1,0 +1,185 @@
+[
+  {
+    "text": "đau bụng vùng hạ sườn phải",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      181,
+      207
+    ]
+  },
+  {
+    "text": "đau bụng",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      295,
+      303
+    ]
+  },
+  {
+    "text": "buồn nôn",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      318,
+      326
+    ]
+  },
+  {
+    "text": "nôn",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      328,
+      331
+    ]
+  },
+  {
+    "text": "đau bụng",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated",
+      "isHistorical"
+    ],
+    "position": [
+      413,
+      421
+    ]
+  },
+  {
+    "text": "buồn nôn",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      451,
+      459
+    ]
+  },
+  {
+    "text": "nôn",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      461,
+      464
+    ]
+  },
+  {
+    "text": "Đau bụng",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      559,
+      567
+    ]
+  },
+  {
+    "text": "Buồn nôn",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      582,
+      590
+    ]
+  },
+  {
+    "text": "nôn",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      592,
+      595
+    ]
+  },
+  {
+    "text": "p",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      654,
+      655
+    ]
+  },
+  {
+    "text": "130",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      656,
+      659
+    ]
+  },
+  {
+    "text": "ch",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      670,
+      672
+    ]
+  },
+  {
+    "text": "93",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      674,
+      676
+    ]
+  },
+  {
+    "text": "SPO2",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      720,
+      724
+    ]
+  },
+  {
+    "text": "99 %",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      726,
+      730
+    ]
+  },
+  {
+    "text": "đau",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      796,
+      799
+    ]
+  },
+  {
+    "text": "đau",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      842,
+      845
+    ]
+  }
+]

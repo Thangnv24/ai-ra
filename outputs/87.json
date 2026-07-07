@@ -1,0 +1,26 @@
+[
+  {
+    "text": "lo âu",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      130,
+      135
+    ]
+  },
+  {
+    "text": "Phẫu thuật cắt cụt chân trái bên trên gối  và cắt cụt chân phải bên dưới gối / biến chứng thuyên tắc phổi hai bên  - nhiễm trùng chi dưới bên phải do Enterococcus kháng vancomycin",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isFamily",
+      "isHistorical"
+    ],
+    "position": [
+      678,
+      857
+    ],
+    "candidates": []
+  }
+]

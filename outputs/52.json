@@ -1,0 +1,66 @@
+[
+  {
+    "text": "sốt",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      413,
+      416
+    ]
+  },
+  {
+    "text": "sốt",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      426,
+      429
+    ]
+  },
+  {
+    "text": "sốt",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      493,
+      496
+    ]
+  },
+  {
+    "text": "hình ảnh",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      783,
+      791
+    ],
+    "candidates": []
+  },
+  {
+    "text": "cộng hưởng từ mật tụy",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      809,
+      830
+    ]
+  },
+  {
+    "text": "hình ảnh  trước",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      974,
+      989
+    ],
+    "candidates": []
+  }
+]

@@ -1,0 +1,282 @@
+[
+  {
+    "text": "rung nhĩ",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      106,
+      114
+    ],
+    "candidates": [
+      "I48.91"
+    ]
+  },
+  {
+    "text": "rung nhĩ",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      371,
+      379
+    ],
+    "candidates": [
+      "I48.91"
+    ]
+  },
+  {
+    "text": "sốt",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      428,
+      431
+    ]
+  },
+  {
+    "text": "đau bụng",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      435,
+      443
+    ]
+  },
+  {
+    "text": "đau bụng",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      496,
+      504
+    ]
+  },
+  {
+    "text": "sốt",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      560,
+      563
+    ]
+  },
+  {
+    "text": "đau",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      588,
+      591
+    ]
+  },
+  {
+    "text": "đau bụng",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      678,
+      686
+    ]
+  },
+  {
+    "text": "đau",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      803,
+      806
+    ]
+  },
+  {
+    "text": "sốt",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isFamily",
+      "isHistorical"
+    ],
+    "position": [
+      896,
+      899
+    ]
+  },
+  {
+    "text": "đau",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      924,
+      927
+    ]
+  },
+  {
+    "text": "cấy máu",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1015,
+      1022
+    ]
+  },
+  {
+    "text": "sốt",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1066,
+      1069
+    ]
+  },
+  {
+    "text": "đau bụng",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1076,
+      1084
+    ]
+  },
+  {
+    "text": "đau",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1091,
+      1094
+    ]
+  },
+  {
+    "text": "sốt",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1114,
+      1117
+    ]
+  },
+  {
+    "text": "đau",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1139,
+      1142
+    ]
+  },
+  {
+    "text": "đau",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1191,
+      1194
+    ]
+  },
+  {
+    "text": "buồn nôn",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      1388,
+      1396
+    ]
+  },
+  {
+    "text": "nôn",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      1398,
+      1401
+    ]
+  },
+  {
+    "text": "ớn lạnh",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      1403,
+      1410
+    ]
+  },
+  {
+    "text": "đau ngực",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1437,
+      1445
+    ]
+  },
+  {
+    "text": "khó thở",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1447,
+      1454
+    ]
+  },
+  {
+    "text": "đau",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1545,
+      1548
+    ]
+  },
+  {
+    "text": "cấy máu",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      2010,
+      2017
+    ]
+  },
+  {
+    "text": "hình ảnh",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      2062,
+      2070
+    ],
+    "candidates": []
+  },
+  {
+    "text": "khác: lo ngại viêm túi mật cấp",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      2392,
+      2422
+    ],
+    "candidates": []
+  }
+]

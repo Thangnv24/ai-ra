@@ -1,0 +1,69 @@
+[
+  {
+    "text": "mệt mỏi",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      160,
+      167
+    ]
+  },
+  {
+    "text": "khó thở",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      199,
+      206
+    ]
+  },
+  {
+    "text": "mệt mỏi",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      248,
+      255
+    ]
+  },
+  {
+    "text": "Khó thở",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      258,
+      265
+    ]
+  },
+  {
+    "text": "Đau",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      341,
+      344
+    ]
+  },
+  {
+    "text": "hình ảnh",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      423,
+      431
+    ],
+    "candidates": []
+  }
+]

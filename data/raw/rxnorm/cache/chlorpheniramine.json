@@ -1,0 +1,1618 @@
+{
+  "drugGroup": {
+    "name": null,
+    "conceptGroup": [
+      {
+        "tty": "BPCK"
+      },
+      {
+        "tty": "GPCK",
+        "conceptProperties": [
+          {
+            "rxcui": "1101555",
+            "name": "{1 (acetaminophen 500 MG / chlorpheniramine maleate 2 MG / phenylephrine hydrochloride 5 MG Oral Tablet) / 1 (acetaminophen 500 MG / phenylephrine hydrochloride 5 MG Oral Tablet) } Pack",
+            "synonym": "1 daytime (acetaminophen 500 MG / phenylephrine HCl 5 MG Oral Tablet) / 1 nighttime (acetaminophen 500 MG / chlorpheniramine maleate 2 MG / phenylephrine HCl 5 MG Oral Tablet) Pack",
+            "tty": "GPCK",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1250983",
+            "name": "{1 (acetaminophen 500 MG / chlorpheniramine maleate 2 MG / dextromethorphan hydrobromide 15 MG Oral Tablet) / 1 (dextromethorphan hydrobromide 10 MG / guaifenesin 200 MG Oral Capsule) } Pack",
+            "synonym": "1 daytime (dextromethorphan HBr 10 MG / guaiFENesin 200 MG Oral Capsule) / 1 nighttime (acetaminophen 500 MG / chlorpheniramine maleate 2 MG / dextromethorphan HBr 15 MG Oral Tablet) Pack",
+            "tty": "GPCK",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "2119625",
+            "name": "{1 (chlorpheniramine maleate 0.2 MG/ML / dextromethorphan hydrobromide 1.5 MG/ML Oral Solution) / 1 (dextromethorphan hydrobromide 1 MG/ML / guaifenesin 20 MG/ML Oral Solution) } Pack",
+            "synonym": "1 daytime (dextromethorphan HBr 5 MG / guaifenesin 100 MG per 5 ML Oral Solution) / 1 nighttime (chlorpheniramine maleate 2 MG / dextromethorphan hydrobromide 15 MG per 10 ML Oral Solution) Pack",
+            "tty": "GPCK",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "2362250",
+            "name": "{1 (chlorpheniramine maleate 0.2 MG/ML / dextromethorphan hydrobromide 1.5 MG/ML Oral Solution) / 1 (dextromethorphan hydrobromide 1 MG/ML / guaifenesin 10 MG/ML Oral Solution) } Pack",
+            "synonym": "1 daytime (dextromethorphan HBr 20 MG / guaifenesin 200 MG per 20 ML Oral Solution) / 1 nighttime (chlorpheniramine maleate 2 MG / dextromethorphan hydrobromide 15 MG per 10 ML Oral Solution) Pack",
+            "tty": "GPCK",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "2558505",
+            "name": "{1 (acetaminophen 500 MG / chlorpheniramine maleate 2 MG / dextromethorphan hydrobromide 15 MG / pseudoephedrine hydrochloride 30 MG Oral Tablet) / 1 (acetaminophen 500 MG / dextromethorphan hydrobromide 15 MG / pseudoephedrine hydrochloride 30 MG Oral Tablet) } Pack",
+            "synonym": "1 daytime (acetaminophen 500 MG / dextromethorphan hydrobromide 15 MG / pseudoephedrine hydrochloride 30 MG Oral Tablet) / 1 nighttime (acetaminophen 500 MG / chlorpheniramine maleate 2 MG / dextromethorphan hydrobromide 15 MG / pseudoephedrine hydrochloride 30 MG Oral Tablet) Pack",
+            "tty": "GPCK",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "2604579",
+            "name": "{1 (acetaminophen 500 MG / chlorpheniramine maleate 2 MG / dextromethorphan hydrobromide 15 MG Oral Tablet) / 1 (acetaminophen 500 MG / dextromethorphan hydrobromide 15 MG Oral Tablet) } Pack",
+            "synonym": "1 nighttime (acetaminophen 500 MG / chlorpheniramine maleate 2 MG / dextromethorphan HBr 15 MG Oral Tablet) / 1 daytime (acetaminophen 500 MG / dextromethorphan HBr 15 MG Oral Tablet) Pack",
+            "tty": "GPCK",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "2604635",
+            "name": "{1 (acetaminophen 33.3 MG/ML / chlorpheniramine maleate 0.133 MG/ML / dextromethorphan hydrobromide 1 MG/ML Oral Solution) / 1 (acetaminophen 33.3 MG/ML / dextromethorphan hydrobromide 1 MG/ML Oral Solution) } Pack",
+            "synonym": "1 nighttime (acetaminophen 33.3 MG/ML / chlorpheniramine maleate 0.133 MG/ML / dextromethorphan HBr 1 MG/ML Oral Solution) / 1 daytime (acetaminophen 33.3 MG/ML / dextromethorphan HBr 1 MG/ML Oral Solution) Pack",
+            "tty": "GPCK",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "2634560",
+            "name": "{1 (acetaminophen 325 MG / chlorpheniramine maleate 2 MG / dextromethorphan hydrobromide 10 MG / phenylephrine hydrochloride 5 MG Oral Tablet) / 1 (acetaminophen 325 MG / dextromethorphan hydrobromide 10 MG / phenylephrine hydrochloride 5 MG Oral Tablet) } Pack",
+            "synonym": "1 daytime (acetaminophen 325 MG / dextromethorphan HBr 10 MG / phenylephrine HCl 5 MG Oral Tablet) / 1 nighttime (acetaminophen 325 MG / chlorpheniramine maleate 2 MG / dextromethorphan HBr 10 MG / phenylephrine HCl 5 MG Oral Tablet) Pack",
+            "tty": "GPCK",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "2634561",
+            "name": "{1 (acetaminophen 325 MG / chlorpheniramine maleate 2 MG / phenylephrine hydrochloride 5 MG Oral Tablet) / 1 (acetaminophen 325 MG / phenylephrine hydrochloride 5 MG Oral Tablet) } Pack",
+            "synonym": "1 daytime (acetaminophen 325 MG / phenylephrine HCl 5 MG Oral Tablet) / 1 nighttime (acetaminophen 325 MG / chlorpheniramine maleate 2 MG / phenylephrine HCl 5 MG Oral Tablet) Pack",
+            "tty": "GPCK",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "2634819",
+            "name": "{1 (acetaminophen 325 MG / chlorpheniramine maleate 2 MG / dextromethorphan hydrobromide 10 MG / phenylephrine hydrochloride 5 MG Oral Tablet) / 1 (acetaminophen 325 MG / dextromethorphan hydrobromide 10 MG / guaifenesin 200 MG / phenylephrine hydrochloride 5 MG Oral Tablet) } Pack",
+            "synonym": "1 daytime (acetaminophen 325 MG / dextromethorphan HBr 10 MG / guaifenesin 200 MG / phenylephrine HCl 5 MG Oral Tablet) / 1 nighttime (acetaminophen 325 MG / chlorpheniramine maleate 2 MG / dextromethorphan HBr 10 MG / phenylephrine HCl 5 Oral Tablet) Pack",
+            "tty": "GPCK",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "2636659",
+            "name": "{1 (acetaminophen 1000 MG / chlorpheniramine maleate 4 MG / dextromethorphan hydrobromide 30 MG Powder for Oral Solution) / 1 (acetaminophen 1000 MG / dextromethorphan hydrobromide 30 MG Powder for Oral Solution) } Pack",
+            "synonym": "{1 daytime (acetaminophen 1000 MG / dextromethorphan hydrobromide 30 MG Granules for Oral Solution) / 1 nighttime (acetaminophen 1000 MG / chlorpheniramine maleate 4 MG / dextromethorphan hydrobromide 30 MG Granules for Oral Solution) } Pack",
+            "tty": "GPCK",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "2644878",
+            "name": "{1 (chlorpheniramine maleate 0.133 MG/ML / dextromethorphan hydrobromide 1 MG/ML Oral Solution) / 1 (dextromethorphan hydrobromide 0.667 MG/ML / guaifenesin 6.667 MG/ML / phenylephrine hydrochloride 0.333 MG/ML Oral Solution) } Pack",
+            "synonym": "1 nighttime (chlorpheniramine maleate 2 MG / dextromethorphan HBr 15 MG per 15 ML Oral Solution) / 1 daytime (dextromethorphan HBr 10 MG / guaifenesin 100 MG / phenylephrine HCl 5 MG per 15 ML Oral Solution) Pack",
+            "tty": "GPCK",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "2664074",
+            "name": "{1 (aspirin 325 MG / chlorpheniramine maleate 2 MG / dextromethorphan hydrobromide 10 MG / phenylephrine bitartrate 7.8 MG Effervescent Oral Tablet) / 1 (aspirin 325 MG / dextromethorphan hydrobromide 10 MG / phenylephrine bitartrate 7.8 MG Effervescent Oral Tablet) } Pack",
+            "synonym": "1 daytime (aspirin 325 MG / dextromethorphan HBr 10 MG / phenylephrine bitartrate 7.8 MG Effervescent Oral Tablet) / 1 nighttime (aspirin 325 MG / chlorpheniramine maleate 2 MG / dextromethorphan HBr 10 MG / phenylephrine bitartrate 7.8 MG Effervescent Oral Tablet) Pack",
+            "tty": "GPCK",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "2743069",
+            "name": "{1 (chlorpheniramine maleate 0.2 MG/ML / dextromethorphan hydrobromide 1.5 MG/ML Oral Suspension) / 1 (dextromethorphan hydrobromide 1 MG/ML / guaifenesin 20 MG/ML Oral Suspension) } Pack",
+            "synonym": "1 daytime (dextromethorphan HBr 5 MG / guaifenesin 100 MG per 5 ML Oral Suspension) / 1 nighttime (chlorpheniramine maleate 2 MG / dextromethorphan hydrobromide 15 MG per 10 ML Oral Suspension) Pack",
+            "tty": "GPCK",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "2744508",
+            "name": "{1 (acetaminophen 250 MG / chlorpheniramine maleate 2 MG / dextromethorphan hydrobromide 10 MG Effervescent Oral Tablet) / 1 (acetaminophen 250 MG / dextromethorphan hydrobromide 10 MG Effervescent Oral Tablet) } Pack",
+            "synonym": "1 daytime (acetaminophen 250 MG / dextromethorphan hydrobromide 10 MG Effervescent Oral Tablet) / 1 nighttime (acetaminophen 325 MG / chlorpheniramine hydrochloride 2 MG / dextromethorphan hydrobromide 10 MG Effervescent Oral Tablet)",
+            "tty": "GPCK",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "759494",
+            "name": "{14 (12 HR brompheniramine maleate 6 MG / pseudoephedrine hydrochloride 45 MG Extended Release Oral Tablet) / 14 (12 HR chlorpheniramine maleate 8 MG / methscopolamine nitrate 2.5 MG / phenylephrine hydrochloride 25 MG Extended Release Oral Tablet) } Pack",
+            "synonym": "",
+            "tty": "GPCK",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          }
+        ]
+      },
+      {
+        "tty": "SBD",
+        "conceptProperties": [
+          {
+            "rxcui": "1087463",
+            "name": "12 HR chlorpheniramine polistirex 1.6 MG/ML / hydrocodone polistirex 2 MG/ML Extended Release Suspension [Tussionex]",
+            "synonym": "Tussionex Pennkinetic ER (chlorpheniramine polistirex 1.6 MG/ML / hydrocodone polistirex 2 MG/ML) 12 HR Extended Release Suspension",
+            "tty": "SBD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1363290",
+            "name": "12 HR chlorpheniramine maleate 12 MG Extended Release Oral Tablet [Chlor-Trimeton]",
+            "synonym": "12 HR Chlor-Trimeton 12 MG Extended Release Oral Tablet",
+            "tty": "SBD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1363311",
+            "name": "chlorpheniramine maleate 4 MG Oral Tablet [Chlor-Trimeton]",
+            "synonym": "Chlor-Trimeton 4 MG Oral Tablet",
+            "tty": "SBD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1363315",
+            "name": "chlorpheniramine maleate 4 MG Oral Tablet [Aller-Chlor]",
+            "synonym": "Aller-Chlor 4 MG Oral Tablet",
+            "tty": "SBD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1363323",
+            "name": "chlorpheniramine maleate 4 MG Oral Tablet [Wal-finate]",
+            "synonym": "Wal-finate 4 MG Oral Tablet",
+            "tty": "SBD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1652093",
+            "name": "12 HR chlorpheniramine polistirex 0.8 MG/ML / codeine polistirex 4 MG/ML Extended Release Suspension [Tuzistra]",
+            "synonym": "Tuzistra (12 HR chlorpheniramine polistirex 0.8 MG/ML / codeine polistirex 4 MG/ML) Extended Release Suspension",
+            "tty": "SBD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "2099286",
+            "name": "12 HR chlorpheniramine maleate 8 MG / codeine phosphate 54.3 MG Extended Release Oral Tablet [Tuxarin]",
+            "synonym": "Tuxarin 54.3 MG / 8 MG 12 HR Extended Release Oral Tablet",
+            "tty": "SBD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "2199037",
+            "name": "carbetapentane tannate 6 MG/ML / chlorpheniramine tannate 0.8 MG/ML Oral Suspension [Tannic-12 S]",
+            "synonym": "Tannic-12 S (carbetapentane tannate 6 MG/ML / chlorpheniramine tannate 0.8 MG/ML) Oral Suspension",
+            "tty": "SBD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "2610310",
+            "name": "chlorpheniramine maleate 5 MG/ML Mucosal Spray [Clorrelief]",
+            "synonym": "ClorRelief 0.5 % Mucosal Spray",
+            "tty": "SBD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "604669",
+            "name": "chlorpheniramine maleate 0.4 MG/ML / phenylephrine hydrochloride 1.5 MG/ML / pyrilamine maleate 2.5 MG/ML Oral Solution [Poly Hist PD]",
+            "synonym": "Poly Hist PD (chlorpheniramine maleate 2 MG / phenylephrine hydrochloride 7.5 MG / pyrilamine maleate 12.5 MG) per 5 ML Oral Solution",
+            "tty": "SBD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "995043",
+            "name": "chlorpheniramine maleate 0.2 MG/ML / codeine phosphate 1 MG/ML / pseudoephedrine hydrochloride 3 MG/ML Oral Suspension [Zodryl DAC]",
+            "synonym": "Zodryl DAC 80 (chlorpheniramine maleate 0.2 MG / codeine phosphate 1 MG / pseudoephedrine HCl 3 MG) per 1 ML Oral Suspension",
+            "tty": "SBD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "995064",
+            "name": "chlorpheniramine maleate 0.2 MG/ML / codeine phosphate 1 MG/ML Oral Suspension [Zodryl AC]",
+            "synonym": "Zodryl AC 80 (chlorpheniramine maleate 2 MG / codeine phosphate 10 MG) per 10 ML Oral Suspension",
+            "tty": "SBD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "995067",
+            "name": "chlorpheniramine maleate 0.222 MG/ML / codeine phosphate 1 MG/ML / pseudoephedrine hydrochloride 3.33 MG/ML Oral Suspension [Zodryl DAC]",
+            "synonym": "Zodryl DAC 40 (chlorpheniramine maleate 0.222 MG / codeine phosphate 1 MG / pseudoephedrine HCl 33.3 MG) per 1 ML Oral Suspension",
+            "tty": "SBD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "995070",
+            "name": "chlorpheniramine maleate 0.222 MG/ML / codeine phosphate 1 MG/ML Oral Suspension [Zodryl AC]",
+            "synonym": "Zodryl AC 40 (chlorpheniramine maleate 0.222 MG / codeine phosphate 1 MG) per 1 ML Oral Suspension",
+            "tty": "SBD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "995073",
+            "name": "chlorpheniramine maleate 0.25 MG/ML / codeine phosphate 1 MG/ML Oral Suspension [Zodryl AC]",
+            "synonym": "Zodryl AC 35 (chlorpheniramine maleate 0.25 MG / codeine phosphate 1 MG) per 1 ML Oral Suspension",
+            "tty": "SBD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "995077",
+            "name": "chlorpheniramine maleate 0.25 MG/ML / codeine phosphate 1 MG/ML / pseudoephedrine hydrochloride 0.375 MG/ML Oral Suspension [Zodryl DAC]",
+            "synonym": "Zodryl DAC 35 (chlorpheniramine maleate 0.25 MG / codeine phosphate 1 MG / pseudoephedrine HCl 0.375 MG) per 1 ML Oral Suspension",
+            "tty": "SBD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "995081",
+            "name": "chlorpheniramine maleate 0.266 MG/ML / codeine phosphate 1 MG/ML / pseudoephedrine hydrochloride 4 MG/ML Oral Suspension [Zodryl DAC]",
+            "synonym": "Zodryl DAC 60 (chlorpheniramine maleate 0.266 MG / codeine phosphate 1 MG / pseudoephedrine HCl 4 MG) per 1 ML Oral Suspension",
+            "tty": "SBD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "995084",
+            "name": "chlorpheniramine maleate 0.267 MG/ML / codeine phosphate 1 MG/ML Oral Suspension [Zodryl AC]",
+            "synonym": "Zodryl AC 60 (chlorpheniramine maleate 0.267 MG / codeine phosphate 1 MG) per 1 ML Oral Suspension",
+            "tty": "SBD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "995088",
+            "name": "chlorpheniramine maleate 0.286 MG/ML / codeine phosphate 1 MG/ML / pseudoephedrine hydrochloride 4.29 MG/ML Oral Suspension [Zodryl DAC]",
+            "synonym": "Zodryl DAC (chlorpheniramine maleate 0.286 MG / codeine phosphate 1 MG / pseudoephedrine HCl 4.29 MG) per 1 ML Oral Suspension",
+            "tty": "SBD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "995095",
+            "name": "chlorpheniramine maleate 0.286 MG/ML / codeine phosphate 1 MG/ML Oral Suspension [Zodryl AC]",
+            "synonym": "Zodryl AC 30 (chlorpheniramine maleate 0.286 MG / codeine phosphate 1 MG) per 1 ML Oral Suspension",
+            "tty": "SBD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "995110",
+            "name": "chlorpheniramine maleate 0.333 MG/ML / codeine phosphate 1 MG/ML / pseudoephedrine hydrochloride 5 MG/ML Oral Suspension [Zodryl DAC]",
+            "synonym": "Zodryl DAC (chlorpheniramine maleate 0.333 MG / codeine phosphate 1 MG / pseudoephedrine HCl 5 MG) per 1 ML Oral Suspension",
+            "tty": "SBD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "995118",
+            "name": "chlorpheniramine maleate 0.333 MG/ML / codeine phosphate 1 MG/ML Oral Suspension [Zodryl AC]",
+            "synonym": "Zodryl AC 25 (chlorpheniramine maleate 0.333 MG / codeine phosphate 1 MG) per 1 ML Oral Suspension",
+            "tty": "SBD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "995122",
+            "name": "chlorpheniramine maleate 0.4 MG/ML / codeine phosphate 1 MG/ML / pseudoephedrine hydrochloride 6 MG/ML Oral Suspension [Zodryl DAC]",
+            "synonym": "Zodryl DAC 50 (chlorpheniramine maleate 0.4 MG / codeine phosphate 1 MG / pseudoephedrine HCl 6 MG) per 1 ML Oral Suspension",
+            "tty": "SBD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "995125",
+            "name": "chlorpheniramine maleate 0.4 MG/ML / codeine phosphate 1 MG/ML Oral Suspension [Zodryl AC]",
+            "synonym": "Zodryl AC 50 (chlorpheniramine maleate 0.4 MG / codeine phosphate 1 MG) per ML Oral Suspension",
+            "tty": "SBD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          }
+        ]
+      },
+      {
+        "tty": "SCD",
+        "conceptProperties": [
+          {
+            "rxcui": "1042688",
+            "name": "acetaminophen 325 MG / chlorpheniramine maleate 2 MG / dextromethorphan hydrobromide 10 MG / phenylephrine hydrochloride 5 MG Oral Capsule",
+            "synonym": "APAP 325 MG / chlorpheniramine maleate 2 MG / dextromethorphan hydrobromide 10 MG / phenylephrine hydrochloride 5 MG Oral Capsule",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1042693",
+            "name": "chlorpheniramine maleate 0.4 MG/ML / codeine phosphate 2 MG/ML / phenylephrine hydrochloride 1 MG/ML Oral Solution",
+            "synonym": "chlorpheniramine maleate 2 MG / codeine phosphate 10 MG / phenylephrine hydrochloride 5 MG per 5 ML Oral Solution",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1046384",
+            "name": "acetaminophen 21.7 MG/ML / chlorpheniramine maleate 0.133 MG/ML / dextromethorphan hydrobromide 1 MG/ML Oral Solution",
+            "synonym": "APAP 21.7 MG/ML / Chlorpheniramine Maleate 0.133 MG/ML / Dextromethorphan Hydrobromide 1 MG/ML Oral Solution",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1046781",
+            "name": "acetaminophen 325 MG / chlorpheniramine maleate 2 MG / phenylephrine hydrochloride 5 MG Oral Tablet",
+            "synonym": "APAP 325 MG / chlorpheniramine maleate 2 MG / phenylephrine hydrochloride 5 MG Oral Tablet",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1048124",
+            "name": "12 HR atropine sulfate 0.04 MG / chlorpheniramine maleate 8 MG / hyoscyamine sulfate 0.19 MG / pseudoephedrine hydrochloride 90 MG / scopolamine hydrobromide 0.01 MG Extended Release Oral Tablet",
+            "synonym": "atropine sulfate 0.04 MG / chlorpheniramine maleate 8 MG / hyoscyamine sulfate 0.19 MG / pseudoephedrine hydrochloride 90 MG / scopolamine hydrobromide 0.01 MG 12 HR Extended Release Oral Tablet",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1052679",
+            "name": "acetaminophen 500 MG / chlorpheniramine maleate 2 MG / phenylephrine hydrochloride 5 MG Oral Tablet",
+            "synonym": "APAP 500 MG / Chlorpheniramine Maleate 2 MG / Phenylephrine Hydrochloride 5 MG Oral Tablet",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1053618",
+            "name": "chlorpheniramine maleate 0.4 MG/ML / pseudoephedrine hydrochloride 6 MG/ML Oral Solution",
+            "synonym": "chlorpheniramine maleate 2 MG / psuedoephedrine hydrochloride 30 MG per 5 ML Syrup",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1086443",
+            "name": "chlorpheniramine maleate 0.8 MG/ML / dextromethorphan hydrobromide 3 MG/ML / phenylephrine hydrochloride 2 MG/ML Oral Solution",
+            "synonym": "chlorpheniramine maleate 4 MG / dextromethorphan hydrobromide 15 MG / phenylephrine hydrochloride 10 MG per 5 ML Oral Solution",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1086463",
+            "name": "chlorpheniramine maleate 0.8 MG/ML / phenylephrine hydrochloride 2 MG/ML Oral Solution",
+            "synonym": "chlorpheniramine maleate 4 MG / phenylephrine hydrochloride 10 MG per 5 ML Oral Solution",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1086750",
+            "name": "acetaminophen 32 MG/ML / chlorpheniramine maleate 0.2 MG/ML / dextromethorphan hydrobromide 1 MG/ML Oral Suspension",
+            "synonym": "APAP 32 MG/ML / Chlorpheniramine Maleate 0.2 MG/ML / Dextromethorphan Hydrobromide 1 MG/ML Oral Suspension",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1086991",
+            "name": "acetaminophen 325 MG / chlorpheniramine maleate 2 MG / dextromethorphan hydrobromide 10 MG / phenylephrine hydrochloride 5 MG Oral Tablet",
+            "synonym": "APAP 325 MG / chlorpheniramine maleate 2 MG / dextromethorphan hydrobromide 10 MG / phenylephrine hydrochloride 5 MG Oral Tablet",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1087459",
+            "name": "12 HR chlorpheniramine polistirex 1.6 MG/ML / hydrocodone polistirex 2 MG/ML Extended Release Suspension",
+            "synonym": "hydrocodone polistirex 10 MG / chlorpheniramine polistirex 8 MG per 5 ML 12HR Extended Release Oral Suspension",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1089968",
+            "name": "acetaminophen 500 MG / chlorpheniramine maleate 2 MG / dextromethorphan hydrobromide 15 MG / pseudoephedrine hydrochloride 30 MG Oral Tablet",
+            "synonym": "APAP 500 MG / Chlorpheniramine Maleate 2 MG / Dextromethorphan Hydrobromide 15 MG / Pseudoephedrine Hydrochloride 30 MG Oral Tablet",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1090443",
+            "name": "chlorpheniramine maleate 4 MG / phenylephrine hydrochloride 10 MG Oral Tablet",
+            "synonym": "",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1090699",
+            "name": "chlorpheniramine maleate 2 MG / pseudoephedrine hydrochloride 30 MG Oral Tablet",
+            "synonym": "",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1098496",
+            "name": "acetaminophen 500 MG / chlorpheniramine maleate 2 MG / dextromethorphan hydrobromide 15 MG Oral Tablet",
+            "synonym": "APAP 500 MG / chlorpheniramine maleate 2 MG / dextromethorphan hydrobromide 15 MG Oral Tablet",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1111440",
+            "name": "chlorpheniramine maleate 0.2 MG/ML / dextromethorphan hydrobromide 1.5 MG/ML Oral Solution",
+            "synonym": "chlorpheniramine maleate 1 MG / dextromethorphan hydrobromide 7.5 MG per 5 ML Oral Solution",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1112864",
+            "name": "acetaminophen 325 MG / chlorpheniramine maleate 2 MG Oral Tablet",
+            "synonym": "APAP 325 MG / chlorpheniramine maleate 2 MG Oral Tablet",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1113397",
+            "name": "acetaminophen 32 MG/ML / chlorpheniramine maleate 0.2 MG/ML / dextromethorphan hydrobromide 1 MG/ML / phenylephrine hydrochloride 0.5 MG/ML Oral Suspension",
+            "synonym": "acetaminophen 160 MG / chlorpheniramine maleate 1 MG / dextromethorphan HBr 5 MG / phenylephrine HCl 2.5 MG per 5 ML Oral Suspension",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1113522",
+            "name": "acetaminophen 32 MG/ML / chlorpheniramine maleate 0.2 MG/ML / dextromethorphan hydrobromide 1.5 MG/ML Oral Solution",
+            "synonym": "APAP 32 MG/ML / Chlorpheniramine Maleate 0.2 MG/ML / Dextromethorphan Hydrobromide 1.5 MG/ML Oral Solution",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1114361",
+            "name": "chlorpheniramine maleate 0.133 MG/ML / dextromethorphan hydrobromide 1 MG/ML Oral Solution",
+            "synonym": "chlorpheniramine maleate 2 MG / dextromethorphan hydrobromide 15 MG per 15 ML Oral Solution",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1114838",
+            "name": "chlorpheniramine maleate 2 MG/ML / phenylephrine hydrochloride 5 MG/ML Oral Solution",
+            "synonym": "chlorpheniramine maleate 2 MG / phenylephrine HCl 5 MG per 1 ML Oral Solution",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1117392",
+            "name": "chlorpheniramine maleate 0.2 MG/ML / dextromethorphan hydrobromide 1 MG/ML / pseudoephedrine hydrochloride 3 MG/ML Oral Solution",
+            "synonym": "chlorpheniramine maleate 1 MG / dextromethorphan hydrobromide 5 MG / pseudoephedrine hydrochloride 15 MG per 5 ML Oral Solution",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1147795",
+            "name": "acetaminophen 325 MG / chlorpheniramine maleate 2 MG / dextromethorphan hydrobromide 10 MG / pseudoephedrine hydrochloride 30 MG Oral Tablet",
+            "synonym": "APAP 325 MG / Chlorpheniramine Maleate 2 MG / Dextromethorphan Hydrobromide 10 MG / Pseudoephedrine Hydrochloride 30 MG Oral Tablet",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1190174",
+            "name": "chlorpheniramine maleate 0.4 MG/ML / dextromethorphan hydrobromide 3 MG/ML / phenylephrine hydrochloride 1 MG/ML Oral Solution",
+            "synonym": "chlorpheniramine maleate 2 MG / dextromethorphan hydrobromide 15 MG / phenylephrine hydrochloride 5 MG per 5 ML Oral Solution",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1193292",
+            "name": "acetaminophen 250 MG / chlorpheniramine maleate 2 MG / dextromethorphan hydrobromide 10 MG / phenylephrine hydrochloride 5 MG Oral Capsule",
+            "synonym": "APAP 250 MG / chlorpheniramine maleate 2 MG / dextromethorphan hydrobromide 10 MG / phenylephrine hydrochloride 5 MG Oral Capsule",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1193293",
+            "name": "acetaminophen 325 MG / chlorpheniramine maleate 4 MG / phenylephrine hydrochloride 10 MG Oral Tablet",
+            "synonym": "APAP 325 MG / chlorpheniramine maleate 4 MG / phenylephrine hydrochloride 10 MG Oral Tablet",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1236070",
+            "name": "acetaminophen 21.7 MG/ML / chlorpheniramine maleate 0.13 MG/ML / dextromethorphan hydrobromide 0.67 MG/ML Oral Solution",
+            "synonym": "APAP 325 MG / chlorpheniramine maleate 2 MG / dextromethorphan hydrobromide 10 MG per 15 ML Oral Solution",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1242240",
+            "name": "chlorpheniramine maleate 2 MG / phenylephrine hydrochloride 5 MG Oral Tablet",
+            "synonym": "",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1242747",
+            "name": "acetaminophen 162.5 MG / chlorpheniramine maleate 2 MG / dextromethorphan hydrobromide 10 MG / phenylephrine hydrochloride 5 MG Oral Capsule",
+            "synonym": "APAP 162.5 MG / chlorpheniramine maleate 2 MG / dextromethorphan hydrobromide 10 MG / phenylephrine hydrochloride 5 MG Oral Capsule",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1245169",
+            "name": "acetaminophen 163 MG / chlorpheniramine maleate 2 MG / dextromethorphan hydrobromide 10 MG / phenylephrine hydrochloride 5 MG Oral Tablet",
+            "synonym": "APAP 163 MG / Chlorpheniramine Maleate 2 MG / Dextromethorphan Hydrobromide 10 MG / Phenylephrine Hydrochloride 5 MG Oral Tablet",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1251811",
+            "name": "chlorpheniramine maleate 1 MG / dextromethorphan hydrobromide 5 MG Chewable Tablet",
+            "synonym": "",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1251928",
+            "name": "acetaminophen 500 MG / chlorpheniramine maleate 2 MG / pseudoephedrine hydrochloride 30 MG Oral Tablet",
+            "synonym": "APAP 500 MG / Chlorpheniramine Maleate 2 MG / Pseudoephedrine Hydrochloride 30 MG Oral Tablet",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1291266",
+            "name": "chlorpheniramine maleate 0.8 MG/ML / dextromethorphan hydrobromide 2 MG/ML / phenylephrine hydrochloride 2 MG/ML Oral Solution",
+            "synonym": "chlorpheniramine maleate 4 MG / dextromethorphan hydrobromide 10 MG / phenylephrine hydrochloride 10 MG per 5 ML Oral Solution",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1292342",
+            "name": "acetaminophen 43.3 MG/ML / chlorpheniramine maleate 0.267 MG/ML / dextromethorphan hydrobromide 2 MG/ML Oral Solution",
+            "synonym": "APAP 43.3 MG/ML / chlorpheniramine maleate 0.267 MG/ML / dextromethorphan HBr 2 MG/ML Oral Solution",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1293344",
+            "name": "acetaminophen 325 MG / chlorpheniramine maleate 2 MG / pseudoephedrine hydrochloride 30 MG Oral Tablet",
+            "synonym": "APAP 325 MG / chlorpheniramine maleate 2 MG / pseudoephedrine hydrochloride 30 MG Oral Tablet",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1293468",
+            "name": "chlorpheniramine tannate 0.4 MG/ML / phenylephrine tannate 1 MG/ML / pyrilamine tannate 2.5 MG/ML Oral Suspension",
+            "synonym": "chlorpheniramine tannate 2 MG / phenylephrine tannate 5 MG / pyrilamine tannate 12.5 MG per 5 ML Oral Suspension",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1293487",
+            "name": "chlorpheniramine tannate 9 MG / phenylephrine tannate 25 MG Oral Tablet",
+            "synonym": "",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1293491",
+            "name": "chlorpheniramine maleate 4 MG / phenylephrine hydrochloride 20 MG / phenyltoloxamine citrate 40 MG Extended Release Oral Tablet",
+            "synonym": "",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1294201",
+            "name": "acetaminophen 325 MG / chlorpheniramine maleate 2 MG / pseudoephedrine hydrochloride 30 MG Oral Capsule",
+            "synonym": "APAP 325 MG / Chlorpheniramine Maleate 2 MG / Pseudoephedrine Hydrochloride 30 MG Oral Capsule",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1297390",
+            "name": "chlorpheniramine maleate 2 MG / ibuprofen 200 MG / pseudoephedrine hydrochloride 30 MG Oral Tablet",
+            "synonym": "",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1299646",
+            "name": "acetaminophen 325 MG / chlorpheniramine maleate 2 MG / dextromethorphan hydrobromide 15 MG / pseudoephedrine hydrochloride 30 MG Oral Capsule",
+            "synonym": "APAP 325 MG / Chlorpheniramine Maleate 2 MG / Dextromethorphan Hydrobromide 15 MG / Pseudoephedrine Hydrochloride 30 MG Oral Capsule",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1299662",
+            "name": "acetaminophen 325 MG / chlorpheniramine maleate 2 MG / dextromethorphan hydrobromide 10 MG / pseudoephedrine hydrochloride 30 MG Oral Capsule",
+            "synonym": "APAP 325 MG / Chlorpheniramine Maleate 2 MG / Dextromethorphan Hydrobromide 10 MG / Pseudoephedrine Hydrochloride 30 MG Oral Capsule",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1303251",
+            "name": "acetaminophen 100 MG / caffeine 2 MG / chlorpheniramine maleate 2 MG Oral Capsule",
+            "synonym": "APAP 100 MG / Caffeine 2 MG / Chlorpheniramine Maleate 2 MG Oral Capsule",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1307244",
+            "name": "acetaminophen 325 MG / chlorpheniramine maleate 2 MG / dextromethorphan hydrobromide 15 MG / phenylephrine hydrochloride 5 MG Oral Tablet",
+            "synonym": "APAP 325 MG / chlorpheniramine maleate 2 MG / dextromethorphan HBr 15 MG / phenylephrine HCl 5 MG Oral Tablet",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1308442",
+            "name": "chlorpheniramine maleate 0.5 MG/ML / phenylephrine hydrochloride 1 MG/ML / phenyltoloxamine citrate 1.5 MG/ML Oral Solution",
+            "synonym": "chlorpheniramine maleate 2.5 MG / phenylephrine hydrochloride 5 MG / phenyltoloxamine citrate 7.5 MG per 5 ML Oral Solution",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1310503",
+            "name": "chlorpheniramine maleate 4 MG / ibuprofen 200 MG / phenylephrine hydrochloride 10 MG Oral Tablet",
+            "synonym": "",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1313969",
+            "name": "acetaminophen 325 MG / chlorpheniramine maleate 2 MG / phenylephrine hydrochloride 5 MG Oral Capsule",
+            "synonym": "APAP 325 MG / chlorpheniramine maleate 2 MG / phenylephrine hydrochloride 5 MG Oral Capsule",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1357894",
+            "name": "12 HR chlorpheniramine maleate 8 MG / dextromethorphan hydrobromide 30 MG / phenylephrine hydrochloride 20 MG Extended Release Oral Tablet",
+            "synonym": "chlorpheniramine maleate 8 MG / dextromethorphan hydrobromide 30 MG / phenylephrine hydrochloride 20 MG 12 HR Extended Release Oral Tablet",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1359114",
+            "name": "chlorpheniramine maleate 4 MG / dextromethorphan hydrobromide 20 MG / pseudoephedrine hydrochloride 60 MG Oral Tablet",
+            "synonym": "",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1363242",
+            "name": "chlorpheniramine maleate 10 MG/ML Injectable Solution",
+            "synonym": "",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1363288",
+            "name": "12 HR chlorpheniramine maleate 12 MG Extended Release Oral Tablet",
+            "synonym": "chlorpheniramine maleate 12 MG 12 HR Extended Release Oral Tablet",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1363306",
+            "name": "chlorpheniramine maleate 0.4 MG/ML Oral Solution",
+            "synonym": "chlorpheniramine maleate 2 MG per 5 ML Oral Solution",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1363309",
+            "name": "chlorpheniramine maleate 4 MG Oral Tablet",
+            "synonym": "",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1363752",
+            "name": "chlorpheniramine maleate 0.4 MG/ML / dextromethorphan hydrobromide 2 MG/ML / phenylephrine hydrochloride 1 MG/ML Oral Solution",
+            "synonym": "chlorpheniramine maleate 2 MG / dextromethorphan HBr 10 MG / phenylephrine HCl 5 MG per 5 ML Oral Solution",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1366825",
+            "name": "acetaminophen 80 MG / chlorpheniramine maleate 0.5 MG / dextromethorphan hydrobromide 2.5 MG / pseudoephedrine hydrochloride 7.5 MG Chewable Tablet",
+            "synonym": "APAP 80 MG / chlorpheniramine maleate 0.5 MG / dextromethorphan hydrobromide 2.5 MG / pseudoephedrine hydrochloride 7.5 MG Chewable Tablet",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1366948",
+            "name": "chlorpheniramine tannate 8 MG / phenylephrine tannate 25 MG Oral Tablet",
+            "synonym": "",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1366953",
+            "name": "chlorpheniramine tannate 0.8 MG/ML Oral Suspension",
+            "synonym": "chlorpheniramine tannate 4 MG per 5 ML Oral Suspension",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1367225",
+            "name": "chlorpheniramine maleate 2 MG / guaifenesin 100 MG / phenylephrine hydrochloride 5 MG Oral Tablet",
+            "synonym": "",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1367227",
+            "name": "chlorpheniramine maleate 3.5 MG / phenylephrine hydrochloride 10 MG Oral Tablet",
+            "synonym": "",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1370125",
+            "name": "chlorpheniramine maleate 0.4 MG/ML / dextromethorphan hydrobromide 3 MG/ML Oral Solution",
+            "synonym": "chlorpheniramine maleate 2 MG / dextromethorphan hydrobromide 15 MG per 5 ML Oral Solution",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1370440",
+            "name": "acetaminophen 50 MG/ML / chlorpheniramine maleate 0.8 MG/ML / dextromethorphan hydrobromide 2 MG/ML / phenylephrine hydrochloride 2 MG/ML Oral Solution",
+            "synonym": "acetaminophen 250 MG / chlorpheniramine maleate 4 MG / dextromethorphan HBr 10 MG / phenylephrine HCl 10 per 5 ML Oral Solution",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1372312",
+            "name": "acetaminophen 32 MG/ML / chlorpheniramine maleate 0.2 MG/ML / phenylephrine hydrochloride 0.5 MG/ML Oral Suspension",
+            "synonym": "acetaminophen 160 MG / chlorpheniramine maleate 1 MG / phenylephrine HCl 2.5 MG per 5 ML Oral Suspension",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1421985",
+            "name": "chlorpheniramine maleate 4 MG / dextromethorphan hydrobromide 30 MG Oral Tablet",
+            "synonym": "",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1423711",
+            "name": "chlorpheniramine maleate 0.4 MG/ML / dextromethorphan hydrobromide 2 MG/ML / pseudoephedrine hydrochloride 6 MG/ML Oral Solution",
+            "synonym": "chlorpheniramine maleate 2 MG / dextromethorphan hydrobromide 10 MG / pseudoephedrine hydrochloride 30 MG per 5 ML Oral Solution",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1424872",
+            "name": "chlophedianol hydrochloride 24 MG / chlorpheniramine maleate 3.5 MG / phenylephrine hydrochloride 10 MG Oral Tablet",
+            "synonym": "",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1425315",
+            "name": "acetaminophen 325 MG / chlorpheniramine maleate 6.25 MG / dextromethorphan hydrobromide 15 MG Oral Tablet",
+            "synonym": "APAP 325 MG / chlorpheniramine maleate 6.25 MG / dextromethorphan hydrobromide 15 MG Oral Tablet",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1429345",
+            "name": "chlorpheniramine maleate 0.2 MG/ML / phenylephrine hydrochloride 0.5 MG/ML Oral Solution",
+            "synonym": "chlorpheniramine maleate 1 MG / phenylephrine hydrochloride 2.5 MG per 5 ML Oral Solution",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1489310",
+            "name": "chlorpheniramine maleate 0.8 MG/ML / dextromethorphan hydrobromide 4 MG/ML / phenylephrine hydrochloride 2 MG/ML Oral Solution",
+            "synonym": "chlorpheniramine maleate 4 MG / dextromethorphan HBr 20 MG / phenylephrine HCl 10 MG per 5 ML Oral Solution",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1536477",
+            "name": "acetaminophen 250 MG / chlorpheniramine maleate 2 MG / dextromethorphan hydrobromide 10 MG / phenylephrine hydrochloride 5 MG Effervescent Oral Tablet",
+            "synonym": "APAP 250 MG / Chlorpheniramine Maleate 2 MG / Dextromethorphan Hydrobromide 10 MG / Phenylephrine Hydrochloride 5 MG Effervescent Oral Tablet",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1536840",
+            "name": "aspirin 325 MG / chlorpheniramine maleate 2 MG / phenylephrine bitartrate 7.8 MG Effervescent Oral Tablet",
+            "synonym": "ASA 325 MG / Chlorpheniramine Maleate 2 MG / Phenylephrine bitartrate 7.8 MG Effervescent Oral Tablet",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1536862",
+            "name": "chlorpheniramine maleate 2 MG / dextromethorphan hydrobromide 10 MG / phenylephrine hydrochloride 5 MG Effervescent Oral Tablet",
+            "synonym": "chlorpheniramine maleate 2 MG / dextromethorphan HBr 10 MG / phenylephrine HCl 5 MG Effervescent Oral Tablet",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1536931",
+            "name": "acetaminophen 250 MG / chlorpheniramine maleate 2 MG / phenylephrine hydrochloride 5 MG Effervescent Oral Tablet",
+            "synonym": "APAP 250 MG / Chlorpheniramine Maleate 2 MG / Phenylephrine Hydrochloride 5 MG Effervescent Oral Tablet",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1536934",
+            "name": "acetaminophen 325 MG / chlorpheniramine maleate 2 MG / dextromethorphan hydrobromide 10 MG / phenylpropanolamine bitartrate 20 MG Effervescent Oral Tablet",
+            "synonym": "APAP 325 MG / Chlorpheniramine Maleate 2 MG / Dextromethorphan Hydrobromide 10 MG / PHENYLPROPANOLAMINE BITARTRATE 20 MG Effervescent Oral Tablet",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1536993",
+            "name": "aspirin 500 MG / chlorpheniramine maleate 2 MG / phenylephrine bitartrate 8 MG Effervescent Oral Tablet",
+            "synonym": "ASA 500 MG / Chlorpheniramine Maleate 2 MG / Phenylephrine bitartrate 8 MG Effervescent Oral Tablet",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1537029",
+            "name": "aspirin 325 MG / chlorpheniramine maleate 2 MG / dextromethorphan hydrobromide 10 MG / phenylephrine bitartrate 7.8 MG Effervescent Oral Tablet",
+            "synonym": "ASA 325 MG / Chlorpheniramine Maleate 2 MG / Dextromethorphan Hydrobromide 10 MG / Phenylephrine bitartrate 7.8 MG Effervescent Oral Tablet",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1540507",
+            "name": "acetaminophen 80 MG / chlorpheniramine maleate 0.5 MG / phenylephrine hydrochloride 1.25 MG Chewable Tablet",
+            "synonym": "APAP 80 MG / Chlorpheniramine Maleate 0.5 MG / Phenylephrine Hydrochloride 1.25 MG Chewable Tablet",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1593105",
+            "name": "chlorpheniramine maleate 4 MG / dextromethorphan hydrobromide 10 MG / phenylephrine hydrochloride 10 MG Oral Tablet",
+            "synonym": "",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1599133",
+            "name": "acetaminophen 60 MG / chlorpheniramine maleate 0.667 MG Oral Tablet",
+            "synonym": "APAP 60 MG / Chlorpheniramine Maleate 0.667 MG Oral Tablet",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1652087",
+            "name": "12 HR chlorpheniramine polistirex 0.8 MG/ML / codeine polistirex 4 MG/ML Extended Release Suspension",
+            "synonym": "codeine polistirex 20 ML / chlorpheniramine polistirex 4 ML per 5 ML 12 HR Extended Release Suspension",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1664543",
+            "name": "12 HR chlorpheniramine maleate 8 MG / codeine phosphate 54.3 MG Extended Release Oral Tablet",
+            "synonym": "chlorpheniramine maleate 8 MG / codeine phosphate 54.3 MG 12HR Oral Extended Release Tablet",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1673791",
+            "name": "chlorpheniramine maleate 2 MG Oral Lozenge",
+            "synonym": "",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1741529",
+            "name": "acetaminophen 650 MG / chlorpheniramine maleate 4 MG / phenylephrine hydrochloride 10 MG Oral Powder",
+            "synonym": "APAP 650 MG / Chlorpheniramine Maleate 4 MG / Phenylephrine Hydrochloride 10 MG Oral Powder",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1743369",
+            "name": "acetaminophen 25 MG/ML / chlorpheniramine maleate 0.4 MG/ML / dextromethorphan hydrobromide 1.33 MG/ML / guaifenesin 20 MG/ML / phenylephrine hydrochloride 0.5 MG/ML Oral Solution",
+            "synonym": "acetaminophen 250 MG / chlorpheniramine maleate 4 MG / dextromethorphan HBr 13.33 MG / guaifenesin 200 MG / phenylephrine HCl 5 MG per 10 ML Oral Solution",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1744049",
+            "name": "acetaminophen 325 MG / chlorpheniramine maleate 3 MG / dextromethorphan hydrobromide 30 MG / phenylephrine hydrochloride 5 MG Oral Tablet",
+            "synonym": "APAP 325 MG / Chlorpheniramine Maleate 3 MG / Dextromethorphan Hydrobromide 30 MG / Phenylephrine Hydrochloride 5 MG Oral Tablet",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "1876117",
+            "name": "chlorpheniramine maleate 0.4 MG/ML / phenylephrine hydrochloride 1 MG/ML Oral Solution",
+            "synonym": "chlorpheniramine maleate 2 MG / phenylephrine HCl 5 MG per 5 ML Oral Solution",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "2003130",
+            "name": "chlorpheniramine maleate 4 MG / dextromethorphan hydrobromide 18 MG / phenylephrine hydrochloride 10 MG Oral Tablet",
+            "synonym": "chlorpheniramine maleate 4 MG / dextromethorphan HBr 18 MG / phenylephrine HCl 10 MG Oral Tablet",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "2049283",
+            "name": "acetaminophen 33.3 MG/ML / chlorpheniramine maleate 0.133 MG/ML / dextromethorphan hydrobromide 1 MG/ML / pseudoephedrine hydrochloride 2 MG/ML Oral Solution",
+            "synonym": "acetaminophen 1000 MG / chlorpheniramine maleate 4 MG / dextromethorphan HBr 30 MG / pseudoephedrine HCl 60 MG per 30 ML Oral Solution",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "2049841",
+            "name": "acetaminophen 325 MG / chlorpheniramine maleate 2 MG / dextromethorphan hydrobromide 10 MG Oral Tablet",
+            "synonym": "APAP 325 MG / Chlorpheniramine Maleate 2 MG / Dextromethorphan Hydrobromide 10 MG Oral Tablet",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "2056893",
+            "name": "chlorpheniramine maleate 0.8 MG/ML / codeine phosphate 2 MG/ML / phenylephrine hydrochloride 2 MG/ML Oral Solution",
+            "synonym": "codeine phosphate 10 MG / chlorpheniramine maleate 4 MG / phenylephrine hydrochloride 10 MG per 5 mL Oral Solution",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "2119482",
+            "name": "12 HR chlorpheniramine maleate 8 MG / methscopolamine nitrate 2.5 MG / phenylephrine hydrochloride 25 MG Extended Release Oral Tablet",
+            "synonym": "",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "2121065",
+            "name": "acetaminophen 65 MG/ML / chlorpheniramine maleate 0.4 MG/ML / dextromethorphan hydrobromide 1.3 MG/ML / phenylephrine hydrochloride 1 MG/ML Oral Solution",
+            "synonym": "APAP 65 MG/ML / Chlorpheniramine Maleate 0.4 MG/ML / Dextromethorphan Hydrobromide 1.3 MG/ML / Phenylephrine Hydrochloride 1 MG/ML Oral Solution",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "2167740",
+            "name": "chlorpheniramine maleate 0.133 MG/ML / dextromethorphan hydrobromide 0.333 MG/ML / phenylephrine hydrochloride 0.333 MG/ML Oral Solution",
+            "synonym": "chlorpheniramine maleate 0.133 MG/ML / dextromethorphan HBr 0.333 MG/ML / phenylephrine HCl 0.333 MG/ML Oral Solution",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "2167750",
+            "name": "chlorpheniramine maleate 0.8 MG/ML / dextromethorphan hydrobromide 6 MG/ML / phenylephrine hydrochloride 1.5 MG/ML Oral Solution",
+            "synonym": "chlorpheniramine maleate 4 MG / dextromethorphan HBr 30 MG / phenylephrine HCl 7.5 MG per 5 ML Oral Solution",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "2167752",
+            "name": "chlorpheniramine maleate 4 MG / dextromethorphan hydrobromide 20 MG / phenylephrine hydrochloride 10 MG Oral Tablet",
+            "synonym": "chlorpheniramine maleate 4 MG / dextromethorphan HBr 20 MG / phenylephrine HCl 10 MG Oral Tablet",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "2176488",
+            "name": "chlorpheniramine maleate 0.133 MG/ML / dextromethorphan hydrobromide 0.333 MG/ML / pseudoephedrine hydrochloride 0.333 MG/ML Oral Solution",
+            "synonym": "",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "2181307",
+            "name": "acetaminophen 325 MG / caffeine 45 MG / chlorpheniramine maleate 2 MG / phenylephrine hydrochloride 5 MG Oral Tablet",
+            "synonym": "APAP 325 MG / caffeine 45 MG / chlorpheniramine maleate 2 MG / phenylephrine HCl 5 MG Oral Tablet",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "2181311",
+            "name": "chlorpheniramine tannate 1.6 MG/ML / phenylephrine tannate 3 MG/ML / pyrilamine tannate 2.5 MG/ML Extended Release Suspension",
+            "synonym": "",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "2181317",
+            "name": "chlorpheniramine maleate 4 MG / phenylephrine hydrochloride 10 MG / phenylpropanolamine hydrochloride 50 MG / pyrilamine maleate 25 MG Oral Tablet",
+            "synonym": "",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "2181319",
+            "name": "chlorpheniramine maleate 8 MG Oral Capsule",
+            "synonym": "",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "2183684",
+            "name": "chlorpheniramine tannate 1.6 MG/ML / phenylephrine tannate 2 MG/ML Extended Release Suspension",
+            "synonym": "",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "2183700",
+            "name": "chlorpheniramine maleate 4 MG / pseudoephedrine hydrochloride 60 MG Oral Capsule",
+            "synonym": "",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "2199033",
+            "name": "carbetapentane tannate 6 MG/ML / chlorpheniramine tannate 0.8 MG/ML Oral Suspension",
+            "synonym": "",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "2463332",
+            "name": "acetaminophen 500 MG / chlorpheniramine maleate 4 MG / phenylephrine hydrochloride 10 MG Oral Tablet",
+            "synonym": "APAP 500 MG / chlorpheniramine maleate 4 MG / phenylephrine hydrochloride 10 MG Oral Tablet",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "2557336",
+            "name": "acetaminophen 325 MG / chlorpheniramine maleate 2 MG / dextromethorphan hydrobromide 10 MG / phenylephrine hydrochloride 5 MG Effervescent Oral Tablet",
+            "synonym": "APAP 325 / chlorpheniramine maleate 2 MG / dextromethorphan hydrobromide 10 MG / phenylephrine hydrochloride 5 MG Effervescent Oral Tablet",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "2588212",
+            "name": "acetaminophen 6.67 MG/ML / chlorpheniramine maleate 0.0833 MG/ML / dextromethorphan hydrobromide 0.5 MG/ML Oral Solution",
+            "synonym": "APAP 6.67 MG/ML / chlorpheniramine maleate 0.0833 MG/ML / dextromethorphan hydrobromide 0.5 MG/ML Oral Solution",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "2599517",
+            "name": "acetaminophen 325 MG / chlorpheniramine maleate 4 MG / phenylephrine hydrochloride 10 MG Oral Capsule",
+            "synonym": "APAP 325 MG / chlorpheniramine maleate 4 MG / phenylephrine hydrochloride 10 MG Oral Capsule",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "2603661",
+            "name": "chlorpheniramine maleate 3.5 MG / dextromethorphan hydrobromide 29 MG / phenylephrine hydrochloride 10 MG Oral Tablet",
+            "synonym": "",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "2604562",
+            "name": "acetaminophen 33.3 MG/ML / chlorpheniramine maleate 0.133 MG/ML / dextromethorphan hydrobromide 1 MG/ML Oral Solution",
+            "synonym": "acetaminophen 1000 MG / chlorpheniramine maleate 4 MG / dextromethorphan HBr 30 MG per 30 mL Oral Solution",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "2610305",
+            "name": "chlorpheniramine maleate 5 MG/ML Mucosal Spray",
+            "synonym": "chlorpheniramine maleate 0.5 % Mucosal Spray",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "2636658",
+            "name": "acetaminophen 1000 MG / chlorpheniramine maleate 4 MG / dextromethorphan hydrobromide 30 MG Powder for Oral Solution",
+            "synonym": "APAP 1000 MG / chlorpheniramine maleate 4 MG / dextromethorphan hydrobromide 30 MG Powder for Oral Solution",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "2645106",
+            "name": "acetaminophen 10 MG/ML / chlorpheniramine maleate 0.125 MG/ML Oral Solution",
+            "synonym": "APAP 10 MG/ML / chlorpheniramine maleate 0.125 MG/ML Oral Solution",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "2678231",
+            "name": "acetaminophen 162.5 MG / chlorpheniramine maleate 2 MG / dextromethorphan hydrobromide 5 MG Chewable Tablet",
+            "synonym": "APAP 162.5 MG / chlorpheniramine maleate 2 MG / dextromethorphan hydrobromide 5 MG Chewable Tablet",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "2691098",
+            "name": "acetaminophen 325 MG / chlorpheniramine maleate 2 MG / phenylephrine hydrochloride 5 MG Effervescent Oral Tablet",
+            "synonym": "APAP 325 MG / chlorpheniramine maleate 2 MG / phenylephrine hydrochloride 5 MG Effervescent Oral Tablet",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "2709229",
+            "name": "acetaminophen 325 MG / chlorpheniramine maleate 4 MG / dextromethorphan hydrobromide 20 MG / phenylephrine hydrochloride 10 MG Oral Tablet",
+            "synonym": "APAP 325 MG / chlorpheniramine maleate 4 MG / dextromethorphan hydrobromide 20 MG / phenylephrine hydrochloride 10 MG Oral Tablet",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "2724415",
+            "name": "chlorpheniramine maleate 0.35 MG/ML / phenylephrine hydrochloride 1 MG/ML Oral Solution",
+            "synonym": "chlorpheniramine maleate 1.75 MG / phenylephrine hydrochloride 5 MG per 5 ML Oral Solution",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "2743068",
+            "name": "chlorpheniramine maleate 0.2 MG/ML / dextromethorphan hydrobromide 1.5 MG/ML Oral Suspension",
+            "synonym": "chlorpheniramine maleate 2 MG / dextromethorphan HBr 15 MG per 10 ML Oral Suspension",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "2744312",
+            "name": "acetaminophen 250 MG / chlorpheniramine maleate 2 MG / dextromethorphan hydrobromide 10 MG Effervescent Oral Tablet",
+            "synonym": "APAP 250 MG / chlorpheniramine maleate 2 MG / dextromethorphan hydrobromide 10 MG Effervescent Oral Tablet",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "477045",
+            "name": "chlorpheniramine maleate 2 MG/ML Oral Solution",
+            "synonym": "chlorpheniramine maleate 2 MG per 1 ML Oral Solution",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "604664",
+            "name": "chlorpheniramine maleate 0.4 MG/ML / phenylephrine hydrochloride 1.5 MG/ML / pyrilamine maleate 2.5 MG/ML Oral Solution",
+            "synonym": "chlorpheniramine maleate 2 MG / phenylephrine hydrochloride 7.5 MG / pyrilamine maleate 12.5 MG per 5 ML Oral Solution",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "636568",
+            "name": "chlorpheniramine maleate 0.2 MG/ML / dextromethorphan hydrobromide 1 MG/ML Oral Solution",
+            "synonym": "chlorpheniramine maleate 1 MG / dextromethorphan HBr 5 MG per 5 ML Oral Solution",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "700949",
+            "name": "chlorpheniramine maleate 0.6 MG/ML / dextromethorphan hydrobromide 2.75 MG/ML / phenylephrine hydrochloride 1.5 MG/ML Oral Solution",
+            "synonym": "chlorpheniramine maleate 0.6 MG / dextromethorphan HBr 2.75 MG / phenylephrine HCl 1.5 MG per 1 ML Oral Solution",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "995041",
+            "name": "chlorpheniramine maleate 0.2 MG/ML / codeine phosphate 1 MG/ML / pseudoephedrine hydrochloride 3 MG/ML Oral Suspension",
+            "synonym": "chlorpheniramine maleate 0.2 MG/ML / codeine phosphate 1 MG/ML / pseudoephedrine HCl 3 MG/ML Oral Suspension",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "995062",
+            "name": "chlorpheniramine maleate 0.2 MG/ML / codeine phosphate 1 MG/ML Oral Suspension",
+            "synonym": "chlorpheniramine maleate 0.2 MG / codeine phosphate 1 MG per 1 ML Oral Suspension",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "995065",
+            "name": "chlorpheniramine maleate 0.222 MG/ML / codeine phosphate 1 MG/ML / pseudoephedrine hydrochloride 3.33 MG/ML Oral Suspension",
+            "synonym": "chlorpheniramine maleate 0.222 MG / codeine phosphate 1 MG / pseudoephedrine HCl 3.33 MG per 1 ML Oral Suspension",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "995068",
+            "name": "chlorpheniramine maleate 0.222 MG/ML / codeine phosphate 1 MG/ML Oral Suspension",
+            "synonym": "chlorpheniramine maleate 0.222 MG / codeine phosphate 1 MG per 1 ML Oral Suspension",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "995071",
+            "name": "chlorpheniramine maleate 0.25 MG/ML / codeine phosphate 1 MG/ML Oral Suspension",
+            "synonym": "chlorpheniramine maleate 0.25 MG / codeine phosphate 1 MG per 1 ML Oral Suspension",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "995075",
+            "name": "chlorpheniramine maleate 0.25 MG/ML / codeine phosphate 1 MG/ML / pseudoephedrine hydrochloride 0.375 MG/ML Oral Suspension",
+            "synonym": "chlorpheniramine maleate 0.25 MG / codeine phosphate 1 MG / pseudoephedrine HCl 0.375 MG per 1 ML Oral Suspension",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "995079",
+            "name": "chlorpheniramine maleate 0.266 MG/ML / codeine phosphate 1 MG/ML / pseudoephedrine hydrochloride 4 MG/ML Oral Suspension",
+            "synonym": "chlorpheniramine maleate 0.266 MG / codeine phosphate 1 MG / pseudoephedrine HCl 4 MG per 1 ML Oral Suspension",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "995082",
+            "name": "chlorpheniramine maleate 0.267 MG/ML / codeine phosphate 1 MG/ML Oral Suspension",
+            "synonym": "chlorpheniramine maleate 0.267 MG / codeine phosphate 1 MG per 1 ML Oral Suspension",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "995086",
+            "name": "chlorpheniramine maleate 0.286 MG/ML / codeine phosphate 1 MG/ML / pseudoephedrine hydrochloride 4.29 MG/ML Oral Suspension",
+            "synonym": "chlorpheniramine maleate 0.286 MG/ML / codeine phosphate 1 MG/ML / pseudoephedrine HCl 4.29 MG/ML Oral Suspension",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "995093",
+            "name": "chlorpheniramine maleate 0.286 MG/ML / codeine phosphate 1 MG/ML Oral Suspension",
+            "synonym": "chlorpheniramine maleate 0.286 MG / codeine phosphate 1 MG per 1 ML Oral Suspension",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "995108",
+            "name": "chlorpheniramine maleate 0.333 MG/ML / codeine phosphate 1 MG/ML / pseudoephedrine hydrochloride 5 MG/ML Oral Suspension",
+            "synonym": "chlorpheniramine maleate 0.333 MG/ML / codeine phosphate 1 MG/ML / pseudoephedrine HCl 5 MG/ML Oral Suspension",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "995116",
+            "name": "chlorpheniramine maleate 0.333 MG/ML / codeine phosphate 1 MG/ML Oral Suspension",
+            "synonym": "chlorpheniramine maleate 0.333 MG / codeine phosphate 1 MG per 1 ML Oral Suspension",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "995120",
+            "name": "chlorpheniramine maleate 0.4 MG/ML / codeine phosphate 1 MG/ML / pseudoephedrine hydrochloride 6 MG/ML Oral Suspension",
+            "synonym": "chlorpheniramine maleate 0.4 MG/ML / codeine phosphate 1 MG/ML / pseudoephedrine HCl 6 MG/ML Oral Suspension",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "995123",
+            "name": "chlorpheniramine maleate 0.4 MG/ML / codeine phosphate 1 MG/ML Oral Suspension",
+            "synonym": "chlorpheniramine maleate 0.4 MG / codeine phosphate 1 MG per 1 ML Oral Suspension",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          },
+          {
+            "rxcui": "998254",
+            "name": "chlorpheniramine maleate 4 MG / pseudoephedrine hydrochloride 60 MG Oral Tablet",
+            "synonym": "",
+            "tty": "SCD",
+            "language": "ENG",
+            "suppress": "N",
+            "umlscui": ""
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,79 @@
+[
+  {
+    "text": "đau ngực",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isFamily",
+      "isHistorical"
+    ],
+    "position": [
+      156,
+      164
+    ]
+  },
+  {
+    "text": "đau",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      182,
+      185
+    ]
+  },
+  {
+    "text": "đau ngực",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      292,
+      300
+    ]
+  },
+  {
+    "text": "đau",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      312,
+      315
+    ]
+  },
+  {
+    "text": "đau",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      335,
+      338
+    ]
+  },
+  {
+    "text": "đau ngực",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      404,
+      412
+    ]
+  },
+  {
+    "text": "khác: bóc tách động mạch chủ loại B",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      798,
+      833
+    ],
+    "candidates": []
+  }
+]

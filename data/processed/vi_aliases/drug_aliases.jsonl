@@ -1,0 +1,22 @@
+{"alias": "Chlorpheniramine", "canonical_name": "Chlorpheniramine", "type": "THUỐC", "candidate_codes": [], "source": "statement2_and_test_input_1"}
+{"alias": "Capsaicin", "canonical_name": "Capsaicin", "type": "THUỐC", "candidate_codes": [], "source": "statement2_and_test_input_1"}
+{"alias": "amlodipine", "canonical_name": "amlodipine", "type": "THUỐC", "candidate_codes": [], "source": "statement1_example"}
+{"alias": "aspirin", "canonical_name": "aspirin", "type": "THUỐC", "candidate_codes": [], "source": "statement1_example"}
+{"alias": "metoprolol succinate", "canonical_name": "metoprolol succinate", "type": "THUỐC", "candidate_codes": [], "source": "statement1_example"}
+{"alias": "guaifenesin", "canonical_name": "guaifenesin", "type": "THUỐC", "candidate_codes": [], "source": "statement1_example"}
+{"alias": "nystatin", "canonical_name": "nystatin", "type": "THUỐC", "candidate_codes": [], "source": "statement1_example"}
+{"alias": "acetaminophen", "canonical_name": "acetaminophen", "type": "THUỐC", "candidate_codes": [], "source": "statement1_example"}
+{"alias": "pravastatin", "canonical_name": "pravastatin", "type": "THUỐC", "candidate_codes": [], "source": "statement1_example"}
+{"alias": "docusate sodium", "canonical_name": "docusate sodium", "type": "THUỐC", "candidate_codes": [], "source": "statement1_example"}
+{"alias": "senna", "canonical_name": "senna", "type": "THUỐC", "candidate_codes": [], "source": "statement1_example"}
+{"alias": "clonazepam", "canonical_name": "clonazepam", "type": "THUỐC", "candidate_codes": [], "source": "statement1_example"}
+{"alias": "metoprolol", "canonical_name": "metoprolol", "type": "THUỐC", "candidate_codes": [], "source": "input_1"}
+{"alias": "doxycycline", "canonical_name": "doxycycline", "type": "THUỐC", "candidate_codes": [], "source": "input_1"}
+{"alias": "atenolol", "canonical_name": "atenolol", "type": "THUỐC", "candidate_codes": [], "source": "input_1"}
+{"alias": "NSAID", "canonical_name": "NSAID", "type": "THUỐC", "candidate_codes": [], "source": "input_4"}
+{"alias": "NSAIDs", "canonical_name": "NSAIDs", "type": "THUỐC", "candidate_codes": [], "source": "input_4"}
+{"alias": "omeprazole", "canonical_name": "omeprazole", "type": "THUỐC", "candidate_codes": [], "source": "input_4"}
+{"alias": "levophed", "canonical_name": "levophed", "type": "THUỐC", "candidate_codes": [], "source": "input_5"}
+{"alias": "propofol", "canonical_name": "propofol", "type": "THUỐC", "candidate_codes": [], "source": "input_5"}
+{"alias": "phentolamine", "canonical_name": "phentolamine", "type": "THUỐC", "candidate_codes": [], "source": "input_5"}
+{"alias": "norepinephrine", "canonical_name": "norepinephrine", "type": "THUỐC", "candidate_codes": [], "source": "manual_seed"}

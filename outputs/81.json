@@ -1,0 +1,14 @@
+[
+  {
+    "text": "hình ảnh",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      245,
+      253
+    ],
+    "candidates": []
+  }
+]

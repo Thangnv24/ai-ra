@@ -1,0 +1,273 @@
+[
+  {
+    "text": "acetaminophen 500",
+    "type": "THUỐC",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      171,
+      188
+    ],
+    "candidates": [
+      "313782"
+    ]
+  },
+  {
+    "text": "đau",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      226,
+      229
+    ]
+  },
+  {
+    "text": "đau bụng",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      376,
+      384
+    ]
+  },
+  {
+    "text": "đau bụng",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      449,
+      457
+    ]
+  },
+  {
+    "text": "đau bụng",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      491,
+      499
+    ]
+  },
+  {
+    "text": "đau bụng",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      542,
+      550
+    ]
+  },
+  {
+    "text": "đau bụng",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      590,
+      598
+    ]
+  },
+  {
+    "text": "đau bụng",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      775,
+      783
+    ]
+  },
+  {
+    "text": "đau bụng",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      801,
+      809
+    ]
+  },
+  {
+    "text": "mệt mỏi",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      821,
+      828
+    ]
+  },
+  {
+    "text": "khó thở khi gắng sức",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      851,
+      871
+    ]
+  },
+  {
+    "text": "đau",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated",
+      "isHistorical"
+    ],
+    "position": [
+      917,
+      920
+    ]
+  },
+  {
+    "text": "Đau",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      952,
+      955
+    ]
+  },
+  {
+    "text": "buồn nôn",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated",
+      "isHistorical"
+    ],
+    "position": [
+      1016,
+      1024
+    ]
+  },
+  {
+    "text": "nôn",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated",
+      "isHistorical"
+    ],
+    "position": [
+      1036,
+      1039
+    ]
+  },
+  {
+    "text": "acetaminophen 500",
+    "type": "THUỐC",
+    "assertions": [],
+    "position": [
+      1183,
+      1200
+    ],
+    "candidates": [
+      "313782"
+    ]
+  },
+  {
+    "text": "ast",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1349,
+      1352
+    ]
+  },
+  {
+    "text": "alt",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1358,
+      1361
+    ]
+  },
+  {
+    "text": "bilirubin toàn phần",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1376,
+      1395
+    ]
+  },
+  {
+    "text": "acetaminophen",
+    "type": "THUỐC",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      1485,
+      1498
+    ],
+    "candidates": [
+      "313782"
+    ]
+  },
+  {
+    "text": "ast",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1830,
+      1833
+    ]
+  },
+  {
+    "text": "alt",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1840,
+      1843
+    ]
+  },
+  {
+    "text": "bilirubin toàn phần",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1860,
+      1879
+    ]
+  },
+  {
+    "text": "hình ảnh",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      2095,
+      2103
+    ],
+    "candidates": []
+  },
+  {
+    "text": "khác",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      2320,
+      2324
+    ],
+    "candidates": []
+  }
+]

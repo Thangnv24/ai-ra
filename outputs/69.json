@@ -1,0 +1,48 @@
+[
+  {
+    "text": "mệt mỏi",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      238,
+      245
+    ]
+  },
+  {
+    "text": "mệt mỏi",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      322,
+      329
+    ]
+  },
+  {
+    "text": "hình ảnh: chụp cắt lớp vi tính ổ bụng năm ngoái cho thấy không có dấu hiệu bệnh lan rộng",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      629,
+      717
+    ],
+    "candidates": []
+  },
+  {
+    "text": "khác",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isFamily"
+    ],
+    "position": [
+      813,
+      817
+    ],
+    "candidates": []
+  }
+]

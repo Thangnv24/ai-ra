@@ -1,0 +1,11 @@
+{
+  "concept_count": 1039,
+  "alias_exact_count": 2160,
+  "alias_norm_count": 2156,
+  "artifacts": [
+    "ontology_index.json",
+    "alias_exact.json",
+    "alias_norm.json",
+    "kb_manifest.json"
+  ]
+}

@@ -1,0 +1,36 @@
+[
+  {
+    "text": "khó thở khi gắng sức",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      59,
+      79
+    ]
+  },
+  {
+    "text": "Khó thở khi gắng sức",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      190,
+      210
+    ]
+  },
+  {
+    "text": "hình ảnh",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      235,
+      243
+    ],
+    "candidates": []
+  }
+]

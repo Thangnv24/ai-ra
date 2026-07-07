@@ -1,0 +1,106 @@
+[
+  {
+    "text": "khó thở",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isFamily",
+      "isHistorical"
+    ],
+    "position": [
+      256,
+      263
+    ]
+  },
+  {
+    "text": "khó thở",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isFamily",
+      "isHistorical"
+    ],
+    "position": [
+      362,
+      369
+    ]
+  },
+  {
+    "text": "khó thở",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isFamily",
+      "isHistorical"
+    ],
+    "position": [
+      441,
+      448
+    ]
+  },
+  {
+    "text": "ho",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      582,
+      584
+    ]
+  },
+  {
+    "text": "sốt",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      613,
+      616
+    ]
+  },
+  {
+    "text": "khó thở",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      877,
+      884
+    ]
+  },
+  {
+    "text": "ho",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      886,
+      888
+    ]
+  },
+  {
+    "text": "sốt",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      912,
+      915
+    ]
+  },
+  {
+    "text": "aspirin 325",
+    "type": "THUỐC",
+    "assertions": [],
+    "position": [
+      1504,
+      1515
+    ],
+    "candidates": [
+      "243670",
+      "1191"
+    ]
+  }
+]

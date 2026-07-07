@@ -1,0 +1,14 @@
+[
+  {
+    "text": "khác",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      198,
+      202
+    ],
+    "candidates": []
+  }
+]

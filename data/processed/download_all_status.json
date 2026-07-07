@@ -1,0 +1,32 @@
+[
+  {
+    "command": "scripts/download_icd10.py",
+    "returncode": 0,
+    "stdout": "{\"output\": \"D:\\\\downloads\\\\ai-race\\\\data\\\\processed\\\\icd10\\\\icd10_concepts.jsonl\", \"source\": \"icd10\", \"downloaded\": false, \"rows\": 19, \"error\": \"The read operation timed out\"}",
+    "stderr": ""
+  },
+  {
+    "command": "scripts/download_rxnorm.py",
+    "returncode": 0,
+    "stdout": "{\"output\": \"D:\\\\downloads\\\\ai-race\\\\data\\\\processed\\\\rxnorm\\\\rxnorm_concepts.jsonl\", \"source\": \"rxnorm\", \"downloaded\": true, \"rows\": 1020, \"failures\": [\"amlodipine: The read operation timed out\", \"aspirin: The read operation timed out\", \"guaifenesin: The read operation timed out\", \"pravastatin: The read operation timed out\"]}",
+    "stderr": ""
+  },
+  {
+    "command": "scripts/download_public_corpora.py",
+    "returncode": 0,
+    "stdout": "{\"output\": \"D:\\\\downloads\\\\ai-race\\\\data\\\\raw\\\\public_corpora\\\\status.json\", \"source\": \"public_corpora\", \"downloaded\": false, \"resources\": {\"NCBI Disease Corpus\": \"optional; not downloaded by default in this reproducible flow\", \"MedMentions\": \"optional; not downloaded by default in this reproducible flow\", \"BC5CDR\": \"optional; not downloaded by default in this reproducible flow\"}, \"note\": \"These corpora are development resources and do not block inference.\"}",
+    "stderr": ""
+  },
+  {
+    "command": "scripts/prepare_vi_medical_aliases.py",
+    "returncode": 0,
+    "stdout": "{\"output_dir\": \"D:\\\\downloads\\\\ai-race\\\\data\\\\processed\\\\vi_aliases\", \"aliases\": 124}",
+    "stderr": ""
+  },
+  {
+    "command": "scripts/inspect_data_status.py",
+    "returncode": 0,
+    "stdout": "{\n  \"icd10\": {\n    \"status\": {\n      \"source\": \"icd10\",\n      \"downloaded\": false,\n      \"rows\": 19,\n      \"error\": \"The read operation timed out\"\n    },\n    \"concept_rows\": 19\n  },\n  \"rxnorm\": {\n    \"status\": {\n      \"source\": \"rxnorm\",\n      \"downloaded\": true,\n      \"rows\": 1020,\n      \"failures\": [\n        \"amlodipine: The read operation timed out\",\n        \"aspirin: The read operation timed out\",\n        \"guaifenesin: The read operation timed out\",\n        \"pravastatin: The read operation timed out\"\n      ]\n    },\n    \"concept_rows\": 1020\n  },\n  \"public_corpora\": {\n    \"source\": \"public_corpora\",\n    \"downloaded\": false,\n    \"resources\": {\n      \"NCBI Disease Corpus\": \"optional; not downloaded by default in this reproducible flow\",\n      \"MedMentions\": \"optional; not downloaded by default in this reproducible flow\",\n      \"BC5CDR\": \"optional; not downloaded by default in this reproducible flow\"\n    },\n    \"note\": \"These corpora are development resources and do not block inference.\"\n  },\n  \"vi_aliases\": {\n    \"aliases\": 124,\n    \"diseases\": 30,\n    \"drugs\": 22,\n    \"symptoms\": 39,\n    \"labs\": 33\n  },\n  \"kb\": {\n    \"concepts\": 0,\n    \"aliases\": 0\n  },\n  \"indexes\": {\n    \"ontology_index\": true,\n    \"alias_exact\": false,\n    \"alias_norm\": false,\n    \"manifest\": null\n  }\n}",
+    "stderr": ""
+  }
+]

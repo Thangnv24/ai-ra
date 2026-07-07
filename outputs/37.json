@@ -1,0 +1,75 @@
+[
+  {
+    "text": "Tăng huyết áp",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      39,
+      52
+    ],
+    "candidates": [
+      "I10"
+    ]
+  },
+  {
+    "text": "trước đây)",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isNegated",
+      "isHistorical"
+    ],
+    "position": [
+      164,
+      174
+    ],
+    "candidates": []
+  },
+  {
+    "text": "Creatinine",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      607,
+      617
+    ]
+  },
+  {
+    "text": "glucose",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      911,
+      918
+    ]
+  },
+  {
+    "text": "creatinine",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1414,
+      1424
+    ]
+  },
+  {
+    "text": "phân tích nước tiểu",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1478,
+      1497
+    ]
+  },
+  {
+    "text": "hình ảnh: chụp x-quang ngực: Tăng gánh nhẹ tuần hoàn phổi, tràn dịch màng phổi hai bên nhẹ, tim to",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      1542,
+      1640
+    ],
+    "candidates": []
+  }
+]
