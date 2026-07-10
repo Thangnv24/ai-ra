@@ -3,14 +3,14 @@ requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "medkg"
+name = "ai-race-medical-kg"
 version = "0.1.0"
-description = "Deterministic baseline for Ontological Reasoning in Medical Knowledge Retrieval"
+description = "Hybrid Track A pipeline for Ontological Reasoning in Medical Knowledge Retrieval"
 requires-python = ">=3.10"
 dependencies = [
   "fastapi==0.103.2",
-  "pydantic<2",
-  "uvicorn==0.23.2",
+  "pydantic>=1.10.13,<2",
+  "uvicorn[standard]==0.23.2",
 ]
 
 [project.optional-dependencies]
@@ -20,5 +20,5 @@ dev = ["pytest>=8"]
 where = ["src"]
 
 [project.scripts]
-medkg-run = "medkg.pipeline:main"
-medkg-submit = "medkg.submit:main"
+ai-race-run = "services.pipeline:main"
+ai-race-submit = "submission.package:main"

@@ -35,7 +35,7 @@ No pytest and no benchmark were run.
 
 ## Inference Results
 
-Direct hybrid mode over `input/` generated 100 JSON files in `output/`. Because `MEDKG_LLM_ENABLED` is false by default and no local LLM server was configured, all files used deterministic fallback mode.
+Direct hybrid mode over `input/` generated 100 JSON files in `output/`. Because LLM usage was not enabled for that run, all files used deterministic fallback mode.
 
 `python scripts/validate_outputs.py --output-dir output --input-dir input` reported 100 files and 0 errors.
 
@@ -45,5 +45,5 @@ Direct hybrid mode over `input/` generated 100 JSON files in `output/`. Because 
 
 - ICD-10 public download should be retried on a better network or with a locally downloaded CDC ZIP.
 - UMLS and restricted clinical resources require manual credentials/licenses.
-- Hybrid LLM mode is wired but needs a running local OpenAI-compatible server and `.env` configuration.
+- Hybrid LLM mode is wired for a GPT/OpenAI-compatible API and needs `.env` configuration.
 - Highest-impact scoring work remains expanding Vietnamese clinical aliases and improving high-recall span proposal.

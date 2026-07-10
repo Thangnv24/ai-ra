@@ -11,8 +11,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-from medkg.config import SYSTEM_ICD10, TYPE_DIAGNOSIS, get_paths
-from medkg.ontology import seed_entries
+from core.config import SYSTEM_ICD10, TYPE_DIAGNOSIS, get_paths
+from knowledge.ontology import seed_entries
 
 
 ICD10_CM_FY26_APRIL_ZIP = (

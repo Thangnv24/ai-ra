@@ -42,5 +42,4 @@ python scripts/package_submission.py --output-dir output --submission-dir submis
 
 ## LLM Rules
 
-The local LLM is optional and fail-open. It must be OpenAI-compatible and self-hosted. It may rerank candidates and disambiguate type/assertion decisions, but it must not invent ICD-10/RxNorm codes or emit final competition JSON without deterministic validation.
-
+The LLM decision pass is optional and fail-open. During experimentation it uses a GPT/OpenAI-compatible API. It may rerank candidates and disambiguate type/assertion decisions, but it must not invent ICD-10/RxNorm codes or emit final competition JSON without deterministic validation.

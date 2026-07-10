@@ -2,165 +2,167 @@
 
 ## Project goal
 
-Build a fast, deterministic Python system for the competition "Ontological Reasoning in Medical Knowledge Retrieval".
+Build a reliable Python system for the competition **Ontological Reasoning in Medical Knowledge Retrieval**.
 
-The system processes free-text medical inputs such as doctor notes, discharge summaries, lab results, and EHR snippets. It must detect and normalize medical concepts, classify concept types, map diseases to ICD-10 and drugs to RxNorm, infer context such as negation/family/history, infer relations between concepts, and produce the exact submission format described in `problem/`.
+The system processes Vietnamese/English clinical text, extracts medical concepts, classifies concept types, detects assertion/context, maps diagnoses to ICD-10 and drugs to RxNorm, validates offsets/schema, and writes the exact JSON files required by `problem/`.
+
+## Current strategy
+
+Use a hybrid Track A pipeline:
+
+1. Deterministic rule/lab extraction for high-precision spans.
+2. Optional LLM entity proposal over document chunks in `llm_full_doc` mode.
+3. Context detection for `isNegated`, `isFamily`, and `isHistorical`.
+4. Local candidate retrieval from seed ontology plus `data/candidates`.
+5. Optional OpenAI-compatible LLM rerank/classification with strict JSON.
+6. Deterministic schema and offset validation before writing files.
+
+Do not build a slow open-ended ReAct agent for final inference. LLM output must always be parsed, constrained, and validated.
 
 ## Important files
 
-- `docs/research_notes.md`: prior research notes and recommended datasets/ontologies.
-- `problem/statement1.md`: phase-1 submission/scoring statement from the organizer.
-- `problem/statement2.md`: full problem overview, input/output definition, data description, and phase schedule.
-- `problem/input_output_spec.md`: input/output schema.
-- `problem/scoring.md`: benchmark and scoring rules.
-- `problem/submission_format.md`: final submission requirements.
-- `input/`: official test input files when unpacked from the organizer ZIP.
-- `outputs/`: generated output files.
-- `submission/`: final packaged submission.
+- `.env.example`: primary runtime config. In normal use, copy to `.env` and replace only `AI_RACE_API_KEY`.
+- `problem/statement1.md`: phase-1 statement and submission/scoring notes.
+- `problem/statement2.md`: full task overview, labels, input/output definition, data and schedule.
+- `problem/scoring.md`: scoring rules.
+- `problem/sample_input_1.txt`, `problem/sample_input_2.txt`: official examples.
+- `input/`: official `.txt` files.
+- `output/`: generated `.json` predictions. Do not recreate legacy `outputs/`.
+- `submission/`: final `output.zip`.
+- `data/candidates/`: slim runtime ICD-10/RxNorm candidate KB.
+- `scripts/build_slim_candidate_kb.py`: builds slim candidate artifacts from prepared raw sources.
+- `main.py`: FastAPI server entry point.
+- `test.py`: manual client, can run through server or direct local.
+- `tests/test.py`: E2E server runner. Default output is `output/out_put_DDMMYYYY/`.
+- `src/services/pipeline.py`: end-to-end orchestration.
+- `src/extraction/`: rule NER, lab extractor, sectioning, LLM entity proposal.
+- `src/knowledge/`: ontology seed, slim candidate index, candidate retrieval, reasoning.
+- `src/integrations/`: OpenAI-compatible client and strict JSON prompts.
+- `src/core/schema.py`: output concept model and validation.
 
-## Engineering rules
+## Runtime config
 
-- Prioritize correctness and speed.
-- Do not use web/API calls during final inference unless the problem statement explicitly allows it.
-- Build all ontology indexes offline before running test inference.
-- Keep runtime deterministic and reproducible.
-- Validate every output against the required schema.
-- Avoid free-form LLM output in final files; always parse/validate into structured JSON.
-- Cache expensive computations.
-- Add benchmark timing for end-to-end runtime and per-file latency.
+Primary environment variables use `AI_RACE_*`:
 
-## Preferred architecture
+- `AI_RACE_API_KEY`
+- `AI_RACE_MODE=llm_full_doc`
+- `AI_RACE_USE_LLM=true`
+- `AI_RACE_BASE_URL=https://api.openai.com/v1`
+- `AI_RACE_MODEL=gpt-4.1`
+- `AI_RACE_TEMPERATURE=0`
+- `AI_RACE_MAX_TOKENS=4096`
+- `AI_RACE_TIMEOUT=120`
+- `AI_RACE_FAIL_OPEN=true`
 
-Use a hybrid pipeline:
+Only `AI_RACE_*` variables are supported. Do not add alternate legacy environment-variable prefixes.
 
-1. Rule/model-based entity extraction.
-2. Context/assertion detection for negation, family member, historical mention, hypothetical mention.
-3. Candidate retrieval from local ICD-10/RxNorm/UMLS/HPO indexes.
-4. Optional 9B model reranking/classification with strict JSON schema.
-5. Ontology reasoning and rule-based correction.
-6. Submission validation.
-
-Do not build a slow open-ended ReAct agent for final inference.
+If no API key is present, the pipeline must still run with local fallback and report that LLM was not used.
 
 ## Manual commands
 
-- Install: `pip install -e .`
-- Download public/fallback resources: `python scripts/download_all_data.py`
-- Build knowledge base: `python scripts/build_knowledge_base.py`
-- Build indexes: `python scripts/build_indexes.py`
-- Inspect data status: `python scripts/inspect_data_status.py`
-- Run API server: `python scripts/run_server.py`
-- Run one file via server: `python test.py --file problem/sample_input_5.txt --out output`
-- Run folder via server: `python test.py --input-dir input --out output`
-- Run direct fallback mode: `python test.py --direct --input-dir input --out output`
-- Validate generated output manually: `python scripts/validate_outputs.py --output-dir output --input-dir input`
-- Package: `python scripts/package_submission.py --output-dir output --submission-dir submission`
+- Install:
+  `pip install -r requirements.txt`
+  `pip install -e .`
+- Run API server:
+  `python main.py`
+- Run full input folder through server with dated output:
+  `python tests/test.py --mode llm_full_doc`
+- Run one file through server:
+  `python tests/test.py input/1.txt --mode llm_full_doc`
+- Run one file with custom output:
+  `python tests/test.py input/1.txt --mode llm_full_doc --output-dir output/single_run`
+- Run direct local folder inference:
+  `python test.py --direct --input-dir input --out output --mode llm_full_doc`
+- Run direct local smoke test:
+  `python test.py --direct --input-dir input --out output/_tmp_eval --mode llm_full_doc --limit 5 --pretty`
+- Run automated tests:
+  `python -m unittest discover -s tests`
+- Build Docker image:
+  `docker build -t ai-race-medical-kg:latest .`
+- Run API with Docker Compose:
+  `docker compose up --build ai-race-api`
+- Run batch inference in Docker:
+  `docker compose --profile run run --rm ai-race-runner`
+- Package submission:
+  `ai-race-submit --output-dir output --submission-dir submission`
+
+After temporary smoke tests, remove temporary output directories such as `output/_tmp_eval`.
+
+## Source of truth
+
+- Treat `problem/statement1.md`, `problem/statement2.md`, and `problem/scoring.md` as the source of truth for labels, fields, candidates, assertions, offsets, and allowed model/API behavior.
+- Official inputs are Vietnamese free-form clinical snippets with English drug names, mixed lab abbreviations, numeric results, and ICD-10/RxNorm candidate requirements.
+- Generated outputs are reproducible artifacts, not source-of-truth data.
+- Keep offsets zero-based and end-exclusive. Every `position` must match `text[start:end]`.
 
 ## Data-source rules
 
-- Treat `problem/statement1.md` and `problem/statement2.md` as the source of truth for labels, JSON fields, scoring, and allowed external model/API behavior.
-- Official inputs are Vietnamese free-form clinical snippets with English drug names, mixed Vietnamese lab names, abbreviations, numeric lab results, and RxNorm/ICD-10 candidate requirements.
-- Keep downloader/build logic in `scripts/`; keep `data/` for downloaded raw files, curated external dictionaries, and generated indexes only.
-- Final inference must use local files only. Network access is allowed only in explicit preparation scripts such as ICD-10/RxNorm downloaders.
+- Runtime candidate retrieval uses local files under `data/candidates/`.
+- Do not re-add raw full ICD-10/RxNorm dumps unless the user explicitly asks or a preparation task requires it.
+- Downloader/build scripts belong in `scripts/` and are preparation-only.
+- Before enabling a new knowledge source, verify source, license, version, row counts, checksums, and provenance.
+- Final inference should use local files only unless the problem statement explicitly allows external API/model calls. The OpenAI-compatible API path is for Track A experimentation unless confirmed compliant for final submission.
 
-## Change guidance
+## Runtime flow
 
-- Keep changes deterministic and compatible with the schema in `problem/`.
-- Do not add repository skills or automatic test generation/running requirements to this file.
-- Document assumptions in `docs/architecture.md` when they affect inference behavior.
+Direct file/folder flow:
 
-## README writing guidance
+```text
+input/*.txt
+  -> core.io.read_text
+  -> services.pipeline.MedicalKGPipeline
+  -> extraction.MedicalNER
+  -> extraction.labs.extract_lab_spans
+  -> extraction.LLMEntityExtractor when mode=llm_full_doc and LLM is enabled
+  -> extraction.ContextDetector
+  -> knowledge.CandidateRetriever/OntologyIndex/SlimCandidateIndex
+  -> integrations.ApiLLMClient decision pass when mode=hybrid or llm_full_doc and LLM is enabled
+  -> core.schema.validate_output
+  -> output/*.json
+```
 
-When asked to create or update `README.md`, write it as a complete project guide. The README should include:
+Server flow:
 
-1. Project overview
-   - Explain the competition task: medical concept extraction, normalization, context/assertion detection, ICD-10/RxNorm candidate mapping, and valid JSON submission generation.
-   - State that final inference is deterministic and offline.
+```text
+main.py
+  -> api.server.app
+  -> singleton MedicalKGPipeline
+  -> /predict or /predict_batch
+  -> tests/test.py writes and validates JSON
+```
 
-2. Project structure
-   - Describe the purpose of major directories and entry points:
-     - `input/`: official `.txt` files.
-     - `outputs/`: generated `.json` predictions.
-     - `submission/`: final `output.zip`.
-     - `problem/`: official problem statements and schema notes.
-     - `data/raw`, `data/external`, `data/indexes`: downloaded resources, curated dictionaries, generated ontology indexes.
-     - `src/medkg/`: core pipeline package.
-     - `scripts/`: operational scripts.
-     - `main.py`: FastAPI server entry point.
-     - `test.py`: manual file/folder inference client.
-     - `requirements.txt`: runtime dependencies.
+Data preparation flow:
 
-3. Techniques used
-   - Rule-based medical NER using Vietnamese/English lexicons and regex patterns.
-   - Vietnamese text normalization: lowercasing, accent stripping, whitespace cleanup, fuzzy matching.
-   - Context/assertion detection for `isNegated`, `isFamily`, and `isHistorical`.
-   - Local ontology retrieval from ICD-10/RxNorm seed dictionaries and optional downloaded indexes.
-   - LRU caching for repeated normalization/candidate lookup.
-   - Strict output schema validation before writing JSON.
-   - FastAPI singleton pipeline loading index/regex once per process.
+```text
+scripts/download_* -> data/raw
+scripts/build_knowledge_base.py -> data/processed
+scripts/build_indexes.py -> data/indexes
+scripts/build_slim_candidate_kb.py -> data/candidates
+```
 
-4. Runtime flow
-   - Startup: load config, ontology index, external Vietnamese lexicon, regex patterns.
-   - Input: read one `.txt` file or folder of `.txt` files.
-   - Extraction: detect symptoms, diagnoses, drugs, lab names, lab results.
-   - Context: infer assertion tags from nearby text windows.
-   - Candidate retrieval: map diagnoses/drugs to ICD-10/RxNorm when local evidence exists.
-   - Validation: check type labels, offsets, assertion fields, candidate fields.
-   - Output: write one `.json` per input and optionally package `submission/output.zip`.
+Do not assume a KB exists because builder scripts exist. Check the actual files and manifest.
 
-5. Installation
-   - Use:
-     ```bash
-     pip install -r requirements.txt
-     ```
-   - Mention Python version if known or assumed.
+## Engineering rules
 
-6. Running the project
-   - API server:
-     ```bash
-     python main.py
-     ```
-   - API smoke call:
-     ```bash
-     python test.py --path input/1.txt
-     ```
-   - Direct local inference:
-     ```bash
-     python test.py --path input/1.txt --direct
-     ```
-   - Folder inference:
-     ```bash
-     python test.py --path input --output-dir outputs
-     ```
-   - Build ontology index:
-     ```bash
-     python scripts/build_ontology_index.py
-     ```
-   - Package submission:
-     ```bash
-     python scripts/package_submission.py --output-dir outputs --submission-dir submission
-     ```
+- Prioritize correctness, valid schema, exact offsets, and candidate quality.
+- Keep changes compatible with the schema in `problem/`.
+- Prefer existing package structure and local helper APIs.
+- Keep edits scoped; do not refactor unrelated files.
+- Cache expensive lookup/index work where appropriate.
+- Do not emit free-form LLM output to final files.
+- Keep tests focused on extraction, schema validation, candidate ranking, and end-to-end behavior.
+- If a user explicitly says not to change code, do not edit inference logic.
+- If using temporary test outputs, delete them after reporting.
 
-7. Data preparation
-   - Explain that final inference uses only local files.
-   - Downloader scripts are preparation-only:
-     ```bash
-     python scripts/download_icd10.py
-     python scripts/download_rxnorm.py --limit 25
-     python scripts/build_ontology_index.py
-     ```
+## Change workflow guide
 
-8. Output format
-   - Explain each JSON item includes:
-     - `text`
-     - `type`
-     - `position`
-     - `assertions`
-     - `candidates` for `CHẨN_ĐOÁN` and `THUỐC`.
-   - State that offsets are zero-based and end-exclusive.
+Before changing inference logic, write down the flow being touched:
 
-9. Known limitations and next improvements
-   - Mention lexicon/rule baseline limitations.
-   - Recommend expanding Vietnamese clinical lexicons from official input.
-   - Recommend adding larger ICD-10/RxNorm/UMLS/HPO local resources.
-   - Recommend improving lab extraction and disease/drug normalization.
+1. Request boundary: documentation, scripts/tests, data preparation, or inference logic.
+2. Source of truth: relevant `problem/` docs and expected labels/fields.
+3. Input-to-output map: `test.py`, `tests/test.py`, FastAPI endpoint, mode, output path.
+4. Runtime path: modules called from input read to schema validation.
+5. Data/knowledge path: whether the change uses seed ontology, `data/candidates`, or build scripts.
+6. Validation plan: smallest relevant unit/E2E test.
+
+Report changed files, validation results, API/LLM availability, deleted temporary outputs, and remaining risks.

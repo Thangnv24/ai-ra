@@ -15,9 +15,9 @@ SRC = ROOT / "src"
 if str(SRC) not in sys.path:
     sys.path.insert(0, str(SRC))
 
-from medkg.config import get_paths
-from medkg.io import discover_input_files, read_text
-from medkg.pipeline import MedicalKGPipeline
+from core.config import get_paths
+from core.io import discover_input_files, read_text
+from services.pipeline import MedicalKGPipeline
 
 
 def post_json(url: str, payload: dict[str, Any], timeout: int = 60) -> dict[str, Any]:
@@ -93,7 +93,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--server-url", default=None, help=argparse.SUPPRESS)
     args = parser.parse_args(argv)
 
-    out_dir = args.out or args.output_dir or (ROOT / "output")
+    out_dir = args.out or args.output_dir or get_paths(ROOT).output_dir
     server_url = args.server_url or args.url
     files = get_input_files(args.file, args.input_dir, args.path)
     if args.limit is not None:
@@ -108,7 +108,7 @@ def main(argv: list[str] | None = None) -> int:
         results = direct_predict(files, args.mode) if args.direct else server_predict(files, args.mode, server_url)
     except urllib.error.URLError as exc:
         print(f"cannot reach API at {server_url}: {exc}")
-        print("start it with: python scripts/run_server.py")
+        print("start it with: python main.py")
         return 2
 
     fallback_count = 0

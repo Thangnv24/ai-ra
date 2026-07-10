@@ -7,7 +7,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-from medkg.config import get_paths
+from core.config import get_paths
 
 
 def count_jsonl(path: Path) -> int:

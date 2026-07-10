@@ -1,2 +1,0 @@
-"""Local model client utilities."""
-

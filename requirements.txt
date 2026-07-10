@@ -1,3 +1,4 @@
+# Runtime dependencies for the AI Race medical ontology API.
 fastapi==0.103.2
-pydantic<2
-uvicorn==0.23.2
+pydantic>=1.10.13,<2
+uvicorn[standard]==0.23.2

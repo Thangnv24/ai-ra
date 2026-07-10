@@ -8,9 +8,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-from medkg.config import SYSTEM_ICD10, SYSTEM_RXNORM, TYPE_DIAGNOSIS, TYPE_DRUG, get_paths
-from medkg.normalization import normalize_key
-from medkg.ontology import OntologyEntry, OntologyIndex, seed_entries
+from core.config import SYSTEM_ICD10, SYSTEM_RXNORM, TYPE_DIAGNOSIS, TYPE_DRUG, get_paths
+from core.text import normalize_key
+from knowledge.ontology import OntologyEntry, OntologyIndex, seed_entries
 
 
 def read_jsonl(path: Path) -> list[dict[str, object]]:

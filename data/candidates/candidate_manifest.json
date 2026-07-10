@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "purpose": "Slim runtime candidate data for ICD-10 diagnosis and RxNorm drug mapping.",
+  "sources": {
+    "icd10": "D:\\downloads\\ai-race\\data\\icd10\\icd10.jsonl",
+    "rxnconso": "D:\\downloads\\ai-race\\data\\rxnorm\\RXNCONSO.RRF",
+    "rxnarchive": "D:\\downloads\\ai-race\\data\\rxnorm\\RXNATOMARCHIVE.RRF"
+  },
+  "counts": {
+    "icd10_candidates": 15844,
+    "rxnorm_candidates": 330708,
+    "aliases": 553687
+  },
+  "artifacts": [
+    "icd10_candidates.jsonl",
+    "rxnorm_candidates.jsonl",
+    "candidate_aliases.jsonl",
+    "candidate_manifest.json"
+  ]
+}

@@ -8,8 +8,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-from medkg.config import get_paths
-from medkg.ontology import build_ontology_index
+from core.config import get_paths
+from knowledge.ontology import build_ontology_index
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -30,4 +30,3 @@ def main(argv: list[str] | None = None) -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-

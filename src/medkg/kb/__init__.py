@@ -1,2 +1,0 @@
-"""Knowledge-base compatibility namespace."""
-

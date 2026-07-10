@@ -1,0 +1,68 @@
+services:
+  ai-race-api:
+    build:
+      context: .
+    image: ai-race-medical-kg:latest
+    container_name: ai-race-api
+    environment:
+      AI_RACE_API_KEY: ${AI_RACE_API_KEY:-}
+      AI_RACE_MODE: ${AI_RACE_MODE:-llm_full_doc}
+      AI_RACE_USE_LLM: ${AI_RACE_USE_LLM:-true}
+      AI_RACE_BASE_URL: ${AI_RACE_BASE_URL:-https://api.openai.com/v1}
+      AI_RACE_MODEL: ${AI_RACE_MODEL:-gpt-4.1}
+      AI_RACE_TEMPERATURE: ${AI_RACE_TEMPERATURE:-0}
+      AI_RACE_MAX_TOKENS: ${AI_RACE_MAX_TOKENS:-4096}
+      AI_RACE_TIMEOUT: ${AI_RACE_TIMEOUT:-120}
+      AI_RACE_FAIL_OPEN: ${AI_RACE_FAIL_OPEN:-true}
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./input:/app/input:ro
+      - ./output:/app/output
+      - ./submission:/app/submission
+      - ./data/candidates:/app/data/candidates:ro
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "python",
+          "-c",
+          "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health', timeout=5).read()",
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+
+  ai-race-runner:
+    build:
+      context: .
+    image: ai-race-medical-kg:latest
+    profiles:
+      - run
+    environment:
+      AI_RACE_API_KEY: ${AI_RACE_API_KEY:-}
+      AI_RACE_MODE: ${AI_RACE_MODE:-llm_full_doc}
+      AI_RACE_USE_LLM: ${AI_RACE_USE_LLM:-true}
+      AI_RACE_BASE_URL: ${AI_RACE_BASE_URL:-https://api.openai.com/v1}
+      AI_RACE_MODEL: ${AI_RACE_MODEL:-gpt-4.1}
+      AI_RACE_TEMPERATURE: ${AI_RACE_TEMPERATURE:-0}
+      AI_RACE_MAX_TOKENS: ${AI_RACE_MAX_TOKENS:-4096}
+      AI_RACE_TIMEOUT: ${AI_RACE_TIMEOUT:-120}
+      AI_RACE_FAIL_OPEN: ${AI_RACE_FAIL_OPEN:-true}
+    volumes:
+      - ./input:/app/input:ro
+      - ./output:/app/output
+      - ./data/candidates:/app/data/candidates:ro
+    command:
+      [
+        "python",
+        "test.py",
+        "--direct",
+        "--input-dir",
+        "input",
+        "--out",
+        "output",
+        "--mode",
+        "llm_full_doc",
+      ]

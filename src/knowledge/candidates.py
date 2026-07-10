@@ -1,0 +1,212 @@
+"""Slim candidate index for ICD-10 and RxNorm lookup."""
+
+from __future__ import annotations
+
+import json
+import re
+from dataclasses import dataclass
+from pathlib import Path
+
+from core.config import CODED_TYPES, TYPE_DIAGNOSIS, TYPE_DRUG
+from core.text import normalize_key
+
+
+@dataclass(frozen=True, slots=True)
+class CandidateRecord:
+    code: str
+    name: str
+    system: str
+    concept_type: str
+    priority: int = 100
+    archive: bool = False
+
+
+@dataclass(frozen=True, slots=True)
+class CandidateHit:
+    record: CandidateRecord
+    source: str
+    score: float
+
+
+class SlimCandidateIndex:
+    def __init__(
+        self,
+        records: dict[tuple[str, str], CandidateRecord],
+        aliases: dict[tuple[str, str], tuple[str, ...]],
+    ) -> None:
+        self.records = records
+        self.aliases = aliases
+
+    @classmethod
+    def empty(cls) -> "SlimCandidateIndex":
+        return cls({}, {})
+
+    def lookup(self, text: str, concept_type: str, limit: int = 10) -> list[CandidateHit]:
+        if concept_type not in CODED_TYPES:
+            return []
+
+        hits: list[CandidateHit] = []
+        seen: set[str] = set()
+        for source, key in _query_variants(text, concept_type):
+            codes = self.aliases.get((concept_type, key), ())
+            for rank, code in enumerate(codes):
+                record = self.records.get((concept_type, code))
+                if record is None or code in seen:
+                    continue
+                seen.add(code)
+                score = 1.0 - min(rank, 20) * 0.01 - min(record.priority, 100) * 0.001
+                hits.append(CandidateHit(record=record, source=source, score=score))
+                if len(hits) >= limit:
+                    return hits
+        return hits
+
+
+def load_slim_candidate_index(candidate_dir: Path) -> SlimCandidateIndex:
+    if not candidate_dir.exists():
+        return SlimCandidateIndex.empty()
+
+    records: dict[tuple[str, str], CandidateRecord] = {}
+    for file_name in ("icd10_candidates.jsonl", "rxnorm_candidates.jsonl"):
+        path = candidate_dir / file_name
+        if not path.exists():
+            continue
+        for row in _read_jsonl(path):
+            concept_type = str(row.get("type") or "")
+            code = str(row.get("code") or "")
+            if concept_type not in CODED_TYPES or not code:
+                continue
+            name = str(row.get("name") or row.get("name_vi") or row.get("name_en") or "")
+            records[(concept_type, code)] = CandidateRecord(
+                code=code,
+                name=name,
+                system=str(row.get("system") or ""),
+                concept_type=concept_type,
+                priority=_safe_int(row.get("priority"), 100),
+                archive=bool(row.get("archive")),
+            )
+
+    aliases: dict[tuple[str, str], tuple[str, ...]] = {}
+    alias_path = candidate_dir / "candidate_aliases.jsonl"
+    if alias_path.exists():
+        for row in _read_jsonl(alias_path):
+            concept_type = str(row.get("type") or "")
+            alias = str(row.get("alias_norm") or "")
+            if concept_type not in CODED_TYPES or not alias:
+                continue
+            codes: list[str] = []
+            for item in row.get("candidates") or []:
+                if isinstance(item, dict):
+                    code = str(item.get("code") or "")
+                    if code and (concept_type, code) in records:
+                        codes.append(code)
+            if codes:
+                aliases[(concept_type, alias)] = tuple(codes)
+
+    return SlimCandidateIndex(records, aliases)
+
+
+def _read_jsonl(path: Path):
+    with path.open("r", encoding="utf-8-sig") as fh:
+        for line in fh:
+            line = line.strip()
+            if line:
+                yield json.loads(line)
+
+
+def _safe_int(value: object, default: int) -> int:
+    try:
+        return int(value)
+    except (TypeError, ValueError):
+        return default
+
+
+def _query_variants(text: str, concept_type: str) -> list[tuple[str, str]]:
+    key = normalize_key(text)
+    variants: list[tuple[str, str]] = []
+    _add_variant(variants, "exact", key)
+
+    if concept_type == TYPE_DRUG:
+        _add_variant(variants, "drug_unit", _normalize_drug_units(key))
+        _add_variant(variants, "drug_core", _strip_drug_route_frequency(key))
+        _add_variant(variants, "drug_ingredient", _strip_drug_modifiers(key))
+    elif concept_type == TYPE_DIAGNOSIS:
+        _add_variant(variants, "diagnosis_core", _strip_diagnosis_prefix(key))
+        _add_variant(variants, "diagnosis_unspecified", _strip_unspecified_suffix(key))
+
+    return variants
+
+
+def _add_variant(variants: list[tuple[str, str]], source: str, key: str) -> None:
+    key = " ".join((key or "").split())
+    if key and all(existing != key for _, existing in variants):
+        variants.append((source, key))
+
+
+def _normalize_drug_units(key: str) -> str:
+    key = re.sub(r"\bmg\s*/\s*ml\b", "mg/ml", key)
+    key = re.sub(r"\bmcg\s*/\s*ml\b", "mcg/ml", key)
+    return key
+
+
+def _strip_drug_route_frequency(key: str) -> str:
+    tokens = key.split()
+    stop = {
+        "po",
+        "iv",
+        "im",
+        "sc",
+        "bid",
+        "tid",
+        "qid",
+        "qam",
+        "qhs",
+        "daily",
+        "prn",
+    }
+    kept: list[str] = []
+    for token in tokens:
+        if token in stop or re.fullmatch(r"q\d+h:?prn?", token):
+            break
+        kept.append(token)
+    return " ".join(kept)
+
+
+def _strip_drug_modifiers(key: str) -> str:
+    tokens = key.split()
+    stop = {"mg", "mcg", "g", "ml", "iu", "unit", "units", "tablet", "capsule", "solution"}
+    kept: list[str] = []
+    for token in tokens:
+        if token in stop or any(ch.isdigit() for ch in token):
+            break
+        kept.append(token)
+    return " ".join(kept)
+
+
+def _strip_diagnosis_prefix(key: str) -> str:
+    prefixes = (
+        "chan doan mac benh ",
+        "chan doan ",
+        "duoc chan doan mac benh ",
+        "duoc chan doan ",
+        "mac benh ",
+        "benh ",
+        "theo doi ",
+        "nghi ngo ",
+    )
+    for prefix in prefixes:
+        if key.startswith(prefix):
+            return key[len(prefix) :]
+    return key
+
+
+def _strip_unspecified_suffix(key: str) -> str:
+    suffixes = (
+        " khong xac dinh",
+        " khong dac hieu",
+        " unspecified",
+        " nos",
+    )
+    for suffix in suffixes:
+        if key.endswith(suffix):
+            return key[: -len(suffix)]
+    return key

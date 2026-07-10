@@ -1,0 +1,6 @@
+fastapi==0.103.2
+pydantic<2,>=1.10.13
+uvicorn[standard]==0.23.2
+
+[dev]
+pytest>=8
