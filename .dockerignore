@@ -19,9 +19,7 @@ submission/
 *.zip
 *.log
 
-data/raw/
-data/processed/
-data/indexes/
+data/
 
 .DS_Store
 Thumbs.db
