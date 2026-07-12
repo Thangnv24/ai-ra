@@ -56,6 +56,11 @@ imports follow package responsibility, for example
 python main.py
 python tests/test_end_to_end.py input/1.txt
 python tests/test_end_to_end.py input
-python test.py --input-dir input --out output
-ai-race-submit --output-dir output --submission-dir submission
+python test.py --input-dir input --out output/review_YYYYMMDD_HHMMSS
+# Optional, only when explicitly requested:
+# ai-race-submit --output-dir output/review_YYYYMMDD_HHMMSS --submission-dir submission
 ```
+
+Manual output review/optimization should create a fresh timestamped folder under
+`output/` and must not write `submission/output.zip` unless the user explicitly
+asks for a submission package.

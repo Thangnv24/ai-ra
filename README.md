@@ -83,16 +83,16 @@ python test.py --direct --input-dir input --out output --mode llm_full_doc
 python test.py --direct --file input/1.txt --out output --mode llm_full_doc
 ```
 
-Đóng gói submission:
+Tạo thư mục output riêng cho review thủ công:
 
 ```bash
-ai-race-submit --output-dir output --submission-dir submission
+python tests/test.py input --mode llm_full_doc --output-dir output/review_YYYYMMDD_HHMMSS
 ```
 
-File cuối cùng:
+Chỉ đóng gói submission khi được yêu cầu rõ:
 
-```text
-submission/output.zip
+```bash
+ai-race-submit --output-dir output/review_YYYYMMDD_HHMMSS --submission-dir submission
 ```
 
 ## Chạy Bằng Docker
@@ -169,7 +169,7 @@ Nếu thiếu key, API lỗi, hoặc JSON LLM không hợp lệ, `AI_RACE_FAIL_O
 |-- tests/test.py                # Runner E2E qua server, output mặc định theo ngày
 |-- input/                       # File .txt chính thức
 |-- output/                      # JSON dự đoán
-|-- submission/                  # output.zip để nộp
+|-- submission/                  # output.zip để nộp, chỉ cập nhật khi được yêu cầu
 |-- problem/                     # Đề bài, sample, scoring
 |-- data/candidates/             # Candidate KB đã giản lược cho runtime
 |-- scripts/                     # Script tải/build/inspect dữ liệu
@@ -179,7 +179,7 @@ Nếu thiếu key, API lỗi, hoặc JSON LLM không hợp lệ, `AI_RACE_FAIL_O
 |-- src/knowledge/               # Ontology seed, slim candidate index, retrieval, reasoning
 |-- src/integrations/            # OpenAI-compatible client và prompt JSON
 |-- src/services/                # Pipeline điều phối end-to-end
-`-- src/submission/              # Đóng gói submission/output.zip
+`-- src/submission/              # Công cụ đóng gói khi được yêu cầu
 ```
 
 ## Vai Trò Từng Nhóm File

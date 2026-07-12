@@ -52,6 +52,18 @@ class RuleRefinementTest(unittest.TestCase):
         assertions = ContextDetector().assertions_for(text, start, start + len("tang huyet ap"), TYPE_DIAGNOSIS)
         self.assertIn(ASSERTION_FAMILY, assertions)
 
+    def test_negation_does_not_cross_list_separator(self) -> None:
+        text = "vang da khong dau - ngua"
+        start = text.index("ngua")
+        assertions = ContextDetector().assertions_for(text, start, start + len("ngua"), TYPE_SYMPTOM)
+        self.assertNotIn("isNegated", assertions)
+
+    def test_negation_still_applies_to_close_symptom(self) -> None:
+        text = "benh nhan khong non"
+        start = text.index("non")
+        assertions = ContextDetector().assertions_for(text, start, start + len("non"), TYPE_SYMPTOM)
+        self.assertIn("isNegated", assertions)
+
     def test_aspirin_325_dose_prefers_matching_rxnorm_candidate(self) -> None:
         retriever = CandidateRetriever(load_ontology_index())
         candidates = retriever.candidates_for("aspirin 325mg x 1", TYPE_DRUG, limit=3)

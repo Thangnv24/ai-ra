@@ -2,9 +2,9 @@
   "version": 1,
   "purpose": "Slim runtime candidate data for ICD-10 diagnosis and RxNorm drug mapping.",
   "sources": {
-    "icd10": "D:\\downloads\\ai-race\\data\\icd10\\icd10.jsonl",
-    "rxnconso": "D:\\downloads\\ai-race\\data\\rxnorm\\RXNCONSO.RRF",
-    "rxnarchive": "D:\\downloads\\ai-race\\data\\rxnorm\\RXNATOMARCHIVE.RRF"
+    "icd10": "data\\icd10\\icd10.jsonl",
+    "rxnconso": "D:\\downloads\\data_ai\\RxNorm_full_07062026\\rrf\\RXNCONSO.RRF",
+    "rxnarchive": "D:\\downloads\\data_ai\\RxNorm_full_07062026\\rrf\\RXNATOMARCHIVE.RRF"
   },
   "counts": {
     "icd10_candidates": 15844,

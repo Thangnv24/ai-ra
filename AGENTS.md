@@ -28,7 +28,7 @@ Do not build a slow open-ended ReAct agent for final inference. LLM output must 
 - `problem/sample_input_1.txt`, `problem/sample_input_2.txt`: official examples.
 - `input/`: official `.txt` files.
 - `output/`: generated `.json` predictions. Do not recreate legacy `outputs/`.
-- `submission/`: final `output.zip`.
+- `submission/`: final `output.zip`, only update when the user explicitly asks for a submission package.
 - `data/candidates/`: slim runtime ICD-10/RxNorm candidate KB.
 - `scripts/build_slim_candidate_kb.py`: builds slim candidate artifacts from prepared raw sources.
 - `main.py`: FastAPI server entry point.
@@ -83,10 +83,13 @@ If no API key is present, the pipeline must still run with local fallback and re
   `docker compose up --build ai-race-api`
 - Run batch inference in Docker:
   `docker compose --profile run run --rm ai-race-runner`
-- Package submission:
-  `ai-race-submit --output-dir output --submission-dir submission`
+- Create a manual review output folder:
+  `output/review_YYYYMMDD_HHMMSS/`
+- Package submission only on explicit user request:
+  `ai-race-submit --output-dir <review-output-dir> --submission-dir submission`
 
 After temporary smoke tests, remove temporary output directories such as `output/_tmp_eval`.
+For manual output optimization/review, do not overwrite `submission/output.zip` by default. Create a new timestamped folder under `output/` and report that folder path; package to `submission/` only if the user asks.
 
 ## Source of truth
 

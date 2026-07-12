@@ -29,6 +29,8 @@ submission/*.zip
 data/raw/
 data/processed/
 data/indexes/
+data/rxnorm/
+data/icd10/
 
 # OS/editor noise
 .DS_Store

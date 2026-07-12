@@ -23,7 +23,7 @@ Offsets are zero-based Python string character offsets over the original input t
 ## Required Flow
 
 ```text
-download data -> build KB/index -> start FastAPI -> run test.py -> generate JSON -> package output.zip
+download data -> build KB/index -> start FastAPI -> run test.py -> generate JSON in a timestamped output folder
 ```
 
 Primary commands:
@@ -35,9 +35,10 @@ python scripts/build_knowledge_base.py
 python scripts/build_indexes.py
 python scripts/inspect_data_status.py
 python scripts/run_server.py
-python test.py --file problem/sample_input_5.txt --out output
-python test.py --input-dir input --out output
-python scripts/package_submission.py --output-dir output --submission-dir submission
+python test.py --file problem/sample_input_5.txt --out output/review_YYYYMMDD_HHMMSS
+python test.py --input-dir input --out output/review_YYYYMMDD_HHMMSS
+# Optional, only when explicitly requested:
+# python scripts/package_submission.py --output-dir output/review_YYYYMMDD_HHMMSS --submission-dir submission
 ```
 
 ## LLM Rules

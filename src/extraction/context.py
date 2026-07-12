@@ -23,7 +23,9 @@ FAMILY_RE = re.compile(
     r"|\b(?:bo|cha|me|ong|ba)\s+(?:bi|mac|co|tien su|duoc chan doan|da tung)\b)"
 )
 HISTORICAL_RE = re.compile(
-    r"(?:\btien su\b|\btruoc nhap vien\b|\bda tung\b|\bbenh su\b|\bpast medical history\b|\bpmh\b|\bhistory of\b|\bhome meds?\b|\bprior to admission\b|\bpreviously\b)"
+    r"(?:\btien su\b|\btruoc nhap vien\b|\bda tung\b|\bda dung\b|\btung dung\b|\bsu dung\b"
+    r"|\bduoc ke\b|\bngung\b|\bvua ngung\b|\bbenh su\b|\bpast medical history\b|\bpmh\b"
+    r"|\bhistory of\b|\bhome meds?\b|\bprior to admission\b|\bpreviously\b)"
 )
 
 
@@ -51,18 +53,26 @@ class ContextDetector:
         if not before:
             return False
         close = " ".join(before.split()[-8:])
+        if re.search(r"\bkhong\b[^:;.\n]*[-:]$", close):
+            return False
         if NEGATION_RE.search(close):
             return True
         return bool(NEGATION_RE.search(sentence_before) and len(sentence_before.split()) <= 16)
 
     @staticmethod
     def _has_historical_context(sentence_before: str, broad_before: str, concept_type: str) -> bool:
-        if _is_present_illness_context(sentence_before) or _is_present_illness_context(broad_before):
+        if _is_present_illness_context(sentence_before):
             return False
         if HISTORICAL_RE.search(sentence_before):
             return True
         if concept_type == TYPE_DRUG:
-            return bool(re.search(r"\b(?:thuoc truoc nhap vien|truoc nhap vien|home meds?|prior to admission)\b", broad_before))
+            return bool(
+                re.search(
+                    r"\b(?:thuoc truoc nhap vien|truoc nhap vien|home meds?|prior to admission|"
+                    r"medications?|dang dung|duoc ke|da dung|su dung|ngung)\b",
+                    broad_before,
+                )
+            )
         return bool(re.search(r"\b(?:tien su benh noi khoa|past medical history|pmh|da tung|previously)\b", broad_before))
 
 

@@ -35,6 +35,7 @@ from knowledge.candidates import load_slim_candidate_index
 from knowledge.ontology import OntologyIndex, load_ontology_index
 from knowledge.reasoning import infer_relations
 from knowledge.retrieval import CandidateRetriever
+from services.postprocess import refine_concepts
 
 
 @dataclass(frozen=True)
@@ -136,6 +137,12 @@ class MedicalKGPipeline:
         }
         if requested_mode in {"hybrid", "llm_full_doc"}:
             concepts, meta = self._apply_llm_decisions(text, concepts, meta)
+        before_postprocess = len(concepts)
+        concepts = refine_concepts(text, concepts, retriever=self.retriever, context_detector=self.context)
+        meta["postprocess"] = {
+            "input_concepts": before_postprocess,
+            "output_concepts": len(concepts),
+        }
         # Keep relation inference available without changing the public schema.
         infer_relations(concepts)
         errors = validate_output([concept.to_dict() for concept in concepts], source_text=text)
@@ -160,7 +167,7 @@ class MedicalKGPipeline:
         retrieved_by_id: dict[str, set[str]] = {}
         for idx, concept in enumerate(concepts):
             mention_id = f"m{idx + 1}"
-            candidate_rows = self.retriever.candidate_rows_for(concept.text, concept.type, limit=10) if concept.type in CODED_TYPES else []
+            candidate_rows = self.retriever.candidate_rows_for(concept.text, concept.type, limit=25) if concept.type in CODED_TYPES else []
             retrieved_by_id[mention_id] = {row["code"] for row in candidate_rows}
             start, end = concept.position
             mention_payload.append(

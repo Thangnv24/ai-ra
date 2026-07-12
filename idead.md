@@ -98,13 +98,14 @@ main.py
   -> test.py ghi output/*.json
 ```
 
-### Package
+### Validate / Optional Package
 
 ```text
 output/*.json
   -> scripts/validate_outputs.py
-  -> scripts/package_submission.py
-  -> submission/output.zip
+  -> output/review_YYYYMMDD_HHMMSS/
+  -> optional scripts/package_submission.py only when explicitly requested
+  -> optional submission/output.zip
 ```
 
 ## 4. Map Tham Số Quan Trọng
@@ -403,7 +404,7 @@ Giai đoạn 4: Multi-pass API
 Giai đoạn 5: Validate/package
 
 - `python scripts/validate_outputs.py --output-dir output --input-dir input`
-- `python scripts/package_submission.py --output-dir output --submission-dir submission`
+- Chỉ đóng gói submission khi người dùng yêu cầu rõ. Review/thử nghiệm mặc định ghi vào thư mục mới trong `output/`, ví dụ `output/review_YYYYMMDD_HHMMSS/`.
 
 ## 11. Checklist Tối Ưu Sau Này
 
@@ -487,7 +488,8 @@ input text
   -> deterministic merge/dedup/overlap resolver
   -> schema + position validation
   -> output/<id>.json
-  -> package output.zip
+  -> output/review_YYYYMMDD_HHMMSS/<id>.json
+  -> optional package only when explicitly requested
 ```
 
 Nguyên tắc: LLM không được quyết định final offset và không được tự sinh ICD/RxNorm code ngoài candidate pack.
@@ -823,7 +825,205 @@ Milestone 7 - End-to-end output:
 - run 100 input files;
 - generate output dated folder;
 - validate all JSON;
-- package `submission/output.zip`.
+- package `submission/output.zip` chỉ khi người dùng yêu cầu rõ; mặc định dừng ở thư mục output timestamp để review.
+
+## 14. Ý Tưởng Tối Ưu Candidate Sau Điểm 35.938
+
+Ghi chú phạm vi: đây là ý tưởng phân tích, chưa sửa code. Mục tiêu 2 ngày tới là kéo điểm gần mốc 50 bằng cách ưu tiên `J_candidates`, đồng thời không làm hỏng `text/type/position`.
+
+### 14.1. Đọc Lại Công Thức Điểm
+
+Điểm mới nhất:
+
+```text
+final_score: 35.938
+WER: 57.6834
+text_score ~= 42.3166
+J_assertion: 42.1579
+J_candidates: 26.4891
+```
+
+Công thức:
+
+```text
+final = 0.3 * text_score + 0.3 * assertion_score + 0.4 * candidate_score
+```
+
+Nếu giữ nguyên text và assertion, candidate phải lên khoảng 61.6 mới đạt 50 điểm. Vì vậy không nên chỉ sửa mã ICD/RxNorm đơn thuần. Cần phối hợp 3 hướng:
+
+- giảm WER bằng span đúng hơn;
+- sửa assertion theo section/ngữ cảnh;
+- tăng candidate bằng retrieval và rerank tốt hơn.
+
+`J_candidates` bị nặng vì chiếm 40% final score và còn bị weighted theo số candidate thật. Các bệnh/thuốc có nhiều mã gold nếu sai sẽ kéo điểm mạnh.
+
+### 14.2. Vì Sao Text Thuốc Trong Input Lệch Với RxNorm `name`
+
+Ví dụ BTC:
+
+```json
+{
+  "text": "amlodipine 10 mg po daily",
+  "type": "THUỐC",
+  "candidates": ["308135"]
+}
+```
+
+Trong `data/candidates/rxnorm_candidates.jsonl`, mã `308135` là:
+
+```text
+amlodipine 10 MG Oral Tablet
+```
+
+Nghĩa là output `text` phải giữ nguyên span trong input, bao gồm cả phần SIG/hướng dẫn dùng thuốc như `po daily`, `po bid`, `q6h:prn`, `x 1`. Nhưng phần dùng để map RxNorm phải là drug product core:
+
+```text
+amlodipine 10 mg po daily
+-> strip SIG: amlodipine 10 mg
+-> infer form/route: oral tablet từ po hoặc từ candidate alias
+-> map: amlodipine 10 MG Oral Tablet
+-> RxCUI: 308135
+```
+
+Do đó nếu search trực tiếp toàn bộ span input vào cột `name` thì sẽ lệch. Đây không phải lỗi dữ liệu; đây là khác biệt giữa:
+
+- mention text trong hồ sơ lâm sàng;
+- tên chuẩn RxNorm dùng để normalize thuốc.
+
+### 14.3. Bridge Cho RxNorm: Span -> Core Drug -> Candidate
+
+Ý tưởng map 2 phía:
+
+1. Giữ nguyên `text` và `position` theo input.
+2. Tạo query variants từ mention:
+   - raw normalized: `amlodipine 10 mg po daily`;
+   - bỏ frequency: `amlodipine 10 mg po`;
+   - bỏ route/frequency: `amlodipine 10 mg`;
+   - thêm form từ route: `amlodipine 10 mg oral tablet`;
+   - ingredient-only: `amlodipine`.
+3. Search trong `candidate_aliases.jsonl` trước, không chỉ search cột `name`.
+4. Dùng thông tin strength/form để chọn mức RxNorm:
+   - có hoạt chất + strength + form: ưu tiên SCD/SBD;
+   - có brand: cho phép SBD/brand;
+   - chỉ có tên hoạt chất, không dose/form: ưu tiên IN/PIN;
+   - có nhiều hoạt chất: ưu tiên multi-ingredient clinical drug.
+5. LLM/reranker chỉ chọn trong candidate pack mở rộng, nhưng candidate pack phải đủ rộng trước.
+
+Ví dụ từ dữ liệu hiện có:
+
+```text
+aspirin 81 mg po daily
+-> aspirin 81 mg oral tablet
+-> 243670
+
+metoprolol succinate xl 50 mg po daily
+-> metoprolol succinate 50 mg extended release oral tablet
+-> 866436
+
+docusate sodium 100 mg po bid
+-> docusate sodium 100 mg oral tablet
+-> 1099279
+
+senna 8.6 mg po bid:prn
+-> sennosides 8.6 mg oral tablet
+-> 312935
+```
+
+Trường hợp đặc biệt cần rule/LLM hiểu synonym:
+
+- `senna` trong input có thể map sang `Sennosides`;
+- `ASA` map sang `aspirin`;
+- `APAP` map sang `acetaminophen`;
+- `xl`, `er`, `extended release`, `24 hr` là cùng nhóm extended-release;
+- `po` thường gợi ý oral, nhưng không phải lúc nào cũng đủ để quyết định tablet/suspension nếu input không có form.
+
+### 14.4. Chính Sách Candidate Count Cho RxNorm
+
+Không nên luôn lấy top 1. Nhưng cũng không nên nhét quá nhiều mã vì Jaccard phạt candidate thừa.
+
+Đề xuất:
+
+- Nếu exact clinical drug match rất rõ: chọn 1 mã.
+- Nếu mention có dose range như `325-650 mg`: cân nhắc chọn mã dose thấp/chuẩn BTC thường dùng, nhưng không thêm tất cả dose nếu không có evidence.
+- Nếu mention là ingredient-only: chọn ingredient RxCUI, không đoán clinical drug.
+- Nếu input có form rõ như `oral suspension`, `injection`, `cream`, `solution`: bắt buộc ưu tiên candidate cùng form.
+- Nếu candidate top 2 là cùng alias và đều priority tốt, chỉ giữ cả 2 khi benchmark/ICD-like pattern cho thấy gold thường nhiều mã. Với RxNorm, đa số nên 1 mã.
+
+### 14.5. ICD-10: Không Chỉ Exact Name, Phải Hiểu Cấp Mã
+
+Ví dụ `bệnh trào ngược dạ dày - thực quản` trong local ICD có:
+
+```text
+K21   Bệnh trào ngược dạ dày - thực quản
+K21.0 Bệnh trào ngược dạ dày - thực quản kèm viêm thực quản
+K21.9 Bệnh trào ngược dạ dày - thực quản không kèm viêm thực quản
+```
+
+Benchmark ví dụ của BTC chọn `K21.0` và `K21.9`, không chọn parent `K21`. Điều này gợi ý scoring/gold có xu hướng dùng mã lá hoặc các mã con hợp lệ, không chỉ parent category.
+
+Ý tưởng cho ICD:
+
+1. Query cả raw span, bỏ tiền tố `bệnh`, `chẩn đoán`, `mắc`, `theo dõi`.
+2. Search `name_vi`, `name_en`, `aliases`, `alias_norms`.
+3. Nếu exact match vào parent code có children rất sát, cân nhắc trả children thay vì parent, hoặc parent + children tùy pattern đã học từ benchmark.
+4. Nếu text có dấu hiệu specificity:
+   - `kèm viêm`, `có biến chứng`, `cấp`, `mạn`, `không xác định`, `không kèm`: ưu tiên mã con tương ứng;
+   - nếu không nói rõ nhưng benchmark có tiền lệ lấy sibling `.0` + `.9`, áp dụng cho một số nhóm đã xác nhận.
+5. Không map triệu chứng thành chẩn đoán chỉ vì ICD có mã triệu chứng. Nếu type sai, concept bị tính mismatch nặng.
+
+### 14.6. Lỗi Có Khả Năng Đang Kéo `J_candidates`
+
+Từ output hiện tại, tất cả `CHẨN_ĐOÁN`/`THUỐC` đều có candidate và mã đều nằm trong local index. Vậy candidate thấp nhiều khả năng do:
+
+- chọn sai mức RxNorm: ingredient thay vì clinical drug hoặc ngược lại;
+- không bridge được `po daily`, `q6h:prn`, `xl`, dose range sang tên chuẩn;
+- ICD chọn parent/generic trong khi gold chọn child/sibling;
+- entity text/type không khớp gold nên candidate đúng cũng không được tính;
+- false positive diagnosis/drug làm mẫu bị phạt Jaccard;
+- LLM đang bị giới hạn bởi candidate pack nghèo.
+
+### 14.7. Phương Án Tối Ưu Luồng Code Sau Khi Được Xác Nhận
+
+Chưa thực hiện ngay, chỉ là đề xuất:
+
+```text
+input text
+-> entity proposal exact quote
+-> deterministic offset align
+-> type guard: symptom/lab/diagnosis/drug
+-> RxNorm/ICD query variant builder
+-> local candidate expansion top 30-50
+-> ranker theo strength/form/alias/source/priority
+-> LLM adjudicator chọn candidate subset trong pack
+-> manual/silver override layer từ các lần chấm điểm
+-> schema + position validation
+-> output/review_YYYYMMDD_HHMMSS/
+```
+
+Độ phù hợp:
+
+- RxNorm query variant + TTY/form ranker: rất cao, vì ví dụ BTC chứng minh span input khác `name` chuẩn.
+- ICD child/sibling policy: cao, vì benchmark GERD cho thấy gold có thể dùng nhiều mã con.
+- Manual/silver override layer: rất cao trong 2 ngày, vì biến tri thức từ các lần submit thành rule ổn định.
+- Full LLM JSON trực tiếp: trung bình, vì dễ sai offset/code nếu không bị ràng buộc.
+- Rule/NER thuần: thấp nếu dùng một mình, vì triệu chứng/chẩn đoán tự nhiên quá đa dạng.
+
+### 14.8. Ưu Tiên Thực Thi Nếu Được Duyệt
+
+1. Audit nhóm file nhiều `CHẨN_ĐOÁN`/`THUỐC` trước: `20`, `41`, `54`, `96`, `13`, `50`, `16`, `32`, `88`, `37`, `44`.
+2. Làm bảng lỗi RxNorm từ ví dụ BTC và output thật:
+   - span;
+   - core drug;
+   - expected candidate;
+   - candidate hiện tại;
+   - rule/synonym cần thêm.
+3. Làm bảng lỗi ICD:
+   - diagnosis span;
+   - mã parent;
+   - mã child/sibling;
+   - dấu hiệu trong text.
+4. Sau khi có 30-50 case chắc chắn, mới cập nhật code retrieval/ranker.
+5. Mỗi lần chạy mới chỉ ghi vào thư mục timestamp trong `output/`, không đóng gói submission nếu chưa được yêu cầu.
 
 Milestone 8 - Submit/iterate:
 
@@ -840,3 +1040,36 @@ Milestone 8 - Submit/iterate:
 - `position` là invariant quan trọng nhất: mọi bước phải preserve original text.
 - Cần giữ audit để biết điểm thấp do miss entity, sai type, sai assertion hay sai candidate.
 - Nên chuẩn bị song song track self-host để giảm rủi ro sau khi lọt top 15.
+
+## 15. Luồng Mới Đang Triển Khai Sau Điểm 44.64020
+
+Mục tiêu của vòng này là đưa tri thức từ các lần submit vào code, nhưng vẫn giữ LLM ở vai trò bộ quyết định có kiểm soát:
+
+```text
+rule/lab extraction
+-> LLM exact-quote entity proposal theo chunk
+-> merge span và validate offset
+-> local candidate expansion với query variants
+-> LLM adjudicator chọn type/assertion/candidate trong candidate pack
+-> deterministic postprocess/silver rules
+-> schema + offset validation
+-> output/review_YYYYMMDD_HHMMSS/
+```
+
+Thay đổi trong pipeline:
+
+- Candidate pack gửi vào LLM tăng lên 25 mã cho mỗi diagnosis/drug.
+- RxNorm query variants xử lý `325mg` -> `325 mg`, bỏ `x 1`, cắt route/frequency, bỏ `xl/xr/er/sr/cr` khi cần fallback.
+- ICD query variants sửa một số spelling/synonym hay gặp, ví dụ `sung huyet` -> `xung huyet`.
+- Postprocess sửa các span nhiễu từ lần chấm: `phu ngoai vi tang dan...` -> `phu ngoai vi`, `tang tang can ... pound...` -> `tang can`, lab result `12 bach cau` -> `12`, `am tinh nitrite` -> `am tinh`.
+- Drop diagnosis nằm hoàn toàn bên trong tên xét nghiệm để giảm false positive candidate.
+- Re-apply assertion bằng context detector sau LLM, để tránh LLM làm mất `isHistorical` ở thuốc/tiền sử.
+- Không package `submission/output.zip` nếu người dùng chưa yêu cầu rõ; output review luôn ghi vào thư mục timestamp trong `output/`.
+
+Hướng tiếp nếu điểm vẫn tăng chậm:
+
+1. Tạo bảng silver case cho 30-50 diagnosis/drug chắc chắn sai từ các lần submit.
+2. Thêm rule candidate override có provenance cho từng silver case.
+3. Tách candidate ranker riêng cho RxNorm: ingredient vs SCDC/SCD/SBD, strength, form, route.
+4. Tách candidate ranker riêng cho ICD: exact child, sibling unspecified, parent fallback.
+5. Chạy chunk-by-chunk manual review cho nhóm file nhiều candidate trước khi submit tiếp.

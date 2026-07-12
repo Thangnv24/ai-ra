@@ -22,7 +22,7 @@ class CandidateRetriever:
         codes: list[str] = []
         for entry in self.index.lookup(text, concept_type, limit=limit):
             codes.append(entry.code)
-        for hit in self.slim_index.lookup(text, concept_type, limit=max(limit * 2, 10)):
+        for hit in self.slim_index.lookup(text, concept_type, limit=max(limit * 4, 20)):
             codes.append(hit.record.code)
         return tuple(_unique(codes)[:limit])
 
@@ -59,6 +59,7 @@ class CandidateRetriever:
                     "priority": hit.record.priority,
                     "score": round(hit.score, 6),
                     "archive": hit.record.archive,
+                    "ttys": list(hit.record.ttys),
                 }
             )
             if len(rows) >= limit:

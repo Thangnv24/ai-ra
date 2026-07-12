@@ -92,6 +92,12 @@ def write_jsonl(path: Path, rows: list[dict[str, Any]]) -> None:
             fh.write(json.dumps(row, ensure_ascii=False, separators=(",", ":")) + "\n")
 
 
+def read_candidate_rows(path: Path) -> list[dict[str, Any]]:
+    if not path.exists():
+        return []
+    return [row for row in read_jsonl(path)]
+
+
 def icd_priority(row: dict[str, Any]) -> int:
     code = str(row.get("disease_code") or "")
     if row.get("flag_not_primary") or row.get("flag_not_recommended_primary"):
@@ -262,6 +268,24 @@ def build_rxnorm_rows(conso_path: Path, archive_path: Path) -> list[dict[str, An
     return sorted(rows, key=lambda item: (item["priority"], item["code"]))
 
 
+def compact_rxnorm_rows(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Keep lookup aliases in candidate_aliases.jsonl and make records GitHub-friendly."""
+    compact: list[dict[str, Any]] = []
+    for row in rows:
+        compact.append(
+            {
+                "code": row["code"],
+                "system": row["system"],
+                "type": row["type"],
+                "name": row["name"],
+                "ttys": row.get("ttys", []),
+                "priority": row.get("priority", 100),
+                "archive": row.get("archive", False),
+            }
+        )
+    return compact
+
+
 def build_alias_rows(candidate_rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
     aliases: dict[tuple[str, str], dict[str, Any]] = {}
     for row in candidate_rows:
@@ -302,16 +326,24 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--rxnconso", type=Path, default=ROOT / "data" / "rxnorm" / "RXNCONSO.RRF")
     parser.add_argument("--rxnarchive", type=Path, default=ROOT / "data" / "rxnorm" / "RXNATOMARCHIVE.RRF")
     parser.add_argument("--out-dir", type=Path, default=ROOT / "data" / "candidates")
+    parser.add_argument(
+        "--existing-icd-candidates",
+        type=Path,
+        default=None,
+        help="Reuse an already-built icd10_candidates.jsonl when raw ICD-10 jsonl is not present.",
+    )
     args = parser.parse_args(argv)
 
     icd_rows = build_icd10_rows(args.icd10)
+    if not icd_rows and args.existing_icd_candidates is not None:
+        icd_rows = read_candidate_rows(args.existing_icd_candidates)
     rx_rows = build_rxnorm_rows(args.rxnconso, args.rxnarchive)
     all_rows = icd_rows + rx_rows
     alias_rows = build_alias_rows(all_rows)
 
     args.out_dir.mkdir(parents=True, exist_ok=True)
     write_jsonl(args.out_dir / "icd10_candidates.jsonl", icd_rows)
-    write_jsonl(args.out_dir / "rxnorm_candidates.jsonl", rx_rows)
+    write_jsonl(args.out_dir / "rxnorm_candidates.jsonl", compact_rxnorm_rows(rx_rows))
     write_jsonl(args.out_dir / "candidate_aliases.jsonl", alias_rows)
 
     manifest = {
