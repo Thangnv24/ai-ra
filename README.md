@@ -55,6 +55,22 @@ Payload `/predict` chỉ nhận trường `text`:
 
 Nếu LLM/API lỗi, request fail và server ghi log lỗi; hệ thống không quay về local fallback.
 
+## Manual gold workflow
+
+Sau khi chạy LLM và có một thư mục output mới, tạo bản gold draft để sửa tay:
+
+```bash
+python scripts/gold_workflow.py init --prediction-dir output/out_put_DDMMYYYY --gold-dir data/gold_manual/review_YYYYMMDD_HHMMSS --pretty
+```
+
+Sau khi sửa các file JSON trong `data/gold_manual/review_...`, chấm lại output:
+
+```bash
+python scripts/gold_workflow.py score --prediction-dir output/out_put_DDMMYYYY --gold-dir data/gold_manual/review_YYYYMMDD_HHMMSS
+```
+
+Script sẽ sinh report tổng và file `.errors.jsonl` để gom lỗi span, assertion, candidate, missing và extra.
+
 ## Luồng chính
 
 ```text

@@ -77,6 +77,10 @@ Do not add request-level `id`, `mode`, `validate`, `model`, `max_tokens`, or oth
   `python tests/test.py input/1.txt --output-dir output/single_run`
 - Run full input folder through server with explicit workers:
   `python tests/test.py input --workers 8`
+- Create editable manual-gold draft from a prediction folder:
+  `python scripts/gold_workflow.py init --prediction-dir output/out_put_DDMMYYYY --gold-dir data/gold_manual/review_YYYYMMDD_HHMMSS --pretty`
+- Score predictions against edited manual gold:
+  `python scripts/gold_workflow.py score --prediction-dir output/out_put_DDMMYYYY --gold-dir data/gold_manual/review_YYYYMMDD_HHMMSS`
 - Build Docker image:
   `docker build -t ai-race-medical-kg:latest .`
 - Run API with Docker Compose:
