@@ -1,0 +1,565 @@
+[
+  {
+    "text": "viêm tủy xương mãn tính",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "M86.6"
+    ],
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      18,
+      41
+    ]
+  },
+  {
+    "text": "bàng quang thần kinh",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "N31"
+    ],
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      45,
+      65
+    ]
+  },
+  {
+    "text": "liệt hai chi dưới",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "G82.2"
+    ],
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      81,
+      98
+    ]
+  },
+  {
+    "text": "loét tì đè giai đoạn IV mãn tính",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "L89.3"
+    ],
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      102,
+      134
+    ]
+  },
+  {
+    "text": "nhiễm khuẩn đường tiết niệu",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "N39.0"
+    ],
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      163,
+      190
+    ]
+  },
+  {
+    "text": "vanco",
+    "type": "THUỐC",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      236,
+      241
+    ],
+    "candidates": [
+      "11124"
+    ]
+  },
+  {
+    "text": "zosyn",
+    "type": "THUỐC",
+    "candidates": [
+      "74170"
+    ],
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      241,
+      246
+    ]
+  },
+  {
+    "text": "bactrim",
+    "type": "THUỐC",
+    "candidates": [
+      "151399"
+    ],
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      321,
+      328
+    ]
+  },
+  {
+    "text": "nhiễm khuẩn đường tiết niệu",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "N39.0"
+    ],
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      341,
+      368
+    ]
+  },
+  {
+    "text": "sốt cao",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      407,
+      414
+    ]
+  },
+  {
+    "text": "hạ huyết áp",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "I95.9"
+    ],
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      466,
+      477
+    ]
+  },
+  {
+    "text": "nhiễm trùng huyết",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "A41.9"
+    ],
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      497,
+      514
+    ]
+  },
+  {
+    "text": "vanco",
+    "type": "THUỐC",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      541,
+      546
+    ],
+    "candidates": [
+      "11124"
+    ]
+  },
+  {
+    "text": "zosyn",
+    "type": "THUỐC",
+    "candidates": [
+      "74170"
+    ],
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      546,
+      551
+    ]
+  },
+  {
+    "text": "bactrim",
+    "type": "THUỐC",
+    "candidates": [
+      "151399"
+    ],
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      551,
+      558
+    ]
+  },
+  {
+    "text": "zosyn",
+    "type": "THUỐC",
+    "candidates": [
+      "74170"
+    ],
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      604,
+      609
+    ]
+  },
+  {
+    "text": "viêm tủy xương mãn tính",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "M86.6"
+    ],
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      655,
+      678
+    ]
+  },
+  {
+    "text": "sốt cao 39.7 độ C",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      822,
+      839
+    ]
+  },
+  {
+    "text": "Cảm giác khát nước",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      896,
+      914
+    ]
+  },
+  {
+    "text": "Da khô",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      915,
+      921
+    ]
+  },
+  {
+    "text": "nếp véo da mất chậm",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      923,
+      942
+    ]
+  },
+  {
+    "text": "khó thở",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      962,
+      969
+    ]
+  },
+  {
+    "text": "Đau bụng",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      970,
+      978
+    ]
+  },
+  {
+    "text": "đau hông",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      980,
+      988
+    ]
+  },
+  {
+    "text": "Hạ huyết áp",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "I95.9"
+    ],
+    "assertions": [],
+    "position": [
+      999,
+      1010
+    ]
+  },
+  {
+    "text": "Mạch nhanh",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1011,
+      1021
+    ]
+  },
+  {
+    "text": "Tim nhịp nhanh đều",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1023,
+      1041
+    ]
+  },
+  {
+    "text": "nước tiểu có cặn",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1077,
+      1093
+    ]
+  },
+  {
+    "text": "lactate",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1111,
+      1118
+    ]
+  },
+  {
+    "text": "1.1",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1119,
+      1122
+    ]
+  },
+  {
+    "text": "0.8",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1125,
+      1128
+    ]
+  },
+  {
+    "text": "Cấy nước tiểu",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1131,
+      1144
+    ]
+  },
+  {
+    "text": "nhiễm khuẩn đường tiết niệu",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "N39.0"
+    ],
+    "assertions": [],
+    "position": [
+      1147,
+      1174
+    ]
+  },
+  {
+    "text": "nhiễm khuẩn đường tiết niệu có các vi khuẩn hỗn hợp",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1147,
+      1198
+    ]
+  },
+  {
+    "text": "cấy máu",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1201,
+      1208
+    ]
+  },
+  {
+    "text": "âm tính",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1210,
+      1217
+    ]
+  },
+  {
+    "text": "chỉ số marker viêm",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1219,
+      1237
+    ]
+  },
+  {
+    "text": "đã có xu hướng tăng",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1249,
+      1268
+    ]
+  },
+  {
+    "text": "MRI",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1294,
+      1297
+    ]
+  },
+  {
+    "text": "không thấy tình trạng viêm xương tủy nặng hơn",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1300,
+      1345
+    ]
+  },
+  {
+    "text": "Xquang ngực thẳng",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1348,
+      1365
+    ]
+  },
+  {
+    "text": "không thấy thâm nhiễm",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1367,
+      1388
+    ]
+  },
+  {
+    "text": "svo2",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1402,
+      1406
+    ]
+  },
+  {
+    "text": "82",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1410,
+      1412
+    ]
+  },
+  {
+    "text": "cvp",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1452,
+      1455
+    ]
+  },
+  {
+    "text": "6",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1459,
+      1460
+    ]
+  },
+  {
+    "text": "nhiễm trùng huyết đường vào tiết niệu",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "A41.9",
+      "N39.0"
+    ],
+    "assertions": [],
+    "position": [
+      1472,
+      1509
+    ]
+  },
+  {
+    "text": "viêm tủy xương mãn tính",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "M86.6"
+    ],
+    "assertions": [],
+    "position": [
+      1511,
+      1534
+    ]
+  },
+  {
+    "text": "NS 0.9 %",
+    "type": "THUỐC",
+    "candidates": [
+      "313002"
+    ],
+    "assertions": [],
+    "position": [
+      1572,
+      1580
+    ]
+  },
+  {
+    "text": "Cefepim",
+    "type": "THUỐC",
+    "candidates": [
+      "20481"
+    ],
+    "assertions": [],
+    "position": [
+      1594,
+      1601
+    ]
+  },
+  {
+    "text": "Vancomycin",
+    "type": "THUỐC",
+    "candidates": [
+      "11124"
+    ],
+    "assertions": [],
+    "position": [
+      1605,
+      1615
+    ]
+  }
+]

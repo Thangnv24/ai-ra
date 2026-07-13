@@ -1,0 +1,209 @@
+[
+  {
+    "text": "Ung thư vú di căn",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "C50.9"
+    ],
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      49,
+      66
+    ]
+  },
+  {
+    "text": "taxol",
+    "type": "THUỐC",
+    "candidates": [
+      "196466"
+    ],
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      105,
+      110
+    ]
+  },
+  {
+    "text": "fulvestrant",
+    "type": "THUỐC",
+    "candidates": [
+      "282357"
+    ],
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      114,
+      125
+    ]
+  },
+  {
+    "text": "đau bụng",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      181,
+      189
+    ]
+  },
+  {
+    "text": "đau bụng",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      295,
+      303
+    ]
+  },
+  {
+    "text": "buồn nôn",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      318,
+      326
+    ]
+  },
+  {
+    "text": "nôn",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      328,
+      331
+    ]
+  },
+  {
+    "text": "đi ngoài phân lỏng",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      341,
+      359
+    ]
+  },
+  {
+    "text": "đau bụng",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      413,
+      421
+    ]
+  },
+  {
+    "text": "buồn nôn",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      451,
+      459
+    ]
+  },
+  {
+    "text": "nôn",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      461,
+      464
+    ]
+  },
+  {
+    "text": "Đau bụng",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      559,
+      567
+    ]
+  },
+  {
+    "text": "Buồn nôn",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      582,
+      590
+    ]
+  },
+  {
+    "text": "nôn",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      592,
+      595
+    ]
+  },
+  {
+    "text": "Mạch",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      668,
+      672
+    ]
+  },
+  {
+    "text": "93",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      674,
+      676
+    ]
+  },
+  {
+    "text": "compazine",
+    "type": "THUỐC",
+    "candidates": [
+      "203546"
+    ],
+    "assertions": [],
+    "position": [
+      764,
+      773
+    ]
+  },
+  {
+    "text": "aleve",
+    "type": "THUỐC",
+    "candidates": [
+      "215101"
+    ],
+    "assertions": [],
+    "position": [
+      777,
+      782
+    ]
+  },
+  {
+    "text": "morphine",
+    "type": "THUỐC",
+    "candidates": [
+      "7052"
+    ],
+    "assertions": [],
+    "position": [
+      812,
+      820
+    ]
+  },
+  {
+    "text": "lorazepam",
+    "type": "THUỐC",
+    "candidates": [
+      "6470"
+    ],
+    "assertions": [],
+    "position": [
+      829,
+      838
+    ]
+  }
+]

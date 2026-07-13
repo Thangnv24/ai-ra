@@ -1,0 +1,88 @@
+[
+  {
+    "text": "viêm tủy xương mãn tính",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      18,
+      41
+    ],
+    "candidates": [
+      "M86.6"
+    ]
+  },
+  {
+    "text": "sốt",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      407,
+      410
+    ]
+  },
+  {
+    "text": "nhiễm trùng huyết",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      497,
+      514
+    ],
+    "candidates": [
+      "A41.9"
+    ]
+  },
+  {
+    "text": "viêm tủy xương mãn tính",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      655,
+      678
+    ],
+    "candidates": [
+      "M86.6"
+    ]
+  },
+  {
+    "text": "sốt",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      822,
+      825
+    ]
+  },
+  {
+    "text": "khó thở",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      962,
+      969
+    ]
+  },
+  {
+    "text": "Đau bụng",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      970,
+      978
+    ]
+  },
+  {
+    "text": "nhiễm trùng huyết đường vào tiết niệu- viêm tủy xương mãn tính",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      1472,
+      1534
+    ],
+    "candidates": []
+  }
+]

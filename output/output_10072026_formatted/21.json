@@ -1,0 +1,58 @@
+[
+  {
+    "text": "Tăng huyết áp",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "I10"
+    ],
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      48,
+      61
+    ]
+  },
+  {
+    "text": "suy tim, không đặc hiệu",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "I50.9"
+    ],
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      68,
+      91
+    ]
+  },
+  {
+    "text": "bệnh thận mạn, không đặc hiệu",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "N18.9"
+    ],
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      98,
+      127
+    ]
+  },
+  {
+    "text": "phình động mạch chủ ngực – bụng",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "I71.9"
+    ],
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      231,
+      262
+    ]
+  }
+]

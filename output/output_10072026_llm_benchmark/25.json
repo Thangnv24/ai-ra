@@ -1,0 +1,28 @@
+[
+  {
+    "text": "tách thành động mạch chủ",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      48,
+      72
+    ],
+    "candidates": [
+      "I71.0"
+    ]
+  },
+  {
+    "text": "Rò động - tĩnh mạch",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      335,
+      354
+    ],
+    "candidates": [
+      "I77.0"
+    ]
+  }
+]

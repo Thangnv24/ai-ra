@@ -1,0 +1,29 @@
+[
+  {
+    "text": "Yếu nửa người",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      123,
+      136
+    ]
+  },
+  {
+    "text": "yếu nửa người",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      218,
+      231
+    ]
+  },
+  {
+    "text": "Yếu nửa người",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1309,
+      1322
+    ]
+  }
+]

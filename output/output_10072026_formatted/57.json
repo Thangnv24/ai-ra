@@ -1,0 +1,38 @@
+[
+  {
+    "text": "bệnh rễ thần kinh tuỷ sống",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "M54.1"
+    ],
+    "assertions": [],
+    "position": [
+      74,
+      100
+    ]
+  },
+  {
+    "text": "bệnh rễ thần kinh tuỷ sống",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "M54.1"
+    ],
+    "assertions": [],
+    "position": [
+      187,
+      213
+    ]
+  },
+  {
+    "text": "hẹp ống sống",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "M48.0"
+    ],
+    "assertions": [],
+    "position": [
+      325,
+      337
+    ]
+  }
+]

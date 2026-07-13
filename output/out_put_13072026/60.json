@@ -1,0 +1,18 @@
+[
+  {
+    "text": "Trào ngược dạ dày thực quản",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      149,
+      176
+    ],
+    "candidates": [
+      "K21.0",
+      "K21.9",
+      "K21"
+    ]
+  }
+]

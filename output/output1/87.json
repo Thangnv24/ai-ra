@@ -1,0 +1,81 @@
+[
+  {
+    "text": "trầm cảm",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "F32"
+    ],
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      108,
+      116
+    ]
+  },
+  {
+    "text": "rối loạn lo âu",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "F41.9"
+    ],
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      121,
+      135
+    ]
+  },
+  {
+    "text": "tổn thương chi dưới",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      179,
+      198
+    ]
+  },
+  {
+    "text": "tổn thương chi dưới",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      441,
+      460
+    ]
+  },
+  {
+    "text": "tổn thương chi dưới",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      633,
+      652
+    ]
+  },
+  {
+    "text": "thuyên tắc phổi",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "I26.9"
+    ],
+    "assertions": [],
+    "position": [
+      768,
+      783
+    ]
+  },
+  {
+    "text": "nhiễm trùng chi dưới bên phải do Enterococcus kháng vancomycin",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "B95.2"
+    ],
+    "assertions": [],
+    "position": [
+      795,
+      857
+    ]
+  }
+]

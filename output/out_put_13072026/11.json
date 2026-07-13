@@ -1,0 +1,34 @@
+[
+  {
+    "text": "tăng huyết áp",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      57,
+      70
+    ],
+    "candidates": [
+      "I10"
+    ]
+  },
+  {
+    "text": "béo phì",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      167,
+      174
+    ],
+    "candidates": [
+      "E66.9",
+      "E66.0",
+      "E66.1",
+      "E66.2",
+      "E66.8"
+    ]
+  }
+]

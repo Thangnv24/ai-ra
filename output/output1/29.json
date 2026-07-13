@@ -1,0 +1,48 @@
+[
+  {
+    "text": "tiểu tiện không tự chủ",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      70,
+      92
+    ]
+  },
+  {
+    "text": "sa âm đạo",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "N81.9"
+    ],
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      96,
+      105
+    ]
+  },
+  {
+    "text": "tiểu tiện không tự chủ",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      177,
+      199
+    ]
+  },
+  {
+    "text": "sa âm đạo",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "N81.9"
+    ],
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      202,
+      211
+    ]
+  }
+]

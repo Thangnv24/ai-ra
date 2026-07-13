@@ -1,0 +1,41 @@
+[
+  {
+    "text": "tăng huyết áp",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "I10"
+    ],
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      53,
+      66
+    ]
+  },
+  {
+    "text": "ho",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      165,
+      167
+    ]
+  },
+  {
+    "text": "Đa u tủy xương",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "C90.0"
+    ],
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      485,
+      499
+    ]
+  }
+]

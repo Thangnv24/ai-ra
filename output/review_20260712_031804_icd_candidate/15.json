@@ -1,0 +1,26 @@
+[
+  {
+    "text": "xuất huyết nội sọ không do chấn thương",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "I62.9"
+    ],
+    "assertions": [],
+    "position": [
+      37,
+      75
+    ]
+  },
+  {
+    "text": "xuất huyết nội sọ không do chấn thương",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "I62.9"
+    ],
+    "assertions": [],
+    "position": [
+      205,
+      243
+    ]
+  }
+]

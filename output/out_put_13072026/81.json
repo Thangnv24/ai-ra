@@ -1,0 +1,38 @@
+[
+  {
+    "text": "vết thương thấu bụng",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      37,
+      57
+    ],
+    "candidates": [
+      "S31.6"
+    ]
+  },
+  {
+    "text": "vết thương thấu bụng",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      95,
+      115
+    ],
+    "candidates": [
+      "S31.6"
+    ]
+  },
+  {
+    "text": "dày niêm mạc xoang hàm",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      308,
+      330
+    ],
+    "candidates": [
+      "J34.8"
+    ]
+  }
+]

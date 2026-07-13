@@ -1,0 +1,227 @@
+[
+  {
+    "text": "đau ngực",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      71,
+      79
+    ]
+  },
+  {
+    "text": "đau ngực",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      81,
+      89
+    ]
+  },
+  {
+    "text": "tăng huyết áp",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      193,
+      206
+    ],
+    "candidates": [
+      "I10"
+    ]
+  },
+  {
+    "text": "Tăng huyết áp",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      229,
+      242
+    ],
+    "candidates": [
+      "I10"
+    ]
+  },
+  {
+    "text": "tăng lipid máu",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      250,
+      264
+    ],
+    "candidates": [
+      "E78.5"
+    ]
+  },
+  {
+    "text": "tăng lipid máu",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      282,
+      296
+    ],
+    "candidates": [
+      "E78.5"
+    ]
+  },
+  {
+    "text": "Đái tháo đường type 2",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      320,
+      341
+    ],
+    "candidates": [
+      "E11.9"
+    ]
+  },
+  {
+    "text": "bệnh phổi tắc nghẽn mạn tính",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      371,
+      399
+    ],
+    "candidates": [
+      "J44.9"
+    ]
+  },
+  {
+    "text": "bệnh phổi tắc nghẽn mạn tính",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      417,
+      445
+    ],
+    "candidates": [
+      "J44.9"
+    ]
+  },
+  {
+    "text": "aspirin 81mg",
+    "type": "THUỐC",
+    "assertions": [],
+    "position": [
+      760,
+      772
+    ],
+    "candidates": [
+      "243670",
+      "1191",
+      "315431"
+    ]
+  },
+  {
+    "text": "metoprolol succinate 100mg daily",
+    "type": "THUỐC",
+    "assertions": [],
+    "position": [
+      860,
+      892
+    ],
+    "candidates": [
+      "866436",
+      "1370483",
+      "221124"
+    ]
+  },
+  {
+    "text": "lasix 40mg daily",
+    "type": "THUỐC",
+    "assertions": [],
+    "position": [
+      911,
+      927
+    ],
+    "candidates": [
+      "4603",
+      "202991"
+    ]
+  },
+  {
+    "text": "atorvastatin 80mg daily",
+    "type": "THUỐC",
+    "assertions": [],
+    "position": [
+      946,
+      969
+    ],
+    "candidates": [
+      "617314",
+      "329299",
+      "477286",
+      "83367"
+    ]
+  },
+  {
+    "text": "lisinopril 2.5mg daily",
+    "type": "THUỐC",
+    "assertions": [],
+    "position": [
+      986,
+      1008
+    ],
+    "candidates": [
+      "197361",
+      "316152",
+      "29046"
+    ]
+  },
+  {
+    "text": "đau ngực",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1103,
+      1111
+    ]
+  },
+  {
+    "text": "đau ngực",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1315,
+      1323
+    ]
+  },
+  {
+    "text": "đau ngực",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1410,
+      1418
+    ]
+  },
+  {
+    "text": "đau ngực",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      1573,
+      1581
+    ]
+  },
+  {
+    "text": "khó thở",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      1583,
+      1590
+    ]
+  }
+]

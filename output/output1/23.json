@@ -1,0 +1,187 @@
+[
+  {
+    "text": "rối loạn ý thức",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      136,
+      151
+    ]
+  },
+  {
+    "text": "xuất huyết dưới nhện",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "I60.9"
+    ],
+    "assertions": [],
+    "position": [
+      317,
+      337
+    ]
+  },
+  {
+    "text": "đau đầu",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      711,
+      718
+    ]
+  },
+  {
+    "text": "tụ máu ngoài màng cứng",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "I62.1"
+    ],
+    "assertions": [],
+    "position": [
+      752,
+      774
+    ]
+  },
+  {
+    "text": "đau đầu",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1001,
+      1008
+    ]
+  },
+  {
+    "text": "tê bì nửa mặt phải",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1056,
+      1074
+    ]
+  },
+  {
+    "text": "mất định hướng",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1376,
+      1390
+    ]
+  },
+  {
+    "text": "run giật tay chân",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      1889,
+      1906
+    ]
+  },
+  {
+    "text": "cứng đờ",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      1914,
+      1921
+    ]
+  },
+  {
+    "text": "cắn lưỡi",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      1929,
+      1937
+    ]
+  },
+  {
+    "text": "tiểu tiện không tự chủ",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      1947,
+      1969
+    ]
+  },
+  {
+    "text": "Đau đầu",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      2008,
+      2015
+    ]
+  },
+  {
+    "text": "rối loạn ý thức",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      2132,
+      2147
+    ]
+  },
+  {
+    "text": "mất định hướng",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      2360,
+      2374
+    ]
+  },
+  {
+    "text": "cứng đờ",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      2520,
+      2527
+    ]
+  },
+  {
+    "text": "cắn lưỡi",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      2529,
+      2537
+    ]
+  },
+  {
+    "text": "tiểu tiện không tự chủ",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      2543,
+      2565
+    ]
+  },
+  {
+    "text": "xuất huyết dưới nhện",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "I60.9"
+    ],
+    "assertions": [],
+    "position": [
+      2609,
+      2629
+    ]
+  }
+]

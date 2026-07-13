@@ -1,0 +1,77 @@
+[
+  {
+    "text": "nốt sần tuyến giáp",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      86,
+      104
+    ],
+    "candidates": [
+      "E04.1"
+    ]
+  },
+  {
+    "text": "đau vùng hạ sườn phải",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      156,
+      177
+    ]
+  },
+  {
+    "text": "sỏi mật",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      237,
+      244
+    ],
+    "candidates": [
+      "K80.2",
+      "K80.0",
+      "K80.1",
+      "K80.3",
+      "K80.4"
+    ]
+  },
+  {
+    "text": "sỏi mật",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      406,
+      413
+    ],
+    "candidates": [
+      "K80.2",
+      "K80.0",
+      "K80.1",
+      "K80.3",
+      "K80.4"
+    ]
+  },
+  {
+    "text": "nốt sần tuyến giáp",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      460,
+      478
+    ],
+    "candidates": [
+      "E04.1"
+    ]
+  }
+]

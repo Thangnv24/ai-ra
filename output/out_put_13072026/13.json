@@ -1,0 +1,30 @@
+[
+  {
+    "text": "béo phì",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      170,
+      177
+    ],
+    "candidates": [
+      "E66.9",
+      "E66.0",
+      "E66.1",
+      "E66.2",
+      "E66.8"
+    ]
+  },
+  {
+    "text": "Tăng huyết áp",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      184,
+      197
+    ],
+    "candidates": [
+      "I10"
+    ]
+  }
+]

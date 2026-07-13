@@ -1,0 +1,30 @@
+[
+  {
+    "text": "gãy xương sườn",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      146,
+      160
+    ],
+    "candidates": [
+      "S22.3"
+    ]
+  },
+  {
+    "text": "gãy xương sườn",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      316,
+      330
+    ],
+    "candidates": [
+      "S22.3"
+    ]
+  }
+]

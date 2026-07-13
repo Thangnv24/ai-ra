@@ -1,0 +1,294 @@
+[
+  {
+    "text": "Viêm nội tâm mạc",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "I33.0"
+    ],
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      48,
+      64
+    ]
+  },
+  {
+    "text": "rối loạn chức năng tâm thất phải",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "I51.9"
+    ],
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      68,
+      100
+    ]
+  },
+  {
+    "text": "rung nhĩ",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "I48.9"
+    ],
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      102,
+      110
+    ]
+  },
+  {
+    "text": "Suy thận mạn giai V",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "N18.5"
+    ],
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      159,
+      178
+    ]
+  },
+  {
+    "text": "coumadin 3.0 mg",
+    "type": "THUỐC",
+    "candidates": [
+      "855320"
+    ],
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      401,
+      416
+    ]
+  },
+  {
+    "text": "INR",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      462,
+      465
+    ]
+  },
+  {
+    "text": "chảy máu mũi",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      529,
+      541
+    ]
+  },
+  {
+    "text": "INR",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      672,
+      675
+    ]
+  },
+  {
+    "text": "1.7",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      676,
+      679
+    ]
+  },
+  {
+    "text": "chảy máu mũi",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      752,
+      764
+    ]
+  },
+  {
+    "text": "đau ngực",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      774,
+      782
+    ]
+  },
+  {
+    "text": "khó thở",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      792,
+      799
+    ]
+  },
+  {
+    "text": "đau bụng",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      809,
+      817
+    ]
+  },
+  {
+    "text": "buồn nôn",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      828,
+      836
+    ]
+  },
+  {
+    "text": "nôn",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      844,
+      847
+    ]
+  },
+  {
+    "text": "Nhiệt độ",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      965,
+      973
+    ]
+  },
+  {
+    "text": "36.5",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      976,
+      980
+    ]
+  },
+  {
+    "text": "Mạch",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      986,
+      990
+    ]
+  },
+  {
+    "text": "88",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      993,
+      995
+    ]
+  },
+  {
+    "text": "Huyết áp",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1000,
+      1008
+    ]
+  },
+  {
+    "text": "120/70",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1010,
+      1016
+    ]
+  },
+  {
+    "text": "Nhịp thở",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1022,
+      1030
+    ]
+  },
+  {
+    "text": "20",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1032,
+      1034
+    ]
+  },
+  {
+    "text": "SPO2",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1039,
+      1043
+    ]
+  },
+  {
+    "text": "92 %",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1046,
+      1050
+    ]
+  },
+  {
+    "text": "INR",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1075,
+      1078
+    ]
+  },
+  {
+    "text": "1.7",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1100,
+      1103
+    ]
+  },
+  {
+    "text": "heparin",
+    "type": "THUỐC",
+    "candidates": [
+      "5224"
+    ],
+    "assertions": [],
+    "position": [
+      1130,
+      1137
+    ]
+  }
+]

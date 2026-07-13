@@ -1,0 +1,85 @@
+[
+  {
+    "text": "nốt tuyến giáp",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      108,
+      122
+    ],
+    "candidates": [
+      "E04.1"
+    ]
+  },
+  {
+    "text": "nốt tuyến giáp",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      190,
+      204
+    ],
+    "candidates": [
+      "E04.1"
+    ]
+  },
+  {
+    "text": "khó thở",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      578,
+      585
+    ]
+  },
+  {
+    "text": "nốt tuyến giáp",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      683,
+      697
+    ],
+    "candidates": [
+      "E04.1"
+    ]
+  },
+  {
+    "text": "nốt tuyến giáp",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      787,
+      801
+    ],
+    "candidates": [
+      "E04.1"
+    ]
+  },
+  {
+    "text": "nốt tuyến giáp",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      875,
+      889
+    ],
+    "candidates": [
+      "E04.1"
+    ]
+  },
+  {
+    "text": "Nốt tuyến giáp",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      916,
+      930
+    ],
+    "candidates": [
+      "E04.1"
+    ]
+  }
+]

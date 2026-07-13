@@ -1,0 +1,117 @@
+[
+  {
+    "text": "ung thư đường mật",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "C24.9"
+    ],
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      183,
+      200
+    ]
+  },
+  {
+    "text": "run rẩy",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      401,
+      408
+    ]
+  },
+  {
+    "text": "sốt",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      413,
+      416
+    ]
+  },
+  {
+    "text": "sốt",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      426,
+      429
+    ]
+  },
+  {
+    "text": "sốt",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      493,
+      496
+    ]
+  },
+  {
+    "text": "ổ dịch trong ổ bụng",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      504,
+      523
+    ]
+  },
+  {
+    "text": "áp xe",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "L02.9"
+    ],
+    "assertions": [],
+    "position": [
+      536,
+      541
+    ]
+  },
+  {
+    "text": "Augmentin",
+    "type": "THUỐC",
+    "candidates": [
+      "151392"
+    ],
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      630,
+      639
+    ]
+  },
+  {
+    "text": "mrcp",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      798,
+      802
+    ]
+  },
+  {
+    "text": "chụp cộng hưởng từ mật tụy",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      804,
+      830
+    ]
+  },
+  {
+    "text": "nhiều nang tụy nhỏ",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "K86.2"
+    ],
+    "assertions": [],
+    "position": [
+      841,
+      859
+    ]
+  }
+]

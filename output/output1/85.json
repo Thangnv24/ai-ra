@@ -1,0 +1,102 @@
+[
+  {
+    "text": "Đái tháo đường type II",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "E11.9"
+    ],
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      57,
+      79
+    ]
+  },
+  {
+    "text": "bệnh động mạch vành",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "I25.1"
+    ],
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      86,
+      105
+    ]
+  },
+  {
+    "text": "suy tim",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "I50.9",
+      "I50.0"
+    ],
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      154,
+      161
+    ]
+  },
+  {
+    "text": "bệnh mạch máu ngoại biên",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "I73.9"
+    ],
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      168,
+      192
+    ]
+  },
+  {
+    "text": "bệnh phổi tắc nghẽn mạn tính",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "J44.9",
+      "J44.8"
+    ],
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      199,
+      227
+    ]
+  },
+  {
+    "text": "Ngưng thở khi ngủ do tắc nghẽn",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "G47.3"
+    ],
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      234,
+      264
+    ]
+  },
+  {
+    "text": "Ung thư biểu mô tế bào vảy",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "C60.9"
+    ],
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      287,
+      313
+    ]
+  }
+]

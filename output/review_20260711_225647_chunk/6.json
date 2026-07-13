@@ -1,0 +1,28 @@
+[
+  {
+    "text": "Nghẽn tắc và hẹp động mạch cảnh",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "I65.2"
+    ],
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      50,
+      81
+    ]
+  },
+  {
+    "text": "nghẽn tắc và hẹp động mạch cảnh",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "I65.2"
+    ],
+    "assertions": [],
+    "position": [
+      264,
+      295
+    ]
+  }
+]

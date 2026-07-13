@@ -1,0 +1,290 @@
+[
+  {
+    "text": "bệnh động mạch vành",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "I25.1"
+    ],
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      48,
+      67
+    ]
+  },
+  {
+    "text": "đau ngực",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      145,
+      153
+    ]
+  },
+  {
+    "text": "đau ngực trái dữ dội lan xuống cánh tay trái",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      640,
+      684
+    ]
+  },
+  {
+    "text": "nitroglycerin",
+    "type": "THUỐC",
+    "candidates": [
+      "4917"
+    ],
+    "assertions": [],
+    "position": [
+      786,
+      799
+    ]
+  },
+  {
+    "text": "khó thở",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      885,
+      892
+    ]
+  },
+  {
+    "text": "nitroglycerin",
+    "type": "THUỐC",
+    "candidates": [
+      "4917"
+    ],
+    "assertions": [],
+    "position": [
+      909,
+      922
+    ]
+  },
+  {
+    "text": "đau ngực",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      945,
+      953
+    ]
+  },
+  {
+    "text": "đau ngực trái dữ dội lan xuống cánh tay trái",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1032,
+      1076
+    ]
+  },
+  {
+    "text": "vã mồ hôi",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1083,
+      1092
+    ]
+  },
+  {
+    "text": "khó thở",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1099,
+      1106
+    ]
+  },
+  {
+    "text": "điện tim",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1154,
+      1162
+    ]
+  },
+  {
+    "text": "sóng ST chênh xuống ở các chuyển đạo v4 đến v6",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1163,
+      1209
+    ]
+  },
+  {
+    "text": "aspirin",
+    "type": "THUỐC",
+    "candidates": [
+      "1191"
+    ],
+    "assertions": [],
+    "position": [
+      1226,
+      1233
+    ]
+  },
+  {
+    "text": "nitroglycerin",
+    "type": "THUỐC",
+    "candidates": [
+      "4917"
+    ],
+    "assertions": [],
+    "position": [
+      1256,
+      1269
+    ]
+  },
+  {
+    "text": "nitroglycerin",
+    "type": "THUỐC",
+    "candidates": [
+      "4917"
+    ],
+    "assertions": [],
+    "position": [
+      1283,
+      1296
+    ]
+  },
+  {
+    "text": "nitroglycerin",
+    "type": "THUỐC",
+    "candidates": [
+      "4917"
+    ],
+    "assertions": [],
+    "position": [
+      1321,
+      1334
+    ]
+  },
+  {
+    "text": "ativan",
+    "type": "THUỐC",
+    "candidates": [
+      "202479"
+    ],
+    "assertions": [],
+    "position": [
+      1342,
+      1348
+    ]
+  },
+  {
+    "text": "Lorazepam",
+    "type": "THUỐC",
+    "candidates": [
+      "6470"
+    ],
+    "assertions": [],
+    "position": [
+      1351,
+      1360
+    ]
+  },
+  {
+    "text": "lovenox",
+    "type": "THUỐC",
+    "candidates": [
+      "225036"
+    ],
+    "assertions": [],
+    "position": [
+      1368,
+      1375
+    ]
+  },
+  {
+    "text": "đau ngực",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      1400,
+      1408
+    ]
+  },
+  {
+    "text": "sóng ST trên điện tim cải thiện không chênh",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1414,
+      1457
+    ]
+  },
+  {
+    "text": "vã mồ hôi",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1569,
+      1578
+    ]
+  },
+  {
+    "text": "troponin",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1603,
+      1611
+    ]
+  },
+  {
+    "text": "0.10",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1615,
+      1619
+    ]
+  },
+  {
+    "text": "điện tâm đồ",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1657,
+      1668
+    ]
+  },
+  {
+    "text": "nhịp xoangnhịp xoang, tần số 91 lần/phút",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1678,
+      1718
+    ]
+  },
+  {
+    "text": "điện tâm đồ",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1725,
+      1736
+    ]
+  },
+  {
+    "text": "Sóng ST chênh xuống  ở các chuyển đạo v4 đến v6chênh nhiều so với EKG ở  trước đó",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1746,
+      1827
+    ]
+  }
+]

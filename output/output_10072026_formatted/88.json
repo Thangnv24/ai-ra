@@ -1,0 +1,199 @@
+[
+  {
+    "text": "Đái tháo đường típ 1",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "E10.9"
+    ],
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      48,
+      68
+    ]
+  },
+  {
+    "text": "viêm thần kinh ngoại biên",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "G62.9"
+    ],
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      83,
+      108
+    ]
+  },
+  {
+    "text": "Viêm gan virus C và B",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "B18.2",
+      "B18.1"
+    ],
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      115,
+      136
+    ]
+  },
+  {
+    "text": "Tăng áp động mạch phổi",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "I27.2"
+    ],
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      143,
+      165
+    ]
+  },
+  {
+    "text": "U lympho không hodgkin tế bàoB lớn lan toả",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "C83.3"
+    ],
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      189,
+      231
+    ]
+  },
+  {
+    "text": "methadone",
+    "type": "THUỐC",
+    "candidates": [
+      "6813"
+    ],
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      360,
+      369
+    ]
+  },
+  {
+    "text": "lasix",
+    "type": "THUỐC",
+    "candidates": [
+      "202991"
+    ],
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      383,
+      388
+    ]
+  },
+  {
+    "text": "Phù chân trái",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      453,
+      466
+    ]
+  },
+  {
+    "text": "hoại tử",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "R02"
+    ],
+    "assertions": [],
+    "position": [
+      470,
+      477
+    ]
+  },
+  {
+    "text": "Lasix",
+    "type": "THUỐC",
+    "candidates": [
+      "202991"
+    ],
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      604,
+      609
+    ]
+  },
+  {
+    "text": "lasix",
+    "type": "THUỐC",
+    "candidates": [
+      "202991"
+    ],
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      664,
+      669
+    ]
+  },
+  {
+    "text": "hoại tử",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "R02"
+    ],
+    "assertions": [],
+    "position": [
+      730,
+      737
+    ]
+  },
+  {
+    "text": "Loét 2 bàn chân",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "L97"
+    ],
+    "assertions": [],
+    "position": [
+      851,
+      866
+    ]
+  },
+  {
+    "text": "hoại tử",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "R02"
+    ],
+    "assertions": [],
+    "position": [
+      889,
+      896
+    ]
+  },
+  {
+    "text": "Loét bàn chân nhiễm trùng",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "L97",
+      "B95.2"
+    ],
+    "assertions": [],
+    "position": [
+      938,
+      963
+    ]
+  }
+]

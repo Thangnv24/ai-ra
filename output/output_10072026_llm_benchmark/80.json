@@ -1,0 +1,38 @@
+[
+  {
+    "text": "gãy xương sườn trái",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      146,
+      165
+    ],
+    "candidates": [
+      "S22.3"
+    ]
+  },
+  {
+    "text": "gãy xương sườn trái",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      316,
+      335
+    ],
+    "candidates": [
+      "S22.3"
+    ]
+  },
+  {
+    "text": "đụng dập một vùng nhu mô phổi",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      533,
+      562
+    ],
+    "candidates": [
+      "S27.3"
+    ]
+  }
+]

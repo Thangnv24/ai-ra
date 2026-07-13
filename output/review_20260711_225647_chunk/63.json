@@ -1,0 +1,208 @@
+[
+  {
+    "text": "Bệnh túi thừa ở cả ruột non và đại tràng, chưa có biến chứng thủng hoặc áp xe",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "K57.5"
+    ],
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      53,
+      130
+    ]
+  },
+  {
+    "text": "colace",
+    "type": "THUỐC",
+    "candidates": [
+      "82000"
+    ],
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      175,
+      181
+    ]
+  },
+  {
+    "text": "đau bụng",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      230,
+      238
+    ]
+  },
+  {
+    "text": "đau hố chậu",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      295,
+      306
+    ]
+  },
+  {
+    "text": "táo bón",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      355,
+      362
+    ]
+  },
+  {
+    "text": "đau hố chậu",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      535,
+      546
+    ]
+  },
+  {
+    "text": "tylenol",
+    "type": "THUỐC",
+    "candidates": [
+      "202433"
+    ],
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      618,
+      625
+    ]
+  },
+  {
+    "text": "tylenol",
+    "type": "THUỐC",
+    "candidates": [
+      "202433"
+    ],
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      655,
+      662
+    ]
+  },
+  {
+    "text": "đau bụng",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      743,
+      751
+    ]
+  },
+  {
+    "text": "táo bón",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      758,
+      765
+    ]
+  },
+  {
+    "text": "buồn nôn",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      772,
+      780
+    ]
+  },
+  {
+    "text": "đau hố chậu",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      820,
+      831
+    ]
+  },
+  {
+    "text": "buồn nôn",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      933,
+      941
+    ]
+  },
+  {
+    "text": "thiếu máu hồng cầu nhỏ",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1366,
+      1388
+    ]
+  },
+  {
+    "text": "27.2",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1392,
+      1396
+    ]
+  },
+  {
+    "text": "bun/creatinine",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1403,
+      1417
+    ]
+  },
+  {
+    "text": "chụp ct bụng, chậu, không thuốc cản quang",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1450,
+      1491
+    ]
+  },
+  {
+    "text": "một lượng nhỏ dịch và mỡ bao quanh một quai ruột kết sigma",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1501,
+      1559
+    ]
+  },
+  {
+    "text": "viêm túi mật cấp tính không biến chứng",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "K81.0"
+    ],
+    "assertions": [],
+    "position": [
+      1567,
+      1605
+    ]
+  },
+  {
+    "text": "viêm túi mật cấp tính không biến chứng",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "K81.0"
+    ],
+    "assertions": [],
+    "position": [
+      1638,
+      1676
+    ]
+  }
+]

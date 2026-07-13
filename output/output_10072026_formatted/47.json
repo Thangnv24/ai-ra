@@ -1,0 +1,326 @@
+[
+  {
+    "text": "ung thư biểu mô tế bào mật",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "C22.1"
+    ],
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      238,
+      264
+    ]
+  },
+  {
+    "text": "buồn nôn",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      733,
+      741
+    ]
+  },
+  {
+    "text": "nôn",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      743,
+      746
+    ]
+  },
+  {
+    "text": "sốt",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      748,
+      751
+    ]
+  },
+  {
+    "text": "ớn lạnh",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      753,
+      760
+    ]
+  },
+  {
+    "text": "dịch rò rỉ",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      767,
+      777
+    ]
+  },
+  {
+    "text": "cholangiogram",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      814,
+      827
+    ]
+  },
+  {
+    "text": "tắc nghẽn",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "K83.1"
+    ],
+    "assertions": [],
+    "position": [
+      853,
+      862
+    ]
+  },
+  {
+    "text": "sinh thiết",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1042,
+      1052
+    ]
+  },
+  {
+    "text": "lấy mẫu bằng bàn chải",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1056,
+      1077
+    ]
+  },
+  {
+    "text": "lấy mẫu bằng bàn chải",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1105,
+      1126
+    ]
+  },
+  {
+    "text": "buồn nôn",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      1503,
+      1511
+    ]
+  },
+  {
+    "text": "nôn",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      1513,
+      1516
+    ]
+  },
+  {
+    "text": "đau ngực",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      1518,
+      1526
+    ]
+  },
+  {
+    "text": "khó thở",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      1533,
+      1540
+    ]
+  },
+  {
+    "text": "đau khi sờ nắn",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1575,
+      1589
+    ]
+  },
+  {
+    "text": "buồn nôn",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      1930,
+      1938
+    ]
+  },
+  {
+    "text": "nôn",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      1940,
+      1943
+    ]
+  },
+  {
+    "text": "sốt",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      1945,
+      1948
+    ]
+  },
+  {
+    "text": "ớn lạnh",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      1950,
+      1957
+    ]
+  },
+  {
+    "text": "dịch rò rỉ",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      1964,
+      1974
+    ]
+  },
+  {
+    "text": "cholangiogram",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      2011,
+      2024
+    ]
+  },
+  {
+    "text": "tắc nghẽn",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "K83.1"
+    ],
+    "assertions": [],
+    "position": [
+      2050,
+      2059
+    ]
+  },
+  {
+    "text": "sinh thiết",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      2228,
+      2238
+    ]
+  },
+  {
+    "text": "lấy mẫu bằng bàn chải",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      2242,
+      2263
+    ]
+  },
+  {
+    "text": "lấy mẫu bằng bàn chải",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      2291,
+      2312
+    ]
+  },
+  {
+    "text": "đau khi sờ nắn",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      2566,
+      2580
+    ]
+  },
+  {
+    "text": "lấy mẫu bằng bàn chải",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      2670,
+      2691
+    ]
+  },
+  {
+    "text": "ung thư biểu mô tuyến",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "C80.9"
+    ],
+    "assertions": [],
+    "position": [
+      2751,
+      2772
+    ]
+  },
+  {
+    "text": "cholangiogram",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      2805,
+      2818
+    ]
+  },
+  {
+    "text": "tắc nghẽn",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "K83.1"
+    ],
+    "assertions": [],
+    "position": [
+      2844,
+      2853
+    ]
+  }
+]

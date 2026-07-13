@@ -1,0 +1,142 @@
+[
+  {
+    "text": "Đái tháo đường típ 1",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      48,
+      68
+    ],
+    "candidates": [
+      "E10.9"
+    ]
+  },
+  {
+    "text": "viêm thần kinh ngoại biên",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      83,
+      108
+    ],
+    "candidates": [
+      "G62.9"
+    ]
+  },
+  {
+    "text": "Viêm gan virus C",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      115,
+      131
+    ],
+    "candidates": [
+      "B18.2"
+    ]
+  },
+  {
+    "text": "Tăng áp động mạch phổi",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      143,
+      165
+    ],
+    "candidates": [
+      "I27.2"
+    ]
+  },
+  {
+    "text": "U lympho không hodgkin",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      189,
+      211
+    ],
+    "candidates": [
+      "C85.1"
+    ]
+  },
+  {
+    "text": "Phù chân trái",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      453,
+      466
+    ]
+  },
+  {
+    "text": "hoại tử",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      470,
+      477
+    ],
+    "candidates": [
+      "R02"
+    ]
+  },
+  {
+    "text": "hoại tử",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      730,
+      737
+    ],
+    "candidates": [
+      "R02"
+    ]
+  },
+  {
+    "text": "Loét 2 bàn chân",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      851,
+      866
+    ],
+    "candidates": [
+      "L97"
+    ]
+  },
+  {
+    "text": "hoại tử",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      889,
+      896
+    ],
+    "candidates": [
+      "R02"
+    ]
+  },
+  {
+    "text": "Loét bàn chân nhiễm trùng",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      938,
+      963
+    ],
+    "candidates": [
+      "L97",
+      "B95.2"
+    ]
+  }
+]

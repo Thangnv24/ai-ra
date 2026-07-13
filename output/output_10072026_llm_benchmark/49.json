@@ -1,0 +1,34 @@
+[
+  {
+    "text": "sa âm đạo",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      58,
+      67
+    ],
+    "candidates": [
+      "N81.9"
+    ]
+  },
+  {
+    "text": "táo bón",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      497,
+      504
+    ]
+  },
+  {
+    "text": "Táo bón",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      715,
+      722
+    ]
+  }
+]

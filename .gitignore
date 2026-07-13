@@ -1,5 +1,4 @@
-# Local env variants
-.env.*
+
 
 # Python
 __pycache__/
@@ -15,12 +14,8 @@ htmlcov/
 # Virtual environments
 venv/
 .venv/
-env/
 
-# Runtime outputs
-output/
-outputs/
-*.log
+
 
 # Data generated from preparation scripts
 data/raw/

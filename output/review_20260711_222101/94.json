@@ -1,0 +1,301 @@
+[
+  {
+    "text": "Ung thư vú di căn",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "C50.9"
+    ],
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      49,
+      66
+    ]
+  },
+  {
+    "text": "taxol",
+    "type": "THUỐC",
+    "candidates": [
+      "196466"
+    ],
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      105,
+      110
+    ]
+  },
+  {
+    "text": "fulvestrant",
+    "type": "THUỐC",
+    "candidates": [
+      "282357"
+    ],
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      114,
+      125
+    ]
+  },
+  {
+    "text": "đau bụng vùng hạ sườn phải ngày càng tăng",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      181,
+      222
+    ]
+  },
+  {
+    "text": "đau bụng hạ sườn phải",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      295,
+      316
+    ]
+  },
+  {
+    "text": "buồn nôn",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      318,
+      326
+    ]
+  },
+  {
+    "text": "nôn",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      328,
+      331
+    ]
+  },
+  {
+    "text": "đi ngoài phân lỏng, toàn nước",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      341,
+      370
+    ]
+  },
+  {
+    "text": "không nhầy máu",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      373,
+      387
+    ]
+  },
+  {
+    "text": "đau bụng tăng lên",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      413,
+      430
+    ]
+  },
+  {
+    "text": "buồn nôn",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      451,
+      459
+    ]
+  },
+  {
+    "text": "nôn",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      461,
+      464
+    ]
+  },
+  {
+    "text": "Đau bụng hạ sườn phải",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      559,
+      580
+    ]
+  },
+  {
+    "text": "Buồn nôn, nôn ra thức ăn và dịch dạ dày",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      582,
+      621
+    ]
+  },
+  {
+    "text": "nôn",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      592,
+      595
+    ]
+  },
+  {
+    "text": "Huyết áp",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      647,
+      655
+    ]
+  },
+  {
+    "text": "130/76",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      656,
+      662
+    ]
+  },
+  {
+    "text": "Mạch",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      668,
+      672
+    ]
+  },
+  {
+    "text": "93",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      674,
+      676
+    ]
+  },
+  {
+    "text": "Nhiệt độ",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      681,
+      689
+    ]
+  },
+  {
+    "text": "36.3",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      692,
+      696
+    ]
+  },
+  {
+    "text": "Nhịp thở",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      702,
+      710
+    ]
+  },
+  {
+    "text": "14",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      712,
+      714
+    ]
+  },
+  {
+    "text": "SPO2",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      720,
+      724
+    ]
+  },
+  {
+    "text": "99 %",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      726,
+      730
+    ]
+  },
+  {
+    "text": "compazine",
+    "type": "THUỐC",
+    "candidates": [
+      "203546"
+    ],
+    "assertions": [],
+    "position": [
+      764,
+      773
+    ]
+  },
+  {
+    "text": "aleve",
+    "type": "THUỐC",
+    "candidates": [
+      "215101"
+    ],
+    "assertions": [],
+    "position": [
+      777,
+      782
+    ]
+  },
+  {
+    "text": "vẫn còn đau",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      788,
+      799
+    ]
+  },
+  {
+    "text": "morphine",
+    "type": "THUỐC",
+    "candidates": [
+      "7052"
+    ],
+    "assertions": [],
+    "position": [
+      812,
+      820
+    ]
+  },
+  {
+    "text": "lorazepam",
+    "type": "THUỐC",
+    "candidates": [
+      "6470"
+    ],
+    "assertions": [],
+    "position": [
+      829,
+      838
+    ]
+  }
+]

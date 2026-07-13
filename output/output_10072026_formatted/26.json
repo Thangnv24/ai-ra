@@ -1,0 +1,16 @@
+[
+  {
+    "text": "béo phì",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "E66.9"
+    ],
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      52,
+      59
+    ]
+  }
+]

@@ -1,0 +1,133 @@
+[
+  {
+    "text": "khối u thần kinh nội tiết",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      130,
+      155
+    ],
+    "candidates": [
+      "C25.4"
+    ]
+  },
+  {
+    "text": "octreotide",
+    "type": "THUỐC",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      206,
+      216
+    ],
+    "candidates": [
+      "51428",
+      "7617"
+    ]
+  },
+  {
+    "text": "flagyl",
+    "type": "THUỐC",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      223,
+      229
+    ],
+    "candidates": [
+      "6922"
+    ]
+  },
+  {
+    "text": "u nội tiết",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      432,
+      442
+    ],
+    "candidates": [
+      "C25.4"
+    ]
+  },
+  {
+    "text": "rò ống tuỵ mật",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      470,
+      484
+    ],
+    "candidates": [
+      "K86.8"
+    ]
+  },
+  {
+    "text": "nhiễm Clostridioides difficile",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      665,
+      695
+    ],
+    "candidates": [
+      "A04.7"
+    ]
+  },
+  {
+    "text": "nhiễm trùng vết mổ",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      700,
+      718
+    ],
+    "candidates": [
+      "T81.4"
+    ]
+  },
+  {
+    "text": "flagyl",
+    "type": "THUỐC",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      742,
+      748
+    ],
+    "candidates": [
+      "6922"
+    ]
+  },
+  {
+    "text": "sưng nề",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      930,
+      937
+    ]
+  },
+  {
+    "text": "sưng nề",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1171,
+      1178
+    ]
+  }
+]
