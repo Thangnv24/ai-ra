@@ -36,24 +36,24 @@ class LLMEntityExtractor:
 
     def extract(self, text: str) -> tuple[list[SpanCandidate], EntityProposalSummary]:
         if not getattr(self.llm_client, "enabled", False):
-            return [], EntityProposalSummary(chunks=0, mentions=0, aligned=0, errors=("LLM disabled",))
+            raise RuntimeError("LLM entity extraction is required but the LLM client is disabled")
 
         chunks = split_chunks(text, max_chars=self.max_chars, overlap=self.overlap)
         spans: list[SpanCandidate] = []
         mention_count = 0
-        errors: list[str] = []
         for chunk in chunks:
             result = self.llm_client.chat_json(
                 ENTITY_SYSTEM_PROMPT,
                 build_entity_extraction_prompt(_chunk_payload(chunk)),
             )
             if not result.ok or not isinstance(result.data, dict):
-                errors.append(f"{chunk.chunk_id}: {result.error or 'LLM returned no data'}")
-                continue
+                raise RuntimeError(
+                    f"LLM entity extraction failed for {chunk.chunk_id}: "
+                    f"{result.error or 'LLM returned no data'}"
+                )
             mentions = result.data.get("mentions")
             if not isinstance(mentions, list):
-                errors.append(f"{chunk.chunk_id}: JSON has no mentions list")
-                continue
+                raise RuntimeError(f"LLM entity extraction failed for {chunk.chunk_id}: JSON has no mentions list")
             mention_count += len(mentions)
             for mention in mentions:
                 span = _span_from_mention(text, chunk, mention)
@@ -64,7 +64,6 @@ class LLMEntityExtractor:
             chunks=len(chunks),
             mentions=mention_count,
             aligned=len(spans),
-            errors=tuple(errors[:20]),
         )
 
 

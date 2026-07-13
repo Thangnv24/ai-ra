@@ -1,3 +1,0 @@
-[console_scripts]
-ai-race-run = services.pipeline:main
-ai-race-submit = submission.package:main

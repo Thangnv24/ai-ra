@@ -27,6 +27,10 @@ HISTORICAL_RE = re.compile(
     r"|\bduoc ke\b|\bngung\b|\bvua ngung\b|\bbenh su\b|\bpast medical history\b|\bpmh\b"
     r"|\bhistory of\b|\bhome meds?\b|\bprior to admission\b|\bpreviously\b)"
 )
+CLINICAL_HISTORY_RE = re.compile(
+    r"(?:\btien su\b|\btruoc nhap vien\b|\bda tung\b|\btung bi\b|\bbenh su\b"
+    r"|\bpast medical history\b|\bpmh\b|\bhistory of\b|\bpreviously\b)"
+)
 
 
 class ContextDetector:
@@ -63,9 +67,11 @@ class ContextDetector:
     def _has_historical_context(sentence_before: str, broad_before: str, concept_type: str) -> bool:
         if _is_present_illness_context(sentence_before):
             return False
-        if HISTORICAL_RE.search(sentence_before):
-            return True
+        if concept_type != TYPE_DRUG and _is_present_illness_context(broad_before):
+            return False
         if concept_type == TYPE_DRUG:
+            if HISTORICAL_RE.search(sentence_before):
+                return True
             return bool(
                 re.search(
                     r"\b(?:thuoc truoc nhap vien|truoc nhap vien|home meds?|prior to admission|"
@@ -73,6 +79,8 @@ class ContextDetector:
                     broad_before,
                 )
             )
+        if CLINICAL_HISTORY_RE.search(sentence_before):
+            return True
         return bool(re.search(r"\b(?:tien su benh noi khoa|past medical history|pmh|da tung|previously)\b", broad_before))
 
 

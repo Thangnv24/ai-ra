@@ -60,6 +60,7 @@ def refine_concepts(
 
     refined = _drop_diagnoses_inside_test_names(refined)
     refined = _dedupe(refined)
+    refined = _dedupe_repeated_concepts(refined, text)
     return sorted(refined, key=lambda c: (c.position[0], c.position[1], c.type))
 
 
@@ -73,9 +74,22 @@ def _refine_single_span(text: str, concept: Concept) -> Concept | None:
     return concept
 
 
-def _refine_symptom_span(text: str, concept: Concept) -> Concept:
+def _refine_symptom_span(text: str, concept: Concept) -> Concept | None:
     start, end = concept.position
     key = normalize_key(concept.text)
+    if key == "ho" and normalize_key(text[start : min(len(text), start + 32)]).startswith("ho dai thao duong"):
+        return None
+
+    expansions = (
+        ("non", ("nôn ra máu",)),
+        ("kho tho", ("khó thở khi gắng sức", "khó thở khi nằm đột ngột", "khó thở khi nằm")),
+        ("dau bung", ("đau bụng gián đoạn",)),
+    )
+    for source_key, phrases in expansions:
+        if key == source_key:
+            expanded = _expand_to_phrase_at(text, start, phrases)
+            if expanded is not None:
+                return _replace_span(concept, text, *expanded)
 
     targeted: list[tuple[str, bool]] = [
         ("phu ngoai vi", key.startswith("phu ngoai vi ") and _has_any(key, ("tang dan", "gan day", "trong vai"))),
@@ -132,6 +146,16 @@ def _refine_diagnosis_span(text: str, concept: Concept) -> Concept | None:
     key = normalize_key(concept.text)
     if key in _DROP_DIAGNOSIS_KEYS:
         return None
+    if key.startswith("viem da day ") and "ruot do virus" in key:
+        expanded = _expand_to_phrase_at(text, concept.position[0], ("viêm dạ dày ruột do virus", "viêm dạ dày - ruột do virus"))
+        if expanded is not None:
+            return _replace_span(concept, text, *expanded)
+    for marker in (" phan ung", " dap ung", " dieu tri", " duoc dieu tri"):
+        idx = key.find(marker)
+        if idx > 0:
+            narrowed = _narrow_to_prefix_before_normalized(text, concept.position[0], concept.position[1], marker)
+            if narrowed is not None:
+                return _replace_span(concept, text, *narrowed)
     bad_prefixes = (
         "ket qua",
         "hinh anh",
@@ -155,7 +179,7 @@ def _repair_assertions(
     if concept.type not in ASSERTION_TYPES:
         return replace(concept, assertions=())
     assertions = [item for item in concept.assertions if item in ALLOWED_ASSERTIONS]
-    if context_detector is not None:
+    if context_detector is not None and concept.type == TYPE_DRUG:
         start, end = concept.position
         assertions.extend(context_detector.assertions_for(text, start, end, concept.type))
     return replace(concept, assertions=_ordered_assertions(assertions))
@@ -212,9 +236,41 @@ def _dedupe(concepts: list[Concept]) -> list[Concept]:
     return list(best.values())
 
 
+def _dedupe_repeated_concepts(concepts: list[Concept], text: str) -> list[Concept]:
+    best: dict[tuple[str, str], Concept] = {}
+    for concept in concepts:
+        key = (concept.type, normalize_key(concept.text))
+        current = best.get(key)
+        if current is None or _concept_rank(text, concept) > _concept_rank(text, current):
+            best[key] = concept
+    return list(best.values())
+
+
+def _concept_rank(text: str, concept: Concept) -> tuple[int, int, int, int, int]:
+    assertions = set(concept.assertions)
+    start, end = concept.position
+    context = normalize_key(text[max(0, start - 120) : min(len(text), end + 120)])
+    current_context = int(any(marker in context for marker in ("trieu chung hien tai", "ly do nhap vien", "chan doan hinh anh", "ket qua")))
+    return (
+        int("isNegated" not in assertions),
+        int("isFamily" not in assertions),
+        int("isHistorical" not in assertions),
+        current_context,
+        len(concept.text),
+    )
+
+
 def _replace_span(concept: Concept, text: str, start: int, end: int) -> Concept:
     start, end, span_text = trim_span_text(text, start, end)
     return replace(concept, text=span_text, position=(start, end))
+
+
+def _expand_to_phrase_at(text: str, start: int, phrases: tuple[str, ...]) -> tuple[int, int] | None:
+    segment = text[start : min(len(text), start + 80)]
+    for phrase in sorted(phrases, key=len, reverse=True):
+        if normalize_key(segment[: len(phrase) + 8]).startswith(normalize_key(phrase)):
+            return start, start + len(phrase)
+    return None
 
 
 def _narrow_to_normalized_subspan(text: str, start: int, end: int, target_key: str) -> tuple[int, int] | None:

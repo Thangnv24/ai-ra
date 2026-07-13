@@ -5,21 +5,18 @@ services:
     image: ai-race-medical-kg:latest
     container_name: ai-race-api
     environment:
-      AI_RACE_API_KEY: ${AI_RACE_API_KEY:-}
-      AI_RACE_MODE: ${AI_RACE_MODE:-llm_full_doc}
-      AI_RACE_USE_LLM: ${AI_RACE_USE_LLM:-true}
-      AI_RACE_BASE_URL: ${AI_RACE_BASE_URL:-https://api.openai.com/v1}
-      AI_RACE_MODEL: ${AI_RACE_MODEL:-gpt-4.1}
-      AI_RACE_TEMPERATURE: ${AI_RACE_TEMPERATURE:-0}
-      AI_RACE_MAX_TOKENS: ${AI_RACE_MAX_TOKENS:-4096}
-      AI_RACE_TIMEOUT: ${AI_RACE_TIMEOUT:-120}
-      AI_RACE_FAIL_OPEN: ${AI_RACE_FAIL_OPEN:-true}
+      API_KEY: ${API_KEY:-}
+      BASE_URL: ${BASE_URL:-http://10.221.58.70:8402}
+      MODEL: ${MODEL:-thangnv108}
+      TEMPERATURE: ${TEMPERATURE:-0}
+      MAX_TOKENS: ${MAX_TOKENS:-4096}
+      TIMEOUT: ${TIMEOUT:-120}
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
     ports:
       - "8000:8000"
     volumes:
       - ./input:/app/input:ro
       - ./output:/app/output
-      - ./submission:/app/submission
       - ./data/candidates:/app/data/candidates:ro
     healthcheck:
       test:
@@ -40,16 +37,17 @@ services:
     image: ai-race-medical-kg:latest
     profiles:
       - run
+    depends_on:
+      ai-race-api:
+        condition: service_healthy
     environment:
-      AI_RACE_API_KEY: ${AI_RACE_API_KEY:-}
-      AI_RACE_MODE: ${AI_RACE_MODE:-llm_full_doc}
-      AI_RACE_USE_LLM: ${AI_RACE_USE_LLM:-true}
-      AI_RACE_BASE_URL: ${AI_RACE_BASE_URL:-https://api.openai.com/v1}
-      AI_RACE_MODEL: ${AI_RACE_MODEL:-gpt-4.1}
-      AI_RACE_TEMPERATURE: ${AI_RACE_TEMPERATURE:-0}
-      AI_RACE_MAX_TOKENS: ${AI_RACE_MAX_TOKENS:-4096}
-      AI_RACE_TIMEOUT: ${AI_RACE_TIMEOUT:-120}
-      AI_RACE_FAIL_OPEN: ${AI_RACE_FAIL_OPEN:-true}
+      API_KEY: ${API_KEY:-}
+      BASE_URL: ${BASE_URL:-http://10.221.58.70:8402}
+      MODEL: ${MODEL:-thangnv108}
+      TEMPERATURE: ${TEMPERATURE:-0}
+      MAX_TOKENS: ${MAX_TOKENS:-4096}
+      TIMEOUT: ${TIMEOUT:-120}
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
     volumes:
       - ./input:/app/input:ro
       - ./output:/app/output
@@ -57,12 +55,10 @@ services:
     command:
       [
         "python",
-        "test.py",
-        "--direct",
-        "--input-dir",
+        "tests/test.py",
         "input",
-        "--out",
+        "--url",
+        "http://ai-race-api:8000",
+        "--output-dir",
         "output",
-        "--mode",
-        "llm_full_doc",
       ]

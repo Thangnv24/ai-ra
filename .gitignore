@@ -1,7 +1,5 @@
-# Local secrets
-.env
+# Local env variants
 .env.*
-!.env.example
 
 # Python
 __pycache__/
@@ -22,7 +20,6 @@ env/
 # Runtime outputs
 output/
 outputs/
-submission/*.zip
 *.log
 
 # Data generated from preparation scripts

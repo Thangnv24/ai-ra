@@ -56,7 +56,6 @@ class Paths:
     index_file: Path
     input_dir: Path
     output_dir: Path
-    submission_dir: Path
 
 
 @dataclass(frozen=True)
@@ -70,11 +69,10 @@ class Settings:
     llm_temperature: float
     llm_max_tokens: int
     llm_timeout: int
-    llm_fail_open: bool
 
 
 def project_root() -> Path:
-    env_root = _env_str(("AI_RACE_ROOT",), "")
+    env_root = _env_str(("ROOT",), "")
     if env_root:
         return Path(env_root).resolve()
     return Path(__file__).resolve().parents[2]
@@ -94,7 +92,6 @@ def get_paths(root: Path | None = None) -> Paths:
         index_file=base / "data" / "indexes" / "ontology_index.json",
         input_dir=default_input,
         output_dir=base / "output",
-        submission_dir=base / "submission",
     )
 
 
@@ -146,20 +143,15 @@ def load_dotenv(path: Path | None = None) -> None:
 def get_settings(root: Path | None = None) -> Settings:
     base = (root or project_root()).resolve()
     load_dotenv(base / ".env")
-    api_key = _env_str(("AI_RACE_API_KEY",), "")
-    mode = _env_str(
-        ("AI_RACE_MODE",),
-        "llm_full_doc" if api_key else "hybrid",
-    )
+    api_key = _env_str(("API_KEY",), "")
     return Settings(
-        mode=mode,
-        llm_enabled=_env_bool(("AI_RACE_USE_LLM",), bool(api_key)),
+        mode="llm_full_doc",
+        llm_enabled=True,
         llm_backend="openai_compatible",
-        llm_base_url=_env_str(("AI_RACE_BASE_URL",), "https://api.openai.com/v1"),
-        llm_model=_env_str(("AI_RACE_MODEL",), "gpt-4.1"),
+        llm_base_url=_env_str(("BASE_URL",), "http://10.221.58.70:8402"),
+        llm_model=_env_str(("MODEL",), "thangnv108"),
         llm_api_key=api_key,
-        llm_temperature=_env_float(("AI_RACE_TEMPERATURE",), 0.0),
-        llm_max_tokens=_env_int(("AI_RACE_MAX_TOKENS",), 4096),
-        llm_timeout=_env_int(("AI_RACE_TIMEOUT",), 120),
-        llm_fail_open=_env_bool(("AI_RACE_FAIL_OPEN",), True),
+        llm_temperature=_env_float(("TEMPERATURE",), 0.0),
+        llm_max_tokens=_env_int(("MAX_TOKENS",), 4096),
+        llm_timeout=_env_int(("TIMEOUT",), 120),
     )

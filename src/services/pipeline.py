@@ -1,4 +1,4 @@
-"""End-to-end deterministic inference pipeline."""
+"""End-to-end LLM-required inference pipeline."""
 
 from __future__ import annotations
 
@@ -102,17 +102,21 @@ class MedicalKGPipeline:
             return
 
     def process_text(self, text: str) -> list[Concept]:
-        concepts, _ = self.process_text_with_meta(text, mode="baseline")
+        concepts, _ = self.process_text_with_meta(text)
         return concepts
 
     def process_text_with_meta(self, text: str, mode: str | None = None) -> tuple[list[Concept], dict[str, object]]:
-        requested_mode = mode or self.settings.mode
+        if mode is not None and mode != "llm_full_doc":
+            raise ValueError("Only llm_full_doc mode is supported; local fallback modes were removed")
+        requested_mode = "llm_full_doc"
+        if not self.settings.llm_enabled:
+            raise RuntimeError("LLM is required but disabled")
+
         spans = self.ner.extract(text)
-        llm_entity_meta: dict[str, object] | None = None
-        if requested_mode == "llm_full_doc":
-            llm_spans, summary = self.llm_entity_extractor.extract(text)
-            llm_entity_meta = summary.to_dict()
-            spans = _merge_span_candidates([*spans, *llm_spans])
+        llm_spans, summary = self.llm_entity_extractor.extract(text)
+        llm_entity_meta = summary.to_dict()
+        spans = _merge_span_candidates([*spans, *llm_spans])
+
         concepts: list[Concept] = []
         for span in spans:
             assertions = self.context.assertions_for(text, span.start, span.end, span.type)
@@ -128,15 +132,14 @@ class MedicalKGPipeline:
             )
         concepts = sorted(concepts, key=lambda c: (c.position[0], c.position[1], c.type))
         meta: dict[str, object] = {
-            "mode_requested": requested_mode,
-            "mode_used": "baseline",
+            "mode": requested_mode,
+            "mode_used": "llm_full_doc",
+            "llm_required": True,
             "llm_used": False,
-            "fallback_used": requested_mode != "baseline",
             "llm_error": None,
             "llm_entity": llm_entity_meta,
         }
-        if requested_mode in {"hybrid", "llm_full_doc"}:
-            concepts, meta = self._apply_llm_decisions(text, concepts, meta)
+        concepts, meta = self._apply_llm_decisions(text, concepts, meta)
         before_postprocess = len(concepts)
         concepts = refine_concepts(text, concepts, retriever=self.retriever, context_detector=self.context)
         meta["postprocess"] = {
@@ -160,8 +163,7 @@ class MedicalKGPipeline:
         meta: dict[str, object],
     ) -> tuple[list[Concept], dict[str, object]]:
         if not self.settings.llm_enabled:
-            meta["llm_error"] = "LLM disabled"
-            return concepts, meta
+            raise RuntimeError("LLM decision pass is required but disabled")
 
         mention_payload: list[dict[str, object]] = []
         retrieved_by_id: dict[str, set[str]] = {}
@@ -185,20 +187,27 @@ class MedicalKGPipeline:
         result = self.llm.chat_json(SYSTEM_PROMPT, build_decision_prompt(text, mention_payload))
         if not result.ok or not isinstance(result.data, dict):
             meta["llm_error"] = result.error or "LLM returned no data"
-            return concepts, meta
+            raise RuntimeError(f"LLM decision pass failed: {meta['llm_error']}")
 
         decisions = result.data.get("decisions")
         if not isinstance(decisions, list):
             meta["llm_error"] = "LLM JSON has no decisions list"
-            return concepts, meta
+            raise RuntimeError("LLM decision pass failed: JSON has no decisions list")
 
         by_id = {f"m{idx + 1}": concept for idx, concept in enumerate(concepts)}
+        decision_by_id = {
+            str(decision.get("mention_id")): decision
+            for decision in decisions
+            if isinstance(decision, dict) and decision.get("mention_id") is not None
+        }
+        missing = [mention_id for mention_id in by_id if mention_id not in decision_by_id]
+        if missing:
+            preview = ", ".join(missing[:10])
+            raise RuntimeError(f"LLM decision pass failed: missing decisions for {len(missing)} mention(s): {preview}")
+
         updated: list[Concept] = []
         for mention_id, concept in by_id.items():
-            decision = next((d for d in decisions if isinstance(d, dict) and d.get("mention_id") == mention_id), None)
-            if not decision:
-                updated.append(concept)
-                continue
+            decision = decision_by_id[mention_id]
             if decision.get("keep") is False:
                 continue
             final_type = decision.get("final_type")
@@ -224,9 +233,9 @@ class MedicalKGPipeline:
                 candidates = ()
             updated.append(replace(concept, type=final_type, assertions=assertions, candidates=candidates))
 
-        meta["mode_used"] = "hybrid"
+        meta["mode_used"] = "llm_full_doc"
         meta["llm_used"] = True
-        meta["fallback_used"] = False
+        meta["llm_decisions"] = len(decisions)
         return sorted(updated, key=lambda c: (c.position[0], c.position[1], c.type)), meta
 
     def run_directory(self, input_dir: Path, output_dir: Path, limit: int | None = None) -> RunSummary:

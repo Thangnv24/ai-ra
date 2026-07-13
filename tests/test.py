@@ -1,38 +1,22 @@
 from __future__ import annotations
 
 import argparse
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from dataclasses import dataclass
 from datetime import datetime
 import json
 import os
 import sys
-import tempfile
-import unittest
 import urllib.error
 import urllib.request
-from concurrent.futures import ThreadPoolExecutor, as_completed
-from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-# Cach chay tu thu muc goc du an:
-#   python main.py
-#   python tests/test.py
-# Mac dinh lenh tren doc full folder input/ va ghi output vao:
-#   output/out_put_DDMMYYYY/1.json, output/out_put_DDMMYYYY/2.json, ...
-# Chay rieng 1 file txt:
-#   python tests/test.py input/1.txt
-# File tren se di qua API /predict va ghi ra:
-#   output/out_put_DDMMYYYY/1.json
-# Neu muon chi dinh thu muc output rieng:
-#   python tests/test.py input/1.txt --output-dir output/single_run
-# Khi do ket qua ghi ra:
-#   output/single_run/1.json
-
+from core.io import read_text
 from core.schema import validate_output
-from services.pipeline import MedicalKGPipeline
 
 
 @dataclass(frozen=True)
@@ -47,18 +31,20 @@ def default_output_dir() -> Path:
     return ROOT / "output" / f"out_put_{datetime.now().strftime('%d%m%Y')}"
 
 
-def discover_inputs(target: Path) -> list[Path]:
+def discover_inputs(target: Path, limit: int | None) -> list[Path]:
     if target.is_file() and target.suffix.lower() == ".txt":
-        return [target]
-    if target.is_dir():
-        return sorted(
+        files = [target]
+    elif target.is_dir():
+        files = sorted(
             target.glob("*.txt"),
             key=lambda path: (
                 int(path.stem) if path.stem.isdigit() else 10**9,
                 path.name,
             ),
         )
-    raise ValueError(f"Khong tim thay file hoac thu muc input hop le: {target}")
+    else:
+        raise ValueError(f"Khong tim thay file hoac thu muc input hop le: {target}")
+    return files[: max(0, limit)] if limit is not None else files
 
 
 def post_json(url: str, payload: dict[str, Any], timeout: int) -> dict[str, Any]:
@@ -80,13 +66,13 @@ def run_file(
     input_path: Path,
     output_dir: Path,
     server_url: str,
-    mode: str,
     timeout: int,
+    pretty: bool,
 ) -> FileResult:
-    text = input_path.read_text(encoding="utf-8-sig")
+    text = read_text(input_path)
     response = post_json(
         f"{server_url.rstrip('/')}/predict",
-        {"id": input_path.stem, "text": text, "mode": mode, "validate": True},
+        {"text": text},
         timeout,
     )
     concepts = response.get("concepts")
@@ -99,7 +85,7 @@ def run_file(
 
     output_path = output_dir / f"{input_path.stem}.json"
     output_path.write_text(
-        json.dumps(concepts, ensure_ascii=False, indent=2),
+        json.dumps(concepts, ensure_ascii=False, indent=2 if pretty else None),
         encoding="utf-8",
     )
     meta = response.get("meta") if isinstance(response.get("meta"), dict) else {}
@@ -115,11 +101,12 @@ def run_target(
     target: Path,
     output_dir: Path,
     server_url: str,
-    mode: str,
     workers: int,
     timeout: int,
+    limit: int | None,
+    pretty: bool,
 ) -> list[FileResult]:
-    files = discover_inputs(target)
+    files = discover_inputs(target, limit)
     if not files:
         raise ValueError(f"Khong co file .txt trong {target}")
 
@@ -134,8 +121,8 @@ def run_target(
                 path,
                 output_dir,
                 server_url,
-                mode,
                 timeout,
+                pretty,
             ): path
             for path in files
         }
@@ -151,34 +138,10 @@ def run_target(
     return sorted(results, key=lambda item: item.input_path.name)
 
 
-class EndToEndFlowTest(unittest.TestCase):
-    def test_direct_pipeline_returns_schema_valid_output(self) -> None:
-        text = (
-            "Benh nhan khong ho. Co tien su hen suyen. "
-            "Dang dung aspirin 81 mg po daily. WBC: 12 mg/dL"
-        )
-        with tempfile.TemporaryDirectory() as tmp:
-            input_dir = Path(tmp) / "input"
-            output_dir = Path(tmp) / "output"
-            input_dir.mkdir()
-            (input_dir / "1.txt").write_text(text, encoding="utf-8")
-
-            summary = MedicalKGPipeline(root=ROOT).run_directory(
-                input_dir,
-                output_dir,
-                limit=1,
-            )
-            payload = json.loads(
-                (output_dir / "1.json").read_text(encoding="utf-8-sig")
-            )
-            self.assertEqual(summary.files, 1)
-            self.assertEqual(validate_output(payload, source_text=text), [])
-
-
 def main(argv: list[str] | None = None) -> int:
     default_workers = max(1, (os.cpu_count() or 1) * 2)
     parser = argparse.ArgumentParser(
-        description="Chay E2E qua server cho mot file .txt hoac ca thu muc"
+        description="Chay input .txt song song qua local API server"
     )
     parser.add_argument(
         "target",
@@ -188,24 +151,23 @@ def main(argv: list[str] | None = None) -> int:
         help="Duong dan toi mot file .txt hoac thu muc chua cac file .txt",
     )
     parser.add_argument("--url", default="http://127.0.0.1:8000")
-    parser.add_argument("--output-dir", type=Path, default=default_output_dir())
-    parser.add_argument(
-        "--mode",
-        choices=("baseline", "hybrid", "llm_full_doc"),
-        default="hybrid",
-    )
+    parser.add_argument("--output-dir", type=Path, default=None)
     parser.add_argument("--workers", type=int, default=default_workers)
     parser.add_argument("--timeout", type=int, default=120)
+    parser.add_argument("--limit", type=int, default=None)
+    parser.add_argument("--pretty", action="store_true")
     args = parser.parse_args(argv)
 
+    output_dir = (args.output_dir or default_output_dir()).resolve()
     try:
         results = run_target(
             args.target.resolve(),
-            args.output_dir.resolve(),
+            output_dir,
             args.url,
-            args.mode,
             args.workers,
             args.timeout,
+            args.limit,
+            args.pretty,
         )
     except urllib.error.URLError as exc:
         print(f"Khong ket noi duoc server {args.url}: {exc}")
@@ -220,7 +182,7 @@ def main(argv: list[str] | None = None) -> int:
         "concepts": sum(item.concepts for item in results),
         "llm_used_files": sum(item.llm_used for item in results),
         "workers": max(1, min(args.workers, len(results))),
-        "output_dir": str(args.output_dir.resolve()),
+        "output_dir": str(output_dir),
         "validation_errors": 0,
     }
     print(json.dumps(summary, ensure_ascii=False, indent=2))

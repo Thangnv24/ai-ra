@@ -3,14 +3,12 @@ FROM python:3.10-slim
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
     PIP_NO_CACHE_DIR=1 \
-    AI_RACE_MODE=llm_full_doc \
-    AI_RACE_USE_LLM=true \
-    AI_RACE_BASE_URL=https://api.openai.com/v1 \
-    AI_RACE_MODEL=gpt-4.1 \
-    AI_RACE_TEMPERATURE=0 \
-    AI_RACE_MAX_TOKENS=4096 \
-    AI_RACE_TIMEOUT=120 \
-    AI_RACE_FAIL_OPEN=true
+    BASE_URL=http://10.221.58.70:8402 \
+    MODEL=thangnv108 \
+    TEMPERATURE=0 \
+    MAX_TOKENS=4096 \
+    TIMEOUT=120 \
+    LOG_LEVEL=INFO
 
 WORKDIR /app
 
@@ -27,7 +25,7 @@ RUN python -m pip install --upgrade pip \
 
 COPY . .
 
-RUN mkdir -p input output submission data/candidates
+RUN mkdir -p input output data/candidates
 
 EXPOSE 8000
 
