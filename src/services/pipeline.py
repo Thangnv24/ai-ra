@@ -166,11 +166,24 @@ class MedicalKGPipeline:
             raise RuntimeError("LLM decision pass is required but disabled")
 
         mention_payload: list[dict[str, object]] = []
+        decision_concepts: dict[str, Concept] = {}
+        passthrough: list[Concept] = []
+        passthrough_by_type: dict[str, int] = {}
         retrieved_by_id: dict[str, set[str]] = {}
         for idx, concept in enumerate(concepts):
+            candidate_rows = (
+                _compact_candidate_rows(self.retriever.candidate_rows_for(concept.text, concept.type, limit=10))
+                if concept.type == TYPE_DIAGNOSIS
+                else []
+            )
+            if not _needs_llm_decision(concept, candidate_rows):
+                passthrough.append(concept)
+                passthrough_by_type[concept.type] = passthrough_by_type.get(concept.type, 0) + 1
+                continue
+
             mention_id = f"m{idx + 1}"
-            candidate_rows = self.retriever.candidate_rows_for(concept.text, concept.type, limit=25) if concept.type in CODED_TYPES else []
             retrieved_by_id[mention_id] = {row["code"] for row in candidate_rows}
+            decision_concepts[mention_id] = concept
             start, end = concept.position
             mention_payload.append(
                 {
@@ -178,13 +191,22 @@ class MedicalKGPipeline:
                     "text": concept.text,
                     "position": [start, end],
                     "proposed_type": concept.type,
-                    "local_context": text[max(0, start - 160) : min(len(text), end + 160)],
+                    "local_context": text[max(0, start - 120) : min(len(text), end + 120)],
                     "rule_assertions": list(concept.assertions),
                     "retrieved_candidates": candidate_rows,
                 }
             )
 
-        result = self.llm.chat_json(SYSTEM_PROMPT, build_decision_prompt(text, mention_payload))
+        if not mention_payload:
+            meta["mode_used"] = "llm_full_doc"
+            meta["llm_used"] = True
+            meta["llm_decisions"] = 0
+            meta["llm_decision_scope"] = "ambiguous_diagnosis_and_labs"
+            meta["llm_decision_passthrough"] = len(passthrough)
+            meta["llm_decision_passthrough_by_type"] = passthrough_by_type
+            return sorted(passthrough, key=lambda c: (c.position[0], c.position[1], c.type)), meta
+
+        result = self.llm.chat_json(SYSTEM_PROMPT, build_decision_prompt("", mention_payload))
         if not result.ok or not isinstance(result.data, dict):
             meta["llm_error"] = result.error or "LLM returned no data"
             raise RuntimeError(f"LLM decision pass failed: {meta['llm_error']}")
@@ -194,19 +216,18 @@ class MedicalKGPipeline:
             meta["llm_error"] = "LLM JSON has no decisions list"
             raise RuntimeError("LLM decision pass failed: JSON has no decisions list")
 
-        by_id = {f"m{idx + 1}": concept for idx, concept in enumerate(concepts)}
         decision_by_id = {
             str(decision.get("mention_id")): decision
             for decision in decisions
             if isinstance(decision, dict) and decision.get("mention_id") is not None
         }
-        missing = [mention_id for mention_id in by_id if mention_id not in decision_by_id]
+        missing = [mention_id for mention_id in decision_concepts if mention_id not in decision_by_id]
         if missing:
             preview = ", ".join(missing[:10])
             raise RuntimeError(f"LLM decision pass failed: missing decisions for {len(missing)} mention(s): {preview}")
 
-        updated: list[Concept] = []
-        for mention_id, concept in by_id.items():
+        updated: list[Concept] = list(passthrough)
+        for mention_id, concept in decision_concepts.items():
             decision = decision_by_id[mention_id]
             if decision.get("keep") is False:
                 continue
@@ -236,6 +257,9 @@ class MedicalKGPipeline:
         meta["mode_used"] = "llm_full_doc"
         meta["llm_used"] = True
         meta["llm_decisions"] = len(decisions)
+        meta["llm_decision_scope"] = "ambiguous_diagnosis_and_labs"
+        meta["llm_decision_passthrough"] = len(passthrough)
+        meta["llm_decision_passthrough_by_type"] = passthrough_by_type
         return sorted(updated, key=lambda c: (c.position[0], c.position[1], c.type)), meta
 
     def run_directory(self, input_dir: Path, output_dir: Path, limit: int | None = None) -> RunSummary:
@@ -314,6 +338,26 @@ def _merge_span_candidates(spans: list[SpanCandidate]) -> list[SpanCandidate]:
             continue
         selected.append(span)
     return sorted(selected, key=lambda span: (span.start, span.end, span.type))
+
+
+def _compact_candidate_rows(rows: list[dict[str, object]]) -> list[dict[str, object]]:
+    return [
+        {
+            "code": str(row.get("code") or ""),
+            "name": str(row.get("name") or ""),
+            "system": str(row.get("system") or ""),
+        }
+        for row in rows
+        if row.get("code")
+    ]
+
+
+def _needs_llm_decision(concept: Concept, candidate_rows: list[dict[str, object]]) -> bool:
+    if concept.type in {TYPE_TEST_NAME, TYPE_TEST_RESULT}:
+        return True
+    if concept.type == TYPE_DIAGNOSIS:
+        return len(candidate_rows) > 1
+    return False
 
 
 def main(argv: list[str] | None = None) -> int:

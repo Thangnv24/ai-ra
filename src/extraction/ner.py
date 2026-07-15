@@ -8,6 +8,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 from core.config import TYPE_DIAGNOSIS, TYPE_DRUG, TYPE_SYMPTOM, TYPE_TEST_NAME, TYPE_TEST_RESULT
+from core.medication import extend_medication_span_end
 from core.text import normalize_key, trim_span_text
 from extraction.labs import extract_lab_spans
 
@@ -178,6 +179,7 @@ DRUG_BASE_TERMS = (
     "chlorpheniramine",
     "capsaicin",
     "metoprolol succinate",
+    "metoprolol",
     "docusate sodium",
     "acetaminophen",
     "paracetamol",
@@ -198,6 +200,33 @@ DRUG_BASE_TERMS = (
     "metronidazole",
     "lasix",
     "furosemide",
+    "doxycycline",
+    "atenolol",
+    "omeprazole",
+    "propofol",
+    "phentolamine",
+    "levophed",
+    "norepinephrine",
+    "vancomycin",
+    "ceftazidime",
+    "zosyn",
+    "bactrim",
+    "cipro",
+    "ciprofloxacin",
+    "seroquel",
+    "quetiapine",
+    "tylenol",
+    "mucinex",
+    "lorazepam",
+    "ativan",
+    "lovenox",
+    "enoxaparin",
+    "clopidogrel",
+    "ranexa",
+    "ranolazine",
+    "heparin",
+    "nitroglycerin",
+    "azithromycin",
 )
 
 LAB_PAIR_RE = re.compile(
@@ -328,34 +357,7 @@ def _extract_phrase_matches(
 
 
 def _extend_drug_end(text: str, offset: int) -> int:
-    end = offset
-    max_end = min(len(text), offset + 80)
-    terminators = [
-        "\n",
-        ";",
-        ",",
-        " \u0111i\u1ec1u tr\u1ecb ",
-        " dieu tri ",
-        " for ",
-    ]
-    next_stop = max_end
-    lower_tail = text[offset:max_end].casefold()
-    for token in terminators:
-        idx = lower_tail.find(token)
-        if idx >= 0:
-            next_stop = min(next_stop, offset + idx)
-    candidate = text[offset:next_stop]
-    # Keep common dose/route/frequency tokens after the drug name.
-    match = re.match(
-        r"(?:\s+(?:xl|oral|suspension|tablet|capsule|solution|"
-        r"\d+(?:[.,-]\d+)?(?:mg|mcg|g|ml)?|mg/ml|mcg/ml|mg/dl|mg|mcg|g|ml|"
-        r"po|iv|im|sc|bid|tid|qid|qam|qhs|q\d+h:?prn|daily|prn|x|\+))+",
-        candidate,
-        flags=re.IGNORECASE,
-    )
-    if match:
-        end = offset + match.end()
-    return max(end, offset)
+    return extend_medication_span_end(text, offset)
 
 
 def _looks_like_lab_name(name: str) -> bool:

@@ -22,6 +22,10 @@ class LLMResult:
     raw: str | None = None
 
 
+class MaxTokensExceededError(Exception):
+    """Raised when LLM hits max_tokens limit and returns empty content."""
+
+
 class ApiLLMClient:
     def __init__(self, settings: Settings):
         self.settings = settings
@@ -50,27 +54,61 @@ class ApiLLMClient:
             effective_max_tokens,
             len(system_prompt) + len(user_prompt),
         )
-        try:
-            text = self._chat_with_openai_package(system_prompt, user_prompt, max_tokens)
-        except Exception as package_exc:  # noqa: BLE001
-            logger.warning(
-                "llm_openai_package_failed base_url=%s model=%s seconds=%.6f error=%s",
-                self.settings.llm_base_url,
-                self.settings.llm_model,
-                time.perf_counter() - start,
-                package_exc,
+        text: str | None = None
+        last_exc: Exception | None = None
+        for attempt in range(3):
+            current_max_tokens = (
+                effective_max_tokens * (2**attempt)
+                if attempt > 0
+                else effective_max_tokens
             )
+            if attempt > 0:
+                logger.info("llm_retry attempt=%d max_tokens=%s", attempt, current_max_tokens)
             try:
-                text = self._chat_with_http(system_prompt, user_prompt, max_tokens)
-            except Exception as exc:  # noqa: BLE001
-                logger.error(
-                    "llm_call_failed base_url=%s model=%s seconds=%.6f error=%s",
+                text = self._chat_with_openai_package(
+                    system_prompt,
+                    user_prompt,
+                    current_max_tokens,
+                )
+            except MaxTokensExceededError:
+                last_exc = MaxTokensExceededError(
+                    f"max_tokens={current_max_tokens} still insufficient"
+                )
+                continue
+            except Exception as package_exc:  # noqa: BLE001
+                logger.warning(
+                    "llm_openai_package_failed base_url=%s model=%s seconds=%.6f error=%s",
                     self.settings.llm_base_url,
                     self.settings.llm_model,
                     time.perf_counter() - start,
-                    exc,
+                    package_exc,
                 )
-                return LLMResult(ok=False, error=str(exc))
+                try:
+                    text = self._chat_with_http(
+                        system_prompt,
+                        user_prompt,
+                        current_max_tokens,
+                    )
+                except MaxTokensExceededError:
+                    last_exc = MaxTokensExceededError(
+                        f"max_tokens={current_max_tokens} still insufficient"
+                    )
+                    continue
+                except Exception as exc:  # noqa: BLE001
+                    last_exc = exc
+                    break
+            last_exc = None
+            break
+        if last_exc is not None or text is None:
+            error = last_exc or RuntimeError("LLM request failed without response text")
+            logger.error(
+                "llm_call_failed base_url=%s model=%s seconds=%.6f error=%s",
+                self.settings.llm_base_url,
+                self.settings.llm_model,
+                time.perf_counter() - start,
+                error,
+            )
+            return LLMResult(ok=False, error=str(error))
         try:
             data = _load_json_object(text)
         except (json.JSONDecodeError, ValueError) as exc:
@@ -114,12 +152,34 @@ class ApiLLMClient:
                     if use_json_mode:
                         kwargs["response_format"] = {"type": "json_object"}
                     response = client.chat.completions.create(**kwargs)
+                choice = response.choices[0]
+                msg = choice.message
+                finish_reason = choice.finish_reason
+                logger.info(
+                    "llm_response_detail content_type=%s content_len=%s finish_reason=%s refusal=%s",
+                    type(msg.content).__name__,
+                    len(msg.content or ""),
+                    finish_reason,
+                    getattr(msg, "refusal", None),
+                )
+                if finish_reason == "length" and not msg.content:
+                    raise MaxTokensExceededError(
+                        f"finish_reason=length with empty content at max_tokens={max_tokens}"
+                    )
                 logger.info(
                     "llm_transport_ok transport=openai_package json_mode=%s seconds=%.6f",
                     use_json_mode,
                     time.perf_counter() - start,
                 )
-                return response.choices[0].message.content or "{}"
+                return msg.content or "{}"
+            except MaxTokensExceededError as exc:
+                logger.warning(
+                    "llm_max_tokens_exceeded transport=openai_package json_mode=%s seconds=%.6f error=%s",
+                    use_json_mode,
+                    time.perf_counter() - start,
+                    exc,
+                )
+                raise
             except Exception as exc:  # noqa: BLE001
                 logger.warning(
                     "llm_transport_failed transport=openai_package json_mode=%s seconds=%.6f error=%s",
@@ -145,6 +205,14 @@ class ApiLLMClient:
                     time.perf_counter() - start,
                 )
                 return text
+            except MaxTokensExceededError as exc:
+                logger.warning(
+                    "llm_max_tokens_exceeded transport=urllib json_mode=%s seconds=%.6f error=%s",
+                    use_json_mode,
+                    time.perf_counter() - start,
+                    exc,
+                )
+                raise
             except Exception as exc:  # noqa: BLE001
                 logger.warning(
                     "llm_transport_failed transport=urllib json_mode=%s seconds=%.6f error=%s",
@@ -169,7 +237,22 @@ class ApiLLMClient:
         opener = urllib.request.build_opener(urllib.request.ProxyHandler({}))
         with opener.open(request, timeout=self.settings.llm_timeout) as response:  # noqa: S310
             data = json.loads(response.read().decode("utf-8"))
-        return data["choices"][0]["message"]["content"] or "{}"
+        choice = data["choices"][0]
+        message = choice["message"]
+        content = message.get("content")
+        finish_reason = choice.get("finish_reason")
+        logger.info(
+            "llm_response_detail content_type=%s content_len=%s finish_reason=%s refusal=%s",
+            type(content).__name__,
+            len(content or ""),
+            finish_reason,
+            message.get("refusal"),
+        )
+        if finish_reason == "length" and not content:
+            raise MaxTokensExceededError(
+                f"finish_reason=length with empty content at max_tokens={payload.get('max_tokens')}"
+            )
+        return content or "{}"
 
 
 def _chat_payload(settings: Settings, system_prompt: str, user_prompt: str, max_tokens: int | None) -> dict[str, Any]:

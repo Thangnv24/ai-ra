@@ -1,0 +1,802 @@
+[
+  {
+    "text": "ngất xỉu",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      67,
+      75
+    ]
+  },
+  {
+    "text": "bệnh tim mạch do xơ vữa động mạch",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "I25.1"
+    ],
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      217,
+      250
+    ]
+  },
+  {
+    "text": "tăng huyết áp",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "I10"
+    ],
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      253,
+      266
+    ]
+  },
+  {
+    "text": "phình động mạch chủ nhỏ",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "I71.9"
+    ],
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      269,
+      292
+    ]
+  },
+  {
+    "text": "ngất xỉu",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      456,
+      464
+    ]
+  },
+  {
+    "text": "ngất xỉu",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      533,
+      541
+    ]
+  },
+  {
+    "text": "mất ý thức",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      595,
+      605
+    ]
+  },
+  {
+    "text": "đánh trống ngực",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      696,
+      711
+    ]
+  },
+  {
+    "text": "quầng sáng",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      720,
+      730
+    ]
+  },
+  {
+    "text": "chóng mặt",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      739,
+      748
+    ]
+  },
+  {
+    "text": "buồn nôn",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      757,
+      765
+    ]
+  },
+  {
+    "text": "đổ mồ hôi",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      774,
+      783
+    ]
+  },
+  {
+    "text": "mất kiểm soát đại tiện hoặc tiểu tiện",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      792,
+      829
+    ]
+  },
+  {
+    "text": "đau chân",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      832,
+      840
+    ]
+  },
+  {
+    "text": "đau ngực",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      867,
+      875
+    ]
+  },
+  {
+    "text": "khó thở khi gắng sức",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      878,
+      898
+    ]
+  },
+  {
+    "text": "khó thở về đêm",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      901,
+      915
+    ]
+  },
+  {
+    "text": "khó thở khi nằm",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      918,
+      933
+    ]
+  },
+  {
+    "text": "phù mắt cá chân",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      936,
+      951
+    ]
+  },
+  {
+    "text": "đánh trống ngực",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      954,
+      969
+    ]
+  },
+  {
+    "text": "ngất xỉu",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      972,
+      980
+    ]
+  },
+  {
+    "text": "Xỉu",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      983,
+      986
+    ]
+  },
+  {
+    "text": "ngất xỉu",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1016,
+      1024
+    ]
+  },
+  {
+    "text": "cảm thấy khó chịu",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1275,
+      1292
+    ]
+  },
+  {
+    "text": "cảm thấy khó chịu",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1295,
+      1312
+    ]
+  },
+  {
+    "text": "choáng váng",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      1319,
+      1330
+    ]
+  },
+  {
+    "text": "chóng mặt",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      1332,
+      1341
+    ]
+  },
+  {
+    "text": "buồn nôn",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      1343,
+      1351
+    ]
+  },
+  {
+    "text": "đánh trống ngực",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      1353,
+      1368
+    ]
+  },
+  {
+    "text": "đau ngực",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      1375,
+      1383
+    ]
+  },
+  {
+    "text": "ngất",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1425,
+      1429
+    ]
+  },
+  {
+    "text": "đau chân",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1433,
+      1441
+    ]
+  },
+  {
+    "text": "đau ngực",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1640,
+      1648
+    ]
+  },
+  {
+    "text": "khó thở khi gắng sức",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1837,
+      1857
+    ]
+  },
+  {
+    "text": "khó thở về đêm",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      2052,
+      2066
+    ]
+  },
+  {
+    "text": "khó thở khi nằm",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      2256,
+      2271
+    ]
+  },
+  {
+    "text": "phù mắt cá chân",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      2459,
+      2474
+    ]
+  },
+  {
+    "text": "đánh trống ngực",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      2500,
+      2515
+    ]
+  },
+  {
+    "text": "ngất xỉu",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      2611,
+      2619
+    ]
+  },
+  {
+    "text": "Xỉu",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      2807,
+      2810
+    ]
+  },
+  {
+    "text": "rung nhĩ kèm đáp ứng thất nhanh",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "I48.9"
+    ],
+    "assertions": [],
+    "position": [
+      3200,
+      3231
+    ]
+  },
+  {
+    "text": "nhịp tim chậm tương đối",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "R00.1"
+    ],
+    "assertions": [],
+    "position": [
+      3261,
+      3284
+    ]
+  },
+  {
+    "text": "điện tâm đồ (ecg)",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      3288,
+      3305
+    ]
+  },
+  {
+    "text": "nhồi máu cơ tim vùng dưới cũ",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "I25.2"
+    ],
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      3336,
+      3364
+    ]
+  },
+  {
+    "text": "thay đổi sóng T không đặc hiệu",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      3374,
+      3404
+    ]
+  },
+  {
+    "text": "thay đổi sóng t",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      3405,
+      3420
+    ]
+  },
+  {
+    "text": "công thức sinh hóa máu cơ bản",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      3429,
+      3458
+    ]
+  },
+  {
+    "text": "công thức máu",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      3465,
+      3478
+    ]
+  },
+  {
+    "text": "chức năng gan",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      3485,
+      3498
+    ]
+  },
+  {
+    "text": "phân tích nước tiểu",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      3506,
+      3525
+    ]
+  },
+  {
+    "text": "bình thường",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      3530,
+      3541
+    ]
+  },
+  {
+    "text": "bình thường",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      3541,
+      3552
+    ]
+  },
+  {
+    "text": "bình thường",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      3552,
+      3563
+    ]
+  },
+  {
+    "text": "bình thường",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      3563,
+      3574
+    ]
+  },
+  {
+    "text": "troponin",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      3578,
+      3586
+    ]
+  },
+  {
+    "text": "0.01",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      3587,
+      3591
+    ]
+  },
+  {
+    "text": "chụp x-quang ngực",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      3595,
+      3612
+    ]
+  },
+  {
+    "text": "tim to",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "I51.7"
+    ],
+    "assertions": [],
+    "position": [
+      3622,
+      3628
+    ]
+  },
+  {
+    "text": "không có bất thường nào khác",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      3635,
+      3663
+    ]
+  },
+  {
+    "text": "chụp cắt lớp vi tính sọ não",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      3667,
+      3694
+    ]
+  },
+  {
+    "text": "bình thường",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      3695,
+      3706
+    ]
+  },
+  {
+    "text": "công thức sinh hóa máu cơ bản",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      3978,
+      4007
+    ]
+  },
+  {
+    "text": "bình thường",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      4008,
+      4019
+    ]
+  },
+  {
+    "text": "công thức máu",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      4027,
+      4040
+    ]
+  },
+  {
+    "text": "bình thường",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      4041,
+      4052
+    ]
+  },
+  {
+    "text": "chức năng gan",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      4060,
+      4073
+    ]
+  },
+  {
+    "text": "bình thường",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      4074,
+      4085
+    ]
+  },
+  {
+    "text": "phân tích nước tiểu",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      4092,
+      4111
+    ]
+  },
+  {
+    "text": "bình thường",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      4112,
+      4123
+    ]
+  },
+  {
+    "text": "troponin",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      4126,
+      4134
+    ]
+  },
+  {
+    "text": "0.01",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      4135,
+      4139
+    ]
+  },
+  {
+    "text": "rung nhĩ kèm đáp ứng thất nhanh",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "I48.9"
+    ],
+    "assertions": [],
+    "position": [
+      4142,
+      4173
+    ]
+  },
+  {
+    "text": "nhịp tim chậm tương đối",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "R00.1"
+    ],
+    "assertions": [],
+    "position": [
+      4203,
+      4226
+    ]
+  },
+  {
+    "text": "nhồi máu cơ tim vùng dưới cũ",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "I25.2"
+    ],
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      4239,
+      4267
+    ]
+  },
+  {
+    "text": "điện tâm đồ (ecg)",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      4269,
+      4286
+    ]
+  },
+  {
+    "text": "thay đổi sóng t không đặc hiệu",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      4290,
+      4320
+    ]
+  },
+  {
+    "text": "điện tâm đồ (ecg)",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      4322,
+      4339
+    ]
+  },
+  {
+    "text": "Tim to",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "I51.7"
+    ],
+    "assertions": [],
+    "position": [
+      4360,
+      4366
+    ]
+  },
+  {
+    "text": "chụp x-quang ngực",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      4368,
+      4385
+    ]
+  },
+  {
+    "text": "chụp cắt lớp vi tính sọ não",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      4389,
+      4416
+    ]
+  },
+  {
+    "text": "bình thường",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      4417,
+      4428
+    ]
+  }
+]

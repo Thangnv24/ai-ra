@@ -1,0 +1,585 @@
+Hôm nay 20:32
+statement2(1).md
+Tệp
+statement1(1).md
+Tệp
+đọc kỹ 2 yêu cầu đề bài sau, tôi đã làm ra được 1 baseline rồi, rồi muốn bạn dò lại bằng tay từng tệp input output để xem có chuẩn không. Chỉ trả lời ngắn gọn chuẩn hoặc cần sửa gì vì tôi đang bị chững điểm. Đọc kỹ yêu cầu và trả lời oke
+1.json
+Tệp
+1.txt
+Tài liệu
+2.json
+Tệp
+2.txt
+Tài liệu
+tương tự, tôi bổ sung thêm ngữ cảnh là trong 1 trong tệp json của tôi đang có kết quả là:
+Điểm
+44.67860
+Đã chấm 18 giờ trước
+
+Chỉ số
+
+WER
+48.3153
+num_scored
+100
+J_assertion
+54.4263
+num_records
+100
+J_candidates
+32.1133
+3.json
+Tệp
+3.txt
+Tài liệu
+tương tự
+4.json
+Tệp
+4.txt
+Tài liệu
+tương tự
+5.json
+Tệp
+5(1).txt
+Tài liệu
+tương tự
+6.json
+Tệp
+6.txt
+Tài liệu
+7.json
+Tệp
+7.txt
+Tài liệu
+8.json
+Tệp
+8(1).txt
+Tài liệu
+9.json
+Tệp
+9.txt
+Tài liệu
+10.json
+Tệp
+10.txt
+Tài liệu
+11.json
+Tệp
+11.txt
+Tài liệu
+12.json
+Tệp
+12.txt
+Tài liệu
+13.json
+Tệp
+13.txt
+Tài liệu
+13(1).json
+Tệp
+13(1).txt
+Tài liệu
+14.json
+Tệp
+14.txt
+Tài liệu
+15.json
+Tệp
+15.txt
+Tài liệu
+16.json
+Tệp
+16.txt
+Tài liệu
+17.json
+Tệp
+17.txt
+Tài liệu
+18.json
+Tệp
+18.txt
+Tài liệu
+19.json
+Tệp
+19.txt
+Tài liệu
+20.txt
+Tài liệu
+21.json
+Tệp
+21.txt
+Tài liệu
+22.json
+Tệp
+22.txt
+Tài liệu
+23.json
+Tệp
+23.txt
+Tài liệu
+24.json
+Tệp
+24.txt
+Tài liệu
+Đã xử lý trong 1m 11s
+
+Cần sửa. Đã bổ sung hai lần chọc hút dịch, cấy mẫu bệnh phẩm, thêm isHistorical cho levafloxacin và cephalexin, đồng thời kiểm tra toàn bộ position.
+
+24_corrected.json 
+
+25.json
+Tệp
+25.txt
+Tài liệu
+Đã xử lý trong 33s
+
+Cần sửa. Đã bổ sung rung động tại vị trí lỗ rò dạng TRIỆU_CHỨNG; toàn bộ position đã khớp.
+
+25_corrected.json 
+
+26.json
+Tệp
+26.txt
+Tài liệu
+Đã xử lý trong 14s
+
+Cần sửa. Đã bổ sung hai lần giảm cân và hai lần tăng cân trở lại, đều có isHistorical; toàn bộ position đã khớp.
+
+26_corrected.json 
+
+27.json
+Tệp
+27.txt
+Tài liệu
+Đã xử lý trong 1m 9s
+
+Cần sửa. Đã mở rộng hội chứng turner, không đặc hiệu, thêm isHistorical cho khó nuốt và kiểm tra toàn bộ position.
+
+27_corrected.json 
+
+28.json
+Tệp
+28.txt
+Tài liệu
+
+Tôi sẽ rà toàn bộ 28.txt, kiểm tra assertion lịch sử, các xét nghiệm/kết quả còn thiếu và mọi position, rồi xuất lại trọn vẹn 28.json.
+
+29.json
+Tệp
+29.txt
+Tài liệu
+Thư viện
+/
+27_corrected.json
+[
+  {
+    "text": "hội chứng turner, không đặc hiệu",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "Q96.9"
+    ],
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      48,
+      80
+    ]
+  },
+  {
+    "text": "Tăng huyết áp",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "I10"
+    ],
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      87,
+      100
+    ]
+  },
+  {
+    "text": "Ung thư đại tràng",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "C18.9"
+    ],
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      146,
+      163
+    ]
+  },
+  {
+    "text": "Thuyên tắc phổi",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "I26.9"
+    ],
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      178,
+      193
+    ]
+  },
+  {
+    "text": "coumadin",
+    "type": "THUỐC",
+    "candidates": [
+      "202421"
+    ],
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      204,
+      212
+    ]
+  },
+  {
+    "text": "Thuyên tắc phổi",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "I26.9"
+    ],
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      222,
+      237
+    ]
+  },
+  {
+    "text": "coumadin",
+    "type": "THUỐC",
+    "candidates": [
+      "202421"
+    ],
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      248,
+      256
+    ]
+  },
+  {
+    "text": "coumadin",
+    "type": "THUỐC",
+    "candidates": [
+      "202421"
+    ],
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      355,
+      363
+    ]
+  },
+  {
+    "text": "khó thở",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      412,
+      419
+    ]
+  },
+  {
+    "text": "khó thở",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      455,
+      462
+    ]
+  },
+  {
+    "text": "Cảm giác có đờm ở cổ họng",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      470,
+      495
+    ]
+  },
+  {
+    "text": "ho",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      511,
+      513
+    ]
+  },
+  {
+    "text": "sốt",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      532,
+      535
+    ]
+  },
+  {
+    "text": "ớn lạnh",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      548,
+      555
+    ]
+  },
+  {
+    "text": "đau ngực",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      568,
+      576
+    ]
+  },
+  {
+    "text": "khó thở",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      590,
+      597
+    ]
+  },
+  {
+    "text": "khó thở",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      669,
+      676
+    ]
+  },
+  {
+    "text": "đánh trống ngực",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      702,
+      717
+    ]
+  },
+  {
+    "text": "khó thở",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      730,
+      737
+    ]
+  },
+  {
+    "text": "Cơn nhịp nhanh",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      762,
+      776
+    ],
+    "candidates": [
+      "I47.9"
+    ]
+  },
+  {
+    "text": "đau ngực",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      789,
+      797
+    ]
+  },
+  {
+    "text": "khó nuốt",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      945,
+      953
+    ]
+  },
+  {
+    "text": "albuterolipratropium nebs x2",
+    "type": "THUỐC",
+    "candidates": [
+      "108889"
+    ],
+    "assertions": [],
+    "position": [
+      1018,
+      1046
+    ]
+  },
+  {
+    "text": "metoprolol 5mg iv x2",
+    "type": "THUỐC",
+    "candidates": [
+      "866508"
+    ],
+    "assertions": [],
+    "position": [
+      1053,
+      1073
+    ]
+  },
+  {
+    "text": "tc",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1138,
+      1140
+    ]
+  },
+  {
+    "text": "37 độ c",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1141,
+      1148
+    ]
+  },
+  {
+    "text": "hr",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1149,
+      1151
+    ]
+  },
+  {
+    "text": "88",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1152,
+      1154
+    ]
+  },
+  {
+    "text": "bp",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1155,
+      1157
+    ]
+  },
+  {
+    "text": "13482",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1158,
+      1163
+    ]
+  },
+  {
+    "text": "rr",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1164,
+      1166
+    ]
+  },
+  {
+    "text": "14",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1167,
+      1169
+    ]
+  },
+  {
+    "text": "spo2",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1170,
+      1174
+    ]
+  },
+  {
+    "text": "100ra",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1175,
+      1180
+    ]
+  },
+  {
+    "text": "hr",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1203,
+      1205
+    ]
+  },
+  {
+    "text": "140",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1206,
+      1209
+    ]
+  },
+  {
+    "text": "hr",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1260,
+      1262
+    ]
+  },
+  {
+    "text": "110",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1281,
+      1284
+    ]
+  }
+]

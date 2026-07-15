@@ -3,12 +3,21 @@
 from __future__ import annotations
 
 import json
-import re
+import math
+from collections import Counter, defaultdict
 from dataclasses import dataclass
 from pathlib import Path
 
 from core.config import CODED_TYPES, TYPE_DIAGNOSIS, TYPE_DRUG
-from core.text import normalize_key
+from core.medication import (
+    medication_match_score,
+    normalize_prescription_text,
+    strip_drug_count,
+    strip_drug_modifiers,
+    strip_drug_release_tokens,
+    strip_drug_route_frequency,
+)
+from core.text import normalize_key, similarity
 
 
 @dataclass(frozen=True, slots=True)
@@ -37,6 +46,7 @@ class SlimCandidateIndex:
     ) -> None:
         self.records = records
         self.aliases = aliases
+        self.diagnosis_lexical_index = DiagnosisLexicalIndex.build(records, aliases)
 
     @classmethod
     def empty(cls) -> "SlimCandidateIndex":
@@ -55,11 +65,145 @@ class SlimCandidateIndex:
                 if record is None or code in seen:
                     continue
                 seen.add(code)
-                score = 1.0 - min(rank, 20) * 0.01 - min(record.priority, 100) * 0.001
+                score = _hit_score(text, concept_type, source, rank, record)
                 hits.append(CandidateHit(record=record, source=source, score=score))
-                if len(hits) >= limit:
-                    return hits
-        return hits
+        if concept_type == TYPE_DIAGNOSIS and len(hits) < limit:
+            for rank, hit in enumerate(self.diagnosis_lexical_index.lookup(text, limit=max(limit * 4, 20))):
+                code = hit.record.code
+                if code in seen:
+                    continue
+                seen.add(code)
+                hits.append(
+                    CandidateHit(
+                        record=hit.record,
+                        source=hit.source,
+                        score=hit.score - min(rank, 20) * 0.005,
+                    )
+                )
+        hits.sort(key=lambda hit: (-hit.score, hit.record.priority, hit.record.code))
+        return hits[:limit]
+
+
+@dataclass(frozen=True, slots=True)
+class DiagnosisAliasDoc:
+    alias: str
+    codes: tuple[str, ...]
+    tokens: frozenset[str]
+    grams: frozenset[str]
+
+
+class DiagnosisLexicalIndex:
+    def __init__(
+        self,
+        records: dict[tuple[str, str], CandidateRecord],
+        docs: tuple[DiagnosisAliasDoc, ...],
+        token_index: dict[str, tuple[int, ...]],
+        gram_index: dict[str, tuple[int, ...]],
+    ) -> None:
+        self.records = records
+        self.docs = docs
+        self.token_index = token_index
+        self.gram_index = gram_index
+        self.doc_count = len(docs)
+
+    @classmethod
+    def build(
+        cls,
+        records: dict[tuple[str, str], CandidateRecord],
+        aliases: dict[tuple[str, str], tuple[str, ...]],
+    ) -> "DiagnosisLexicalIndex":
+        docs: list[DiagnosisAliasDoc] = []
+        token_postings: dict[str, list[int]] = defaultdict(list)
+        gram_postings: dict[str, list[int]] = defaultdict(list)
+        for (concept_type, alias), codes in aliases.items():
+            if concept_type != TYPE_DIAGNOSIS:
+                continue
+            alias_key = _diagnosis_search_key(alias)
+            tokens = frozenset(_diagnosis_tokens(alias_key))
+            grams = frozenset(_char_ngrams(alias_key))
+            if not tokens and not grams:
+                continue
+            valid_codes = tuple(
+                code
+                for code in codes
+                if (TYPE_DIAGNOSIS, code) in records
+            )
+            if not valid_codes:
+                continue
+            doc_id = len(docs)
+            docs.append(DiagnosisAliasDoc(alias=alias_key, codes=valid_codes, tokens=tokens, grams=grams))
+            for token in tokens:
+                token_postings[token].append(doc_id)
+            for gram in grams:
+                gram_postings[gram].append(doc_id)
+        return cls(
+            records,
+            tuple(docs),
+            {key: tuple(value) for key, value in token_postings.items()},
+            {key: tuple(value) for key, value in gram_postings.items()},
+        )
+
+    @classmethod
+    def empty(cls) -> "DiagnosisLexicalIndex":
+        return cls({}, (), {}, {})
+
+    def lookup(self, text: str, limit: int = 20) -> list[CandidateHit]:
+        if not self.docs:
+            return []
+
+        best_by_code: dict[str, CandidateHit] = {}
+        for query in _diagnosis_search_variants(text):
+            for doc_score, doc in self._rank_docs(query, limit=max(limit * 4, 40)):
+                if doc_score < _diagnosis_score_threshold(query):
+                    continue
+                for code in doc.codes:
+                    record = self.records.get((TYPE_DIAGNOSIS, code))
+                    if record is None:
+                        continue
+                    score = 0.45 + min(doc_score, 1.0) * 0.4 - min(record.priority, 100) * 0.0005
+                    current = best_by_code.get(code)
+                    if current is None or score > current.score:
+                        best_by_code[code] = CandidateHit(
+                            record=record,
+                            source="diagnosis_lexical",
+                            score=score,
+                        )
+        hits = sorted(best_by_code.values(), key=lambda hit: (-hit.score, hit.record.priority, hit.record.code))
+        return hits[:limit]
+
+    def _rank_docs(self, query: str, limit: int) -> list[tuple[float, DiagnosisAliasDoc]]:
+        tokens = frozenset(_diagnosis_tokens(query))
+        grams = frozenset(_char_ngrams(query))
+        if len(tokens) < 2 and len(normalize_key(query)) < 7:
+            return []
+
+        preliminary: Counter[int] = Counter()
+        for token in tokens:
+            postings = self.token_index.get(token, ())
+            if not postings or len(postings) > 1600:
+                continue
+            weight = 1.0 + math.log((self.doc_count + 1) / (len(postings) + 1))
+            for doc_id in postings:
+                preliminary[doc_id] += weight
+        for gram in grams:
+            postings = self.gram_index.get(gram, ())
+            if not postings or len(postings) > 2200:
+                continue
+            weight = 0.18 + 0.08 * math.log((self.doc_count + 1) / (len(postings) + 1))
+            for doc_id in postings:
+                preliminary[doc_id] += weight
+
+        if not preliminary:
+            return []
+
+        scored: list[tuple[float, DiagnosisAliasDoc]] = []
+        for doc_id, _ in preliminary.most_common(240):
+            doc = self.docs[doc_id]
+            score = _diagnosis_similarity_score(query, tokens, grams, doc)
+            if score > 0:
+                scored.append((score, doc))
+        scored.sort(key=lambda row: (-row[0], min(self.records[(TYPE_DIAGNOSIS, code)].priority for code in row[1].codes), row[1].codes[0]))
+        return scored[:limit]
 
 
 def load_slim_candidate_index(candidate_dir: Path) -> SlimCandidateIndex:
@@ -185,83 +329,148 @@ def _query_variants(text: str, concept_type: str) -> list[tuple[str, str]]:
     _add_variant(variants, "exact", key)
 
     if concept_type == TYPE_DRUG:
-        normalized_drug = _normalize_drug_units(_normalize_drug_spacing(key))
+        normalized_drug = normalize_prescription_text(text)
         _add_variant(variants, "drug_unit", normalized_drug)
-        _add_variant(variants, "drug_no_count", _strip_drug_count(normalized_drug))
-        _add_variant(variants, "drug_core", _strip_drug_route_frequency(normalized_drug))
-        _add_variant(variants, "drug_no_release_token", _strip_drug_release_tokens(_strip_drug_route_frequency(normalized_drug)))
-        _add_variant(variants, "drug_ingredient", _strip_drug_modifiers(normalized_drug))
+        _add_variant(variants, "drug_no_count", strip_drug_count(normalized_drug))
+        drug_core = strip_drug_route_frequency(normalized_drug)
+        _add_variant(variants, "drug_core", drug_core)
+        _add_variant(variants, "drug_no_release_token", strip_drug_release_tokens(drug_core))
+        _add_variant(variants, "drug_ingredient", strip_drug_modifiers(normalized_drug))
     elif concept_type == TYPE_DIAGNOSIS:
         _add_variant(variants, "diagnosis_core", _strip_diagnosis_prefix(key))
         _add_variant(variants, "diagnosis_unspecified", _strip_unspecified_suffix(key))
         _add_variant(variants, "diagnosis_spelling", _normalize_diagnosis_spelling(key))
+        _add_variant(variants, "diagnosis_chronic_shorthand", _expand_diagnosis_shorthand(key))
         _add_variant(variants, "diagnosis_with_benh_prefix", f"benh {key}")
 
     return variants
+
+
+def _hit_score(
+    text: str,
+    concept_type: str,
+    source: str,
+    rank: int,
+    record: CandidateRecord,
+) -> float:
+    source_penalty = {
+        "exact": 0.0,
+        "drug_unit": 0.005,
+        "drug_no_count": 0.015,
+        "drug_core": 0.03,
+        "drug_no_release_token": 0.04,
+        "drug_ingredient": 0.12,
+        "diagnosis_core": 0.02,
+        "diagnosis_unspecified": 0.03,
+        "diagnosis_spelling": 0.04,
+        "diagnosis_chronic_shorthand": 0.045,
+        "diagnosis_with_benh_prefix": 0.05,
+    }.get(source, 0.08)
+    score = 1.0 - source_penalty - min(rank, 20) * 0.01 - min(record.priority, 100) * 0.001
+    if concept_type == TYPE_DRUG:
+        score += medication_match_score(text, record.name)
+    return score
+
+
+def _diagnosis_search_variants(text: str) -> list[str]:
+    variants: list[tuple[str, str]] = []
+    key = normalize_key(text)
+    _add_variant(variants, "diagnosis_search", _diagnosis_search_key(key))
+    _add_variant(variants, "diagnosis_core_search", _diagnosis_search_key(_strip_diagnosis_prefix(key)))
+    _add_variant(variants, "diagnosis_spelling_search", _diagnosis_search_key(_normalize_diagnosis_spelling(key)))
+    _add_variant(variants, "diagnosis_unspecified_search", _diagnosis_search_key(_strip_unspecified_suffix(key)))
+    return [value for _, value in variants]
+
+
+def _diagnosis_search_key(text: str) -> str:
+    key = normalize_key(text)
+    key = _normalize_diagnosis_spelling(key)
+    key = _strip_diagnosis_prefix(key)
+    key = _strip_unspecified_suffix(key)
+    prefixes = (
+        "tien su ",
+        "co tien su ",
+        "duoc phat hien ",
+        "phat hien ",
+        "dang dieu tri ",
+        "da dieu tri ",
+    )
+    for prefix in prefixes:
+        if key.startswith(prefix):
+            key = key[len(prefix) :]
+            break
+    return " ".join(key.split())
+
+
+def _diagnosis_tokens(key: str) -> list[str]:
+    return [
+        token
+        for token in normalize_key(key).split()
+        if len(token) >= 2 and token not in _DIAGNOSIS_STOP_TOKENS
+    ]
+
+
+def _char_ngrams(key: str, size: int = 3) -> list[str]:
+    compact = "".join(ch for ch in normalize_key(key) if ch.isalnum())
+    if len(compact) < size:
+        return []
+    return [compact[index : index + size] for index in range(len(compact) - size + 1)]
+
+
+def _diagnosis_similarity_score(
+    query: str,
+    query_tokens: frozenset[str],
+    query_grams: frozenset[str],
+    doc: DiagnosisAliasDoc,
+) -> float:
+    if not query:
+        return 0.0
+    token_overlap = len(query_tokens & doc.tokens)
+    gram_overlap = len(query_grams & doc.grams)
+    if token_overlap == 0 and gram_overlap < 3:
+        return 0.0
+
+    token_recall = token_overlap / max(1, len(query_tokens))
+    token_precision = token_overlap / max(1, len(doc.tokens))
+    token_jaccard = token_overlap / max(1, len(query_tokens | doc.tokens))
+    gram_jaccard = gram_overlap / max(1, len(query_grams | doc.grams))
+    sequence_score = similarity(query, doc.alias)
+    substring_bonus = 0.0
+    if query in doc.alias or doc.alias in query:
+        substring_bonus = 0.1
+    elif " ".join(query.split()) in doc.alias:
+        substring_bonus = 0.05
+    if substring_bonus == 0.0 and token_recall < 0.55:
+        return 0.0
+
+    query_len = max(1, len(query))
+    doc_len = max(1, len(doc.alias))
+    length_ratio = min(query_len, doc_len) / max(query_len, doc_len)
+    score = (
+        0.34 * token_recall
+        + 0.18 * token_precision
+        + 0.16 * token_jaccard
+        + 0.18 * gram_jaccard
+        + 0.14 * sequence_score
+        + substring_bonus
+    )
+    score -= max(0.0, 0.55 - length_ratio) * 0.12
+    return score
+
+
+def _diagnosis_score_threshold(query: str) -> float:
+    tokens = _diagnosis_tokens(query)
+    if len(tokens) <= 2:
+        return 0.58
+    if len(tokens) <= 4:
+        return 0.5
+    return 0.46
 
 
 def _add_variant(variants: list[tuple[str, str]], source: str, key: str) -> None:
     key = " ".join((key or "").split())
     if key and all(existing != key for _, existing in variants):
         variants.append((source, key))
-
-
-def _normalize_drug_units(key: str) -> str:
-    key = re.sub(r"\bmg\s*/\s*ml\b", "mg/ml", key)
-    key = re.sub(r"\bmcg\s*/\s*ml\b", "mcg/ml", key)
-    return key
-
-
-def _normalize_drug_spacing(key: str) -> str:
-    key = re.sub(r"(\d)(mg|mcg|g|ml|iu|units?)\b", r"\1 \2", key)
-    key = re.sub(r"\b(mg|mcg|g|ml|iu)\s*/\s*ml\b", r"\1/ml", key)
-    key = re.sub(r"\bq\s*(\d+)\s*h\s*:?\s*prn\b", r"q\1h:prn", key)
-    return " ".join(key.split())
-
-
-def _strip_drug_count(key: str) -> str:
-    key = re.sub(r"\s+x\s*\d+(?:\s+(?:ngay|day|days))?\b.*$", "", key)
-    return " ".join(key.split())
-
-
-def _strip_drug_route_frequency(key: str) -> str:
-    tokens = key.split()
-    stop = {
-        "po",
-        "iv",
-        "im",
-        "sc",
-        "bid",
-        "tid",
-        "qid",
-        "qam",
-        "qhs",
-        "daily",
-        "prn",
-        "x",
-    }
-    kept: list[str] = []
-    for token in tokens:
-        if token in stop or re.fullmatch(r"q\d+h:?prn?", token):
-            break
-        kept.append(token)
-    return " ".join(kept)
-
-
-def _strip_drug_release_tokens(key: str) -> str:
-    tokens = [token for token in key.split() if token not in {"xl", "xr", "er", "sr", "cr"}]
-    return " ".join(tokens)
-
-
-def _strip_drug_modifiers(key: str) -> str:
-    tokens = key.split()
-    stop = {"mg", "mcg", "g", "ml", "iu", "unit", "units", "tablet", "capsule", "solution"}
-    kept: list[str] = []
-    for token in tokens:
-        if token in stop or any(ch.isdigit() for ch in token):
-            break
-        kept.append(token)
-    return " ".join(kept)
 
 
 def _strip_diagnosis_prefix(key: str) -> str:
@@ -299,8 +508,59 @@ def _normalize_diagnosis_spelling(key: str) -> str:
         "sung huyet": "xung huyet",
         "tieu duong": "dai thao duong",
         "da day thuc quan": "da day - thuc quan",
+        "khong dac hieu": "khong xac dinh",
         "tuyp": "type",
     }
     for source, target in replacements.items():
         key = key.replace(source, target)
-    return key
+    return _expand_diagnosis_shorthand(key)
+
+
+def _expand_diagnosis_shorthand(key: str) -> str:
+    tokens = normalize_key(key).split()
+    expanded: list[str] = []
+    for index, token in enumerate(tokens):
+        expanded.append(token)
+        next_token = tokens[index + 1] if index + 1 < len(tokens) else ""
+        if token in {"man", "cap"} and next_token != "tinh":
+            expanded.append("tinh")
+    return " ".join(expanded)
+
+
+_DIAGNOSIS_STOP_TOKENS = {
+    "benh",
+    "chan",
+    "doan",
+    "mac",
+    "duoc",
+    "co",
+    "hoi",
+    "chung",
+    "khac",
+    "theo",
+    "doi",
+    "nghi",
+    "ngo",
+    "cua",
+    "do",
+    "va",
+    "voi",
+    "tai",
+    "o",
+    "the",
+    "of",
+    "and",
+    "or",
+    "in",
+    "on",
+    "to",
+    "due",
+    "with",
+    "without",
+    "other",
+    "specified",
+    "unspecified",
+    "disease",
+    "disorder",
+    "syndrome",
+}

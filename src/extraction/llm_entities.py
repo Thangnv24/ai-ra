@@ -29,7 +29,7 @@ class EntityProposalSummary:
 
 
 class LLMEntityExtractor:
-    def __init__(self, llm_client: Any, max_chars: int = 1800, overlap: int = 160) -> None:
+    def __init__(self, llm_client: Any, max_chars: int = 1000, overlap: int = 0) -> None:
         self.llm_client = llm_client
         self.max_chars = max_chars
         self.overlap = overlap
