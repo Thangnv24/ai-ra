@@ -1,35 +1,63 @@
-"""Rule-based assertion/context detection."""
+"""Section- and clause-aware assertion detection."""
 
 from __future__ import annotations
 
 import re
+from functools import lru_cache
 
 from core.config import (
     ASSERTION_FAMILY,
     ASSERTION_HISTORICAL,
     ASSERTION_NEGATED,
     ASSERTION_TYPES,
+    TYPE_DIAGNOSIS,
     TYPE_DRUG,
+    TYPE_SYMPTOM,
 )
 from core.text import normalize_key
+from extraction.sectioning import Section, detect_sections
 
 
 NEGATION_RE = re.compile(
-    r"(?:\bkhong\b|\bkhong ghi nhan\b|\bchua\b|\bphu nhan\b|\bkhong thay\b|\bno\b|\bdenies\b|\bwithout\b|\bnegative for\b)"
+    r"(?:\bkhong\b|\bchua\b|\bphu nhan\b|\bkhong thay\b|\bno\b|\bdenies\b|"
+    r"\bwithout\b|\bnegative for\b)"
 )
+NEGATION_EXCLUSIONS = (
+    "khong dien hinh",
+    "khong dac hieu",
+    "khong the",
+    "khong ro",
+    "khong co cai thien",
+    "khong lien quan",
+)
+CONTRAST_RE = re.compile(r"\b(?:nhung|tuy nhien|song|however|but)\b")
 FAMILY_RE = re.compile(
     r"(?:\btien su gia dinh\b|\bgia dinh\b|\bnguoi than\b|\bfamily\b|\bfather\b|\bmother\b"
     r"|\banh trai\b|\bchi gai\b|\bem trai\b|\bem gai\b"
     r"|\b(?:bo|cha|me|ong|ba)\s+(?:bi|mac|co|tien su|duoc chan doan|da tung)\b)"
 )
-HISTORICAL_RE = re.compile(
-    r"(?:\btien su\b|\btruoc nhap vien\b|\bda tung\b|\bda dung\b|\btung dung\b|\bsu dung\b"
-    r"|\bduoc ke\b|\bngung\b|\bvua ngung\b|\bbenh su\b|\bpast medical history\b|\bpmh\b"
-    r"|\bhistory of\b|\bhome meds?\b|\bprior to admission\b|\bpreviously\b)"
+EXPLICIT_HISTORY_RE = re.compile(
+    r"(?:\bda tung\b|\btung bi\b|\btruoc day\b|\bpreviously\b|\bhistory of\b|"
+    r"\bpast medical history\b|\bpmh\b|\bkeo dai tu lau\b|\btrong vai nam\b|"
+    r"\bman tinh\b|\bman tinh\b|\bcu\b)"
 )
-CLINICAL_HISTORY_RE = re.compile(
-    r"(?:\btien su\b|\btruoc nhap vien\b|\bda tung\b|\btung bi\b|\bbenh su\b"
-    r"|\bpast medical history\b|\bpmh\b|\bhistory of\b|\bpreviously\b)"
+HISTORICAL_DRUG_RE = re.compile(
+    r"(?:\bthuoc truoc khi nhap vien\b|\bthuoc truoc nhap vien\b|\bhome meds?\b|"
+    r"\bprior to admission\b|\bda dung\b|\btung dung\b|\bsu dung\b|\bda ngung\b|"
+    r"\bngung su dung\b|\bo nha\b)"
+)
+CURRENT_TREATMENT_RE = re.compile(
+    r"(?:\bduoc chi dinh dieu tri\b|\btai khoa cap cuu\b|\bden khoa cap cuu\b|"
+    r"\bdanh gia tai benh vien\b|\bdieu tri tai benh vien\b|\bdang dieu tri\b)"
+)
+HISTORICAL_SUBSECTION_RE = re.compile(
+    r"(?:\bcac benh ly (?:noi khoa )?man tinh\b|\bbenh ly man tinh\b|\bbenh ly man tinh\b|"
+    r"\bthuoc truoc khi nhap vien\b|\bthuoc truoc nhap vien\b|\bcac tap kinh lam sang truoc day\b|"
+    r"\btien su phau thuat\b|\bcac su kien truoc khi nhap vien\b|\bcac dien bien truoc khi nhap vien\b)"
+)
+PRESENT_ILLNESS_RE = re.compile(
+    r"(?:\btien su benh hien tai\b|\bbenh su hien tai\b|\blich su benh hien tai\b|"
+    r"\btrieu chung hien tai\b|\bly do nhap vien\b)"
 )
 
 
@@ -38,60 +66,102 @@ class ContextDetector:
         if concept_type not in ASSERTION_TYPES:
             return ()
 
-        before = normalize_key(text[max(0, start - 180) : start])
-        sentence_before = normalize_key(text[max(0, _sentence_start(text, start)) : start])
-        broad_before = normalize_key(text[max(0, start - 600) : start])
+        clause_before = normalize_key(text[_clause_start(text, start) : start])
+        line_before = normalize_key(text[_line_start(text, start) : start])
+        recent_before = normalize_key(text[max(0, start - 700) : start])
+        section = _section_at(text, start)
 
         assertions: list[str] = []
-        if self._has_close_negation(before, sentence_before):
+        if self._has_negation(clause_before):
             assertions.append(ASSERTION_NEGATED)
-        if FAMILY_RE.search(sentence_before) or FAMILY_RE.search(before[-80:]):
+        if FAMILY_RE.search(line_before) or FAMILY_RE.search(recent_before[-220:]):
             assertions.append(ASSERTION_FAMILY)
-        if self._has_historical_context(sentence_before, broad_before, concept_type):
+        if self._has_historical_context(
+            concept_type=concept_type,
+            section=section,
+            clause_before=clause_before,
+            line_before=line_before,
+            recent_before=recent_before,
+        ):
             assertions.append(ASSERTION_HISTORICAL)
-
         return tuple(assertions)
 
     @staticmethod
-    def _has_close_negation(before: str, sentence_before: str) -> bool:
-        if not before:
+    def _has_negation(clause_before: str) -> bool:
+        if not clause_before:
             return False
-        close = " ".join(before.split()[-8:])
-        if re.search(r"\bkhong\b[^:;.\n]*[-:]$", close):
+        matches = list(NEGATION_RE.finditer(clause_before))
+        if not matches:
             return False
-        if NEGATION_RE.search(close):
-            return True
-        return bool(NEGATION_RE.search(sentence_before) and len(sentence_before.split()) <= 16)
+        last = matches[-1]
+        negated_scope = clause_before[last.start() :]
+        if any(negated_scope.startswith(prefix) for prefix in NEGATION_EXCLUSIONS):
+            return False
+        contrast = list(CONTRAST_RE.finditer(negated_scope))
+        return not contrast
 
     @staticmethod
-    def _has_historical_context(sentence_before: str, broad_before: str, concept_type: str) -> bool:
-        if _is_present_illness_context(sentence_before):
-            return False
-        if concept_type != TYPE_DRUG and _is_present_illness_context(broad_before):
-            return False
+    def _has_historical_context(
+        concept_type: str,
+        section: str,
+        clause_before: str,
+        line_before: str,
+        recent_before: str,
+    ) -> bool:
+        local_context = " ".join((line_before, clause_before))
         if concept_type == TYPE_DRUG:
-            if HISTORICAL_RE.search(sentence_before):
+            if CURRENT_TREATMENT_RE.search(local_context) or CURRENT_TREATMENT_RE.search(recent_before[-180:]):
+                return False
+            if HISTORICAL_DRUG_RE.search(local_context):
                 return True
-            return bool(
-                re.search(
-                    r"\b(?:thuoc truoc nhap vien|truoc nhap vien|home meds?|prior to admission|"
-                    r"medications?|dang dung|duoc ke|da dung|su dung|ngung)\b",
-                    broad_before,
-                )
-            )
-        if CLINICAL_HISTORY_RE.search(sentence_before):
+            if section == "pre_admission":
+                return bool(HISTORICAL_DRUG_RE.search(recent_before) or "thuoc" in recent_before[-240:])
+            if HISTORICAL_SUBSECTION_RE.search(recent_before[-450:]):
+                return True
+            return False
+
+        if PRESENT_ILLNESS_RE.search(recent_before[-500:]) and section == "present_illness":
+            if concept_type == TYPE_SYMPTOM:
+                return bool(EXPLICIT_HISTORY_RE.search(local_context))
+            if not EXPLICIT_HISTORY_RE.search(local_context):
+                return False
+
+        if EXPLICIT_HISTORY_RE.search(local_context):
             return True
-        return bool(re.search(r"\b(?:tien su benh noi khoa|past medical history|pmh|da tung|previously)\b", broad_before))
+        if section == "pre_admission":
+            if concept_type == TYPE_DIAGNOSIS:
+                return True
+            if concept_type == TYPE_SYMPTOM:
+                return bool(
+                    EXPLICIT_HISTORY_RE.search(recent_before[-350:])
+                    or re.search(r"\b(?:tap kinh|cac con).*(?:truoc day|vai nam)\b", recent_before[-350:])
+                )
+        if concept_type == TYPE_DIAGNOSIS and HISTORICAL_SUBSECTION_RE.search(recent_before[-450:]):
+            return True
+        return False
 
 
-def _sentence_start(text: str, offset: int) -> int:
-    last = 0
-    for sep in ".;\n":
-        idx = text.rfind(sep, 0, offset)
-        if idx >= 0:
-            last = max(last, idx + 1)
+def _line_start(text: str, offset: int) -> int:
+    index = text.rfind("\n", 0, offset)
+    return index + 1 if index >= 0 else 0
+
+
+def _clause_start(text: str, offset: int) -> int:
+    last = _line_start(text, offset)
+    for separator in (".", ";", ":"):
+        index = text.rfind(separator, last, offset)
+        if index >= 0:
+            last = max(last, index + 1)
     return last
 
 
-def _is_present_illness_context(text: str) -> bool:
-    return bool(re.search(r"\b(?:tien su benh hien tai|benh su hien tai|history of present illness)\b", text))
+@lru_cache(maxsize=128)
+def _sections(text: str) -> tuple[Section, ...]:
+    return tuple(detect_sections(text))
+
+
+def _section_at(text: str, offset: int) -> str:
+    for section in _sections(text):
+        if section.start <= offset < section.end:
+            return section.name
+    return "document"

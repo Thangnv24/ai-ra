@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from collections import Counter
 from dataclasses import dataclass
 from typing import Any
 
@@ -17,6 +18,9 @@ class EntityProposalSummary:
     chunks: int
     mentions: int
     aligned: int
+    aligned_before_dedup: int = 0
+    deduplicated: int = 0
+    rejection_reasons: tuple[tuple[str, int], ...] = ()
     errors: tuple[str, ...] = ()
 
     def to_dict(self) -> dict[str, Any]:
@@ -24,8 +28,20 @@ class EntityProposalSummary:
             "chunks": self.chunks,
             "mentions": self.mentions,
             "aligned": self.aligned,
+            "aligned_before_dedup": self.aligned_before_dedup,
+            "deduplicated": self.deduplicated,
+            "rejected": sum(count for _, count in self.rejection_reasons),
+            "rejection_reasons": dict(self.rejection_reasons),
             "errors": list(self.errors),
         }
+
+
+@dataclass(frozen=True, slots=True)
+class TextUnit:
+    unit_id: str
+    start: int
+    end: int
+    text: str
 
 
 class LLMEntityExtractor:
@@ -41,10 +57,12 @@ class LLMEntityExtractor:
         chunks = split_chunks(text, max_chars=self.max_chars, overlap=self.overlap)
         spans: list[SpanCandidate] = []
         mention_count = 0
+        rejection_reasons: Counter[str] = Counter()
         for chunk in chunks:
+            units = _chunk_units(chunk)
             result = self.llm_client.chat_json(
                 ENTITY_SYSTEM_PROMPT,
-                build_entity_extraction_prompt(_chunk_payload(chunk)),
+                build_entity_extraction_prompt(_chunk_payload(chunk, units)),
             )
             if not result.ok or not isinstance(result.data, dict):
                 raise RuntimeError(
@@ -55,15 +73,28 @@ class LLMEntityExtractor:
             if not isinstance(mentions, list):
                 raise RuntimeError(f"LLM entity extraction failed for {chunk.chunk_id}: JSON has no mentions list")
             mention_count += len(mentions)
+            used_occurrences: dict[tuple[str, str], set[int]] = {}
             for mention in mentions:
-                span = _span_from_mention(text, chunk, mention)
-                if span is not None:
-                    spans.append(span)
+                span, rejection_reason = _span_from_mention_with_reason(
+                    text,
+                    chunk,
+                    mention,
+                    units=units,
+                    used_occurrences=used_occurrences,
+                )
+                if span is None:
+                    rejection_reasons[rejection_reason or "unknown"] += 1
+                    continue
+                spans.append(span)
+        aligned_before_dedup = len(spans)
         spans = _dedup_spans(spans)
         return spans, EntityProposalSummary(
             chunks=len(chunks),
             mentions=mention_count,
             aligned=len(spans),
+            aligned_before_dedup=aligned_before_dedup,
+            deduplicated=aligned_before_dedup - len(spans),
+            rejection_reasons=tuple(sorted(rejection_reasons.items())),
         )
 
 
@@ -85,31 +116,158 @@ def align_quote_in_chunk(chunk: TextChunk, quote: str) -> tuple[int, int] | None
     return _align_normalized_quote(chunk, quote)
 
 
-def _chunk_payload(chunk: TextChunk) -> dict[str, Any]:
+def _chunk_payload(chunk: TextChunk, units: list[TextUnit] | None = None) -> dict[str, Any]:
+    units = units or _chunk_units(chunk)
     return {
         "chunk_id": chunk.chunk_id,
         "section": chunk.section,
         "start": chunk.start,
         "end": chunk.end,
         "text": chunk.text,
+        "units": [
+            {
+                "unit_id": unit.unit_id,
+                "text": unit.text,
+            }
+            for unit in units
+        ],
     }
 
 
 def _span_from_mention(text: str, chunk: TextChunk, mention: Any) -> SpanCandidate | None:
+    span, _ = _span_from_mention_with_reason(text, chunk, mention)
+    return span
+
+
+def _span_from_mention_with_reason(
+    text: str,
+    chunk: TextChunk,
+    mention: Any,
+    units: list[TextUnit] | None = None,
+    used_occurrences: dict[tuple[str, str], set[int]] | None = None,
+) -> tuple[SpanCandidate | None, str | None]:
     if not isinstance(mention, dict):
-        return None
+        return None, "invalid_mention"
     quote = str(mention.get("quote") or "").strip()
+    if not quote:
+        return None, "empty_quote"
     concept_type = str(mention.get("type") or "").strip()
     if concept_type not in ALLOWED_TYPES:
-        return None
-    aligned = align_quote_in_chunk(chunk, quote)
-    if aligned is None:
-        return None
+        return None, "invalid_type"
+
+    available_units = units or _chunk_units(chunk)
+    unit_by_id = {unit.unit_id: unit for unit in available_units}
+    raw_unit_id = str(mention.get("unit_id") or "").strip()
+    if raw_unit_id:
+        unit = unit_by_id.get(raw_unit_id)
+        if unit is None:
+            return None, "invalid_unit_id"
+    else:
+        unit = TextUnit(chunk.chunk_id, chunk.start, chunk.end, chunk.text)
+
+    occurrences = _quote_occurrences(unit.text, quote)
+    if not occurrences:
+        return None, "quote_not_found"
+
+    raw_occurrence_index = mention.get("occurrence_index")
+    if raw_occurrence_index is not None:
+        try:
+            occurrence_index = int(raw_occurrence_index)
+        except (TypeError, ValueError):
+            return None, "invalid_occurrence_index"
+        if occurrence_index < 0 or occurrence_index >= len(occurrences):
+            return None, "occurrence_out_of_range"
+    else:
+        occurrence_key = (unit.unit_id, normalize_key(quote))
+        consumed = (used_occurrences or {}).setdefault(occurrence_key, set())
+        occurrence_index = next((index for index in range(len(occurrences)) if index not in consumed), 0)
+
+    if used_occurrences is not None:
+        occurrence_key = (unit.unit_id, normalize_key(quote))
+        used_occurrences.setdefault(occurrence_key, set()).add(occurrence_index)
+
+    local_start, local_end = occurrences[occurrence_index]
+    aligned = (unit.start + local_start, unit.start + local_end)
     start, end = aligned
     start, end, span_text = trim_span_text(text, start, end)
     if not span_text or text[start:end] != span_text:
-        return None
-    return SpanCandidate(start, end, span_text, concept_type, _confidence(mention.get("confidence")))
+        return None, "invalid_aligned_span"
+    return SpanCandidate(
+        start,
+        end,
+        span_text,
+        concept_type,
+        _confidence(mention.get("confidence")),
+        source="llm",
+    ), None
+
+
+def _chunk_units(chunk: TextChunk) -> list[TextUnit]:
+    units: list[TextUnit] = []
+    local_offset = 0
+    for raw_line in chunk.text.splitlines(keepends=True):
+        line_start = local_offset
+        local_offset += len(raw_line)
+        leading = len(raw_line) - len(raw_line.lstrip())
+        trailing = len(raw_line.rstrip())
+        start = line_start + leading
+        end = line_start + trailing
+        if start >= end:
+            continue
+        units.append(
+            TextUnit(
+                unit_id=f"{chunk.chunk_id}u{len(units) + 1}",
+                start=chunk.start + start,
+                end=chunk.start + end,
+                text=chunk.text[start:end],
+            )
+        )
+    if units:
+        return units
+    stripped = chunk.text.strip()
+    if not stripped:
+        return []
+    leading = len(chunk.text) - len(chunk.text.lstrip())
+    start = chunk.start + leading
+    return [TextUnit(f"{chunk.chunk_id}u1", start, start + len(stripped), stripped)]
+
+
+def _quote_occurrences(source: str, quote: str) -> list[tuple[int, int]]:
+    direct = _literal_occurrences(source, quote)
+    if direct:
+        return direct
+
+    insensitive = _literal_occurrences(source.casefold(), quote.casefold())
+    if insensitive:
+        return insensitive
+
+    target = normalize_key(quote)
+    if not target:
+        return []
+    quote_len = len(quote)
+    min_len = max(1, quote_len - 8)
+    max_len = min(len(source), quote_len + 16)
+    matches: list[tuple[int, int]] = []
+    for start in range(0, len(source)):
+        for end in range(min(len(source), start + max_len), start + min_len - 1, -1):
+            if normalize_key(source[start:end]) == target:
+                matches.append((start, end))
+                break
+    return matches
+
+
+def _literal_occurrences(source: str, quote: str) -> list[tuple[int, int]]:
+    if not quote:
+        return []
+    matches: list[tuple[int, int]] = []
+    cursor = 0
+    while cursor <= len(source) - len(quote):
+        start = source.find(quote, cursor)
+        if start < 0:
+            break
+        matches.append((start, start + len(quote)))
+        cursor = start + max(1, len(quote))
+    return matches
 
 
 def _align_normalized_quote(chunk: TextChunk, quote: str) -> tuple[int, int] | None:

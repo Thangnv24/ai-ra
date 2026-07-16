@@ -1,0 +1,204 @@
+{
+  "input_path": "C:\\Users\\thangnv108\\Downloads\\ai-ra-main\\ai-ra-main\\input\\1.txt",
+  "without_final_llm": "C:\\Users\\thangnv108\\Downloads\\ai-ra-main\\ai-ra-main\\output\\compare_final_llm_15072026_185744\\without_final_llm\\1.json",
+  "with_final_llm": "C:\\Users\\thangnv108\\Downloads\\ai-ra-main\\ai-ra-main\\output\\compare_final_llm_15072026_185744\\with_final_llm\\1.json",
+  "counts": {
+    "without_final_llm": 32,
+    "with_final_llm": 31,
+    "added_by_final_llm": 9,
+    "removed_by_final_llm": 10,
+    "changed_same_span": 0
+  },
+  "added_by_final_llm": [
+    {
+      "text": "Khó thở",
+      "type": "TRIỆU_CHỨNG",
+      "assertions": [],
+      "position": [
+        688,
+        695
+      ]
+    },
+    {
+      "text": "cảm giác thắt chặt ngực",
+      "type": "TRIỆU_CHỨNG",
+      "assertions": [],
+      "position": [
+        714,
+        737
+      ]
+    },
+    {
+      "text": "mệt mỏi",
+      "type": "TRIỆU_CHỨNG",
+      "assertions": [],
+      "position": [
+        878,
+        885
+      ]
+    },
+    {
+      "text": "đổ mồ hôi",
+      "type": "TRIỆU_CHỨNG",
+      "assertions": [
+        "isNegated"
+      ],
+      "position": [
+        1480,
+        1489
+      ]
+    },
+    {
+      "text": "cảm giác thắt chặt ngực vùng trước tim",
+      "type": "TRIỆU_CHỨNG",
+      "assertions": [],
+      "position": [
+        2050,
+        2088
+      ]
+    },
+    {
+      "text": "tăng đánh trống ngực",
+      "type": "TRIỆU_CHỨNG",
+      "assertions": [],
+      "position": [
+        2090,
+        2110
+      ]
+    },
+    {
+      "text": "Nhịp xoang chiếm ưu thế",
+      "type": "CHẨN_ĐOÁN",
+      "assertions": [],
+      "position": [
+        2845,
+        2868
+      ],
+      "candidates": []
+    },
+    {
+      "text": "ngoại tâm thu nhĩ",
+      "type": "CHẨN_ĐOÁN",
+      "assertions": [],
+      "position": [
+        2879,
+        2896
+      ],
+      "candidates": [
+        "I49.1"
+      ]
+    },
+    {
+      "text": "ngoại tâm thu thất",
+      "type": "CHẨN_ĐOÁN",
+      "assertions": [],
+      "position": [
+        2900,
+        2918
+      ],
+      "candidates": [
+        "I49.3"
+      ]
+    }
+  ],
+  "removed_by_final_llm": [
+    {
+      "text": "viêm tuyến mồ hôi",
+      "type": "CHẨN_ĐOÁN",
+      "assertions": [],
+      "position": [
+        98,
+        115
+      ],
+      "candidates": [
+        "L73.2",
+        "H04.0",
+        "E06.0",
+        "E06.1",
+        "E06.2"
+      ]
+    },
+    {
+      "text": "Khó thở nhẹ",
+      "type": "TRIỆU_CHỨNG",
+      "assertions": [],
+      "position": [
+        688,
+        699
+      ]
+    },
+    {
+      "text": "khó thở",
+      "type": "TRIỆU_CHỨNG",
+      "assertions": [],
+      "position": [
+        700,
+        707
+      ]
+    },
+    {
+      "text": "cảm giác thắt chặt ngực vùng trước tim",
+      "type": "TRIỆU_CHỨNG",
+      "assertions": [],
+      "position": [
+        714,
+        752
+      ]
+    },
+    {
+      "text": "Tăng đánh trống ngực",
+      "type": "TRIỆU_CHỨNG",
+      "assertions": [],
+      "position": [
+        782,
+        802
+      ]
+    },
+    {
+      "text": "Cảm thấy mệt mỏi nhiều khi gắng sức trong tuần qua",
+      "type": "TRIỆU_CHỨNG",
+      "assertions": [],
+      "position": [
+        869,
+        919
+      ]
+    },
+    {
+      "text": "Cảm thấy mệt mỏi nhiều hơn sau khi luyện tập thể dục so với mọi ngày",
+      "type": "TRIỆU_CHỨNG",
+      "assertions": [],
+      "position": [
+        926,
+        994
+      ]
+    },
+    {
+      "text": "cảm giác đánh trống ngực",
+      "type": "TRIỆU_CHỨNG",
+      "assertions": [],
+      "position": [
+        1075,
+        1099
+      ]
+    },
+    {
+      "text": "cảm giác thắt chặt ngực",
+      "type": "TRIỆU_CHỨNG",
+      "assertions": [],
+      "position": [
+        1217,
+        1240
+      ]
+    },
+    {
+      "text": "Nhịp xoang chiếm ưu thế. Ghi nhận ngoại tâm thu nhĩ và ngoại tâm thu thất xuất hiện thường xuyên",
+      "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+      "assertions": [],
+      "position": [
+        2845,
+        2941
+      ]
+    }
+  ],
+  "changed_same_span": []
+}

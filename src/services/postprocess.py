@@ -38,6 +38,84 @@ _DROP_DIAGNOSIS_KEYS = {
     "khong co gi dang chu y",
 }
 
+_ATOMIC_SYMPTOM_PHRASES = (
+    "cảm giác thắt chặt ngực",
+    "giảm dung nạp gắng sức",
+    "khó thở khi gắng sức",
+    "khó thở về đêm",
+    "khó thở khi nằm",
+    "đánh trống ngực",
+    "khó chịu vùng ngực",
+    "đau bụng vùng hạ sườn phải",
+    "đau vùng hạ sườn phải",
+    "khó khăn khi nhìn gần",
+    "khó khăn về thị lực gần",
+    "ảo giác thị giác",
+    "ảo giác thính giác",
+    "rối loạn thị giác",
+    "lower abdominal pain",
+    "đôi khi đi ngoài ra máu",
+    "đi ngoài ra máu",
+    "phù mắt cá chân",
+    "mất kiểm soát đại tiện",
+    "mất kiểm soát tiểu tiện",
+    "chảy máu nhiều",
+    "đau bụng quặn",
+    "chướng bụng",
+    "buồn nôn",
+    "đổ mồ hôi",
+    "mệt mỏi",
+    "khó nuốt",
+    "khó thở",
+    "khàn tiếng",
+    "ngất xỉu",
+    "đau chân",
+    "đau ngực",
+    "đau lưng",
+    "lú lẫn",
+    "chóng mặt",
+    "tự tử",
+    "ớn lạnh",
+    "táo bón",
+    "tiểu khó",
+    "tiêu chảy",
+    "sốt",
+    "nôn",
+    "đờm",
+    "ho",
+)
+
+_ATOMIC_DIAGNOSIS_PHRASES = (
+    "ngoại tâm thu nhĩ",
+    "ngoại tâm thu thất",
+    "rung nhĩ kèm đáp ứng thất nhanh",
+    "nhồi máu cơ tim vùng dưới",
+    "nhồi máu cơ tim vùng dưới cũ",
+    "viêm tuyến mồ hôi",
+    "xơ gan do rượu",
+    "hội chứng não gan",
+    "bệnh tim mạch do xơ vữa động mạch",
+    "phình động mạch chủ",
+    "tăng huyết áp",
+    "viêm dạ dày",
+    "sỏi đoạn cuối ống mật chủ",
+    "sỏi ống dẫn mật chung đoạn cuối",
+    "giãn đường mật",
+    "tắc nghẽn đường mật",
+    "hẹp động mạch cảnh",
+    "bệnh lý chất trắng",
+    "bệnh đa xơ cứng",
+    "ảo giác do rượu",
+    "loạn thần",
+    "nốt tuyến giáp thùy trái",
+    "nốt tuyến giáp trái",
+    "u cơ trơn tử cung",
+    "u ác trực tràng",
+    "khối u trực tràng",
+    "u tuyến",
+    "tim to",
+)
+
 
 def refine_concepts(
     text: str,
@@ -48,7 +126,7 @@ def refine_concepts(
     """Apply conservative deterministic fixes before schema validation."""
 
     refined: list[Concept] = []
-    for concept in concepts:
+    for concept in _expand_atomic_concepts(text, concepts):
         updated = _refine_single_span(text, concept)
         if updated is None:
             continue
@@ -60,8 +138,50 @@ def refine_concepts(
 
     refined = _drop_diagnoses_inside_test_names(refined)
     refined = _dedupe(refined)
-    refined = _dedupe_repeated_concepts(refined, text)
     return sorted(refined, key=lambda c: (c.position[0], c.position[1], c.type))
+
+
+def _expand_atomic_concepts(text: str, concepts: list[Concept]) -> list[Concept]:
+    expanded: list[Concept] = []
+    for concept in concepts:
+        phrases: tuple[str, ...] = ()
+        if concept.type == TYPE_SYMPTOM:
+            phrases = _ATOMIC_SYMPTOM_PHRASES
+        elif concept.type == TYPE_DIAGNOSIS:
+            phrases = _ATOMIC_DIAGNOSIS_PHRASES
+        if not phrases:
+            expanded.append(concept)
+            continue
+
+        matches = _atomic_phrase_matches(concept.text, phrases)
+        if not matches:
+            expanded.append(concept)
+            continue
+        for local_start, local_end in matches:
+            start = concept.position[0] + local_start
+            end = concept.position[0] + local_end
+            expanded.append(
+                replace(
+                    concept,
+                    text=text[start:end],
+                    position=(start, end),
+                    candidates=() if concept.type == TYPE_DIAGNOSIS else concept.candidates,
+                )
+            )
+    return expanded
+
+
+def _atomic_phrase_matches(segment: str, phrases: tuple[str, ...]) -> list[tuple[int, int]]:
+    proposed: list[tuple[int, int]] = []
+    for phrase in sorted(set(phrases), key=len, reverse=True):
+        pattern = re.compile(rf"(?<!\w){re.escape(phrase)}(?!\w)", re.IGNORECASE)
+        proposed.extend(match.span() for match in pattern.finditer(segment))
+    selected: list[tuple[int, int]] = []
+    for start, end in sorted(proposed, key=lambda item: (-(item[1] - item[0]), item[0], item[1])):
+        if any(start < other_end and other_start < end for other_start, other_end in selected):
+            continue
+        selected.append((start, end))
+    return sorted(selected)
 
 
 def _refine_single_span(text: str, concept: Concept) -> Concept | None:
@@ -178,10 +298,11 @@ def _repair_assertions(
 ) -> Concept:
     if concept.type not in ASSERTION_TYPES:
         return replace(concept, assertions=())
-    assertions = [item for item in concept.assertions if item in ALLOWED_ASSERTIONS]
-    if context_detector is not None and concept.type == TYPE_DRUG:
+    if context_detector is not None:
         start, end = concept.position
-        assertions.extend(context_detector.assertions_for(text, start, end, concept.type))
+        assertions = list(context_detector.assertions_for(text, start, end, concept.type))
+    else:
+        assertions = [item for item in concept.assertions if item in ALLOWED_ASSERTIONS]
     return replace(concept, assertions=_ordered_assertions(assertions))
 
 
@@ -234,30 +355,6 @@ def _dedupe(concepts: list[Concept]) -> list[Concept]:
         if len(concept.candidates) > len(current.candidates):
             best[key] = concept
     return list(best.values())
-
-
-def _dedupe_repeated_concepts(concepts: list[Concept], text: str) -> list[Concept]:
-    best: dict[tuple[str, str], Concept] = {}
-    for concept in concepts:
-        key = (concept.type, normalize_key(concept.text))
-        current = best.get(key)
-        if current is None or _concept_rank(text, concept) > _concept_rank(text, current):
-            best[key] = concept
-    return list(best.values())
-
-
-def _concept_rank(text: str, concept: Concept) -> tuple[int, int, int, int, int]:
-    assertions = set(concept.assertions)
-    start, end = concept.position
-    context = normalize_key(text[max(0, start - 120) : min(len(text), end + 120)])
-    current_context = int(any(marker in context for marker in ("trieu chung hien tai", "ly do nhap vien", "chan doan hinh anh", "ket qua")))
-    return (
-        int("isNegated" not in assertions),
-        int("isFamily" not in assertions),
-        int("isHistorical" not in assertions),
-        current_context,
-        len(concept.text),
-    )
 
 
 def _replace_span(concept: Concept, text: str, start: int, end: int) -> Concept:

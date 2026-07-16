@@ -4,13 +4,16 @@ from __future__ import annotations
 
 import json
 import math
+import re
 from collections import Counter, defaultdict
 from dataclasses import dataclass
 from pathlib import Path
 
 from core.config import CODED_TYPES, TYPE_DIAGNOSIS, TYPE_DRUG
 from core.medication import (
+    medication_ingredient_key,
     medication_match_score,
+    medication_tty_score,
     normalize_prescription_text,
     strip_drug_count,
     strip_drug_modifiers,
@@ -47,6 +50,7 @@ class SlimCandidateIndex:
         self.records = records
         self.aliases = aliases
         self.diagnosis_lexical_index = DiagnosisLexicalIndex.build(records, aliases)
+        self.medication_lexical_index = MedicationLexicalIndex.build(records)
 
     @classmethod
     def empty(cls) -> "SlimCandidateIndex":
@@ -80,8 +84,67 @@ class SlimCandidateIndex:
                         score=hit.score - min(rank, 20) * 0.005,
                     )
                 )
+        elif concept_type == TYPE_DRUG:
+            for hit in self.medication_lexical_index.lookup(text, limit=max(limit * 4, 30)):
+                code = hit.record.code
+                if code in seen:
+                    continue
+                seen.add(code)
+                hits.append(hit)
         hits.sort(key=lambda hit: (-hit.score, hit.record.priority, hit.record.code))
         return hits[:limit]
+
+
+class MedicationLexicalIndex:
+    def __init__(self, postings: dict[str, tuple[CandidateRecord, ...]]) -> None:
+        self.postings = postings
+
+    @classmethod
+    def build(cls, records: dict[tuple[str, str], CandidateRecord]) -> "MedicationLexicalIndex":
+        postings: dict[str, list[CandidateRecord]] = defaultdict(list)
+        for (concept_type, _), record in records.items():
+            if concept_type != TYPE_DRUG or not record.name:
+                continue
+            ingredient = _medication_record_key(record.name)
+            if len(ingredient) < 3:
+                continue
+            postings[ingredient].append(record)
+        return cls({key: tuple(value) for key, value in postings.items()})
+
+    @classmethod
+    def empty(cls) -> "MedicationLexicalIndex":
+        return cls({})
+
+    def lookup(self, text: str, limit: int = 20) -> list[CandidateHit]:
+        ingredient = medication_ingredient_key(text)
+        if not ingredient:
+            return []
+        scored: list[CandidateHit] = []
+        for record in self.postings.get(ingredient, ()):
+            score = (
+                0.70
+                + medication_match_score(text, record.name)
+                + medication_tty_score(text, record.ttys)
+                - min(record.priority, 100) * 0.001
+            )
+            scored.append(CandidateHit(record=record, source="medication_lexical", score=score))
+        scored.sort(key=lambda hit: (-hit.score, hit.record.priority, hit.record.code))
+        return scored[:limit]
+
+
+def _medication_record_key(name: str) -> str:
+    """Fast build-time equivalent of medication_ingredient_key for RxNorm names."""
+
+    key = normalize_key(name)
+    match = re.search(
+        r"\s+(?:\d|oral\b|tablet\b|capsule\b|solution\b|suspension\b|cream\b|"
+        r"ointment\b|injection\b|patch\b|spray\b|powder\b|extended\b|release\b)",
+        key,
+    )
+    if match:
+        key = key[: match.start()]
+    key = re.sub(r"\s*\[[^\]]+\]\s*$", "", key)
+    return " ".join(key.split())
 
 
 @dataclass(frozen=True, slots=True)
@@ -326,6 +389,10 @@ def _sort_codes(
 def _query_variants(text: str, concept_type: str) -> list[tuple[str, str]]:
     key = normalize_key(text)
     variants: list[tuple[str, str]] = []
+    if concept_type == TYPE_DIAGNOSIS:
+        canonical = _canonical_diagnosis_alias(key)
+        if canonical:
+            _add_variant(variants, "diagnosis_canonical", canonical)
     _add_variant(variants, "exact", key)
 
     if concept_type == TYPE_DRUG:
@@ -338,8 +405,8 @@ def _query_variants(text: str, concept_type: str) -> list[tuple[str, str]]:
         _add_variant(variants, "drug_ingredient", strip_drug_modifiers(normalized_drug))
     elif concept_type == TYPE_DIAGNOSIS:
         _add_variant(variants, "diagnosis_core", _strip_diagnosis_prefix(key))
-        _add_variant(variants, "diagnosis_unspecified", _strip_unspecified_suffix(key))
         _add_variant(variants, "diagnosis_spelling", _normalize_diagnosis_spelling(key))
+        _add_variant(variants, "diagnosis_unspecified", _strip_unspecified_suffix(key))
         _add_variant(variants, "diagnosis_chronic_shorthand", _expand_diagnosis_shorthand(key))
         _add_variant(variants, "diagnosis_with_benh_prefix", f"benh {key}")
 
@@ -361,6 +428,7 @@ def _hit_score(
         "drug_no_release_token": 0.04,
         "drug_ingredient": 0.12,
         "diagnosis_core": 0.02,
+        "diagnosis_canonical": -0.03,
         "diagnosis_unspecified": 0.03,
         "diagnosis_spelling": 0.04,
         "diagnosis_chronic_shorthand": 0.045,
@@ -369,6 +437,7 @@ def _hit_score(
     score = 1.0 - source_penalty - min(rank, 20) * 0.01 - min(record.priority, 100) * 0.001
     if concept_type == TYPE_DRUG:
         score += medication_match_score(text, record.name)
+        score += medication_tty_score(text, record.ttys)
     return score
 
 
@@ -525,6 +594,34 @@ def _expand_diagnosis_shorthand(key: str) -> str:
         if token in {"man", "cap"} and next_token != "tinh":
             expanded.append("tinh")
     return " ".join(expanded)
+
+
+def _canonical_diagnosis_alias(key: str) -> str:
+    normalized = _normalize_diagnosis_spelling(_strip_diagnosis_prefix(normalize_key(key)))
+    exact_aliases = {
+        "tang huyet ap": "benh tang huyet ap vo can nguyen phat",
+        "phinh dong mach chu": "phinh dong mach chu vi tri khong xac dinh khong vo",
+        "phinh dong mach chu nho": "phinh dong mach chu vi tri khong xac dinh khong vo",
+        "viem da day": "viem da day khong xac dinh",
+        "soi doan cuoi ong mat chu": "soi mat khong viem duong dan mat hay viem tui mat",
+        "soi ong mat chu": "soi mat khong viem duong dan mat hay viem tui mat",
+        "soi ong dan mat chung doan cuoi": "soi mat khong viem duong dan mat hay viem tui mat",
+        "rung nhi": "rung nhi va hoac cuong nhi khong xac dinh",
+        "rung nhi dap ung that nhanh": "rung nhi va hoac cuong nhi khong xac dinh",
+        "rung nhi kem dap ung that nhanh": "rung nhi va hoac cuong nhi khong xac dinh",
+        "nhoi mau co tim vung duoi cu": "nhoi mau co tim cu",
+        "not tuyen giap": "buou giap don nhan khong doc",
+        "not tuyen giap trai": "buou giap don nhan khong doc",
+        "not tuyen giap thuy trai": "buou giap don nhan khong doc",
+        "u co tron tu cung": "u co tron tu cung khong xac dinh",
+        "u co tron tu cung khong xac dinh": "u co tron tu cung khong xac dinh",
+        "tang lipid mau": "tang lipid mau khong xac dinh",
+        "ao giac do ruou": "roi loan tam than va hoac hanh vi do su dung ruou loan than",
+        "benh trao nguoc da day thuc quan khong co viem thuc quan": (
+            "benh trao nguoc da day thuc quan khong co viem thuc quan"
+        ),
+    }
+    return exact_aliases.get(normalized, "")
 
 
 _DIAGNOSIS_STOP_TOKENS = {

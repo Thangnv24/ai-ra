@@ -57,10 +57,17 @@ FORM_TOKENS = {
     "injection",
     "patch",
     "spray",
+    "powder",
     "drop",
     "drops",
     "extended",
     "release",
+    "delayed",
+    "enteric",
+    "coated",
+    "chewable",
+    "effervescent",
+    "disintegrating",
     "xl",
     "xr",
     "er",
@@ -221,17 +228,82 @@ def medication_match_score(query_text: str, candidate_text: str) -> float:
     candidate_strengths = _strengths(candidate)
     if query_strengths:
         if query_strengths & candidate_strengths:
-            score += 0.10
+            score += 0.25
         elif candidate_strengths:
-            score -= 0.12
+            score -= 0.60
+        else:
+            score -= 0.30
 
     query_forms = _form_tokens(query)
     candidate_forms = _form_tokens(candidate)
     if query_forms and query_forms & candidate_forms:
         score += 0.03
-    if "oral" in query.split() and ("oral" in candidate.split() or "tablet" in candidate_forms or "capsule" in candidate_forms):
-        score += 0.02
+    release_tokens = {"xl", "xr", "er", "sr", "cr", "extended", "release", "delayed", "enteric", "coated"}
+    query_release = query_forms & release_tokens
+    candidate_release = candidate_forms & release_tokens
+    if candidate_release and not query_release:
+        score -= 0.18
+    elif query_release and not candidate_release:
+        score -= 0.20
+    specialized_forms = {"chewable", "effervescent", "disintegrating"}
+    if candidate_forms & specialized_forms and not query_forms & specialized_forms:
+        score -= 0.12
+    query_tokens = set(query.split())
+    if "/" in candidate and "/" not in query:
+        score -= 0.50
+    if query_tokens & {"oral", "po"} and (
+        "oral" in candidate.split() or "tablet" in candidate_forms or "capsule" in candidate_forms
+    ):
+        score += 0.08
+    if query_strengths and not query_forms:
+        if "tablet" in candidate_forms:
+            score += 0.10
+        elif "capsule" in candidate_forms:
+            score += 0.08
+        elif candidate_forms & {"powder", "solution", "suspension", "injection"}:
+            score -= 0.05
+    brand_match = re.search(r"\[([^\]]+)\]", candidate_text)
+    if brand_match:
+        brand_key = normalize_key(brand_match.group(1))
+        if brand_key and brand_key not in query:
+            score -= 0.05
     return score
+
+
+def medication_ingredient_key(text: str) -> str:
+    """Return the ingredient/brand prefix used for local product retrieval."""
+
+    key = strip_drug_modifiers(text)
+    key = re.sub(r"\s*\[[^\]]+\]\s*$", "", key)
+    return " ".join(key.split())
+
+
+def medication_has_strength(text: str) -> bool:
+    return bool(_strengths(text))
+
+
+def medication_tty_score(query_text: str, ttys: tuple[str, ...]) -> float:
+    tty_set = {tty.upper() for tty in ttys}
+    has_strength = medication_has_strength(query_text)
+    if has_strength:
+        if "SCD" in tty_set:
+            return 0.27
+        if "PSN" in tty_set:
+            return 0.26
+        if "SBD" in tty_set:
+            return 0.21
+        if "SY" in tty_set:
+            return 0.18
+        if "SCDC" in tty_set:
+            return 0.05
+        if tty_set & {"IN", "PIN", "MIN", "BN"}:
+            return -0.35
+    else:
+        if tty_set & {"IN", "PIN", "MIN", "BN"}:
+            return 0.15
+        if tty_set & {"SCD", "SBD", "SCDC"}:
+            return -0.08
+    return 0.0
 
 
 def _first_medication_stop(text: str) -> int:

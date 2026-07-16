@@ -4,18 +4,15 @@ from __future__ import annotations
 
 import argparse
 import json
+import logging
 import statistics
 import subprocess
 import sys
 import time
-from dataclasses import dataclass, replace
+from dataclasses import dataclass
 from pathlib import Path
 
 from core.config import (
-    ALLOWED_ASSERTIONS,
-    ALLOWED_TYPES,
-    ASSERTION_TYPES,
-    CODED_TYPES,
     TYPE_DIAGNOSIS,
     TYPE_DRUG,
     TYPE_SYMPTOM,
@@ -28,14 +25,16 @@ from core.io import discover_input_files, output_path_for, read_text, write_outp
 from core.schema import Concept, validate_output
 from extraction.context import ContextDetector
 from extraction.llm_entities import LLMEntityExtractor
-from extraction.ner import MedicalNER, SpanCandidate
+from extraction.ner import MedicalNER, SpanCandidate, resolve_span_types
 from integrations.openai_client import ApiLLMClient
-from integrations.prompts import SYSTEM_PROMPT, build_decision_prompt
 from knowledge.candidates import load_slim_candidate_index
 from knowledge.ontology import OntologyIndex, load_ontology_index
 from knowledge.reasoning import infer_relations
 from knowledge.retrieval import CandidateRetriever
 from services.postprocess import refine_concepts
+
+
+logger = logging.getLogger("ai_race.pipeline")
 
 
 @dataclass(frozen=True)
@@ -76,6 +75,24 @@ class RunSummary:
         }
 
 
+@dataclass(frozen=True, slots=True)
+class MergeSummary:
+    inputs: int
+    selected: int
+    invalid: int
+    exact_duplicates: int
+    overlap_conflicts: int
+
+    def to_dict(self) -> dict[str, int]:
+        return {
+            "inputs": self.inputs,
+            "selected": self.selected,
+            "invalid": self.invalid,
+            "exact_duplicates": self.exact_duplicates,
+            "overlap_conflicts": self.overlap_conflicts,
+        }
+
+
 class MedicalKGPipeline:
     def __init__(self, index: OntologyIndex | None = None, root: Path | None = None):
         self.root = root
@@ -106,17 +123,74 @@ class MedicalKGPipeline:
         return concepts
 
     def process_text_with_meta(self, text: str, mode: str | None = None) -> tuple[list[Concept], dict[str, object]]:
+        pipeline_start = time.perf_counter()
         if mode is not None and mode != "llm_full_doc":
             raise ValueError("Only llm_full_doc mode is supported; local fallback modes were removed")
         requested_mode = "llm_full_doc"
         if not self.settings.llm_enabled:
             raise RuntimeError("LLM is required but disabled")
 
-        spans = self.ner.extract(text)
+        stages: dict[str, dict[str, object]] = {}
+
+        stage_start = time.perf_counter()
+        rule_spans = self.ner.extract(text)
+        stages["rule_proposal"] = {
+            "spans": len(rule_spans),
+            "seconds": round(time.perf_counter() - stage_start, 6),
+        }
+        logger.info("pipeline_stage stage=rule_proposal spans=%s seconds=%.6f", len(rule_spans), time.perf_counter() - stage_start)
+
+        stage_start = time.perf_counter()
         llm_spans, summary = self.llm_entity_extractor.extract(text)
         llm_entity_meta = summary.to_dict()
-        spans = _merge_span_candidates([*spans, *llm_spans])
+        stages["llm_entity_proposal"] = {
+            "spans": len(llm_spans),
+            "summary": llm_entity_meta,
+            "seconds": round(time.perf_counter() - stage_start, 6),
+        }
+        logger.info(
+            "pipeline_stage stage=llm_entity_proposal chunks=%s mentions=%s aligned=%s rejected=%s deduplicated=%s seconds=%.6f",
+            summary.chunks,
+            summary.mentions,
+            summary.aligned,
+            llm_entity_meta["rejected"],
+            summary.deduplicated,
+            time.perf_counter() - stage_start,
+        )
 
+        stage_start = time.perf_counter()
+        spans, merge_summary = _merge_span_candidates_with_summary([*rule_spans, *llm_spans])
+        stages["merge"] = {
+            **merge_summary.to_dict(),
+            "seconds": round(time.perf_counter() - stage_start, 6),
+        }
+        logger.info(
+            "pipeline_stage stage=merge inputs=%s selected=%s invalid=%s exact_duplicates=%s overlap_conflicts=%s seconds=%.6f",
+            merge_summary.inputs,
+            merge_summary.selected,
+            merge_summary.invalid,
+            merge_summary.exact_duplicates,
+            merge_summary.overlap_conflicts,
+            time.perf_counter() - stage_start,
+        )
+
+        stage_start = time.perf_counter()
+        original_types = [span.type for span in spans]
+        spans = resolve_span_types(text, spans)
+        type_changes = sum(before != span.type for before, span in zip(original_types, spans))
+        stages["type_resolution"] = {
+            "spans": len(spans),
+            "changed": type_changes,
+            "seconds": round(time.perf_counter() - stage_start, 6),
+        }
+        logger.info(
+            "pipeline_stage stage=type_resolution spans=%s changed=%s seconds=%.6f",
+            len(spans),
+            type_changes,
+            time.perf_counter() - stage_start,
+        )
+
+        stage_start = time.perf_counter()
         concepts: list[Concept] = []
         for span in spans:
             assertions = self.context.assertions_for(text, span.start, span.end, span.type)
@@ -131,136 +205,63 @@ class MedicalKGPipeline:
                 )
             )
         concepts = sorted(concepts, key=lambda c: (c.position[0], c.position[1], c.type))
+        stages["concept_build"] = {
+            "concepts": len(concepts),
+            "seconds": round(time.perf_counter() - stage_start, 6),
+        }
+        logger.info("pipeline_stage stage=concept_build concepts=%s seconds=%.6f", len(concepts), time.perf_counter() - stage_start)
         meta: dict[str, object] = {
             "mode": requested_mode,
             "mode_used": "llm_full_doc",
             "llm_required": True,
-            "llm_used": False,
+            "llm_used": True,
+            "final_llm_used": False,
             "llm_error": None,
             "llm_entity": llm_entity_meta,
+            "stages": stages,
         }
-        concepts, meta = self._apply_llm_decisions(text, concepts, meta)
+
+        stage_start = time.perf_counter()
         before_postprocess = len(concepts)
         concepts = refine_concepts(text, concepts, retriever=self.retriever, context_detector=self.context)
         meta["postprocess"] = {
             "input_concepts": before_postprocess,
             "output_concepts": len(concepts),
         }
+        stages["postprocess"] = {
+            "input_concepts": before_postprocess,
+            "output_concepts": len(concepts),
+            "dropped": before_postprocess - len(concepts),
+            "seconds": round(time.perf_counter() - stage_start, 6),
+        }
+        logger.info(
+            "pipeline_stage stage=postprocess input_concepts=%s output_concepts=%s dropped=%s seconds=%.6f",
+            before_postprocess,
+            len(concepts),
+            before_postprocess - len(concepts),
+            time.perf_counter() - stage_start,
+        )
         # Keep relation inference available without changing the public schema.
         infer_relations(concepts)
+        stage_start = time.perf_counter()
         errors = validate_output([concept.to_dict() for concept in concepts], source_text=text)
         if errors:
             raise ValueError("pipeline generated invalid output: " + "; ".join(errors[:5]))
+        stages["validation"] = {
+            "errors": 0,
+            "seconds": round(time.perf_counter() - stage_start, 6),
+        }
+        meta["total_seconds"] = round(time.perf_counter() - pipeline_start, 6)
+        logger.info(
+            "pipeline_complete chars=%s concepts=%s seconds=%.6f",
+            len(text),
+            len(concepts),
+            time.perf_counter() - pipeline_start,
+        )
         return concepts, meta
 
     def process_file(self, input_path: Path) -> list[Concept]:
         return self.process_text(read_text(input_path))
-
-    def _apply_llm_decisions(
-        self,
-        text: str,
-        concepts: list[Concept],
-        meta: dict[str, object],
-    ) -> tuple[list[Concept], dict[str, object]]:
-        if not self.settings.llm_enabled:
-            raise RuntimeError("LLM decision pass is required but disabled")
-
-        mention_payload: list[dict[str, object]] = []
-        decision_concepts: dict[str, Concept] = {}
-        passthrough: list[Concept] = []
-        passthrough_by_type: dict[str, int] = {}
-        retrieved_by_id: dict[str, set[str]] = {}
-        for idx, concept in enumerate(concepts):
-            candidate_rows = (
-                _compact_candidate_rows(self.retriever.candidate_rows_for(concept.text, concept.type, limit=10))
-                if concept.type == TYPE_DIAGNOSIS
-                else []
-            )
-            if not _needs_llm_decision(concept, candidate_rows):
-                passthrough.append(concept)
-                passthrough_by_type[concept.type] = passthrough_by_type.get(concept.type, 0) + 1
-                continue
-
-            mention_id = f"m{idx + 1}"
-            retrieved_by_id[mention_id] = {row["code"] for row in candidate_rows}
-            decision_concepts[mention_id] = concept
-            start, end = concept.position
-            mention_payload.append(
-                {
-                    "mention_id": mention_id,
-                    "text": concept.text,
-                    "position": [start, end],
-                    "proposed_type": concept.type,
-                    "local_context": text[max(0, start - 120) : min(len(text), end + 120)],
-                    "rule_assertions": list(concept.assertions),
-                    "retrieved_candidates": candidate_rows,
-                }
-            )
-
-        if not mention_payload:
-            meta["mode_used"] = "llm_full_doc"
-            meta["llm_used"] = True
-            meta["llm_decisions"] = 0
-            meta["llm_decision_scope"] = "ambiguous_diagnosis_and_labs"
-            meta["llm_decision_passthrough"] = len(passthrough)
-            meta["llm_decision_passthrough_by_type"] = passthrough_by_type
-            return sorted(passthrough, key=lambda c: (c.position[0], c.position[1], c.type)), meta
-
-        result = self.llm.chat_json(SYSTEM_PROMPT, build_decision_prompt("", mention_payload))
-        if not result.ok or not isinstance(result.data, dict):
-            meta["llm_error"] = result.error or "LLM returned no data"
-            raise RuntimeError(f"LLM decision pass failed: {meta['llm_error']}")
-
-        decisions = result.data.get("decisions")
-        if not isinstance(decisions, list):
-            meta["llm_error"] = "LLM JSON has no decisions list"
-            raise RuntimeError("LLM decision pass failed: JSON has no decisions list")
-
-        decision_by_id = {
-            str(decision.get("mention_id")): decision
-            for decision in decisions
-            if isinstance(decision, dict) and decision.get("mention_id") is not None
-        }
-        missing = [mention_id for mention_id in decision_concepts if mention_id not in decision_by_id]
-        if missing:
-            preview = ", ".join(missing[:10])
-            raise RuntimeError(f"LLM decision pass failed: missing decisions for {len(missing)} mention(s): {preview}")
-
-        updated: list[Concept] = list(passthrough)
-        for mention_id, concept in decision_concepts.items():
-            decision = decision_by_id[mention_id]
-            if decision.get("keep") is False:
-                continue
-            final_type = decision.get("final_type")
-            if final_type not in ALLOWED_TYPES:
-                final_type = concept.type
-            raw_assertions = decision.get("assertions")
-            assertions = concept.assertions
-            if final_type in ASSERTION_TYPES and isinstance(raw_assertions, list):
-                assertions = tuple(a for a in raw_assertions if a in ALLOWED_ASSERTIONS)
-            elif final_type not in ASSERTION_TYPES:
-                assertions = ()
-            raw_candidates = decision.get("selected_candidates")
-            candidates = concept.candidates
-            if final_type in CODED_TYPES and isinstance(raw_candidates, list):
-                allowed = retrieved_by_id.get(mention_id, set())
-                selected = tuple(str(c) for c in raw_candidates if str(c) in allowed)
-                candidates = selected
-                if not candidates:
-                    candidates = self.retriever.candidates_for(concept.text, final_type)
-            elif final_type in CODED_TYPES and final_type != concept.type:
-                candidates = self.retriever.candidates_for(concept.text, final_type)
-            elif final_type not in CODED_TYPES:
-                candidates = ()
-            updated.append(replace(concept, type=final_type, assertions=assertions, candidates=candidates))
-
-        meta["mode_used"] = "llm_full_doc"
-        meta["llm_used"] = True
-        meta["llm_decisions"] = len(decisions)
-        meta["llm_decision_scope"] = "ambiguous_diagnosis_and_labs"
-        meta["llm_decision_passthrough"] = len(passthrough)
-        meta["llm_decision_passthrough_by_type"] = passthrough_by_type
-        return sorted(updated, key=lambda c: (c.position[0], c.position[1], c.type)), meta
 
     def run_directory(self, input_dir: Path, output_dir: Path, limit: int | None = None) -> RunSummary:
         files = discover_input_files(input_dir)
@@ -313,6 +314,11 @@ def _percentile(values: list[float], q: float) -> float:
 
 
 def _merge_span_candidates(spans: list[SpanCandidate]) -> list[SpanCandidate]:
+    selected, _ = _merge_span_candidates_with_summary(spans)
+    return selected
+
+
+def _merge_span_candidates_with_summary(spans: list[SpanCandidate]) -> tuple[list[SpanCandidate], MergeSummary]:
     priority = {
         TYPE_DRUG: 5,
         TYPE_DIAGNOSIS: 4,
@@ -323,41 +329,41 @@ def _merge_span_candidates(spans: list[SpanCandidate]) -> list[SpanCandidate]:
     ordered = sorted(
         spans,
         key=lambda span: (
+            -int(span.source == "rule"),
             -span.score,
-            -(span.end - span.start),
+            (span.end - span.start) if span.source == "llm" else -(span.end - span.start),
             -priority.get(span.type, 0),
             span.start,
             span.end,
         ),
     )
     selected: list[SpanCandidate] = []
+    invalid = 0
+    exact_duplicates = 0
+    overlap_conflicts = 0
     for span in ordered:
         if span.start >= span.end:
+            invalid += 1
             continue
-        if any(span.start < item.end and item.start < span.end for item in selected):
+        conflicts = [item for item in selected if span.start < item.end and item.start < span.end]
+        if conflicts:
+            if any(
+                span.start == item.start and span.end == item.end and span.type == item.type
+                for item in conflicts
+            ):
+                exact_duplicates += 1
+            else:
+                overlap_conflicts += 1
             continue
         selected.append(span)
-    return sorted(selected, key=lambda span: (span.start, span.end, span.type))
-
-
-def _compact_candidate_rows(rows: list[dict[str, object]]) -> list[dict[str, object]]:
-    return [
-        {
-            "code": str(row.get("code") or ""),
-            "name": str(row.get("name") or ""),
-            "system": str(row.get("system") or ""),
-        }
-        for row in rows
-        if row.get("code")
-    ]
-
-
-def _needs_llm_decision(concept: Concept, candidate_rows: list[dict[str, object]]) -> bool:
-    if concept.type in {TYPE_TEST_NAME, TYPE_TEST_RESULT}:
-        return True
-    if concept.type == TYPE_DIAGNOSIS:
-        return len(candidate_rows) > 1
-    return False
+    ordered_selected = sorted(selected, key=lambda span: (span.start, span.end, span.type))
+    return ordered_selected, MergeSummary(
+        inputs=len(spans),
+        selected=len(ordered_selected),
+        invalid=invalid,
+        exact_duplicates=exact_duplicates,
+        overlap_conflicts=overlap_conflicts,
+    )
 
 
 def main(argv: list[str] | None = None) -> int:

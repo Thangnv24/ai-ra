@@ -7,18 +7,23 @@ from datetime import datetime
 import json
 import os
 import sys
+import time
 import urllib.error
 import urllib.request
 from pathlib import Path
-from types import MethodType
+from threading import Lock
 from typing import Any
+
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from core.io import read_text
 from core.schema import validate_output
-from services.pipeline import MedicalKGPipeline
+
+
+RUN_START = time.perf_counter()
+LOG_LOCK = Lock()
 
 
 @dataclass(frozen=True)
@@ -29,25 +34,16 @@ class FileResult:
     llm_used: bool
 
 
-@dataclass(frozen=True)
-class CompareFileResult:
-    input_path: Path
-    without_final_output_path: Path
-    with_final_output_path: Path
-    diff_path: Path
-    without_final_concepts: int
-    with_final_concepts: int
-    added_by_final: int
-    removed_by_final: int
-    changed_same_span: int
-
-
 def default_output_dir() -> Path:
     return ROOT / "output" / f"out_put_{datetime.now().strftime('%d%m%Y')}"
 
 
-def default_compare_output_dir() -> Path:
-    return ROOT / "output" / f"compare_final_llm_{datetime.now().strftime('%d%m%Y_%H%M%S')}"
+def log_step(message: str, step_start: float | None = None) -> None:
+    now = time.perf_counter()
+    elapsed = now - RUN_START
+    duration = f" duration={now - step_start:.2f}s" if step_start is not None else ""
+    with LOG_LOCK:
+        print(f"[{datetime.now().strftime('%H:%M:%S')} +{elapsed:.2f}s] {message}{duration}", flush=True)
 
 
 def discover_inputs(target: Path, limit: int | None) -> list[Path]:
@@ -88,31 +84,53 @@ def run_file(
     timeout: int,
     pretty: bool,
 ) -> FileResult:
+    file_start = time.perf_counter()
+    log_step(f"api_file_start file={input_path.name} final_llm=removed")
+
+    read_start = time.perf_counter()
     text = read_text(input_path)
+    log_step(f"api_read_done file={input_path.name} chars={len(text)}", read_start)
+
+    api_start = time.perf_counter()
+    log_step(f"api_request_start file={input_path.name} url={server_url.rstrip('/')}/predict timeout={timeout}s")
     response = post_json(
         f"{server_url.rstrip('/')}/predict",
         {"text": text},
         timeout,
     )
+    log_step(f"api_response_done file={input_path.name}", api_start)
+
     concepts = response.get("concepts")
     if not isinstance(concepts, list):
         raise ValueError(f"{input_path}: API khong tra ve concepts dang list")
 
+    validate_start = time.perf_counter()
     errors = validate_output(concepts, source_text=text)
     if errors:
         raise ValueError(f"{input_path}: {'; '.join(errors[:10])}")
+    log_step(f"api_validate_done file={input_path.name} concepts={len(concepts)}", validate_start)
 
     output_path = output_dir / f"{input_path.stem}.json"
+    write_start = time.perf_counter()
     output_path.write_text(
         json.dumps(concepts, ensure_ascii=False, indent=2 if pretty else None),
         encoding="utf-8",
     )
+    log_step(f"api_write_done file={input_path.name} output={output_path}", write_start)
+
     meta = response.get("meta") if isinstance(response.get("meta"), dict) else {}
+    llm_used = bool(meta.get("llm_used"))
+    log_step(
+        f"api_file_done file={input_path.name} concepts={len(concepts)} "
+        f"entity_llm_used={llm_used} final_llm_used={bool(meta.get('final_llm_used'))} "
+        f"output={output_path}",
+        file_start,
+    )
     return FileResult(
         input_path=input_path,
         output_path=output_path,
         concepts=len(concepts),
-        llm_used=bool(meta.get("llm_used")),
+        llm_used=llm_used,
     )
 
 
@@ -125,12 +143,18 @@ def run_target(
     limit: int | None,
     pretty: bool,
 ) -> list[FileResult]:
+    run_start = time.perf_counter()
     files = discover_inputs(target, limit)
     if not files:
         raise ValueError(f"Khong co file .txt trong {target}")
 
     output_dir.mkdir(parents=True, exist_ok=True)
     max_workers = max(1, min(workers, len(files)))
+    log_step(
+        f"api_run_start target={target} files={len(files)} workers={max_workers} "
+        f"entity_llm=enabled final_llm=removed output_dir={output_dir}"
+    )
+
     results: list[FileResult] = []
     failures: list[str] = []
     with ThreadPoolExecutor(max_workers=max_workers) as executor:
@@ -150,155 +174,17 @@ def run_target(
             try:
                 results.append(future.result())
             except Exception as exc:  # noqa: BLE001
+                log_step(f"api_file_failed file={path.name} error={exc}")
                 failures.append(f"{path}: {exc}")
 
     if failures:
         raise RuntimeError("\n".join(failures))
-    return sorted(results, key=lambda item: item.input_path.name)
-
-
-def run_compare_final_llm(
-    target: Path,
-    output_dir: Path,
-    limit: int | None,
-    pretty: bool,
-) -> list[CompareFileResult]:
-    files = discover_inputs(target, limit)
-    if not files:
-        raise ValueError(f"Khong co file .txt trong {target}")
-
-    without_dir = output_dir / "without_final_llm"
-    with_dir = output_dir / "with_final_llm"
-    diff_dir = output_dir / "diff"
-    without_dir.mkdir(parents=True, exist_ok=True)
-    with_dir.mkdir(parents=True, exist_ok=True)
-    diff_dir.mkdir(parents=True, exist_ok=True)
-
-    pipeline = MedicalKGPipeline(root=ROOT)
-    results: list[CompareFileResult] = []
-    for input_path in files:
-        text = read_text(input_path)
-        without_concepts = _process_text_without_final_llm(pipeline, text)
-        with_concepts = _process_text_with_final_llm(pipeline, text)
-
-        without_output_path = without_dir / f"{input_path.stem}.json"
-        with_output_path = with_dir / f"{input_path.stem}.json"
-        diff_path = diff_dir / f"{input_path.stem}.json"
-        _write_concepts(without_output_path, without_concepts, pretty)
-        _write_concepts(with_output_path, with_concepts, pretty)
-        diff = _compare_concepts(without_concepts, with_concepts)
-        diff_path.write_text(
-            json.dumps(
-                {
-                    "input_path": str(input_path),
-                    "without_final_llm": str(without_output_path),
-                    "with_final_llm": str(with_output_path),
-                    **diff,
-                },
-                ensure_ascii=False,
-                indent=2 if pretty else None,
-            ),
-            encoding="utf-8",
-        )
-        results.append(
-            CompareFileResult(
-                input_path=input_path,
-                without_final_output_path=without_output_path,
-                with_final_output_path=with_output_path,
-                diff_path=diff_path,
-                without_final_concepts=len(without_concepts),
-                with_final_concepts=len(with_concepts),
-                added_by_final=len(diff["added_by_final_llm"]),
-                removed_by_final=len(diff["removed_by_final_llm"]),
-                changed_same_span=len(diff["changed_same_span"]),
-            )
-        )
-    return results
-
-
-def _process_text_with_final_llm(pipeline: MedicalKGPipeline, text: str) -> list[dict[str, Any]]:
-    concepts, _ = pipeline.process_text_with_meta(text)
-    output = [concept.to_dict() for concept in concepts]
-    _validate_direct_output(output, text)
-    return output
-
-
-def _process_text_without_final_llm(pipeline: MedicalKGPipeline, text: str) -> list[dict[str, Any]]:
-    original_apply = pipeline._apply_llm_decisions
-    pipeline._apply_llm_decisions = MethodType(_skip_final_llm_decisions, pipeline)
-    try:
-        concepts, _ = pipeline.process_text_with_meta(text)
-    finally:
-        pipeline._apply_llm_decisions = original_apply
-    output = [concept.to_dict() for concept in concepts]
-    _validate_direct_output(output, text)
-    return output
-
-
-def _skip_final_llm_decisions(
-    self: MedicalKGPipeline,
-    text: str,
-    concepts: list[Any],
-    meta: dict[str, Any],
-) -> tuple[list[Any], dict[str, Any]]:
-    # Compare mode only: skip the final LLM decision/rerank pass while keeping
-    # the required first LLM entity extraction unchanged.
-    meta["mode_used"] = "llm_full_doc"
-    meta["llm_used"] = True
-    meta["llm_decisions"] = 0
-    meta["llm_decision_scope"] = "disabled_by_tests_compare_final_llm"
-    meta["llm_decision_passthrough"] = len(concepts)
-    return sorted(concepts, key=lambda concept: (concept.position[0], concept.position[1], concept.type)), meta
-
-
-def _validate_direct_output(concepts: list[dict[str, Any]], text: str) -> None:
-    errors = validate_output(concepts, source_text=text)
-    if errors:
-        raise ValueError("; ".join(errors[:10]))
-
-
-def _write_concepts(output_path: Path, concepts: list[dict[str, Any]], pretty: bool) -> None:
-    output_path.write_text(
-        json.dumps(concepts, ensure_ascii=False, indent=2 if pretty else None),
-        encoding="utf-8",
+    log_step(
+        f"api_run_done files={len(results)} concepts={sum(item.concepts for item in results)} "
+        f"output_dir={output_dir}",
+        run_start,
     )
-
-
-def _compare_concepts(without_final: list[dict[str, Any]], with_final: list[dict[str, Any]]) -> dict[str, Any]:
-    without_by_key = {_concept_key(item): item for item in without_final}
-    with_by_key = {_concept_key(item): item for item in with_final}
-    without_span_map = {_span_text_key(item): item for item in without_final}
-    with_span_map = {_span_text_key(item): item for item in with_final}
-    added_keys = sorted(set(with_by_key) - set(without_by_key))
-    removed_keys = sorted(set(without_by_key) - set(with_by_key))
-    changed: list[dict[str, Any]] = []
-    for key in sorted(set(without_span_map) & set(with_span_map)):
-        before = without_span_map[key]
-        after = with_span_map[key]
-        if before != after:
-            changed.append({"without_final_llm": before, "with_final_llm": after})
-    return {
-        "counts": {
-            "without_final_llm": len(without_final),
-            "with_final_llm": len(with_final),
-            "added_by_final_llm": len(added_keys),
-            "removed_by_final_llm": len(removed_keys),
-            "changed_same_span": len(changed),
-        },
-        "added_by_final_llm": [with_by_key[key] for key in added_keys],
-        "removed_by_final_llm": [without_by_key[key] for key in removed_keys],
-        "changed_same_span": changed,
-    }
-
-
-def _concept_key(item: dict[str, Any]) -> tuple[Any, ...]:
-    position = item.get("position") if isinstance(item.get("position"), list) else []
-    return (tuple(position), item.get("text"), item.get("type"), tuple(item.get("candidates") or ()))
-
-
-def _span_text_key(item: dict[str, Any]) -> tuple[Any, ...]:
-    position = item.get("position") if isinstance(item.get("position"), list) else []
-    return (tuple(position), item.get("text"))
+    return sorted(results, key=lambda item: item.input_path.name)
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -319,66 +205,31 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--timeout", type=int, default=600)
     parser.add_argument("--limit", type=int, default=None)
     parser.add_argument("--pretty", action="store_true")
+
     # CAC LENH THUONG DUNG:
     #
-    # 1. Chay binh thuong qua API server, co LLM theo pipeline hien tai.
-    #    Nghia la van co LLM trich xuat entity; LLM cuoi chi chay neu pipeline thay can.
-    #    Can khoi dong server truoc bang: python main.py
-    #    Vi du 1 file:
-    #      python tests/test.py input/1.txt --pretty
-    #    Vi du ca thu muc input:
-    #      python tests/test.py input --pretty
+    # Pipeline chi con mot luong: LLM trich xuat entity lan dau, sau do map
+    # deterministic; khong con LLM decision/rerank lan hai.
+    # Khoi dong API server truoc bang:
+    #   python main.py
     #
-    # 2. Chay so sanh truc tiep "khong LLM cuoi" va "co LLM cuoi".
-    #    Lenh nay khong gui mode vao /predict, ma chay pipeline truc tiep trong test runner.
-    #    - Ket qua khong LLM cuoi nam trong: <output-dir>/without_final_llm/
-    #    - Ket qua co LLM cuoi nam trong:    <output-dir>/with_final_llm/
-    #    - Diff nam trong:                  <output-dir>/diff/
-    #    Luu y: ca hai nhanh van giu LLM trich xuat entity dau tien.
-    #    Vi du:
-    #      python tests/test.py input/1.txt --compare-final-llm --pretty
+    # Chay toan bo input voi cau hinh mac dinh:
+    #   python tests/test.py
     #
-    # 3. Chay qua API server voi so worker tuy y.
-    #    --workers chi ap dung cho mode chay qua API server, khong ap dung cho --compare-final-llm.
-    #    Vi du chay 1 worker de giam tai LiteLLM proxy:
-    #      python tests/test.py input --workers 1 --timeout 600
-    #    Vi du chay 8 worker khi endpoint du khoe:
-    #      python tests/test.py input --workers 8 --timeout 600
-    parser.add_argument(
-        "--compare-final-llm",
-        action="store_true",
-        help="Chay moi file 2 lan de so sanh khong LLM cuoi va co LLM cuoi.",
-    )
+    # Chay mot file:
+    #   python tests/test.py input/1.txt --pretty
+    #
+    # Chay voi so worker tuy chon (nen dung 1 khi proxy cham):
+    #   python tests/test.py input --workers 1 --timeout 600
+    #   python tests/test.py input --workers 8 --timeout 600
     args = parser.parse_args(argv)
 
-    output_dir = (
-        args.output_dir
-        or (default_compare_output_dir() if args.compare_final_llm else default_output_dir())
-    ).resolve()
+    output_dir = args.output_dir.resolve() if args.output_dir else default_output_dir().resolve()
+    log_step(
+        f"runner_start mode=entity_llm_only target={args.target.resolve()} "
+        f"output_dir={output_dir}"
+    )
     try:
-        if args.compare_final_llm:
-            compare_results = run_compare_final_llm(
-                args.target.resolve(),
-                output_dir,
-                args.limit,
-                args.pretty,
-            )
-            summary = {
-                "mode": "compare_final_llm",
-                "files": len(compare_results),
-                "without_final_llm_concepts": sum(item.without_final_concepts for item in compare_results),
-                "with_final_llm_concepts": sum(item.with_final_concepts for item in compare_results),
-                "added_by_final_llm": sum(item.added_by_final for item in compare_results),
-                "removed_by_final_llm": sum(item.removed_by_final for item in compare_results),
-                "changed_same_span": sum(item.changed_same_span for item in compare_results),
-                "output_dir": str(output_dir),
-                "without_final_llm_dir": str(output_dir / "without_final_llm"),
-                "with_final_llm_dir": str(output_dir / "with_final_llm"),
-                "diff_dir": str(output_dir / "diff"),
-                "validation_errors": 0,
-            }
-            print(json.dumps(summary, ensure_ascii=False, indent=2))
-            return 0
         results = run_target(
             args.target.resolve(),
             output_dir,
@@ -397,13 +248,16 @@ def main(argv: list[str] | None = None) -> int:
         return 1
 
     summary = {
+        "mode": "entity_llm_only",
         "files": len(results),
         "concepts": sum(item.concepts for item in results),
-        "llm_used_files": sum(item.llm_used for item in results),
+        "entity_llm_used_files": sum(item.llm_used for item in results),
+        "final_llm": False,
         "workers": max(1, min(args.workers, len(results))),
         "output_dir": str(output_dir),
         "validation_errors": 0,
     }
+    log_step(f"api_summary concepts={summary['concepts']} output_dir={output_dir}")
     print(json.dumps(summary, ensure_ascii=False, indent=2))
     return 0
 
