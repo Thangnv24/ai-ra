@@ -60,6 +60,7 @@ FORM_TOKENS = {
     "powder",
     "drop",
     "drops",
+    "drip",
     "extended",
     "release",
     "delayed",
@@ -94,9 +95,13 @@ _ABBREVIATION_REPLACEMENTS = (
     (re.compile(r"\bq\.?\s*d\.?\b"), "qd"),
 )
 _MEDICATION_SPELLING_REPLACEMENTS = (
+    (re.compile(r"\basa\b"), "aspirin"),
+    (re.compile(r"\bciprofloxaxin\b"), "ciprofloxacin"),
+    (re.compile(r"\baldactol\b"), "spironolactone"),
     (re.compile(r"\bnifedipin\b"), "nifedipine"),
     (re.compile(r"\bspironolacton\b"), "spironolactone"),
     (re.compile(r"\bomeprazol\b"), "omeprazole"),
+    (re.compile(r"\brisperidon\b"), "risperidone"),
     # The Vietnamese market spelling is Forxiga; RxNorm stores Farxiga.
     (re.compile(r"\bforxiga\b"), "farxiga"),
 )
@@ -184,16 +189,18 @@ def normalize_prescription_text(text: str) -> str:
 def medication_lookup_keys(text: str) -> tuple[str, ...]:
     """Return ingredient and brand keys without losing parenthetical drug names."""
 
-    segments = [text]
+    segments = [text, _strip_leading_dose_route(text)]
     leading = re.split(r"[\(\[]", text, maxsplit=1)[0]
     if leading != text:
         segments.append(leading)
+        segments.append(_strip_leading_dose_route(leading))
     segments.extend(re.findall(r"[\(\[]([^\)\]]+)[\)\]]", text))
 
     keys: list[str] = []
     for segment in segments:
         key = medication_ingredient_key(segment)
         key = re.sub(r"^(?:duoi dang|base|as)\s+", "", key)
+        key = re.sub(r"^(?:thuoc\s+hit|thuoc)\s+", "", key)
         if len(key) >= 3 and key not in keys:
             keys.append(key)
     return tuple(keys)
@@ -282,14 +289,14 @@ def medication_match_score(query_text: str, candidate_text: str) -> float:
         "oral" in candidate.split() or "tablet" in candidate_forms or "capsule" in candidate_forms
     ):
         score += 0.08
+    brand_match = re.search(r"\[([^\]]+)\]", candidate_text)
     if query_strengths and not query_forms:
         if "tablet" in candidate_forms:
-            score += 0.10
+            score += 0.02 if brand_match else 0.10
         elif "capsule" in candidate_forms:
-            score += 0.08
+            score += 0.02 if brand_match else 0.08
         elif candidate_forms & {"powder", "solution", "suspension", "injection"}:
             score -= 0.05
-    brand_match = re.search(r"\[([^\]]+)\]", candidate_text)
     if brand_match:
         brand_key = normalize_key(brand_match.group(1))
         if brand_key and brand_key not in query:
@@ -326,7 +333,20 @@ def medication_strength_relation(query_text: str, candidate_text: str) -> str:
 def medication_tty_score(query_text: str, ttys: tuple[str, ...]) -> float:
     tty_set = {tty.upper() for tty in ttys}
     has_strength = medication_has_strength(query_text)
+    query_tokens = set(normalize_prescription_text(query_text).split())
+    has_form_or_route = bool(query_tokens & (FORM_TOKENS | ROUTE_TOKENS))
     if has_strength:
+        if not has_form_or_route:
+            if "SBDC" in tty_set:
+                return 0.33
+            if "SCDC" in tty_set:
+                return 0.31
+            if "SCD" in tty_set:
+                return 0.30
+            if "PSN" in tty_set:
+                return 0.20
+            if "SBD" in tty_set:
+                return 0.18
         if "SCD" in tty_set:
             return 0.27
         if "PSN" in tty_set:
@@ -389,8 +409,45 @@ def _is_allowed_tail_token(token: str) -> bool:
 def _strengths(text: str) -> set[str]:
     values: set[str] = set()
     for match in _STRENGTH_RE.finditer(normalize_prescription_text(text)):
-        values.add(match.group(0).replace(",", ".").replace(" ", ""))
+        raw = match.group(0).replace(",", ".")
+        values.add(_canonical_strength(raw))
     return values
+
+
+def _strip_leading_dose_route(text: str) -> str:
+    key = normalize_prescription_text(text)
+    tokens = key.split()
+    while tokens:
+        token = tokens[0]
+        base = token.split(":", 1)[0]
+        if (
+            any(ch.isdigit() for ch in token)
+            or token in UNIT_TOKENS
+            or token in ROUTE_TOKENS
+            or base in FREQUENCY_TOKENS
+            or token in COUNT_TOKENS
+        ):
+            tokens.pop(0)
+            continue
+        break
+    return " ".join(tokens)
+
+
+def _canonical_strength(value: str) -> str:
+    compact = value.replace(" ", "")
+    match = re.fullmatch(r"(\d+(?:\.\d+)?)(mg|g|mcg|ml|iu|unit|units|%)", compact)
+    if not match:
+        return compact
+    amount = float(match.group(1))
+    unit = match.group(2)
+    if unit == "g":
+        amount *= 1000
+        unit = "mg"
+    if amount.is_integer():
+        amount_text = str(int(amount))
+    else:
+        amount_text = ("%f" % amount).rstrip("0").rstrip(".")
+    return f"{amount_text}{unit}"
 
 
 def _form_tokens(text: str) -> set[str]:

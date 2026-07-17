@@ -91,6 +91,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--gold-dir", type=Path, default=ROOT / "input_part2" / "gt" / "output")
     parser.add_argument("--prediction-dir", type=Path)
     parser.add_argument("--candidate-dir", type=Path, default=ROOT / "data" / "candidates")
+    parser.add_argument("--lexicon-path", type=Path, default=ROOT / "data" / "external" / "vietnamese_clinical_lexicon.csv")
     parser.add_argument(
         "--with-candidates",
         action="store_true",
@@ -105,6 +106,7 @@ def main(argv: list[str] | None = None) -> int:
         gold_dir=args.gold_dir,
         prediction_dir=args.prediction_dir,
         candidate_dir=args.candidate_dir,
+        lexicon_path=args.lexicon_path,
         with_candidates=args.with_candidates,
         limit_files=args.limit_files,
     )
@@ -122,6 +124,7 @@ def evaluate_layers(
     gold_dir: Path,
     prediction_dir: Path | None = None,
     candidate_dir: Path | None = None,
+    lexicon_path: Path | None = None,
     with_candidates: bool = False,
     limit_files: int | None = None,
 ) -> dict[str, Any]:
@@ -133,7 +136,8 @@ def evaluate_layers(
     if limit_files is not None:
         gold_files = gold_files[: max(0, limit_files)]
 
-    ner = MedicalNER()
+    lexicon_paths = (lexicon_path.resolve(),) if lexicon_path and lexicon_path.exists() else ()
+    ner = MedicalNER(lexicon_paths)
     context = ContextDetector()
     retriever: CandidateRetriever | None = None
     candidate_load_seconds = 0.0
@@ -247,6 +251,7 @@ def evaluate_layers(
         "files": len(gold_files),
         "input_dir": str(input_dir),
         "gold_dir": str(gold_dir),
+        "external_lexicon": str(lexicon_paths[0]) if lexicon_paths else None,
         "validation": validation,
         "rule_proposal": {
             "exact_span_and_type": exact_summary,

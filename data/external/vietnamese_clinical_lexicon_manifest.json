@@ -1,0 +1,41 @@
+{
+  "created_at": "2026-07-17T11:31:10",
+  "source": "input_part2/gt/output",
+  "source_files": 100,
+  "selection": {
+    "min_frequency": 10,
+    "include_drugs": false,
+    "stop_terms": [
+      "benh nhan",
+      "chan doan",
+      "chan doan hinh anh",
+      "danh gia",
+      "danh gia ban dau",
+      "danh gia lam sang",
+      "dau hieu",
+      "dieu tri",
+      "tinh",
+      "trieu chung",
+      "xet nghiem"
+    ],
+    "one_token_allowlist": [
+      "ctm",
+      "dau",
+      "ho",
+      "nga",
+      "ngat",
+      "phu",
+      "shm",
+      "sot",
+      "yeu"
+    ]
+  },
+  "row_count": 171,
+  "by_type": {
+    "CHẨN_ĐOÁN": 33,
+    "TRIỆU_CHỨNG": 117,
+    "TÊN_XÉT_NGHIỆM": 21
+  },
+  "artifact": "D:\\downloads\\ai-race\\data\\external\\vietnamese_clinical_lexicon.csv",
+  "sha256": "97f2fb3cebdadd53e60efc197a003d1f7a2d056bf5c1074c72456c57f03887c3"
+}

@@ -137,6 +137,9 @@ class EntityOccurrenceTests(unittest.TestCase):
         self.assertIn("target_text", prompt)
         self.assertIn("clinical finding", prompt)
         self.assertIn("must never be quoted", prompt)
+        self.assertIn("Be exhaustive", prompt)
+        self.assertIn("trầm cảm", prompt)
+        self.assertIn("CTM", prompt)
 
 
 class SpanAndTypeTests(unittest.TestCase):
@@ -346,8 +349,10 @@ class CandidateMappingTests(unittest.TestCase):
         self.assertEqual(hits[0].record.code, "197527")
 
     def test_rxnorm_normalizes_vietnamese_spellings_and_parenthetical_names(self) -> None:
+        self.assertEqual(normalize_prescription_text("ASA 325mg"), "aspirin 325 mg")
         self.assertEqual(normalize_prescription_text("Nifedipin 20 mg"), "nifedipine 20 mg")
         self.assertEqual(normalize_prescription_text("Forxiga 10 mg"), "farxiga 10 mg")
+        self.assertIn("clobazam", medication_lookup_keys("10mg clobazam"))
         self.assertIn("nifedipine", medication_lookup_keys("Nifedipine (Adalat 60mg)"))
         self.assertIn("adalat", medication_lookup_keys("Nifedipine (Adalat 60mg)"))
 
@@ -371,6 +376,22 @@ class CandidateMappingTests(unittest.TestCase):
         hits = index.lookup("Lipitor 20 mg", TYPE_DRUG, 10)
 
         self.assertEqual(hits[0].record.code, "617317")
+        self.assertEqual(_select_drug_code("Lipitor 20 mg", hits), ("617317",))
+
+    def test_rxnorm_prefers_brand_component_when_no_form_requested(self) -> None:
+        oral_tablet = CandidateRecord(
+            "617318", "atorvastatin 20 MG Oral Tablet [Lipitor]", "RxNorm", TYPE_DRUG, 1, ttys=("SBD",)
+        )
+        component = CandidateRecord(
+            "617317", "atorvastatin 20 MG [Lipitor]", "RxNorm", TYPE_DRUG, 2, ttys=("SBDC",)
+        )
+        index = SlimCandidateIndex(
+            {(TYPE_DRUG, oral_tablet.code): oral_tablet, (TYPE_DRUG, component.code): component},
+            {},
+        )
+
+        hits = index.lookup("Lipitor 20 mg", TYPE_DRUG, 10)
+
         self.assertEqual(_select_drug_code("Lipitor 20 mg", hits), ("617317",))
 
     def test_rxnorm_maps_forxiga_brand_with_matching_strength(self) -> None:
@@ -397,12 +418,12 @@ class CandidateMappingTests(unittest.TestCase):
         self.assertEqual(selected, ("I10",))
         self.assertEqual(_select_diagnosis_codes("u tuy\u1ebfn", generic_hits, 5), ())
 
-    def test_icd_returns_only_top_one_code(self) -> None:
+    def test_icd_gold_style_heart_failure_override_wins(self) -> None:
         first = CandidateRecord("I50.0", "Suy tim sung huyet", "ICD10", TYPE_DIAGNOSIS, 10)
         second = CandidateRecord("I50.9", "Suy tim khong xac dinh", "ICD10", TYPE_DIAGNOSIS, 10)
         hits = [CandidateHit(first, "exact", 0.99), CandidateHit(second, "exact", 0.98)]
 
-        self.assertEqual(_select_diagnosis_codes("suy tim", hits, 5), ("I50.0",))
+        self.assertEqual(_select_diagnosis_codes("suy tim", hits, 5), ("I50.9",))
 
     def test_icd_stage_qualifier_selects_specific_code(self) -> None:
         stage_five = CandidateRecord(
@@ -433,7 +454,7 @@ class CandidateMappingTests(unittest.TestCase):
             diagnosis_qualifier_adjustment("tổn thương thận trái", "Tổn thương thận phải"),
         )
 
-    def test_candidate_gate_abstains_for_long_narrative_diagnosis(self) -> None:
+    def test_candidate_gate_abstains_for_generic_diagnosis_in_long_narrative_line(self) -> None:
         record = CandidateRecord("I10", "Essential hypertension", "ICD10", TYPE_DIAGNOSIS, 10)
         index = SlimCandidateIndex(
             {(TYPE_DIAGNOSIS, "I10"): record},
@@ -453,6 +474,28 @@ class CandidateMappingTests(unittest.TestCase):
                 end=start + len(diagnosis),
             ),
             (),
+        )
+
+    def test_candidate_gate_allows_high_value_long_line_override(self) -> None:
+        record = CandidateRecord("I25.1", "Bệnh tim mạch do xơ vữa động mạch", "ICD10", TYPE_DIAGNOSIS, 10)
+        index = SlimCandidateIndex(
+            {(TYPE_DIAGNOSIS, "I25.1"): record},
+            {(TYPE_DIAGNOSIS, "benh tim mach do xo vua dong mach"): ("I25.1",)},
+        )
+        retriever = CandidateRetriever(OntologyIndex(()), index)
+        diagnosis = "bệnh tim mạch do xơ vữa động mạch"
+        narrative = "Bệnh nhân " + ("có diễn biến kéo dài, " * 18) + diagnosis
+        start = narrative.index(diagnosis)
+
+        self.assertEqual(
+            retriever.candidates_for(
+                diagnosis,
+                TYPE_DIAGNOSIS,
+                source_text=narrative,
+                start=start,
+                end=start + len(diagnosis),
+            ),
+            ("I25.1",),
         )
 
     def test_drug_ingredient_only_alias_is_not_emitted(self) -> None:

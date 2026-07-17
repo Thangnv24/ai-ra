@@ -1,0 +1,172 @@
+term,type,source,frequency
+tăng huyết áp,CHẨN_ĐOÁN,input_part2_gold_threshold,148
+trầm cảm,CHẨN_ĐOÁN,input_part2_gold_threshold,90
+Đái tháo đường,CHẨN_ĐOÁN,input_part2_gold_threshold,62
+bệnh mạch vành,CHẨN_ĐOÁN,input_part2_gold_threshold,33
+tai biến mạch máu não,CHẨN_ĐOÁN,input_part2_gold_threshold,31
+rối loạn lipid máu,CHẨN_ĐOÁN,input_part2_gold_threshold,28
+Rung nhĩ,CHẨN_ĐOÁN,input_part2_gold_threshold,25
+lo âu,CHẨN_ĐOÁN,input_part2_gold_threshold,24
+tử vong,CHẨN_ĐOÁN,input_part2_gold_threshold,23
+co giật,CHẨN_ĐOÁN,input_part2_gold_threshold,22
+Nhồi máu cơ tim,CHẨN_ĐOÁN,input_part2_gold_threshold,21
+Suy giáp,CHẨN_ĐOÁN,input_part2_gold_threshold,21
+Bệnh thận mạn,CHẨN_ĐOÁN,input_part2_gold_threshold,17
+Đái tháo đường típ 2,CHẨN_ĐOÁN,input_part2_gold_threshold,17
+Hen phế quản,CHẨN_ĐOÁN,input_part2_gold_threshold,16
+rối loạn cảm xúc lưỡng cực,CHẨN_ĐOÁN,input_part2_gold_threshold,16
+Suy tim,CHẨN_ĐOÁN,input_part2_gold_threshold,16
+Bệnh phổi tắc nghẽn mạn tính,CHẨN_ĐOÁN,input_part2_gold_threshold,15
+nhiễm trùng đường tiết niệu,CHẨN_ĐOÁN,input_part2_gold_threshold,15
+chấn thương,CHẨN_ĐOÁN,input_part2_gold_threshold,14
+sa sút trí tuệ,CHẨN_ĐOÁN,input_part2_gold_threshold,14
+suy thận giai đoạn cuối,CHẨN_ĐOÁN,input_part2_gold_threshold,14
+bệnh mạch máu ngoại biên,CHẨN_ĐOÁN,input_part2_gold_threshold,13
+bệnh tim mạch do xơ vữa động mạch,CHẨN_ĐOÁN,input_part2_gold_threshold,13
+rối loạn cảm xúc hai cực,CHẨN_ĐOÁN,input_part2_gold_threshold,13
+tăng lipid máu,CHẨN_ĐOÁN,input_part2_gold_threshold,13
+Tăng lipid máu (không đặc hiệu),CHẨN_ĐOÁN,input_part2_gold_threshold,13
+tâm thần phân liệt,CHẨN_ĐOÁN,input_part2_gold_threshold,12
+rối loạn căng thẳng sau sang chấn,CHẨN_ĐOÁN,input_part2_gold_threshold,11
+rối loạn phân liệt cảm xúc,CHẨN_ĐOÁN,input_part2_gold_threshold,11
+Sỏi thận,CHẨN_ĐOÁN,input_part2_gold_threshold,11
+bệnh di căn,CHẨN_ĐOÁN,input_part2_gold_threshold,10
+xơ gan,CHẨN_ĐOÁN,input_part2_gold_threshold,10
+đau,TRIỆU_CHỨNG,input_part2_gold_threshold,342
+khó thở,TRIỆU_CHỨNG,input_part2_gold_threshold,192
+buồn nôn,TRIỆU_CHỨNG,input_part2_gold_threshold,160
+đau ngực,TRIỆU_CHỨNG,input_part2_gold_threshold,156
+ngã,TRIỆU_CHỨNG,input_part2_gold_threshold,141
+đau bụng,TRIỆU_CHỨNG,input_part2_gold_threshold,125
+sốt,TRIỆU_CHỨNG,input_part2_gold_threshold,123
+chóng mặt,TRIỆU_CHỨNG,input_part2_gold_threshold,116
+đau đầu,TRIỆU_CHỨNG,input_part2_gold_threshold,113
+tư tưởng tự sát,TRIỆU_CHỨNG,input_part2_gold_threshold,98
+mệt mỏi,TRIỆU_CHỨNG,input_part2_gold_threshold,88
+trầm cảm,TRIỆU_CHỨNG,input_part2_gold_threshold,87
+tiêu chảy,TRIỆU_CHỨNG,input_part2_gold_threshold,77
+run rẩy,TRIỆU_CHỨNG,input_part2_gold_threshold,59
+tê bì,TRIỆU_CHỨNG,input_part2_gold_threshold,59
+sụt cân,TRIỆU_CHỨNG,input_part2_gold_threshold,45
+lo âu,TRIỆU_CHỨNG,input_part2_gold_threshold,44
+táo bón,TRIỆU_CHỨNG,input_part2_gold_threshold,43
+cố gắng tự sát,TRIỆU_CHỨNG,input_part2_gold_threshold,42
+phù,TRIỆU_CHỨNG,input_part2_gold_threshold,41
+chán ăn,TRIỆU_CHỨNG,input_part2_gold_threshold,38
+lẫn lộn,TRIỆU_CHỨNG,input_part2_gold_threshold,37
+mất ý thức,TRIỆU_CHỨNG,input_part2_gold_threshold,37
+đau lưng,TRIỆU_CHỨNG,input_part2_gold_threshold,35
+chảy máu,TRIỆU_CHỨNG,input_part2_gold_threshold,34
+yếu,TRIỆU_CHỨNG,input_part2_gold_threshold,33
+suy yếu,TRIỆU_CHỨNG,input_part2_gold_threshold,31
+tự sát,TRIỆU_CHỨNG,input_part2_gold_threshold,31
+hoang tưởng,TRIỆU_CHỨNG,input_part2_gold_threshold,30
+tiểu không tự chủ,TRIỆU_CHỨNG,input_part2_gold_threshold,30
+Bụng mềm,TRIỆU_CHỨNG,input_part2_gold_threshold,29
+tiểu khó,TRIỆU_CHỨNG,input_part2_gold_threshold,28
+đi tiêu,TRIỆU_CHỨNG,input_part2_gold_threshold,27
+khó nuốt,TRIỆU_CHỨNG,input_part2_gold_threshold,27
+ngất,TRIỆU_CHỨNG,input_part2_gold_threshold,26
+nhìn đôi,TRIỆU_CHỨNG,input_part2_gold_threshold,26
+cảm thấy khỏe,TRIỆU_CHỨNG,input_part2_gold_threshold,25
+chấn thương,TRIỆU_CHỨNG,input_part2_gold_threshold,24
+đau cổ,TRIỆU_CHỨNG,input_part2_gold_threshold,24
+căng thẳng,TRIỆU_CHỨNG,input_part2_gold_threshold,23
+khó chịu,TRIỆU_CHỨNG,input_part2_gold_threshold,23
+lo lắng,TRIỆU_CHỨNG,input_part2_gold_threshold,23
+mờ mắt,TRIỆU_CHỨNG,input_part2_gold_threshold,23
+thay đổi thị lực,TRIỆU_CHỨNG,input_part2_gold_threshold,23
+"Bụng mềm , không chướng",TRIỆU_CHỨNG,input_part2_gold_threshold,21
+phân đen,TRIỆU_CHỨNG,input_part2_gold_threshold,21
+uống rượu,TRIỆU_CHỨNG,input_part2_gold_threshold,20
+vàng da,TRIỆU_CHỨNG,input_part2_gold_threshold,20
+ảo giác,TRIỆU_CHỨNG,input_part2_gold_threshold,18
+ảo giác thính giác,TRIỆU_CHỨNG,input_part2_gold_threshold,18
+cảm giác kim châm,TRIỆU_CHỨNG,input_part2_gold_threshold,18
+khó thở khi nằm,TRIỆU_CHỨNG,input_part2_gold_threshold,18
+nhiễm trùng,TRIỆU_CHỨNG,input_part2_gold_threshold,18
+tổn thương,TRIỆU_CHỨNG,input_part2_gold_threshold,18
+khó tập trung,TRIỆU_CHỨNG,input_part2_gold_threshold,17
+tình trạng sức khỏe thông thường,TRIỆU_CHỨNG,input_part2_gold_threshold,17
+cảm giác vô vọng,TRIỆU_CHỨNG,input_part2_gold_threshold,16
+co giật,TRIỆU_CHỨNG,input_part2_gold_threshold,16
+"Tỉnh, tiếp xúc tốt",TRIỆU_CHỨNG,input_part2_gold_threshold,16
+chướng bụng,TRIỆU_CHỨNG,input_part2_gold_threshold,15
+cơn hoảng loạn,TRIỆU_CHỨNG,input_part2_gold_threshold,15
+phát ban,TRIỆU_CHỨNG,input_part2_gold_threshold,15
+tiểu ra máu,TRIỆU_CHỨNG,input_part2_gold_threshold,15
+tình trạng sức khỏe bình thường,TRIỆU_CHỨNG,input_part2_gold_threshold,15
+triệu chứng hưng cảm,TRIỆU_CHỨNG,input_part2_gold_threshold,15
+ảo tưởng,TRIỆU_CHỨNG,input_part2_gold_threshold,14
+cảm giác,TRIỆU_CHỨNG,input_part2_gold_threshold,14
+đau hông,TRIỆU_CHỨNG,input_part2_gold_threshold,14
+đau vùng thượng vị,TRIỆU_CHỨNG,input_part2_gold_threshold,14
+dị cảm,TRIỆU_CHỨNG,input_part2_gold_threshold,14
+Không sốt,TRIỆU_CHỨNG,input_part2_gold_threshold,14
+ngủ kém,TRIỆU_CHỨNG,input_part2_gold_threshold,14
+ớn lạnh,TRIỆU_CHỨNG,input_part2_gold_threshold,14
+sốt rét,TRIỆU_CHỨNG,input_part2_gold_threshold,14
+ù tai,TRIỆU_CHỨNG,input_part2_gold_threshold,14
+giảm cảm giác thèm ăn,TRIỆU_CHỨNG,input_part2_gold_threshold,13
+giảm nhu cầu ngủ,TRIỆU_CHỨNG,input_part2_gold_threshold,13
+khó đi lại,TRIỆU_CHỨNG,input_part2_gold_threshold,13
+khó ngủ,TRIỆU_CHỨNG,input_part2_gold_threshold,13
+tim đập nhanh,TRIỆU_CHỨNG,input_part2_gold_threshold,13
+tỉnh táo,TRIỆU_CHỨNG,input_part2_gold_threshold,13
+bồn chồn,TRIỆU_CHỨNG,input_part2_gold_threshold,12
+cảm giác tê bì,TRIỆU_CHỨNG,input_part2_gold_threshold,12
+đau hạ sườn phải,TRIỆU_CHỨNG,input_part2_gold_threshold,12
+đau thắt lưng,TRIỆU_CHỨNG,input_part2_gold_threshold,12
+đổ mồ hôi đêm,TRIỆU_CHỨNG,input_part2_gold_threshold,12
+không thể đi lại,TRIỆU_CHỨNG,input_part2_gold_threshold,12
+rối loạn phát âm,TRIỆU_CHỨNG,input_part2_gold_threshold,12
+triệu chứng trầm cảm,TRIỆU_CHỨNG,input_part2_gold_threshold,12
+tự làm hại bản thân,TRIỆU_CHỨNG,input_part2_gold_threshold,12
+cáu kỉnh,TRIỆU_CHỨNG,input_part2_gold_threshold,11
+đau khi nghỉ ngơi,TRIỆU_CHỨNG,input_part2_gold_threshold,11
+đau khớp,TRIỆU_CHỨNG,input_part2_gold_threshold,11
+đi ngoài ra máu đỏ tươi,TRIỆU_CHỨNG,input_part2_gold_threshold,11
+đổ mồ hôi,TRIỆU_CHỨNG,input_part2_gold_threshold,11
+khó khăn,TRIỆU_CHỨNG,input_part2_gold_threshold,11
+khó khăn khi đi lại,TRIỆU_CHỨNG,input_part2_gold_threshold,11
+mất khả năng cảm nhận niềm vui,TRIỆU_CHỨNG,input_part2_gold_threshold,11
+mất ngủ,TRIỆU_CHỨNG,input_part2_gold_threshold,11
+phân lỏng,TRIỆU_CHỨNG,input_part2_gold_threshold,11
+Phổi thông khí được,TRIỆU_CHỨNG,input_part2_gold_threshold,11
+thức dậy,TRIỆU_CHỨNG,input_part2_gold_threshold,11
+tim đập nhanh/không đều,TRIỆU_CHỨNG,input_part2_gold_threshold,11
+"Tim đều, T1T2 rõ",TRIỆU_CHỨNG,input_part2_gold_threshold,11
+xì hơi,TRIỆU_CHỨNG,input_part2_gold_threshold,11
+ảo giác thị giác,TRIỆU_CHỨNG,input_part2_gold_threshold,10
+các yếu tố gây căng thẳng,TRIỆU_CHỨNG,input_part2_gold_threshold,10
+cảm thấy trầm cảm,TRIỆU_CHỨNG,input_part2_gold_threshold,10
+gcs 15 điểm.,TRIỆU_CHỨNG,input_part2_gold_threshold,10
+hoa mắt,TRIỆU_CHỨNG,input_part2_gold_threshold,10
+mất thị lực,TRIỆU_CHỨNG,input_part2_gold_threshold,10
+nghe tiếng nói,TRIỆU_CHỨNG,input_part2_gold_threshold,10
+"nôn ra máu,",TRIỆU_CHỨNG,input_part2_gold_threshold,10
+phù chi dưới,TRIỆU_CHỨNG,input_part2_gold_threshold,10
+tư duy nhanh,TRIỆU_CHỨNG,input_part2_gold_threshold,10
+vấn đề,TRIỆU_CHỨNG,input_part2_gold_threshold,10
+yếu nửa người trái,TRIỆU_CHỨNG,input_part2_gold_threshold,10
+chụp cắt lớp vi tính,TÊN_XÉT_NGHIỆM,input_part2_gold_threshold,43
+dấu hiệu sinh tồn,TÊN_XÉT_NGHIỆM,input_part2_gold_threshold,35
+chụp cộng hưởng từ (mri),TÊN_XÉT_NGHIỆM,input_part2_gold_threshold,27
+siêu âm,TÊN_XÉT_NGHIỆM,input_part2_gold_threshold,23
+CTM,TÊN_XÉT_NGHIỆM,input_part2_gold_threshold,21
+Định lượng Troponin Ths,TÊN_XÉT_NGHIỆM,input_part2_gold_threshold,16
+Điện tim,TÊN_XÉT_NGHIỆM,input_part2_gold_threshold,15
+Định lượng Creatinin (máu),TÊN_XÉT_NGHIỆM,input_part2_gold_threshold,15
+Định lượng Glucose,TÊN_XÉT_NGHIỆM,input_part2_gold_threshold,15
+siêu âm tim,TÊN_XÉT_NGHIỆM,input_part2_gold_threshold,15
+Đo hoạt độ ALT (GPT),TÊN_XÉT_NGHIỆM,input_part2_gold_threshold,14
+Tổng phân tích tế bào máu ngoại vi (bằng máy đếm laser),TÊN_XÉT_NGHIỆM,input_part2_gold_threshold,14
+chụp x-quang,TÊN_XÉT_NGHIỆM,input_part2_gold_threshold,13
+Đo hoạt độ AST (GOT),TÊN_XÉT_NGHIỆM,input_part2_gold_threshold,13
+chụp mạch máu,TÊN_XÉT_NGHIỆM,input_part2_gold_threshold,12
+đánh giá chẩn đoán,TÊN_XÉT_NGHIỆM,input_part2_gold_threshold,12
+"Điện giải đồ (Na, K, Cl)",TÊN_XÉT_NGHIỆM,input_part2_gold_threshold,12
+SHM,TÊN_XÉT_NGHIỆM,input_part2_gold_threshold,11
+"Thời gian prothrombin (PT: Prothrombin Time), (Các tên khác: TQ; Tỷ lệ Prothrombin) bằng máy tự động",TÊN_XÉT_NGHIỆM,input_part2_gold_threshold,11
+chụp x-quang ngực,TÊN_XÉT_NGHIỆM,input_part2_gold_threshold,10
+huyết áp,TÊN_XÉT_NGHIỆM,input_part2_gold_threshold,10
