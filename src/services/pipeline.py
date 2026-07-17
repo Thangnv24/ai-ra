@@ -194,7 +194,13 @@ class MedicalKGPipeline:
         concepts: list[Concept] = []
         for span in spans:
             assertions = self.context.assertions_for(text, span.start, span.end, span.type)
-            candidates = self.retriever.candidates_for(span.text, span.type)
+            candidates = self.retriever.candidates_for(
+                span.text,
+                span.type,
+                source_text=text,
+                start=span.start,
+                end=span.end,
+            )
             concepts.append(
                 Concept(
                     text=span.text,

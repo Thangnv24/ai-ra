@@ -93,6 +93,13 @@ _ABBREVIATION_REPLACEMENTS = (
     (re.compile(r"\bq\.?\s*i\.?\s*d\.?\b"), "qid"),
     (re.compile(r"\bq\.?\s*d\.?\b"), "qd"),
 )
+_MEDICATION_SPELLING_REPLACEMENTS = (
+    (re.compile(r"\bnifedipin\b"), "nifedipine"),
+    (re.compile(r"\bspironolacton\b"), "spironolactone"),
+    (re.compile(r"\bomeprazol\b"), "omeprazole"),
+    # The Vietnamese market spelling is Forxiga; RxNorm stores Farxiga.
+    (re.compile(r"\bforxiga\b"), "farxiga"),
+)
 _TAIL_TOKEN_RE = re.compile(
     rf"""
     (?:
@@ -168,8 +175,28 @@ def normalize_prescription_text(text: str) -> str:
     key = _Q_INTERVAL_PLAIN_RE.sub(r"q\1h", key)
     for pattern, replacement in _ABBREVIATION_REPLACEMENTS:
         key = pattern.sub(replacement, key)
+    for pattern, replacement in _MEDICATION_SPELLING_REPLACEMENTS:
+        key = pattern.sub(replacement, key)
     key = re.sub(r"\b(qam|qpm|qhs|bid|tid|qid)\s*:?\s*prn\b", r"\1:prn", key)
     return " ".join(key.split())
+
+
+def medication_lookup_keys(text: str) -> tuple[str, ...]:
+    """Return ingredient and brand keys without losing parenthetical drug names."""
+
+    segments = [text]
+    leading = re.split(r"[\(\[]", text, maxsplit=1)[0]
+    if leading != text:
+        segments.append(leading)
+    segments.extend(re.findall(r"[\(\[]([^\)\]]+)[\)\]]", text))
+
+    keys: list[str] = []
+    for segment in segments:
+        key = medication_ingredient_key(segment)
+        key = re.sub(r"^(?:duoi dang|base|as)\s+", "", key)
+        if len(key) >= 3 and key not in keys:
+            keys.append(key)
+    return tuple(keys)
 
 
 def strip_drug_count(text: str) -> str:
@@ -282,6 +309,20 @@ def medication_has_strength(text: str) -> bool:
     return bool(_strengths(text))
 
 
+def medication_strength_relation(query_text: str, candidate_text: str) -> str:
+    """Classify strength compatibility for product-level RxNorm mapping."""
+
+    query_strengths = _strengths(query_text)
+    candidate_strengths = _strengths(candidate_text)
+    if not query_strengths:
+        return "not_requested"
+    if query_strengths & candidate_strengths:
+        return "match"
+    if candidate_strengths:
+        return "conflict"
+    return "missing"
+
+
 def medication_tty_score(query_text: str, ttys: tuple[str, ...]) -> float:
     tty_set = {tty.upper() for tty in ttys}
     has_strength = medication_has_strength(query_text)
@@ -290,8 +331,12 @@ def medication_tty_score(query_text: str, ttys: tuple[str, ...]) -> float:
             return 0.27
         if "PSN" in tty_set:
             return 0.26
+        if "SBDC" in tty_set:
+            return 0.24
         if "SBD" in tty_set:
             return 0.21
+        if "SCDC" in tty_set:
+            return 0.20
         if "SY" in tty_set:
             return 0.18
         if "SCDC" in tty_set:

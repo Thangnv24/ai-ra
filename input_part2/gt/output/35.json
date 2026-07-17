@@ -1,0 +1,667 @@
+[
+    {
+        "text": "yếu nửa người trái",
+        "type": "TRIỆU_CHỨNG",
+        "position": [
+            190,
+            208
+        ]
+    },
+    {
+        "text": "yếu nửa người trái",
+        "type": "TRIỆU_CHỨNG",
+        "position": [
+            366,
+            384
+        ]
+    },
+    {
+        "text": " méo miệng",
+        "type": "TRIỆU_CHỨNG",
+        "position": [
+            385,
+            395
+        ]
+    },
+    {
+        "text": "nói khó",
+        "type": "TRIỆU_CHỨNG",
+        "position": [
+            397,
+            404
+        ]
+    },
+    {
+        "text": "tỉnh",
+        "type": "TRIỆU_CHỨNG",
+        "position": [
+            470,
+            474
+        ]
+    },
+    {
+        "text": "Liệt nửa người trái",
+        "type": "TRIỆU_CHỨNG",
+        "position": [
+            538,
+            557
+        ]
+    },
+    {
+        "text": "Cơ lực tay trái 0/5",
+        "type": "TRIỆU_CHỨNG",
+        "position": [
+            558,
+            577
+        ]
+    },
+    {
+        "text": "Cơ lực chân trái 0/5",
+        "type": "TRIỆU_CHỨNG",
+        "position": [
+            578,
+            598
+        ]
+    },
+    {
+        "text": "Liệt VII trung ương trái",
+        "type": "TRIỆU_CHỨNG",
+        "position": [
+            599,
+            623
+        ]
+    },
+    {
+        "text": "Thất ngôn",
+        "type": "TRIỆU_CHỨNG",
+        "position": [
+            624,
+            633
+        ]
+    },
+    {
+        "text": "Quay mắt, quay đầu phải",
+        "type": "TRIỆU_CHỨNG",
+        "position": [
+            634,
+            657
+        ]
+    },
+    {
+        "text": "Gáy cứng (-)",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [],
+        "position": [
+            658,
+            670
+        ]
+    },
+    {
+        "text": "Tim nhịp đều,tần số 82 ck/p",
+        "type": "TRIỆU_CHỨNG",
+        "position": [
+            671,
+            698
+        ]
+    },
+    {
+        "text": "Phổi không ran",
+        "type": "TRIỆU_CHỨNG",
+        "position": [
+            699,
+            713
+        ]
+    },
+    {
+        "text": "Bụng mềm,cầu bàng quang (-)",
+        "type": "TRIỆU_CHỨNG",
+        "position": [
+            714,
+            741
+        ]
+    },
+    {
+        "text": "Mạch 82 l/p",
+        "type": "TRIỆU_CHỨNG",
+        "position": [
+            757,
+            768
+        ]
+    },
+    {
+        "text": "nhiệt độ: 36.5 độ C",
+        "type": "TRIỆU_CHỨNG",
+        "position": [
+            770,
+            789
+        ]
+    },
+    {
+        "text": "huyết áp: 159/89 mmHg",
+        "type": "TRIỆU_CHỨNG",
+        "position": [
+            791,
+            812
+        ]
+    },
+    {
+        "text": "Nhịp thở : 17 l/p",
+        "type": "TRIỆU_CHỨNG",
+        "position": [
+            814,
+            831
+        ]
+    },
+    {
+        "text": "Chụp cắt lớp vi tính mạch máu não",
+        "type": "TÊN_XÉT_NGHIỆM",
+        "position": [
+            854,
+            887
+        ]
+    },
+    {
+        "text": "hình ảnh nhồi máu não thuỳ trán,trung tâm bán bầu dục phải – hẹp tắc M1 phải.",
+        "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+        "position": [
+            889,
+            966
+        ]
+    },
+    {
+        "text": "Điện tim",
+        "type": "TÊN_XÉT_NGHIỆM",
+        "position": [
+            967,
+            975
+        ]
+    },
+    {
+        "text": "Nhịp xoang,tần số 82 ck/phút",
+        "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+        "position": [
+            978,
+            1006
+        ]
+    },
+    {
+        "text": "RBC",
+        "type": "TÊN_XÉT_NGHIỆM",
+        "position": [
+            1022,
+            1025
+        ]
+    },
+    {
+        "text": "3.9 T/l",
+        "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+        "position": [
+            1027,
+            1034
+        ]
+    },
+    {
+        "text": "HGB",
+        "type": "TÊN_XÉT_NGHIỆM",
+        "position": [
+            1036,
+            1039
+        ]
+    },
+    {
+        "text": "118 g/l",
+        "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+        "position": [
+            1041,
+            1048
+        ]
+    },
+    {
+        "text": "PLT",
+        "type": "TÊN_XÉT_NGHIỆM",
+        "position": [
+            1050,
+            1053
+        ]
+    },
+    {
+        "text": "216 G/l",
+        "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+        "position": [
+            1055,
+            1062
+        ]
+    },
+    {
+        "text": "WBC",
+        "type": "TÊN_XÉT_NGHIỆM",
+        "position": [
+            1064,
+            1067
+        ]
+    },
+    {
+        "text": "4.42 G/l",
+        "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+        "position": [
+            1069,
+            1077
+        ]
+    },
+    {
+        "text": "PT",
+        "type": "TÊN_XÉT_NGHIỆM",
+        "position": [
+            1078,
+            1080
+        ]
+    },
+    {
+        "text": "104 %",
+        "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+        "position": [
+            1082,
+            1087
+        ]
+    },
+    {
+        "text": "INR",
+        "type": "TÊN_XÉT_NGHIỆM",
+        "position": [
+            1090,
+            1093
+        ]
+    },
+    {
+        "text": "0.97",
+        "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+        "position": [
+            1095,
+            1099
+        ]
+    },
+    {
+        "text": "APTT",
+        "type": "TÊN_XÉT_NGHIỆM",
+        "position": [
+            1101,
+            1105
+        ]
+    },
+    {
+        "text": "26.9 giây",
+        "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+        "position": [
+            1107,
+            1116
+        ]
+    },
+    {
+        "text": "Fibrinogen",
+        "type": "TÊN_XÉT_NGHIỆM",
+        "position": [
+            1118,
+            1128
+        ]
+    },
+    {
+        "text": "2.91 g/l",
+        "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+        "position": [
+            1130,
+            1138
+        ]
+    },
+    {
+        "text": "Ure",
+        "type": "TÊN_XÉT_NGHIỆM",
+        "position": [
+            1139,
+            1142
+        ]
+    },
+    {
+        "text": " 4.8 mmol/l",
+        "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+        "position": [
+            1143,
+            1154
+        ]
+    },
+    {
+        "text": "Creatinin",
+        "type": "TÊN_XÉT_NGHIỆM",
+        "position": [
+            1156,
+            1165
+        ]
+    },
+    {
+        "text": "90 umol/l; ",
+        "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+        "position": [
+            1167,
+            1178
+        ]
+    },
+    {
+        "text": "AST:",
+        "type": "TÊN_XÉT_NGHIỆM",
+        "position": [
+            1179,
+            1183
+        ]
+    },
+    {
+        "text": "33 U/l",
+        "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+        "position": [
+            1184,
+            1190
+        ]
+    },
+    {
+        "text": "ALT:",
+        "type": "TÊN_XÉT_NGHIỆM",
+        "position": [
+            1191,
+            1195
+        ]
+    },
+    {
+        "text": "25 U/L",
+        "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+        "position": [
+            1196,
+            1202
+        ]
+    },
+    {
+        "text": "Natri",
+        "type": "TÊN_XÉT_NGHIỆM",
+        "position": [
+            1203,
+            1208
+        ]
+    },
+    {
+        "text": "140 mmol/l",
+        "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+        "position": [
+            1210,
+            1220
+        ]
+    },
+    {
+        "text": "Kali",
+        "type": "TÊN_XÉT_NGHIỆM",
+        "position": [
+            1222,
+            1226
+        ]
+    },
+    {
+        "text": "3.8 ",
+        "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+        "position": [
+            1228,
+            1232
+        ]
+    },
+    {
+        "text": " Clo",
+        "type": "TÊN_XÉT_NGHIỆM",
+        "position": [
+            1239,
+            1243
+        ]
+    },
+    {
+        "text": "105 mmol/l",
+        "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+        "position": [
+            1245,
+            1255
+        ]
+    },
+    {
+        "text": "Troponin  T hs",
+        "type": "TÊN_XÉT_NGHIỆM",
+        "position": [
+            1256,
+            1270
+        ]
+    },
+    {
+        "text": "12 ng/L",
+        "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+        "position": [
+            1272,
+            1279
+        ]
+    },
+    {
+        "text": "Nhồi máu não bán cầu não phải",
+        "type": "CHẨN_ĐOÁN",
+        "candidates": [
+            "I63.8"
+        ],
+        "position": [
+            1291,
+            1320
+        ]
+    },
+    {
+        "text": "hẹp tắc M1 phải",
+        "type": "CHẨN_ĐOÁN",
+        "candidates": [
+            "I66.0"
+        ],
+        "position": [
+            1323,
+            1338
+        ]
+    },
+    {
+        "text": " Aspirin 81 mg",
+        "type": "THUỐC",
+        "position": [
+            1412,
+            1426
+        ],
+        "candidates": []
+    },
+    {
+        "text": "Ticagrelor 90 mg",
+        "type": "THUỐC",
+        "position": [
+            1443,
+            1459
+        ],
+        "candidates": [
+            "1116633"
+        ]
+    },
+    {
+        "text": "Cơ lực hồi phục 4/5",
+        "type": "TRIỆU_CHỨNG",
+        "position": [
+            1530,
+            1549
+        ]
+    },
+    {
+        "text": " thất ngôn",
+        "type": "TRIỆU_CHỨNG",
+        "position": [
+            1554,
+            1564
+        ]
+    },
+    {
+        "text": "rối loạn nuốt",
+        "type": "TRIỆU_CHỨNG",
+        "position": [
+            1590,
+            1603
+        ]
+    },
+    {
+        "text": "tắc nghẽn",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [],
+        "position": [
+            1775,
+            1784
+        ]
+    },
+    {
+        "text": "tắc nghẽn đoạn ruột có dịch mật và dịch tụy",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [],
+        "position": [
+            1952,
+            1995
+        ]
+    },
+    {
+        "text": "tắc nghẽn đoạn ruột có dịch mật và dịch tụy của bệnh nhân",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [],
+        "position": [
+            2115,
+            2172
+        ]
+    },
+    {
+        "text": "nội soi",
+        "type": "TÊN_XÉT_NGHIỆM",
+        "assertions": [],
+        "position": [
+            2200,
+            2207
+        ]
+    },
+    {
+        "text": "chụp hình ảnh y khoa",
+        "type": "TÊN_XÉT_NGHIỆM",
+        "assertions": [],
+        "position": [
+            2211,
+            2231
+        ]
+    },
+    {
+        "text": "tắc nghẽn",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [],
+        "position": [
+            2241,
+            2250
+        ]
+    },
+    {
+        "text": "gấp khúc tại một điểm",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [],
+        "position": [
+            2269,
+            2290
+        ]
+    },
+    {
+        "text": "nội soi",
+        "type": "TÊN_XÉT_NGHIỆM",
+        "assertions": [],
+        "position": [
+            2300,
+            2307
+        ]
+    },
+    {
+        "text": "triệu chứng",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [],
+        "position": [
+            2587,
+            2598
+        ]
+    },
+    {
+        "text": "nứt đốt sống thắt lưng không có não úng thuỷ",
+        "type": "CHẨN_ĐOÁN",
+        "candidates": [
+            "Q05.7",
+            "Q05.2"
+        ],
+        "assertions": [],
+        "position": [
+            2888,
+            2932
+        ]
+    },
+    {
+        "text": "cảm giác ngoại biên dưới mắt cá chân",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [],
+        "position": [
+            2941,
+            2977
+        ]
+    },
+    {
+        "text": "bàng quang thần kinh kèm bí tiểu mạn tính",
+        "type": "CHẨN_ĐOÁN",
+        "candidates": [],
+        "assertions": [],
+        "position": [
+            2981,
+            3022
+        ]
+    },
+    {
+        "text": "Nitrofurantoin 50 mg ",
+        "type": "THUỐC",
+        "candidates": [
+            "311991"
+        ],
+        "assertions": [],
+        "position": [
+            3039,
+            3060
+        ]
+    },
+    {
+        "text": "Oxybutynin chloride ER 15 mg mỗi ngày",
+        "type": "THUỐC",
+        "candidates": [
+            "863628"
+        ],
+        "assertions": [],
+        "position": [
+            3064,
+            3101
+        ]
+    },
+    {
+        "text": "kiểm tra bàn chân",
+        "type": "TÊN_XÉT_NGHIỆM",
+        "assertions": [],
+        "position": [
+            3123,
+            3140
+        ]
+    },
+    {
+        "text": "viêm xương tủy",
+        "type": "CHẨN_ĐOÁN",
+        "candidates": [],
+        "assertions": [
+            "isHistorical"
+        ],
+        "position": [
+            3174,
+            3188
+        ]
+    }
+]

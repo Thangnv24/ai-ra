@@ -1,0 +1,1201 @@
+[
+    {
+        "text": "đa thai 6 lần, đa sản 5 lần",
+        "type": "CHẨN_ĐOÁN",
+        "candidates": [],
+        "assertions": [],
+        "position": [
+            174,
+            201
+        ]
+    },
+    {
+        "text": "ung thư nội mạc tử cung",
+        "type": "CHẨN_ĐOÁN",
+        "candidates": [],
+        "assertions": [],
+        "position": [
+            217,
+            240
+        ]
+    },
+    {
+        "text": "sinh thiết nội mạc tử cung",
+        "type": "TÊN_XÉT_NGHIỆM",
+        "assertions": [],
+        "position": [
+            245,
+            271
+        ]
+    },
+    {
+        "text": "Bệnh lý ác tính di căn",
+        "type": "CHẨN_ĐOÁN",
+        "candidates": [],
+        "assertions": [],
+        "position": [
+            328,
+            350
+        ]
+    },
+    {
+        "text": "khám tổng quát",
+        "type": "TÊN_XÉT_NGHIỆM",
+        "assertions": [],
+        "position": [
+            369,
+            383
+        ]
+    },
+    {
+        "text": "polyp nội mạc tử cung",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [],
+        "position": [
+            413,
+            434
+        ]
+    },
+    {
+        "text": "giải phẫu bệnh",
+        "type": "TÊN_XÉT_NGHIỆM",
+        "assertions": [],
+        "position": [
+            523,
+            537
+        ]
+    },
+    {
+        "text": "chảy máu",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [],
+        "position": [
+            549,
+            557
+        ]
+    },
+    {
+        "text": "Bệnh lý ác tính di căn",
+        "type": "CHẨN_ĐOÁN",
+        "candidates": [],
+        "assertions": [],
+        "position": [
+            624,
+            646
+        ]
+    },
+    {
+        "text": "chảy máu",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [],
+        "position": [
+            653,
+            661
+        ]
+    },
+    {
+        "text": "chảy máu",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [],
+        "position": [
+            715,
+            723
+        ]
+    },
+    {
+        "text": "chụp cắt lớp vi tính (ct) ngực, bụng và chậu",
+        "type": "TÊN_XÉT_NGHIỆM",
+        "assertions": [],
+        "position": [
+            941,
+            985
+        ]
+    },
+    {
+        "text": "bệnh di căn",
+        "type": "CHẨN_ĐOÁN",
+        "candidates": [],
+        "assertions": [],
+        "position": [
+            1010,
+            1021
+        ]
+    },
+    {
+        "text": "chướng bụng",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [],
+        "position": [
+            1149,
+            1160
+        ]
+    },
+    {
+        "text": "táo bón",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [],
+        "position": [
+            1162,
+            1169
+        ]
+    },
+    {
+        "text": "đau chân",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [],
+        "position": [
+            1173,
+            1181
+        ]
+    },
+    {
+        "text": "ung thư nội mạc tử cung",
+        "type": "CHẨN_ĐOÁN",
+        "candidates": [],
+        "assertions": [],
+        "position": [
+            1219,
+            1242
+        ]
+    },
+    {
+        "text": "đau",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [],
+        "position": [
+            1512,
+            1515
+        ]
+    },
+    {
+        "text": "đau gối",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [],
+        "position": [
+            1560,
+            1567
+        ]
+    },
+    {
+        "text": "đau gối",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [],
+        "position": [
+            1632,
+            1639
+        ]
+    },
+    {
+        "text": "nhiễm trùng",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [],
+        "position": [
+            2117,
+            2128
+        ]
+    },
+    {
+        "text": "chấn thương hông trái",
+        "type": "CHẨN_ĐOÁN",
+        "candidates": [],
+        "assertions": [],
+        "position": [
+            2220,
+            2241
+        ]
+    },
+    {
+        "text": "sốt",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [],
+        "position": [
+            2266,
+            2269
+        ]
+    },
+    {
+        "text": "run rẩy",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [],
+        "position": [
+            2271,
+            2278
+        ]
+    },
+    {
+        "text": "đỏ",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [],
+        "position": [
+            2285,
+            2287
+        ]
+    },
+    {
+        "text": "đỏ",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [],
+        "position": [
+            2330,
+            2332
+        ]
+    },
+    {
+        "text": "không đi lại với dụng cụ hỗ trợ",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [],
+        "position": [
+            2375,
+            2406
+        ]
+    },
+    {
+        "text": "không đau",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [],
+        "position": [
+            2415,
+            2424
+        ]
+    },
+    {
+        "text": "đau đùi",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [],
+        "position": [
+            2490,
+            2497
+        ]
+    },
+    {
+        "text": "đau hông bên",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [],
+        "position": [
+            2520,
+            2532
+        ]
+    },
+    {
+        "text": "đau gối",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [],
+        "position": [
+            2536,
+            2543
+        ]
+    },
+    {
+        "text": "đau",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [],
+        "position": [
+            2592,
+            2595
+        ]
+    },
+    {
+        "text": "rạn tiếng",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [],
+        "position": [
+            2625,
+            2634
+        ]
+    },
+    {
+        "text": "rạn tiếng",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [],
+        "position": [
+            2647,
+            2656
+        ]
+    },
+    {
+        "text": "chênh lệch chiều dài chân",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [],
+        "position": [
+            2703,
+            2728
+        ]
+    },
+    {
+        "text": "đau",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [],
+        "position": [
+            2927,
+            2930
+        ]
+    },
+    {
+        "text": "đau hông",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [],
+        "position": [
+            2998,
+            3006
+        ]
+    },
+    {
+        "text": "đái tháo đường",
+        "type": "CHẨN_ĐOÁN",
+        "candidates": [],
+        "assertions": [
+            "isHistorical"
+        ],
+        "position": [
+            3160,
+            3174
+        ]
+    },
+    {
+        "text": "tăng huyết áp",
+        "type": "CHẨN_ĐOÁN",
+        "candidates": [],
+        "assertions": [
+            "isHistorical"
+        ],
+        "position": [
+            3176,
+            3189
+        ]
+    },
+    {
+        "text": "thoái hoá khớp gối nguyên phát",
+        "type": "CHẨN_ĐOÁN",
+        "candidates": [
+            "M17.1"
+        ],
+        "assertions": [
+            "isHistorical"
+        ],
+        "position": [
+            3193,
+            3223
+        ]
+    },
+    {
+        "text": "đau khớp gối trái",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [],
+        "position": [
+            3237,
+            3254
+        ]
+    },
+    {
+        "text": "đau ",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [
+            "isHistorical"
+        ],
+        "position": [
+            3282,
+            3286
+        ]
+    },
+    {
+        "text": "thoái hóa khớp",
+        "type": "CHẨN_ĐOÁN",
+        "candidates": [],
+        "assertions": [],
+        "position": [
+            3415,
+            3429
+        ]
+    },
+    {
+        "text": "khớp gối trái",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [],
+        "position": [
+            3464,
+            3477
+        ]
+    },
+    {
+        "text": "đau",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [],
+        "position": [
+            3680,
+            3683
+        ]
+    },
+    {
+        "text": "chụp x-quang",
+        "type": "TÊN_XÉT_NGHIỆM",
+        "assertions": [],
+        "position": [
+            3766,
+            3778
+        ]
+    },
+    {
+        "text": "không thể đi lại được",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [],
+        "position": [
+            3882,
+            3903
+        ]
+    },
+    {
+        "text": "đau",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [
+            "isNegated"
+        ],
+        "position": [
+            4029,
+            4032
+        ]
+    },
+    {
+        "text": "tê",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [
+            "isNegated"
+        ],
+        "position": [
+            4059,
+            4061
+        ]
+    },
+    {
+        "text": "cảm giác tê bì",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [
+            "isNegated"
+        ],
+        "position": [
+            4066,
+            4080
+        ]
+    },
+    {
+        "text": "đau đầu",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [
+            "isNegated"
+        ],
+        "position": [
+            4094,
+            4101
+        ]
+    },
+    {
+        "text": "đau lưng",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [
+            "isNegated"
+        ],
+        "position": [
+            4103,
+            4111
+        ]
+    },
+    {
+        "text": "đau cổ",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [
+            "isNegated"
+        ],
+        "position": [
+            4113,
+            4119
+        ]
+    },
+    {
+        "text": "đau ngực",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [
+            "isNegated"
+        ],
+        "position": [
+            4121,
+            4129
+        ]
+    },
+    {
+        "text": "khó thở",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [
+            "isNegated"
+        ],
+        "position": [
+            4131,
+            4138
+        ]
+    },
+    {
+        "text": "đau bụng",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [
+            "isNegated"
+        ],
+        "position": [
+            4140,
+            4148
+        ]
+    },
+    {
+        "text": "buồn nôn",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [
+            "isNegated"
+        ],
+        "position": [
+            4150,
+            4158
+        ]
+    },
+    {
+        "text": "xuất huyết dưới nhện không do phình mạch",
+        "type": "CHẨN_ĐOÁN",
+        "candidates": [],
+        "assertions": [],
+        "position": [
+            4413,
+            4453
+        ]
+    },
+    {
+        "text": "thay đổi trạng thái tinh thần",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [],
+        "position": [
+            4509,
+            4538
+        ]
+    },
+    {
+        "text": "chụp cắt lớp vi tính",
+        "type": "TÊN_XÉT_NGHIỆM",
+        "assertions": [],
+        "position": [
+            4542,
+            4562
+        ]
+    },
+    {
+        "text": "thủy não",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [],
+        "position": [
+            4572,
+            4580
+        ]
+    },
+    {
+        "text": "thay đổi trạng thái tinh thần",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [],
+        "position": [
+            4625,
+            4654
+        ]
+    },
+    {
+        "text": "khó khăn khi đi lại",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [],
+        "position": [
+            4658,
+            4677
+        ]
+    },
+    {
+        "text": "chụp cắt lớp vi tính mạch máu",
+        "type": "TÊN_XÉT_NGHIỆM",
+        "assertions": [],
+        "position": [
+            4679,
+            4708
+        ]
+    },
+    {
+        "text": "xuất huyết dưới nhện",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [],
+        "position": [
+            4732,
+            4752
+        ]
+    },
+    {
+        "text": "phình mạch",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [],
+        "position": [
+            4790,
+            4800
+        ]
+    },
+    {
+        "text": "chụp cắt lớp vi tính",
+        "type": "TÊN_XÉT_NGHIỆM",
+        "assertions": [],
+        "position": [
+            4805,
+            4825
+        ]
+    },
+    {
+        "text": "chụp mạch máu thông thường",
+        "type": "TÊN_XÉT_NGHIỆM",
+        "assertions": [],
+        "position": [
+            4829,
+            4855
+        ]
+    },
+    {
+        "text": "chụp cắt lớp vi tính",
+        "type": "TÊN_XÉT_NGHIỆM",
+        "assertions": [],
+        "position": [
+            4857,
+            4877
+        ]
+    },
+    {
+        "text": "thủy não",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [],
+        "position": [
+            4923,
+            4931
+        ]
+    },
+    {
+        "text": "chụp cắt lớp vi tính",
+        "type": "TÊN_XÉT_NGHIỆM",
+        "assertions": [],
+        "position": [
+            4950,
+            4970
+        ]
+    },
+    {
+        "text": "suy hô hấp",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [],
+        "position": [
+            5035,
+            5045
+        ]
+    },
+    {
+        "text": "viêm phổi",
+        "type": "CHẨN_ĐOÁN",
+        "candidates": [],
+        "assertions": [],
+        "position": [
+            5059,
+            5068
+        ]
+    },
+    {
+        "text": "trạng thái tinh thần dao động",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [],
+        "position": [
+            5073,
+            5102
+        ]
+    },
+    {
+        "text": "xuất huyết dưới màng cứng hai bên",
+        "type": "CHẨN_ĐOÁN",
+        "candidates": [],
+        "assertions": [],
+        "position": [
+            5151,
+            5184
+        ]
+    },
+    {
+        "text": "suy giảm trạng thái tinh thần",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [],
+        "position": [
+            5199,
+            5228
+        ]
+    },
+    {
+        "text": "khó khăn trong chú ý và định hướng",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [],
+        "position": [
+            5446,
+            5480
+        ]
+    },
+    {
+        "text": "chụp cắt lớp vi tính sọ não",
+        "type": "TÊN_XÉT_NGHIỆM",
+        "assertions": [],
+        "position": [
+            5498,
+            5525
+        ]
+    },
+    {
+        "text": "thủy não",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [],
+        "position": [
+            5535,
+            5543
+        ]
+    },
+    {
+        "text": "đau ngực ",
+        "type": "TRIỆU_CHỨNG",
+        "position": [
+            5826,
+            5835
+        ]
+    },
+    {
+        "text": "Tăng huyết áp ",
+        "type": "CHẨN_ĐOÁN",
+        "assertions": [
+            "isHistorical"
+        ],
+        "candidates": [
+            "I10"
+        ],
+        "position": [
+            5845,
+            5859
+        ]
+    },
+    {
+        "text": "Amlor 5mg",
+        "type": "THUỐC",
+        "assertions": [
+            "isHistorical"
+        ],
+        "position": [
+            5886,
+            5895
+        ],
+        "candidates": []
+    },
+    {
+        "text": "đau ngực trái âm ỉ",
+        "type": "TRIỆU_CHỨNG",
+        "position": [
+            5954,
+            5972
+        ]
+    },
+    {
+        "text": "không khó thở",
+        "type": "TRIỆU_CHỨNG",
+        "position": [
+            5974,
+            5987
+        ]
+    },
+    {
+        "text": "không nôn",
+        "type": "TRIỆU_CHỨNG",
+        "position": [
+            5989,
+            5998
+        ]
+    },
+    {
+        "text": "không sốt",
+        "type": "TRIỆU_CHỨNG",
+        "position": [
+            6000,
+            6009
+        ]
+    },
+    {
+        "text": "đại tiểu tiện bình thường",
+        "type": "TRIỆU_CHỨNG",
+        "position": [
+            6011,
+            6036
+        ]
+    },
+    {
+        "text": "tỉnh ",
+        "type": "TRIỆU_CHỨNG",
+        "position": [
+            6074,
+            6079
+        ]
+    },
+    {
+        "text": "Đau ngực trái âm ỉ",
+        "type": "TRIỆU_CHỨNG",
+        "position": [
+            6109,
+            6127
+        ]
+    },
+    {
+        "text": "Phổi rì rào phế nang rõ đều, không rales ",
+        "type": "TRIỆU_CHỨNG",
+        "position": [
+            6129,
+            6170
+        ]
+    },
+    {
+        "text": "Tim nhịp đều tần số 53 chu kì/ phút ",
+        "type": "TRIỆU_CHỨNG",
+        "position": [
+            6171,
+            6207
+        ]
+    },
+    {
+        "text": "HUyết áp 120/70 mmHg ",
+        "type": "TRIỆU_CHỨNG",
+        "position": [
+            6208,
+            6229
+        ]
+    },
+    {
+        "text": "Bụng mềm, gan lách không sờ thấy ",
+        "type": "TRIỆU_CHỨNG",
+        "position": [
+            6230,
+            6263
+        ]
+    },
+    {
+        "text": "Chụp cắt lớp vi tính động mạch vành, tim",
+        "type": "TÊN_XÉT_NGHIỆM",
+        "position": [
+            6293,
+            6333
+        ]
+    },
+    {
+        "text": "Điểm vôi hóa: 526.9 điểm. Vôi hóa gây nhiễu ảnh hạn chế đánh giá, sơ bộ nghi ngờ hẹp khít ~80%  gốc  LAD,  40%LAD1,  5%RCA2,  vôi  hóa  nhỏ  không  gây  hẹp  RCA1(CAD-RADS 4a/P3)",
+        "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+        "position": [
+            6335,
+            6513
+        ]
+    },
+    {
+        "text": "Điện tim ",
+        "type": "TÊN_XÉT_NGHIỆM",
+        "position": [
+            6514,
+            6523
+        ]
+    },
+    {
+        "text": "Nhịp xoang ST chênh nhẹ V2_V4",
+        "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+        "position": [
+            6525,
+            6554
+        ]
+    },
+    {
+        "text": "theo dõi hội chứng vành cấp",
+        "type": "CHẨN_ĐOÁN",
+        "assertions": [
+            "isHistorical"
+        ],
+        "candidates": [
+            "I21.9"
+        ],
+        "position": [
+            6566,
+            6593
+        ]
+    },
+    {
+        "text": "hẹp 80 % lỗ vào LAD ",
+        "type": "CHẨN_ĐOÁN",
+        "candidates": [
+            "I77.1"
+        ],
+        "position": [
+            6595,
+            6615
+        ]
+    },
+    {
+        "text": " tăng huyết áp",
+        "type": "CHẨN_ĐOÁN",
+        "candidates": [
+            "I10"
+        ],
+        "position": [
+            6616,
+            6630
+        ]
+    },
+    {
+        "text": "Aspirin 81 mg",
+        "type": "THUỐC",
+        "position": [
+            6640,
+            6653
+        ],
+        "candidates": [
+            "315431"
+        ]
+    },
+    {
+        "text": "Plavix 75 mg",
+        "type": "THUỐC",
+        "position": [
+            6669,
+            6681
+        ],
+        "candidates": [
+            "573094"
+        ]
+    },
+    {
+        "text": "Crestor 10 mg",
+        "type": "THUỐC",
+        "position": [
+            6697,
+            6710
+        ],
+        "candidates": []
+    },
+    {
+        "text": "lo âu",
+        "type": "CHẨN_ĐOÁN",
+        "candidates": [],
+        "assertions": [],
+        "position": [
+            6877,
+            6882
+        ]
+    },
+    {
+        "text": "trầm cảm",
+        "type": "CHẨN_ĐOÁN",
+        "candidates": [],
+        "assertions": [],
+        "position": [
+            6884,
+            6892
+        ]
+    },
+    {
+        "text": "rối loạn nhân cách cận biên",
+        "type": "CHẨN_ĐOÁN",
+        "candidates": [],
+        "assertions": [],
+        "position": [
+            6894,
+            6921
+        ]
+    },
+    {
+        "text": "đau ngực",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [],
+        "position": [
+            6943,
+            6951
+        ]
+    },
+    {
+        "text": "đau ngực",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [],
+        "position": [
+            7004,
+            7012
+        ]
+    },
+    {
+        "text": "vã mồ hôi",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [],
+        "position": [
+            7116,
+            7125
+        ]
+    },
+    {
+        "text": "đau ngực",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [],
+        "position": [
+            7127,
+            7135
+        ]
+    },
+    {
+        "text": "các yếu tố gây căng thẳng tâm lý xã hội",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [],
+        "position": [
+            7159,
+            7198
+        ]
+    },
+    {
+        "text": "đau",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [],
+        "position": [
+            7232,
+            7235
+        ]
+    },
+    {
+        "text": "căng thẳng lo âu",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [],
+        "position": [
+            7296,
+            7312
+        ]
+    },
+    {
+        "text": "điện tâm đồ bình thường",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [],
+        "position": [
+            7372,
+            7395
+        ]
+    },
+    {
+        "text": "đau ngực.",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [],
+        "position": [
+            7397,
+            7406
+        ]
+    },
+    {
+        "text": "đánh giá tâm thần",
+        "type": "TÊN_XÉT_NGHIỆM",
+        "assertions": [],
+        "position": [
+            7439,
+            7456
+        ]
+    },
+    {
+        "text": "khó chịu vùng thượng vị",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [],
+        "position": [
+            7542,
+            7565
+        ]
+    },
+    {
+        "text": "đau âm ỉ",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [],
+        "position": [
+            7580,
+            7588
+        ]
+    },
+    {
+        "text": "đau đầu vùng trán",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [],
+        "position": [
+            7608,
+            7625
+        ]
+    },
+    {
+        "text": "trầm cảm",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [],
+        "position": [
+            7652,
+            7660
+        ]
+    },
+    {
+        "text": "ăn uống không đủ",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [],
+        "position": [
+            7667,
+            7683
+        ]
+    },
+    {
+        "text": "huyết áp thường tụt",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [],
+        "position": [
+            7704,
+            7723
+        ]
+    },
+    {
+        "text": "huyết áp ban đầu",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [],
+        "position": [
+            7823,
+            7839
+        ]
+    },
+    {
+        "text": "bệnh mạch vành sớm",
+        "type": "CHẨN_ĐOÁN",
+        "candidates": [],
+        "assertions": [],
+        "position": [
+            7937,
+            7955
+        ]
+    },
+    {
+        "text": "tăng huyết áp",
+        "type": "CHẨN_ĐOÁN",
+        "candidates": [],
+        "assertions": [],
+        "position": [
+            7966,
+            7979
+        ]
+    },
+    {
+        "text": "tăng cholesterol máu",
+        "type": "CHẨN_ĐOÁN",
+        "candidates": [],
+        "assertions": [],
+        "position": [
+            7990,
+            8010
+        ]
+    },
+    {
+        "text": "đái tháo đường",
+        "type": "CHẨN_ĐOÁN",
+        "candidates": [],
+        "assertions": [],
+        "position": [
+            8026,
+            8040
+        ]
+    }
+]

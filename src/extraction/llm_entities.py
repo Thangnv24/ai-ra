@@ -58,11 +58,19 @@ class LLMEntityExtractor:
         spans: list[SpanCandidate] = []
         mention_count = 0
         rejection_reasons: Counter[str] = Counter()
-        for chunk in chunks:
+        for chunk_index, chunk in enumerate(chunks):
             units = _chunk_units(chunk)
+            context_before, context_after = _neighbor_context(chunks, chunk_index)
             result = self.llm_client.chat_json(
                 ENTITY_SYSTEM_PROMPT,
-                build_entity_extraction_prompt(_chunk_payload(chunk, units)),
+                build_entity_extraction_prompt(
+                    _chunk_payload(
+                        chunk,
+                        units,
+                        context_before=context_before,
+                        context_after=context_after,
+                    )
+                ),
             )
             if not result.ok or not isinstance(result.data, dict):
                 raise RuntimeError(
@@ -116,7 +124,12 @@ def align_quote_in_chunk(chunk: TextChunk, quote: str) -> tuple[int, int] | None
     return _align_normalized_quote(chunk, quote)
 
 
-def _chunk_payload(chunk: TextChunk, units: list[TextUnit] | None = None) -> dict[str, Any]:
+def _chunk_payload(
+    chunk: TextChunk,
+    units: list[TextUnit] | None = None,
+    context_before: str = "",
+    context_after: str = "",
+) -> dict[str, Any]:
     units = units or _chunk_units(chunk)
     return {
         "chunk_id": chunk.chunk_id,
@@ -124,6 +137,8 @@ def _chunk_payload(chunk: TextChunk, units: list[TextUnit] | None = None) -> dic
         "start": chunk.start,
         "end": chunk.end,
         "text": chunk.text,
+        "context_before": context_before,
+        "context_after": context_after,
         "units": [
             {
                 "unit_id": unit.unit_id,
@@ -132,6 +147,18 @@ def _chunk_payload(chunk: TextChunk, units: list[TextUnit] | None = None) -> dic
             for unit in units
         ],
     }
+
+
+def _neighbor_context(chunks: list[TextChunk], index: int, max_chars: int = 240) -> tuple[str, str]:
+    chunk = chunks[index]
+    case_id = chunk.section.split(":", 1)[0]
+    before = ""
+    after = ""
+    if index > 0 and chunks[index - 1].section.split(":", 1)[0] == case_id:
+        before = chunks[index - 1].text[-max_chars:]
+    if index + 1 < len(chunks) and chunks[index + 1].section.split(":", 1)[0] == case_id:
+        after = chunks[index + 1].text[:max_chars]
+    return before, after
 
 
 def _span_from_mention(text: str, chunk: TextChunk, mention: Any) -> SpanCandidate | None:
@@ -146,6 +173,7 @@ def _span_from_mention_with_reason(
     units: list[TextUnit] | None = None,
     used_occurrences: dict[tuple[str, str], set[int]] | None = None,
 ) -> tuple[SpanCandidate | None, str | None]:
+    mention = _coerce_compact_mention(mention)
     if not isinstance(mention, dict):
         return None, "invalid_mention"
     quote = str(mention.get("quote") or "").strip()
@@ -200,6 +228,16 @@ def _span_from_mention_with_reason(
         _confidence(mention.get("confidence")),
         source="llm",
     ), None
+
+
+def _coerce_compact_mention(mention: Any) -> Any:
+    if not isinstance(mention, list) or len(mention) < 2:
+        return mention
+    return {
+        "quote": mention[0],
+        "type": mention[1],
+        "occurrence_index": mention[2] if len(mention) > 2 else 0,
+    }
 
 
 def _chunk_units(chunk: TextChunk) -> list[TextUnit]:

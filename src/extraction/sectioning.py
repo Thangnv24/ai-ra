@@ -2,7 +2,9 @@
 
 from __future__ import annotations
 
+import re
 from dataclasses import dataclass
+from functools import lru_cache
 
 from core.text import normalize_key
 
@@ -94,6 +96,40 @@ FALLBACK_SECTION_MARKERS: tuple[tuple[str, tuple[str, ...]], ...] = (
     ),
 )
 
+_CASE_ORDINALS = (
+    "nhat",
+    "hai",
+    "ba",
+    "tu",
+    "nam",
+    "sau",
+    "bay",
+    "tam",
+    "chin",
+    "muoi",
+)
+_CASE_NOUNS = ("ho so", "truong hop", "ca benh", "benh nhan")
+_ADMIN_LINE_PREFIXES = (
+    "phieu ban giao",
+    "cong hoa xa hoi chu nghia viet nam",
+    "bao cao tong hop",
+    "tom tat danh sach",
+    "ngay xuat",
+    "nguoi xuat",
+    "ca truc tu",
+    "nguoi ban giao",
+    "nguoi nhan",
+    "ma so ho so",
+    "thoi diem tiep nhan",
+    "noi dung chi tiet",
+    "phan i",
+    "phan ii",
+    "phan iii",
+)
+_WORD_RE = re.compile(r"[^\W\d_]+", re.UNICODE)
+_CLAUSE_RE = re.compile(r"[,;:\n]|\b(?:va|hoac|khong|phu nhan)\b")
+_TARGET_EXTRACTION_LOAD = 22
+
 
 def detect_sections(text: str) -> list[Section]:
     hits = _section_hits(text)
@@ -109,21 +145,130 @@ def detect_sections(text: str) -> list[Section]:
 
 
 def split_chunks(text: str, max_chars: int = 1000, overlap: int = 0) -> list[TextChunk]:
+    del overlap  # Context overlap is carried separately; extraction targets remain disjoint.
     chunks: list[TextChunk] = []
-    for section in detect_sections(text):
-        for chunk_start, chunk_end in _semantic_section_spans(text, section.start, section.end, max_chars):
-            start, end = _trim_offsets(text, chunk_start, chunk_end)
-            if start < end:
+    semantic_sections = detect_sections(text)
+    for case_index, (case_start, case_end) in enumerate(_case_spans(text), start=1):
+        for segment_start, segment_end in _usable_segments(text, case_start, case_end):
+            for chunk_start, chunk_end in _semantic_section_spans(text, segment_start, segment_end, max_chars):
+                start, end = _trim_offsets(text, chunk_start, chunk_end)
+                if start >= end or _is_administrative_only(text[start:end]):
+                    continue
+                section_name = _section_name_at(semantic_sections, start)
                 chunks.append(
                     TextChunk(
                         chunk_id=f"c{len(chunks) + 1}",
-                        section=section.name,
+                        section=f"case_{case_index}:{section_name}",
                         start=start,
                         end=end,
                         text=text[start:end],
                     )
                 )
     return chunks or [TextChunk("c1", "document", 0, len(text), text)]
+
+
+def _case_spans(text: str) -> list[tuple[int, int]]:
+    return list(_cached_case_spans(text))
+
+
+@lru_cache(maxsize=128)
+def _cached_case_spans(text: str) -> tuple[tuple[int, int], ...]:
+    hits = _case_boundary_hits(text)
+    if not hits:
+        return ((0, len(text)),)
+    starts = [0] if hits[0] > 0 else []
+    starts.extend(hits)
+    starts = sorted(set(starts))
+    return tuple(
+        (start, starts[index + 1] if index + 1 < len(starts) else len(text))
+        for index, start in enumerate(starts)
+    )
+
+
+def case_bounds_at(text: str, offset: int) -> tuple[int, int]:
+    for start, end in _cached_case_spans(text):
+        if start <= offset < end:
+            return start, end
+    return 0, len(text)
+
+
+def _case_boundary_hits(text: str) -> list[int]:
+    hits: list[int] = []
+    offset = 0
+    for raw_line in text.splitlines(keepends=True):
+        stripped = raw_line.strip()
+        key = normalize_key(stripped)
+        if key and len(key) <= 190 and _is_case_boundary_line(stripped, key):
+            start = offset + max(0, raw_line.find(stripped))
+            if not hits or not _is_administrative_only(text[hits[-1] : start]):
+                hits.append(start)
+        offset += len(raw_line)
+    return hits
+
+
+def _is_case_boundary_line(raw_line: str, key: str) -> bool:
+    if key.startswith("ma so ho so"):
+        return True
+    if re.match(r"^\s*\d+\.\d+\.?\s+", raw_line) and any(noun in key for noun in _CASE_NOUNS):
+        return True
+    return any(f"{noun} thu {ordinal}" in key for noun in _CASE_NOUNS for ordinal in _CASE_ORDINALS)
+
+
+def _usable_segments(text: str, start: int, end: int) -> list[tuple[int, int]]:
+    segments: list[tuple[int, int]] = []
+    segment_start = start
+    offset = start
+    for raw_line in text[start:end].splitlines(keepends=True):
+        line_end = offset + len(raw_line)
+        repeat_start = _pathological_repeat_start(raw_line)
+        if repeat_start is not None:
+            absolute_repeat = offset + repeat_start
+            if segment_start < absolute_repeat:
+                segments.append((segment_start, absolute_repeat))
+            segment_start = line_end
+        offset = line_end
+    if segment_start < end:
+        segments.append((segment_start, end))
+    return segments or [(start, end)]
+
+
+def _pathological_repeat_start(line: str, threshold: int = 20) -> int | None:
+    previous = ""
+    run_start = 0
+    run_length = 0
+    for match in _WORD_RE.finditer(line):
+        token = normalize_key(match.group(0))
+        if token and token == previous:
+            run_length += 1
+        else:
+            previous = token
+            run_start = match.start()
+            run_length = 1
+        if run_length >= threshold:
+            return run_start
+    return None
+
+
+def _is_administrative_only(value: str) -> bool:
+    lines = [normalize_key(line) for line in value.splitlines() if normalize_key(line)]
+    if not lines:
+        return True
+    for line in lines:
+        if not line.strip("._- "):
+            continue
+        if any(line.startswith(prefix) for prefix in _ADMIN_LINE_PREFIXES):
+            continue
+        if _is_case_boundary_line(line, line):
+            continue
+        return False
+    return True
+
+
+def _section_name_at(sections: list[Section], offset: int) -> str:
+    for section in sections:
+        if section.start <= offset < section.end:
+            return section.name
+    return "document"
 
 
 def _semantic_section_spans(text: str, start: int, end: int, max_chars: int) -> list[tuple[int, int]]:
@@ -135,18 +280,28 @@ def _semantic_section_spans(text: str, start: int, end: int, max_chars: int) -> 
     chunk_start: int | None = None
     chunk_end: int | None = None
     for block_start, block_end in blocks:
-        if block_end - block_start > max_chars:
+        block_text = text[block_start:block_end]
+        block_load = _estimated_extraction_load(block_text)
+        if block_end - block_start > max_chars or (block_load > _TARGET_EXTRACTION_LOAD and len(block_text) > 360):
             if chunk_start is not None and chunk_end is not None:
                 spans.append((chunk_start, chunk_end))
                 chunk_start = None
                 chunk_end = None
-            spans.extend(_split_long_span(text, block_start, block_end, max_chars))
+            dense_max_chars = min(
+                max_chars,
+                max(360, int(max_chars * _TARGET_EXTRACTION_LOAD / max(1, block_load))),
+            )
+            spans.extend(_split_long_span(text, block_start, block_end, dense_max_chars))
             continue
         if chunk_start is None:
             chunk_start, chunk_end = block_start, block_end
             continue
         assert chunk_end is not None
-        if block_end - chunk_start <= max_chars:
+        combined_text = text[chunk_start:block_end]
+        if (
+            block_end - chunk_start <= max_chars
+            and _estimated_extraction_load(combined_text) <= _TARGET_EXTRACTION_LOAD
+        ):
             chunk_end = block_end
         else:
             spans.append((chunk_start, chunk_end))
@@ -154,6 +309,13 @@ def _semantic_section_spans(text: str, start: int, end: int, max_chars: int) -> 
     if chunk_start is not None and chunk_end is not None:
         spans.append((chunk_start, chunk_end))
     return spans
+
+
+def _estimated_extraction_load(value: str) -> int:
+    key = normalize_key(value)
+    structural_cues = len(_CLAUSE_RE.findall(key))
+    nonempty_lines = sum(bool(line.strip()) for line in value.splitlines())
+    return max(1, structural_cues + max(0, nonempty_lines - 1), len(key) // 220)
 
 
 def _line_blocks(text: str, start: int, end: int, max_chars: int) -> list[tuple[int, int]]:

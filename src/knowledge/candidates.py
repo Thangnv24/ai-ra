@@ -12,6 +12,7 @@ from pathlib import Path
 from core.config import CODED_TYPES, TYPE_DIAGNOSIS, TYPE_DRUG
 from core.medication import (
     medication_ingredient_key,
+    medication_lookup_keys,
     medication_match_score,
     medication_tty_score,
     normalize_prescription_text,
@@ -50,7 +51,7 @@ class SlimCandidateIndex:
         self.records = records
         self.aliases = aliases
         self.diagnosis_lexical_index = DiagnosisLexicalIndex.build(records, aliases)
-        self.medication_lexical_index = MedicationLexicalIndex.build(records)
+        self.medication_lexical_index = MedicationLexicalIndex.build(records, aliases)
 
     @classmethod
     def empty(cls) -> "SlimCandidateIndex":
@@ -96,35 +97,56 @@ class SlimCandidateIndex:
 
 
 class MedicationLexicalIndex:
-    def __init__(self, postings: dict[str, tuple[CandidateRecord, ...]]) -> None:
+    def __init__(
+        self,
+        postings: dict[str, tuple[CandidateRecord, ...]],
+        alias_support: dict[str, int] | None = None,
+    ) -> None:
         self.postings = postings
+        self.alias_support = alias_support or {}
 
     @classmethod
-    def build(cls, records: dict[tuple[str, str], CandidateRecord]) -> "MedicationLexicalIndex":
+    def build(
+        cls,
+        records: dict[tuple[str, str], CandidateRecord],
+        aliases: dict[tuple[str, str], tuple[str, ...]] | None = None,
+    ) -> "MedicationLexicalIndex":
         postings: dict[str, list[CandidateRecord]] = defaultdict(list)
         for (concept_type, _), record in records.items():
             if concept_type != TYPE_DRUG or not record.name:
                 continue
-            ingredient = _medication_record_key(record.name)
-            if len(ingredient) < 3:
-                continue
-            postings[ingredient].append(record)
-        return cls({key: tuple(value) for key, value in postings.items()})
+            for lookup_key in _medication_record_keys(record.name):
+                if len(lookup_key) >= 3:
+                    postings[lookup_key].append(record)
+
+        alias_support: Counter[str] = Counter()
+        for (concept_type, _), codes in (aliases or {}).items():
+            if concept_type == TYPE_DRUG:
+                alias_support.update(codes)
+        return cls(
+            {key: tuple(value) for key, value in postings.items()},
+            dict(alias_support),
+        )
 
     @classmethod
     def empty(cls) -> "MedicationLexicalIndex":
         return cls({})
 
     def lookup(self, text: str, limit: int = 20) -> list[CandidateHit]:
-        ingredient = medication_ingredient_key(text)
-        if not ingredient:
+        lookup_keys = medication_lookup_keys(text)
+        if not lookup_keys:
             return []
         scored: list[CandidateHit] = []
-        for record in self.postings.get(ingredient, ()):
+        records: dict[str, CandidateRecord] = {}
+        for lookup_key in lookup_keys:
+            for record in self.postings.get(lookup_key, ()):
+                records.setdefault(record.code, record)
+        for record in records.values():
             score = (
                 0.70
                 + medication_match_score(text, record.name)
                 + medication_tty_score(text, record.ttys)
+                + min(self.alias_support.get(record.code, 0), 10) * 0.002
                 - min(record.priority, 100) * 0.001
             )
             scored.append(CandidateHit(record=record, source="medication_lexical", score=score))
@@ -145,6 +167,15 @@ def _medication_record_key(name: str) -> str:
         key = key[: match.start()]
     key = re.sub(r"\s*\[[^\]]+\]\s*$", "", key)
     return " ".join(key.split())
+
+
+def _medication_record_keys(name: str) -> tuple[str, ...]:
+    keys = [_medication_record_key(name)]
+    for brand in re.findall(r"\[([^\]]+)\]", name):
+        brand_key = medication_ingredient_key(brand)
+        if len(brand_key) >= 3 and brand_key not in keys:
+            keys.append(brand_key)
+    return tuple(key for key in keys if key)
 
 
 @dataclass(frozen=True, slots=True)
@@ -223,7 +254,12 @@ class DiagnosisLexicalIndex:
                     record = self.records.get((TYPE_DIAGNOSIS, code))
                     if record is None:
                         continue
-                    score = 0.45 + min(doc_score, 1.0) * 0.4 - min(record.priority, 100) * 0.0005
+                    score = (
+                        0.45
+                        + min(doc_score, 1.0) * 0.4
+                        + diagnosis_qualifier_adjustment(text, record.name)
+                        - min(record.priority, 100) * 0.0005
+                    )
                     current = best_by_code.get(code)
                     if current is None or score > current.score:
                         best_by_code[code] = CandidateHit(
@@ -438,7 +474,90 @@ def _hit_score(
     if concept_type == TYPE_DRUG:
         score += medication_match_score(text, record.name)
         score += medication_tty_score(text, record.ttys)
+    elif concept_type == TYPE_DIAGNOSIS:
+        score += diagnosis_qualifier_adjustment(text, record.name)
     return score
+
+
+def diagnosis_qualifier_adjustment(query_text: str, candidate_text: str) -> float:
+    """Reward matching code-defining qualifiers and penalize conflicts."""
+
+    query = _normalize_diagnosis_spelling(normalize_key(query_text))
+    candidate = _normalize_diagnosis_spelling(normalize_key(candidate_text))
+    score = 0.0
+
+    query_stage = _diagnosis_stage(query)
+    candidate_stage = _diagnosis_stage(candidate)
+    score += _qualifier_pair_score(query_stage, candidate_stage, 0.16, -0.25, -0.45)
+
+    query_acuity = _diagnosis_acuity(query)
+    candidate_acuity = _diagnosis_acuity(candidate)
+    score += _qualifier_pair_score(query_acuity, candidate_acuity, 0.08, -0.16, -0.30)
+
+    query_side = _diagnosis_laterality(query)
+    candidate_side = _diagnosis_laterality(candidate)
+    score += _qualifier_pair_score(query_side, candidate_side, 0.10, -0.18, -0.35)
+
+    query_type = _diagnosis_type(query)
+    candidate_type = _diagnosis_type(candidate)
+    score += _qualifier_pair_score(query_type, candidate_type, 0.10, -0.20, -0.35)
+
+    query_unspecified = _has_unspecified_qualifier(query)
+    candidate_unspecified = _has_unspecified_qualifier(candidate)
+    if query_unspecified:
+        score += 0.08 if candidate_unspecified else -0.10
+    elif candidate_unspecified and any((query_stage, query_acuity, query_side, query_type)):
+        score -= 0.08
+    return score
+
+
+def _qualifier_pair_score(
+    query_value: str,
+    candidate_value: str,
+    match_bonus: float,
+    missing_penalty: float,
+    conflict_penalty: float,
+) -> float:
+    if not query_value:
+        return 0.0
+    if not candidate_value:
+        return missing_penalty
+    return match_bonus if query_value == candidate_value else conflict_penalty
+
+
+def _diagnosis_stage(key: str) -> str:
+    match = re.search(r"\bgiai doan\s+(cuoi|[1-5]|i{1,3}|iv|v)\b", key)
+    if not match:
+        return ""
+    value = match.group(1)
+    return {"cuoi": "5", "i": "1", "ii": "2", "iii": "3", "iv": "4", "v": "5"}.get(value, value)
+
+
+def _diagnosis_acuity(key: str) -> str:
+    if re.search(r"\bcap(?: tinh)?\b", key):
+        return "acute"
+    if re.search(r"\bman(?: tinh)?\b", key):
+        return "chronic"
+    return ""
+
+
+def _diagnosis_laterality(key: str) -> str:
+    if re.search(r"\b(hai ben|bilateral)\b", key):
+        return "bilateral"
+    if re.search(r"\b(trai|left)\b", key):
+        return "left"
+    if re.search(r"\b(phai|right)\b", key):
+        return "right"
+    return ""
+
+
+def _diagnosis_type(key: str) -> str:
+    match = re.search(r"\b(?:type|tip)\s*([12])\b", key)
+    return match.group(1) if match else ""
+
+
+def _has_unspecified_qualifier(key: str) -> bool:
+    return bool(re.search(r"\b(khong xac dinh|khong dac hieu|unspecified|nos)\b", key))
 
 
 def _diagnosis_search_variants(text: str) -> list[str]:

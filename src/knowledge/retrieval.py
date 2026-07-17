@@ -6,6 +6,7 @@ from functools import lru_cache
 from typing import Any
 
 from core.config import CODED_TYPES, TYPE_DIAGNOSIS, TYPE_DRUG
+from core.medication import medication_has_strength, medication_strength_relation
 from core.text import normalize_key
 from knowledge.candidates import SlimCandidateIndex
 from knowledge.ontology import OntologyIndex
@@ -16,14 +17,27 @@ class CandidateRetriever:
         self.index = index
         self.slim_index = slim_index or SlimCandidateIndex.empty()
 
-    @lru_cache(maxsize=8192)
-    def candidates_for(self, text: str, concept_type: str, limit: int = 5) -> tuple[str, ...]:
+    def candidates_for(
+        self,
+        text: str,
+        concept_type: str,
+        limit: int = 5,
+        *,
+        source_text: str | None = None,
+        start: int | None = None,
+        end: int | None = None,
+    ) -> tuple[str, ...]:
         if concept_type not in CODED_TYPES:
             return ()
+        if not _candidate_eligible(concept_type, source_text, start, end):
+            return ()
+        return self._candidates_for_query(text, concept_type, limit)
+
+    @lru_cache(maxsize=8192)
+    def _candidates_for_query(self, text: str, concept_type: str, limit: int) -> tuple[str, ...]:
         if concept_type == TYPE_DRUG:
             slim_hits = self.slim_index.lookup(text, concept_type, limit=max(limit * 6, 30))
-            if slim_hits:
-                return (slim_hits[0].record.code,)
+            return _select_drug_code(text, slim_hits)
         if concept_type == TYPE_DIAGNOSIS:
             slim_hits = self.slim_index.lookup(text, concept_type, limit=max(limit * 6, 30))
             selected = _select_diagnosis_codes(text, slim_hits, limit=limit)
@@ -115,20 +129,51 @@ def _select_diagnosis_codes(text: str, hits: list[Any], limit: int) -> tuple[str
         return ()
 
     top = hits[0]
+    threshold = 0.78 if top.source == "diagnosis_lexical" else 0.82
+    if top.score < threshold:
+        return ()
+    if top.source == "diagnosis_lexical" and len(hits) > 1 and top.score - hits[1].score < 0.04:
+        return ()
+    return (top.record.code,)
+
+
+def _select_drug_code(text: str, hits: list[Any]) -> tuple[str, ...]:
+    if not hits:
+        return ()
+    has_strength = medication_has_strength(text)
+    eligible = []
+    for hit in hits:
+        if has_strength:
+            if medication_strength_relation(text, hit.record.name) != "match":
+                continue
+            tty_set = {tty.upper() for tty in hit.record.ttys}
+            if tty_set and tty_set <= {"IN", "PIN", "MIN", "BN"}:
+                continue
+        eligible.append(hit)
+    if not eligible:
+        return ()
+
+    top = eligible[0]
+    weak_sources = {"drug_ingredient"}
+    if top.source in weak_sources:
+        return ()
+    if top.source == "medication_lexical" and top.score < 0.82:
+        return ()
     if top.score < 0.70:
         return ()
-    selected = [top.record.code]
-    if len(hits) < 2 or limit < 2:
-        return tuple(selected)
+    return (top.record.code,)
 
-    second = hits[1]
-    close_exact_siblings = (
-        top.source in {"exact", "diagnosis_canonical"}
-        and second.source in {"exact", "diagnosis_canonical"}
-        and second.score >= 0.90
-        and top.score - second.score <= 0.015
-        and not any(marker in key for marker in ("khong xac dinh", "khong dac hieu", "unspecified"))
-    )
-    if close_exact_siblings:
-        selected.append(second.record.code)
-    return tuple(selected[:limit])
+
+def _candidate_eligible(
+    concept_type: str,
+    source_text: str | None,
+    start: int | None,
+    end: int | None,
+) -> bool:
+    if concept_type != TYPE_DIAGNOSIS or source_text is None or start is None or end is None:
+        return True
+    line_start = source_text.rfind("\n", 0, start) + 1
+    line_end = source_text.find("\n", end)
+    if line_end < 0:
+        line_end = len(source_text)
+    return line_end - line_start < 300

@@ -15,7 +15,7 @@ from core.config import (
     TYPE_SYMPTOM,
 )
 from core.text import normalize_key
-from extraction.sectioning import Section, detect_sections
+from extraction.sectioning import Section, case_bounds_at, detect_sections
 
 
 NEGATION_RE = re.compile(
@@ -31,16 +31,18 @@ NEGATION_EXCLUSIONS = (
     "khong lien quan",
 )
 CONTRAST_RE = re.compile(r"\b(?:nhung|tuy nhien|song|however|but)\b")
-FAMILY_RE = re.compile(
-    r"(?:\btien su gia dinh\b|\bgia dinh\b|\bnguoi than\b|\bfamily\b|\bfather\b|\bmother\b"
-    r"|\banh trai\b|\bchi gai\b|\bem trai\b|\bem gai\b"
-    r"|\b(?:bo|cha|me|ong|ba)\s+(?:bi|mac|co|tien su|duoc chan doan|da tung)\b)"
+FAMILY_SUBJECT_RE = re.compile(
+    r"(?:\btien su gia dinh\s*(?::|la|co|ghi nhan)?\s*$|\bfamily history\s*(?::|of)?\s*$|"
+    r"\b(?:bo|cha|me|ong|ba|anh trai|chi gai|em trai|em gai|father|mother)"
+    r"(?:\s+benh nhan)?\s+(?:bi|mac|co|tien su|duoc chan doan|da tung)\s*$)"
 )
 EXPLICIT_HISTORY_RE = re.compile(
-    r"(?:\bda tung\b|\btung bi\b|\btruoc day\b|\bpreviously\b|\bhistory of\b|"
+    r"(?:\btien su\b|\bda tung\b|\btung bi\b|\btruoc day\b|\bpreviously\b|\bhistory of\b|"
     r"\bpast medical history\b|\bpmh\b|\bkeo dai tu lau\b|\btrong vai nam\b|"
     r"\bman tinh\b|\bman tinh\b|\bcu\b)"
 )
+
+_NARRATIVE_LINE_MIN_CHARS = 300
 HISTORICAL_DRUG_RE = re.compile(
     r"(?:\bthuoc truoc khi nhap vien\b|\bthuoc truoc nhap vien\b|\bhome meds?\b|"
     r"\bprior to admission\b|\bda dung\b|\btung dung\b|\bsu dung\b|\bda ngung\b|"
@@ -66,15 +68,25 @@ class ContextDetector:
         if concept_type not in ASSERTION_TYPES:
             return ()
 
-        clause_before = normalize_key(text[_clause_start(text, start) : start])
-        line_before = normalize_key(text[_line_start(text, start) : start])
-        recent_before = normalize_key(text[max(0, start - 700) : start])
+        case_start, _ = case_bounds_at(text, start)
+        line_start = max(case_start, _line_start(text, start))
+        line_end = text.find("\n", end)
+        if line_end < 0:
+            line_end = len(text)
+        if line_end - line_start >= _NARRATIVE_LINE_MIN_CHARS:
+            return ()
+
+        clause_start = max(case_start, _clause_start(text, start))
+        clause_before = normalize_key(text[clause_start:start])
+        line_before = normalize_key(text[line_start:start])
+        mention_key = normalize_key(text[start:end])
+        recent_before = normalize_key(text[max(case_start, start - 700) : start])
         section = _section_at(text, start)
 
         assertions: list[str] = []
-        if self._has_negation(clause_before):
+        if self._has_negation(clause_before, mention_key):
             assertions.append(ASSERTION_NEGATED)
-        if FAMILY_RE.search(line_before) or FAMILY_RE.search(recent_before[-220:]):
+        if FAMILY_SUBJECT_RE.search(line_before[-180:]) or FAMILY_SUBJECT_RE.search(recent_before[-180:]):
             assertions.append(ASSERTION_FAMILY)
         if self._has_historical_context(
             concept_type=concept_type,
@@ -87,14 +99,15 @@ class ContextDetector:
         return tuple(assertions)
 
     @staticmethod
-    def _has_negation(clause_before: str) -> bool:
-        if not clause_before:
+    def _has_negation(clause_before: str, mention_key: str = "") -> bool:
+        context = " ".join(part for part in (clause_before, mention_key) if part)
+        if not context:
             return False
-        matches = list(NEGATION_RE.finditer(clause_before))
+        matches = list(NEGATION_RE.finditer(context))
         if not matches:
             return False
         last = matches[-1]
-        negated_scope = clause_before[last.start() :]
+        negated_scope = context[last.start() :]
         if any(negated_scope.startswith(prefix) for prefix in NEGATION_EXCLUSIONS):
             return False
         contrast = list(CONTRAST_RE.finditer(negated_scope))

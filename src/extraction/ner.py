@@ -579,14 +579,9 @@ def _overlap(left: SpanCandidate, right: SpanCandidate) -> bool:
 
 
 def resolve_span_types(text: str, spans: list[SpanCandidate]) -> list[SpanCandidate]:
-    """Override uncertain LLM types only when deterministic evidence is strong."""
+    """Preserve proposal types; extraction context is more reliable than lexical overrides."""
 
-    resolved: list[SpanCandidate] = []
-    for span in spans:
-        key = normalize_key(span.text)
-        concept_type = _deterministic_type(key, text, span.start, span.end, span.type) or span.type
-        resolved.append(replace(span, type=concept_type))
-    return resolved
+    return list(spans)
 
 
 def _deterministic_type(

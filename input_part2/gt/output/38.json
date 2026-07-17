@@ -1,0 +1,588 @@
+[
+    {
+        "text": "xơ hóa cơ",
+        "type": "CHẨN_ĐOÁN",
+        "candidates": [],
+        "assertions": [],
+        "position": [
+            163,
+            172
+        ]
+    },
+    {
+        "text": "suy giáp",
+        "type": "CHẨN_ĐOÁN",
+        "candidates": [],
+        "assertions": [],
+        "position": [
+            174,
+            182
+        ]
+    },
+    {
+        "text": "đau vùng thượng vị",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [],
+        "position": [
+            196,
+            214
+        ]
+    },
+    {
+        "text": "đau",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [],
+        "position": [
+            264,
+            267
+        ]
+    },
+    {
+        "text": "buồn nôn",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [],
+        "position": [
+            311,
+            319
+        ]
+    },
+    {
+        "text": "nôn",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [],
+        "position": [
+            335,
+            338
+        ]
+    },
+    {
+        "text": "chán ăn",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [],
+        "position": [
+            400,
+            407
+        ]
+    },
+    {
+        "text": "sốt rét",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [],
+        "position": [
+            418,
+            425
+        ]
+    },
+    {
+        "text": "đau ngực khó thở",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [],
+        "position": [
+            427,
+            443
+        ]
+    },
+    {
+        "text": "thay đổi thói quen đi tiêu",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [],
+        "position": [
+            445,
+            471
+        ]
+    },
+    {
+        "text": "tiểu khó",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [],
+        "position": [
+            473,
+            481
+        ]
+    },
+    {
+        "text": "phân đen",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [],
+        "position": [
+            483,
+            491
+        ]
+    },
+    {
+        "text": "nhiễm trùng răng",
+        "type": "CHẨN_ĐOÁN",
+        "candidates": [],
+        "assertions": [],
+        "position": [
+            574,
+            590
+        ]
+    },
+    {
+        "text": "loét dạ dày tá tràng",
+        "type": "CHẨN_ĐOÁN",
+        "candidates": [],
+        "assertions": [],
+        "position": [
+            606,
+            626
+        ]
+    },
+    {
+        "text": "chụp cắt lớp vi tính ổ bụng",
+        "type": "TÊN_XÉT_NGHIỆM",
+        "assertions": [],
+        "position": [
+            682,
+            709
+        ]
+    },
+    {
+        "text": "sợi xơ quanh thân động mạch chủ bụng",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [],
+        "position": [
+            719,
+            755
+        ]
+    },
+    {
+        "text": "chụp cắt lớp vi tính mạch máu",
+        "type": "TÊN_XÉT_NGHIỆM",
+        "assertions": [],
+        "position": [
+            774,
+            803
+        ]
+    },
+    {
+        "text": "bóc tách tắc nghẽn động mạch chủ bụng",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [],
+        "position": [
+            825,
+            862
+        ]
+    },
+    {
+        "text": "bệnh tim mạch",
+        "type": "CHẨN_ĐOÁN",
+        "candidates": [],
+        "assertions": [],
+        "position": [
+            929,
+            942
+        ]
+    },
+    {
+        "text": "tăng huyết áp",
+        "type": "CHẨN_ĐOÁN",
+        "candidates": [],
+        "assertions": [],
+        "position": [
+            947,
+            960
+        ]
+    },
+    {
+        "text": "khó chịu",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [],
+        "position": [
+            993,
+            1001
+        ]
+    },
+    {
+        "text": "điểm đau khu trú",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [],
+        "position": [
+            1019,
+            1035
+        ]
+    },
+    {
+        "text": "không chướng",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [],
+        "position": [
+            1057,
+            1069
+        ]
+    },
+    {
+        "text": "phản ứng co cứng khi bỏ tay đột ngột",
+        "type": "TRIỆU_CHỨNG",
+        "assertions": [],
+        "position": [
+            1080,
+            1116
+        ]
+    },
+    {
+        "text": "dấu hiệu sinh tồn",
+        "type": "TÊN_XÉT_NGHIỆM",
+        "assertions": [],
+        "position": [
+            1118,
+            1135
+        ]
+    },
+    {
+        "text": "trầm cảm",
+        "type": "CHẨN_ĐOÁN",
+        "candidates": [],
+        "assertions": [
+            "isHistorical"
+        ],
+        "position": [
+            1270,
+            1278
+        ]
+    },
+    {
+        "text": "thay đổi trạng thái tinh thần",
+        "type": "CHẨN_ĐOÁN",
+        "candidates": [],
+        "assertions": [],
+        "position": [
+            1329,
+            1358
+        ]
+    },
+    {
+        "text": "hồi hộp trống ngực",
+        "type": "TRIỆU_CHỨNG",
+        "position": [
+            1471,
+            1489
+        ]
+    },
+    {
+        "text": "đau ngực",
+        "type": "TRIỆU_CHỨNG",
+        "position": [
+            1491,
+            1499
+        ]
+    },
+    {
+        "text": "Thận đa nang",
+        "type": "CHẨN_ĐOÁN",
+        "candidates": [
+            "Q61.3"
+        ],
+        "assertions": [
+            "isHistorical"
+        ],
+        "position": [
+            1510,
+            1522
+        ]
+    },
+    {
+        "text": "Gout",
+        "type": "CHẨN_ĐOÁN",
+        "assertions": [
+            "isHistorical"
+        ],
+        "position": [
+            1525,
+            1529
+        ]
+    },
+    {
+        "text": "Tăng huyết áp",
+        "type": "CHẨN_ĐOÁN",
+        "assertions": [
+            "isHistorical"
+        ],
+        "candidates": [
+            "I10"
+        ],
+        "position": [
+            1532,
+            1545
+        ]
+    },
+    {
+        "text": "Coversyl Plus",
+        "type": "THUỐC",
+        "position": [
+            1561,
+            1574
+        ],
+        "candidates": [
+            "196500"
+        ]
+    },
+    {
+        "text": "hồi hộp trống ngực",
+        "type": "TRIỆU_CHỨNG",
+        "position": [
+            1635,
+            1653
+        ]
+    },
+    {
+        "text": "đau ngực ",
+        "type": "TRIỆU_CHỨNG",
+        "position": [
+            1670,
+            1679
+        ]
+    },
+    {
+        "text": " holter ECG ",
+        "type": "TÊN_XÉT_NGHIỆM",
+        "position": [
+            1778,
+            1790
+        ]
+    },
+    {
+        "text": "nhiều ngoại tâm thu thất",
+        "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+        "position": [
+            1800,
+            1824
+        ]
+    },
+    {
+        "text": "đơn dạng chiếm 31%",
+        "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+        "position": [
+            1826,
+            1844
+        ]
+    },
+    {
+        "text": "tỉnh",
+        "type": "TRIỆU_CHỨNG",
+        "position": [
+            1887,
+            1891
+        ]
+    },
+    {
+        "text": " đau ngực ",
+        "type": "TRIỆU_CHỨNG",
+        "position": [
+            1959,
+            1969
+        ]
+    },
+    {
+        "text": "khó thở",
+        "type": "TRIỆU_CHỨNG",
+        "position": [
+            1976,
+            1983
+        ]
+    },
+    {
+        "text": "Tim không đều, tần số 66 ck/phút ",
+        "type": "TRIỆU_CHỨNG",
+        "position": [
+            2025,
+            2058
+        ]
+    },
+    {
+        "text": "T1, T2 rõ, không phát hiện tiếng thổi bất thường ",
+        "type": "TRIỆU_CHỨNG",
+        "position": [
+            2059,
+            2108
+        ]
+    },
+    {
+        "text": "HA 150/70 mmHg ",
+        "type": "TRIỆU_CHỨNG",
+        "position": [
+            2109,
+            2124
+        ]
+    },
+    {
+        "text": "Phổi nghe rì rào phế nang rõ, không rales ",
+        "type": "TRIỆU_CHỨNG",
+        "position": [
+            2125,
+            2167
+        ]
+    },
+    {
+        "text": "Bụng mềm, không chướng ",
+        "type": "TRIỆU_CHỨNG",
+        "position": [
+            2168,
+            2191
+        ]
+    },
+    {
+        "text": "KQ holter ECG",
+        "type": "TÊN_XÉT_NGHIỆM",
+        "position": [
+            2219,
+            2232
+        ]
+    },
+    {
+        "text": "Nhịp cơ bản là nhịp xoang, thấp nhất 35 ck/phút, tần số trung bình 71 ck/phút, tần số cao nhất là 117 ck/phút. Có ít ngoại tâm thu nhĩ đơn dạng, không có nhịp nhanh nhĩ, nhịp nhanh kịch phát trên thất. Có nhiều Ngoại tâm thu thất đơn dạng, chiếm 31%, không có dạng R/T, không có cơn rung thất, không có nhịp nhanh kịch phát trên thất. Không có khoảng RR > 2.5s. Không có block nhĩ thất. Không có rung nhĩ",
+        "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+        "position": [
+            2245,
+            2649
+        ]
+    },
+    {
+        "text": "Tổng phân tích tế bào máu ngoại vi (bằng máy đếm laser)",
+        "type": "TÊN_XÉT_NGHIỆM",
+        "position": [
+            2671,
+            2726
+        ]
+    },
+    {
+        "text": "Thời gian prothrombin (PT: Prothrombin Time), (Các tên khác: TQ; Tỷ lệ Prothrombin) bằng máy tự động",
+        "type": "TÊN_XÉT_NGHIỆM",
+        "position": [
+            2729,
+            2829
+        ]
+    },
+    {
+        "text": "Định lượng CRP (C - Reactive Protein)",
+        "type": "TÊN_XÉT_NGHIỆM",
+        "position": [
+            2833,
+            2870
+        ]
+    },
+    {
+        "text": "Định lượng NT - proBNP ( ProBNP)",
+        "type": "TÊN_XÉT_NGHIỆM",
+        "position": [
+            2873,
+            2905
+        ]
+    },
+    {
+        "text": "Đo hoạt độ AST (GOT)",
+        "type": "TÊN_XÉT_NGHIỆM",
+        "position": [
+            2908,
+            2928
+        ]
+    },
+    {
+        "text": "Đo hoạt độ ALT (GPT)",
+        "type": "TÊN_XÉT_NGHIỆM",
+        "position": [
+            2931,
+            2951
+        ]
+    },
+    {
+        "text": "Định lượng Creatinin (máu)",
+        "type": "TÊN_XÉT_NGHIỆM",
+        "position": [
+            2954,
+            2980
+        ]
+    },
+    {
+        "text": "Điện giải đồ (Na, K, Cl)",
+        "type": "TÊN_XÉT_NGHIỆM",
+        "position": [
+            2983,
+            3007
+        ]
+    },
+    {
+        "text": "Định lượng Glucose",
+        "type": "TÊN_XÉT_NGHIỆM",
+        "position": [
+            3010,
+            3028
+        ]
+    },
+    {
+        "text": "Định lượng Troponin Ths",
+        "type": "TÊN_XÉT_NGHIỆM",
+        "position": [
+            3031,
+            3054
+        ]
+    },
+    {
+        "text": "Ghi điện tim cấp cứu tại giường",
+        "type": "TÊN_XÉT_NGHIỆM",
+        "position": [
+            3067,
+            3098
+        ]
+    },
+    {
+        "text": "Ngoại tâm thu thất",
+        "type": "CHẨN_ĐOÁN",
+        "candidates": [
+            "I49.3"
+        ],
+        "position": [
+            3115,
+            3133
+        ]
+    },
+    {
+        "text": "Thận đa nang",
+        "type": "CHẨN_ĐOÁN",
+        "candidates": [
+            "Q61.3"
+        ],
+        "position": [
+            3157,
+            3169
+        ]
+    },
+    {
+        "text": "Gout ",
+        "type": "CHẨN_ĐOÁN",
+        "position": [
+            3172,
+            3177
+        ]
+    },
+    {
+        "text": "Tăng huyết áp ",
+        "type": "CHẨN_ĐOÁN",
+        "candidates": [
+            "I10"
+        ],
+        "position": [
+            3179,
+            3193
+        ]
+    },
+    {
+        "text": "Concor Cor 2,5mg (Bisoprolol)",
+        "type": "THUỐC",
+        "position": [
+            3205,
+            3234
+        ],
+        "candidates": []
+    },
+    {
+        "text": "Cozaar 50mg (Losartan potassium)",
+        "type": "THUỐC",
+        "position": [
+            3275,
+            3307
+        ],
+        "candidates": []
+    }
+]
