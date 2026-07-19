@@ -17,8 +17,10 @@ sys.path.insert(0, str(ROOT / "src"))
 
 from core.config import ALLOWED_TYPES, ASSERTION_TYPES, CODED_TYPES
 from core.schema import validate_output
+from extraction.annotation_memory import AnnotationMemory
 from extraction.context import ContextDetector
 from extraction.ner import MedicalNER
+from extraction.span_verifier import SpanTypeVerifier
 from knowledge.candidates import load_slim_candidate_index
 from knowledge.ontology import OntologyIndex
 from knowledge.retrieval import CandidateRetriever
@@ -91,7 +93,12 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--gold-dir", type=Path, default=ROOT / "input_part2" / "gt" / "output")
     parser.add_argument("--prediction-dir", type=Path)
     parser.add_argument("--candidate-dir", type=Path, default=ROOT / "data" / "candidates")
-    parser.add_argument("--lexicon-path", type=Path, default=ROOT / "data" / "external" / "vietnamese_clinical_lexicon.csv")
+    parser.add_argument("--lexicon-path", type=Path)
+    parser.add_argument(
+        "--memory-path",
+        type=Path,
+        default=ROOT / "data" / "external" / "annotation_memory.jsonl",
+    )
     parser.add_argument(
         "--with-candidates",
         action="store_true",
@@ -107,6 +114,7 @@ def main(argv: list[str] | None = None) -> int:
         prediction_dir=args.prediction_dir,
         candidate_dir=args.candidate_dir,
         lexicon_path=args.lexicon_path,
+        memory_path=args.memory_path,
         with_candidates=args.with_candidates,
         limit_files=args.limit_files,
     )
@@ -125,6 +133,7 @@ def evaluate_layers(
     prediction_dir: Path | None = None,
     candidate_dir: Path | None = None,
     lexicon_path: Path | None = None,
+    memory_path: Path | None = None,
     with_candidates: bool = False,
     limit_files: int | None = None,
 ) -> dict[str, Any]:
@@ -138,18 +147,23 @@ def evaluate_layers(
 
     lexicon_paths = (lexicon_path.resolve(),) if lexicon_path and lexicon_path.exists() else ()
     ner = MedicalNER(lexicon_paths)
+    memory = AnnotationMemory.load(memory_path.resolve()) if memory_path and memory_path.exists() else AnnotationMemory.empty()
+    verifier = SpanTypeVerifier(memory)
     context = ContextDetector()
     retriever: CandidateRetriever | None = None
     candidate_load_seconds = 0.0
     if with_candidates:
         candidate_started = time.perf_counter()
         slim_index = load_slim_candidate_index((candidate_dir or ROOT / "data" / "candidates").resolve())
-        retriever = CandidateRetriever(OntologyIndex(()), slim_index)
+        retriever = CandidateRetriever(OntologyIndex(()), slim_index, memory)
         candidate_load_seconds = time.perf_counter() - candidate_started
 
     exact_spans = SpanCounts()
     exact_spans_by_type = {concept_type: SpanCounts() for concept_type in ALLOWED_TYPES}
     boundaries = SpanCounts()
+    verified_spans = SpanCounts()
+    verified_spans_by_type = {concept_type: SpanCounts() for concept_type in ALLOWED_TYPES}
+    verified_boundaries = SpanCounts()
     assertions = SetScores()
     assertions_by_type: dict[str, SetScores] = defaultdict(SetScores)
     candidates = SetScores()
@@ -181,18 +195,30 @@ def evaluate_layers(
             not _offset_matches(source_text, item) for item in gold
         )
 
+        rule_proposals = ner.propose(source_text)
         predicted_spans = ner.extract(source_text)
+        selected_spans, _ = verifier.select(source_text, [*rule_proposals, *memory.propose(source_text)])
         gold_exact = Counter(_span_key(item) for item in gold if _valid_position(item))
         pred_exact = Counter((span.start, span.end, span.type) for span in predicted_spans)
+        selected_exact = Counter((span.start, span.end, span.type) for span in selected_spans)
         exact_spans.add(gold_exact, pred_exact)
         boundaries.add(
             Counter((start, end) for start, end, _ in gold_exact.elements()),
             Counter((start, end) for start, end, _ in pred_exact.elements()),
         )
+        verified_spans.add(gold_exact, selected_exact)
+        verified_boundaries.add(
+            Counter((start, end) for start, end, _ in gold_exact.elements()),
+            Counter((start, end) for start, end, _ in selected_exact.elements()),
+        )
         for concept_type in ALLOWED_TYPES:
             exact_spans_by_type[concept_type].add(
                 Counter(key for key in gold_exact.elements() if key[2] == concept_type),
                 Counter(key for key in pred_exact.elements() if key[2] == concept_type),
+            )
+            verified_spans_by_type[concept_type].add(
+                Counter(key for key in gold_exact.elements() if key[2] == concept_type),
+                Counter(key for key in selected_exact.elements() if key[2] == concept_type),
             )
 
         for item in gold:
@@ -252,6 +278,7 @@ def evaluate_layers(
         "input_dir": str(input_dir),
         "gold_dir": str(gold_dir),
         "external_lexicon": str(lexicon_paths[0]) if lexicon_paths else None,
+        "annotation_memory": str(memory_path.resolve()) if memory_path and memory_path.exists() else None,
         "validation": validation,
         "rule_proposal": {
             "exact_span_and_type": exact_summary,
@@ -261,6 +288,14 @@ def evaluate_layers(
             ),
             "by_type": {
                 concept_type: exact_spans_by_type[concept_type].to_dict()
+                for concept_type in ALLOWED_TYPES
+            },
+        },
+        "verified_proposal": {
+            "exact_span_and_type": verified_spans.to_dict(),
+            "boundary_only": verified_boundaries.to_dict(),
+            "by_type": {
+                concept_type: verified_spans_by_type[concept_type].to_dict()
                 for concept_type in ALLOWED_TYPES
             },
         },

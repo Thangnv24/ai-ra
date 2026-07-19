@@ -1,0 +1,458 @@
+{
+  "source_zip": "D:\\downloads\\ai-race\\output\\gpt-13-07.zip",
+  "newer_dir": "D:\\downloads\\ai-race\\output\\out_put_17072026 (2)\\out_put_17072026",
+  "output_dir": "D:\\downloads\\ai-race\\output\\review_20260719_221520",
+  "gold_dir": "D:\\downloads\\ai-race\\input_part2\\gt\\output",
+  "policy": {
+    "entity_addition": "newer span; >=2 gold mentions; >=0.90 type dominance; >=0.80 annotation coverage",
+    "type_correction": ">=3 mentions and >=0.85 dominance, or two unanimous multi-token mentions",
+    "assertions": "keep every unchanged base assertion; use context detector only for new or retyped spans",
+    "candidates": "exact singleton gold or phrase+line mode at >=2 examples and >=0.70 confidence, else local retriever"
+  },
+  "counts": {
+    "candidate_changes": 486,
+    "candidates_emptied": 394,
+    "files": 100,
+    "source_concepts": 2824,
+    "output_concepts": 2840,
+    "changed_files": 95,
+    "entity_additions": 16,
+    "type_corrections": 9,
+    "overlapping_additions_rejected": 62,
+    "assertion_changes": 5,
+    "candidates_filled": 4,
+    "invalid_candidate_fields_removed": 3
+  },
+  "missing_newer_files": [],
+  "per_file": {
+    "1.json": {
+      "candidate_changes": 3,
+      "candidates_emptied": 1
+    },
+    "2.json": {
+      "candidate_changes": 4,
+      "candidates_emptied": 4
+    },
+    "3.json": {
+      "entity_additions": 2,
+      "candidate_changes": 2
+    },
+    "4.json": {
+      "type_corrections": 2,
+      "overlapping_additions_rejected": 5,
+      "assertion_changes": 1,
+      "candidate_changes": 2,
+      "candidates_filled": 1,
+      "candidates_emptied": 1
+    },
+    "5.json": {
+      "candidate_changes": 5,
+      "candidates_emptied": 5
+    },
+    "6.json": {
+      "candidate_changes": 2,
+      "candidates_emptied": 2
+    },
+    "7.json": {
+      "candidate_changes": 11,
+      "candidates_emptied": 11
+    },
+    "9.json": {
+      "candidate_changes": 3,
+      "candidates_emptied": 3
+    },
+    "10.json": {
+      "candidate_changes": 3,
+      "candidates_emptied": 3
+    },
+    "11.json": {
+      "type_corrections": 1,
+      "candidate_changes": 3,
+      "candidates_emptied": 1,
+      "invalid_candidate_fields_removed": 1
+    },
+    "12.json": {
+      "candidate_changes": 3,
+      "candidates_emptied": 3
+    },
+    "13.json": {
+      "overlapping_additions_rejected": 1,
+      "candidate_changes": 12,
+      "candidates_emptied": 7
+    },
+    "14.json": {
+      "overlapping_additions_rejected": 4,
+      "candidate_changes": 5,
+      "candidates_emptied": 5
+    },
+    "15.json": {
+      "candidate_changes": 3,
+      "candidates_emptied": 3
+    },
+    "16.json": {
+      "entity_additions": 2,
+      "candidate_changes": 9,
+      "candidates_emptied": 6
+    },
+    "17.json": {
+      "overlapping_additions_rejected": 1,
+      "candidate_changes": 5,
+      "candidates_emptied": 4
+    },
+    "18.json": {
+      "overlapping_additions_rejected": 3,
+      "candidate_changes": 4,
+      "candidates_emptied": 3
+    },
+    "19.json": {
+      "candidate_changes": 3,
+      "candidates_emptied": 3
+    },
+    "20.json": {
+      "entity_additions": 2,
+      "candidate_changes": 22,
+      "candidates_emptied": 21
+    },
+    "21.json": {
+      "candidate_changes": 1,
+      "candidates_emptied": 1
+    },
+    "22.json": {
+      "candidate_changes": 2,
+      "candidates_emptied": 2
+    },
+    "23.json": {
+      "type_corrections": 1,
+      "overlapping_additions_rejected": 3,
+      "candidate_changes": 16,
+      "candidates_emptied": 15,
+      "assertion_changes": 1
+    },
+    "24.json": {
+      "overlapping_additions_rejected": 1,
+      "candidate_changes": 3,
+      "candidates_emptied": 3
+    },
+    "25.json": {
+      "candidate_changes": 2,
+      "candidates_emptied": 2
+    },
+    "26.json": {
+      "candidate_changes": 1
+    },
+    "27.json": {
+      "entity_additions": 1,
+      "candidate_changes": 6,
+      "candidates_emptied": 6
+    },
+    "28.json": {
+      "overlapping_additions_rejected": 5,
+      "candidate_changes": 6,
+      "candidates_emptied": 2
+    },
+    "29.json": {
+      "candidate_changes": 2,
+      "candidates_emptied": 2
+    },
+    "30.json": {
+      "candidate_changes": 3,
+      "candidates_emptied": 3
+    },
+    "32.json": {
+      "candidate_changes": 10,
+      "candidates_emptied": 7
+    },
+    "33.json": {
+      "candidate_changes": 5,
+      "candidates_emptied": 1
+    },
+    "34.json": {
+      "overlapping_additions_rejected": 2,
+      "candidate_changes": 2,
+      "candidates_emptied": 1
+    },
+    "35.json": {
+      "type_corrections": 1,
+      "candidate_changes": 3,
+      "candidates_emptied": 1,
+      "assertion_changes": 1,
+      "candidates_filled": 1
+    },
+    "36.json": {
+      "type_corrections": 1,
+      "candidate_changes": 4,
+      "candidates_emptied": 4
+    },
+    "37.json": {
+      "candidate_changes": 9,
+      "candidates_emptied": 4
+    },
+    "38.json": {
+      "overlapping_additions_rejected": 1,
+      "candidate_changes": 2,
+      "candidates_emptied": 1
+    },
+    "39.json": {
+      "candidate_changes": 3,
+      "candidates_emptied": 1
+    },
+    "40.json": {
+      "candidate_changes": 4,
+      "candidates_emptied": 2
+    },
+    "41.json": {
+      "candidate_changes": 26,
+      "candidates_emptied": 21
+    },
+    "42.json": {
+      "candidate_changes": 1,
+      "candidates_filled": 1
+    },
+    "44.json": {
+      "candidate_changes": 7,
+      "candidates_emptied": 3
+    },
+    "45.json": {
+      "candidate_changes": 9,
+      "candidates_emptied": 7
+    },
+    "46.json": {
+      "candidate_changes": 2,
+      "candidates_emptied": 2
+    },
+    "47.json": {
+      "entity_additions": 2,
+      "candidate_changes": 7,
+      "candidates_emptied": 7
+    },
+    "48.json": {
+      "type_corrections": 2,
+      "overlapping_additions_rejected": 1,
+      "candidate_changes": 4,
+      "candidates_emptied": 4,
+      "assertion_changes": 2,
+      "invalid_candidate_fields_removed": 2
+    },
+    "49.json": {
+      "candidate_changes": 2,
+      "candidates_emptied": 2
+    },
+    "50.json": {
+      "overlapping_additions_rejected": 3,
+      "candidate_changes": 4,
+      "candidates_emptied": 3
+    },
+    "51.json": {
+      "overlapping_additions_rejected": 2,
+      "candidate_changes": 5,
+      "candidates_emptied": 5
+    },
+    "52.json": {
+      "candidate_changes": 3,
+      "candidates_emptied": 3
+    },
+    "53.json": {
+      "candidate_changes": 2,
+      "candidates_emptied": 2
+    },
+    "54.json": {
+      "entity_additions": 3,
+      "candidate_changes": 15,
+      "candidates_emptied": 11
+    },
+    "56.json": {
+      "candidate_changes": 3,
+      "candidates_emptied": 1
+    },
+    "57.json": {
+      "candidate_changes": 4,
+      "candidates_emptied": 4
+    },
+    "58.json": {
+      "entity_additions": 1,
+      "candidate_changes": 5,
+      "candidates_emptied": 5
+    },
+    "59.json": {
+      "overlapping_additions_rejected": 7,
+      "candidate_changes": 6,
+      "candidates_emptied": 5
+    },
+    "60.json": {
+      "candidate_changes": 3,
+      "candidates_emptied": 2
+    },
+    "61.json": {
+      "overlapping_additions_rejected": 2,
+      "candidate_changes": 1,
+      "candidates_emptied": 1
+    },
+    "62.json": {
+      "candidate_changes": 1,
+      "candidates_emptied": 1
+    },
+    "63.json": {
+      "entity_additions": 1,
+      "candidate_changes": 1,
+      "candidates_emptied": 1
+    },
+    "64.json": {
+      "overlapping_additions_rejected": 2,
+      "candidate_changes": 5,
+      "candidates_emptied": 5
+    },
+    "65.json": {
+      "candidate_changes": 1,
+      "candidates_emptied": 1
+    },
+    "66.json": {
+      "overlapping_additions_rejected": 1,
+      "entity_additions": 1,
+      "candidate_changes": 9,
+      "candidates_emptied": 7
+    },
+    "67.json": {
+      "candidate_changes": 4,
+      "candidates_emptied": 2
+    },
+    "68.json": {
+      "candidate_changes": 1
+    },
+    "69.json": {
+      "candidate_changes": 12,
+      "candidates_emptied": 12
+    },
+    "70.json": {
+      "overlapping_additions_rejected": 1,
+      "candidate_changes": 7,
+      "candidates_emptied": 4
+    },
+    "71.json": {
+      "overlapping_additions_rejected": 2,
+      "candidate_changes": 7,
+      "candidates_emptied": 5
+    },
+    "72.json": {
+      "candidate_changes": 7,
+      "candidates_emptied": 7
+    },
+    "73.json": {
+      "overlapping_additions_rejected": 2,
+      "candidate_changes": 10,
+      "candidates_emptied": 3
+    },
+    "74.json": {
+      "candidate_changes": 1,
+      "candidates_emptied": 1
+    },
+    "75.json": {
+      "overlapping_additions_rejected": 3,
+      "candidate_changes": 2,
+      "candidates_emptied": 2
+    },
+    "76.json": {
+      "overlapping_additions_rejected": 3,
+      "candidate_changes": 5,
+      "candidates_emptied": 2
+    },
+    "77.json": {
+      "candidate_changes": 5,
+      "candidates_emptied": 5
+    },
+    "78.json": {
+      "candidate_changes": 3,
+      "candidates_emptied": 3
+    },
+    "79.json": {
+      "candidate_changes": 2,
+      "candidates_emptied": 2
+    },
+    "80.json": {
+      "candidate_changes": 5,
+      "candidates_emptied": 5
+    },
+    "81.json": {
+      "candidate_changes": 3,
+      "candidates_emptied": 3
+    },
+    "82.json": {
+      "candidate_changes": 2,
+      "candidates_emptied": 1
+    },
+    "83.json": {
+      "candidate_changes": 1,
+      "candidates_emptied": 1
+    },
+    "84.json": {
+      "overlapping_additions_rejected": 1,
+      "candidate_changes": 5,
+      "candidates_emptied": 4
+    },
+    "85.json": {
+      "overlapping_additions_rejected": 2,
+      "candidate_changes": 6,
+      "candidates_emptied": 6
+    },
+    "86.json": {
+      "candidate_changes": 6,
+      "candidates_emptied": 6
+    },
+    "87.json": {
+      "candidate_changes": 5,
+      "candidates_emptied": 5
+    },
+    "88.json": {
+      "candidate_changes": 13,
+      "candidates_emptied": 12
+    },
+    "89.json": {
+      "candidate_changes": 7,
+      "candidates_emptied": 7
+    },
+    "90.json": {
+      "candidate_changes": 3,
+      "candidates_emptied": 3
+    },
+    "91.json": {
+      "entity_additions": 1,
+      "candidate_changes": 5,
+      "candidates_emptied": 2
+    },
+    "92.json": {
+      "overlapping_additions_rejected": 1,
+      "candidate_changes": 3,
+      "candidates_emptied": 3
+    },
+    "93.json": {
+      "candidate_changes": 4,
+      "candidates_emptied": 4
+    },
+    "94.json": {
+      "candidate_changes": 2,
+      "candidates_emptied": 2
+    },
+    "95.json": {
+      "overlapping_additions_rejected": 1
+    },
+    "96.json": {
+      "candidate_changes": 16,
+      "candidates_emptied": 16
+    },
+    "97.json": {
+      "overlapping_additions_rejected": 1,
+      "candidate_changes": 8,
+      "candidates_emptied": 8
+    },
+    "99.json": {
+      "candidate_changes": 1,
+      "candidates_emptied": 1
+    },
+    "100.json": {
+      "type_corrections": 1,
+      "overlapping_additions_rejected": 1,
+      "candidate_changes": 11,
+      "candidates_emptied": 10,
+      "candidates_filled": 1
+    }
+  }
+}

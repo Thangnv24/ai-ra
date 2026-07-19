@@ -1,0 +1,31 @@
+{
+  "created_at": "2026-07-19T23:48:22",
+  "format_version": 1,
+  "datasets": [
+    {
+      "input_dir": "D:\\downloads\\ai-race\\input_part2\\input\\input",
+      "gold_dir": "D:\\downloads\\ai-race\\input_part2\\gt\\output"
+    }
+  ],
+  "selection": {
+    "runtime_min_positive_count": 3,
+    "runtime_min_support_documents": 2,
+    "runtime_min_type_purity": 0.85,
+    "runtime_min_multi_token_annotation_rate": 0.62,
+    "runtime_min_single_token_positive_count": 8,
+    "runtime_min_single_token_annotation_rate": 0.8
+  },
+  "source_documents": 100,
+  "row_count": 6743,
+  "positive_occurrences": 13462,
+  "hard_negative_occurrences": 36471,
+  "by_type": {
+    "CHẨN_ĐOÁN": 1111,
+    "TRIỆU_CHỨNG": 4244,
+    "TÊN_XÉT_NGHIỆM": 567,
+    "KẾT_QUẢ_XÉT_NGHIỆM": 495,
+    "THUỐC": 326
+  },
+  "artifact": "D:\\downloads\\ai-race\\data\\external\\annotation_memory.jsonl",
+  "sha256": "6ba00b85bbc1702ee2232704cf308e663b63ee37f1f836fb0659f597207cbdb3"
+}

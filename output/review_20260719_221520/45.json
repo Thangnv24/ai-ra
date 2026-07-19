@@ -1,0 +1,154 @@
+[
+  {
+    "text": "đái tháo đường",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "E11.8"
+    ],
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      48,
+      62
+    ]
+  },
+  {
+    "text": "tăng huyết áp",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "I10"
+    ],
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      69,
+      82
+    ]
+  },
+  {
+    "text": "phình mạch ACom bên phải",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      145,
+      169
+    ],
+    "candidates": []
+  },
+  {
+    "text": "đái tháo đường",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "E11.8"
+    ],
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      209,
+      223
+    ]
+  },
+  {
+    "text": "tăng huyết áp",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "I10"
+    ],
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      230,
+      243
+    ]
+  },
+  {
+    "text": "tai biến mạch máu não",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [],
+    "assertions": [],
+    "position": [
+      364,
+      385
+    ]
+  },
+  {
+    "text": "phình mạch ACom bên phải",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      498,
+      522
+    ],
+    "candidates": []
+  },
+  {
+    "text": "chụp mạch máu",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      545,
+      558
+    ]
+  },
+  {
+    "text": "hẹp khoảng 65% của động mạch cảnh chung trái gần gốc",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      580,
+      632
+    ],
+    "candidates": []
+  },
+  {
+    "text": "xơ vữa mảng loét",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [],
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      648,
+      664
+    ]
+  },
+  {
+    "text": "chụp mạch máu",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      875,
+      888
+    ]
+  },
+  {
+    "text": "hẹp khoảng 65% của động mạch cảnh chung trái gần gốc",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      909,
+      961
+    ],
+    "candidates": []
+  },
+  {
+    "text": "xơ vữa mảng loét",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [],
+    "assertions": [],
+    "position": [
+      977,
+      993
+    ]
+  }
+]

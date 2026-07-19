@@ -406,16 +406,19 @@ class MedicalNER:
         self._drug_patterns = _compile_terms(DRUG_BASE_TERMS + tuple(extra.get(TYPE_DRUG, ())))
 
     def extract(self, text: str) -> list[SpanCandidate]:
+        return _resolve_overlaps(self.propose(text))
+
+    def propose(self, text: str) -> list[SpanCandidate]:
         spans: list[SpanCandidate] = []
         spans.extend(self._extract_lab_pairs(text))
         spans.extend(self._extract_known_lab_values(text))
         spans.extend(self._extract_drugs(text))
         spans.extend(self._extract_context_diagnoses(text))
-        spans.extend(_extract_phrase_matches(text, self._diagnosis_patterns, TYPE_DIAGNOSIS, 0.95))
-        spans.extend(_extract_phrase_matches(text, self._symptom_patterns, TYPE_SYMPTOM, 0.8))
-        spans.extend(_extract_phrase_matches(text, self._test_patterns, TYPE_TEST_NAME, 0.7))
+        spans.extend(_extract_phrase_matches(text, self._diagnosis_patterns, TYPE_DIAGNOSIS, 0.95, "lexical_rule"))
+        spans.extend(_extract_phrase_matches(text, self._symptom_patterns, TYPE_SYMPTOM, 0.8, "lexical_rule"))
+        spans.extend(_extract_phrase_matches(text, self._test_patterns, TYPE_TEST_NAME, 0.7, "lexical_rule"))
         spans.extend(self._extract_contextual_results(text))
-        return _resolve_overlaps(spans)
+        return spans
 
     def _extract_contextual_results(self, text: str) -> list[SpanCandidate]:
         spans: list[SpanCandidate] = []
@@ -427,12 +430,12 @@ class MedicalNER:
                 key = normalize_key(span_text)
                 context = normalize_key(text[max(0, start - 140) : min(len(text), end + 60)])
                 if key.startswith("nhip xoang") or _looks_like_result_context(context):
-                    spans.append(SpanCandidate(start, end, span_text, TYPE_TEST_RESULT, 0.92))
+                    spans.append(SpanCandidate(start, end, span_text, TYPE_TEST_RESULT, 0.92, "result_rule"))
         return spans
 
     def _extract_lab_pairs(self, text: str) -> list[SpanCandidate]:
         return [
-            SpanCandidate(span.start, span.end, span.text, span.type, 0.99)
+            SpanCandidate(span.start, span.end, span.text, span.type, 0.99, "lab_rule")
             for span in extract_lab_spans(text)
         ]
 
@@ -448,8 +451,8 @@ class MedicalNER:
                 result_start, result_end = match.span("result")
                 name_start, name_end, name_text = trim_span_text(text, name_start, name_end)
                 result_start, result_end, result_text = trim_span_text(text, result_start, result_end)
-                spans.append(SpanCandidate(name_start, name_end, name_text, TYPE_TEST_NAME, 0.99))
-                spans.append(SpanCandidate(result_start, result_end, result_text, TYPE_TEST_RESULT, 0.99))
+                spans.append(SpanCandidate(name_start, name_end, name_text, TYPE_TEST_NAME, 0.99, "lab_rule"))
+                spans.append(SpanCandidate(result_start, result_end, result_text, TYPE_TEST_RESULT, 0.99, "lab_rule"))
         return spans
 
     def _extract_drugs(self, text: str) -> list[SpanCandidate]:
@@ -460,7 +463,7 @@ class MedicalNER:
                 end = _extend_drug_end(text, match.end())
                 start, end, span_text = trim_span_text(text, start, end)
                 if span_text:
-                    spans.append(SpanCandidate(start, end, span_text, TYPE_DRUG, 0.98))
+                    spans.append(SpanCandidate(start, end, span_text, TYPE_DRUG, 0.98, "drug_rule"))
         return spans
 
     def _extract_context_diagnoses(self, text: str) -> list[SpanCandidate]:
@@ -474,7 +477,7 @@ class MedicalNER:
                     break
             start, end, span_text = trim_span_text(text, start, end)
             if span_text and len(span_text) >= 4 and not _bad_context_diagnosis(span_text):
-                spans.append(SpanCandidate(start, end, span_text, TYPE_DIAGNOSIS, 0.9))
+                spans.append(SpanCandidate(start, end, span_text, TYPE_DIAGNOSIS, 0.9, "context_rule"))
         return spans
 
 
@@ -513,13 +516,14 @@ def _extract_phrase_matches(
     patterns: list[re.Pattern[str]],
     concept_type: str,
     score: float,
+    source: str = "lexical_rule",
 ) -> list[SpanCandidate]:
     spans: list[SpanCandidate] = []
     for pattern in patterns:
         for match in pattern.finditer(text):
             start, end, span_text = trim_span_text(text, match.start(), match.end())
             if span_text:
-                spans.append(SpanCandidate(start, end, span_text, concept_type, score))
+                spans.append(SpanCandidate(start, end, span_text, concept_type, score, source))
     return spans
 
 

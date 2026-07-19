@@ -17,9 +17,11 @@ from core.config import (
 from core.medication import medication_lookup_keys, medication_match_score, normalize_prescription_text
 from core.schema import Concept, validate_output
 from extraction.context import ContextDetector
+from extraction.annotation_memory import AnnotationMemory, MemoryEntry, normalized_projection
 from extraction.llm_entities import _chunk_units, _span_from_mention_with_reason
 from extraction.ner import MedicalNER, SpanCandidate, resolve_span_types
 from extraction.sectioning import TextChunk, split_chunks
+from extraction.span_verifier import SpanTypeVerifier
 from knowledge.candidates import (
     CandidateHit,
     CandidateRecord,
@@ -143,6 +145,90 @@ class EntityOccurrenceTests(unittest.TestCase):
 
 
 class SpanAndTypeTests(unittest.TestCase):
+    def test_normalized_projection_preserves_source_offsets(self) -> None:
+        text = "Tiền sử: TĂNG huyết áp."
+        phrase = "TĂNG huyết áp"
+
+        matches = normalized_projection(text).find("tang huyet ap")
+
+        self.assertEqual(matches, [(text.index(phrase), text.index(phrase) + len(phrase))])
+
+    def test_span_decoder_prefers_two_supported_mentions_over_one_broad_llm_span(self) -> None:
+        text = "đau ngực và khó thở"
+        chest = "đau ngực"
+        dyspnea = "khó thở"
+        proposals = [
+            SpanCandidate(0, len(text), text, TYPE_SYMPTOM, 0.99, "llm"),
+            SpanCandidate(0, len(chest), chest, TYPE_SYMPTOM, 0.8, "lexical_rule"),
+            SpanCandidate(text.index(dyspnea), len(text), dyspnea, TYPE_SYMPTOM, 0.8, "lexical_rule"),
+        ]
+
+        selected, summary = SpanTypeVerifier().select(text, proposals)
+
+        self.assertEqual([span.text for span in selected], [chest, dyspnea])
+        self.assertEqual(summary.overlap_conflicts, 1)
+
+    def test_memory_evidence_resolves_competing_type(self) -> None:
+        text = "Hiện tại có ngất xỉu."
+        phrase = "ngất xỉu"
+        start = text.index(phrase)
+        entry = MemoryEntry(
+            key="ngat xiu",
+            surfaces=(phrase,),
+            concept_type=TYPE_SYMPTOM,
+            positive_count=20,
+            observed_count=20,
+            support_documents=10,
+            observed_documents=10,
+            type_purity=1.0,
+            annotation_rate=1.0,
+            sections={"document": (20, 20)},
+            left_cues=(),
+            right_cues=(),
+            assertions={},
+            candidates={},
+            candidate_sets={"": 20},
+        )
+        memory = AnnotationMemory((entry,))
+        proposals = [
+            SpanCandidate(start, start + len(phrase), phrase, TYPE_DIAGNOSIS, 0.95, "llm"),
+            *memory.propose(text),
+        ]
+
+        selected, summary = SpanTypeVerifier(memory).select(text, proposals)
+
+        self.assertEqual(len(selected), 1)
+        self.assertEqual(selected[0].type, TYPE_SYMPTOM)
+        self.assertEqual(summary.type_conflicts, 1)
+
+    def test_hard_negative_memory_can_suppress_lexical_false_positive(self) -> None:
+        text = "Đánh giá: ổn định"
+        phrase = "ổn định"
+        start = text.index(phrase)
+        entry = MemoryEntry(
+            key="on dinh",
+            surfaces=(phrase,),
+            concept_type=TYPE_SYMPTOM,
+            positive_count=3,
+            observed_count=30,
+            support_documents=3,
+            observed_documents=20,
+            type_purity=1.0,
+            annotation_rate=0.1,
+            sections={"document": (3, 30)},
+            left_cues=(),
+            right_cues=(),
+            assertions={},
+            candidates={},
+            candidate_sets={"": 3},
+        )
+        proposal = SpanCandidate(start, start + len(phrase), phrase, TYPE_SYMPTOM, 0.8, "lexical_rule")
+
+        selected, summary = SpanTypeVerifier(AnnotationMemory((entry,))).select(text, [proposal])
+
+        self.assertEqual(selected, [])
+        self.assertEqual(summary.below_threshold, 1)
+
     def test_rule_span_wins_over_broad_llm_overlap(self) -> None:
         rule = SpanCandidate(5, 20, "rule", TYPE_SYMPTOM, 0.8, source="rule")
         broad_llm = SpanCandidate(0, 30, "llm", TYPE_SYMPTOM, 0.99, source="llm")
@@ -320,6 +406,59 @@ class AssertionTests(unittest.TestCase):
 
 
 class CandidateMappingTests(unittest.TestCase):
+    def test_candidate_memory_treats_null_as_a_first_class_decision(self) -> None:
+        diagnosis = "tăng huyết áp"
+        record = CandidateRecord("I10", "Essential hypertension", "ICD10", TYPE_DIAGNOSIS, 10)
+        index = SlimCandidateIndex(
+            {(TYPE_DIAGNOSIS, "I10"): record},
+            {(TYPE_DIAGNOSIS, "tang huyet ap"): ("I10",)},
+        )
+        entry = MemoryEntry(
+            key="tang huyet ap",
+            surfaces=(diagnosis,),
+            concept_type=TYPE_DIAGNOSIS,
+            positive_count=10,
+            observed_count=10,
+            support_documents=5,
+            observed_documents=5,
+            type_purity=1.0,
+            annotation_rate=1.0,
+            sections={"document": (10, 10)},
+            left_cues=(),
+            right_cues=(),
+            assertions={"": 10},
+            candidates={"I10": 1},
+            candidate_sets={"": 9, "I10": 1},
+        )
+        retriever = CandidateRetriever(OntologyIndex(()), index, AnnotationMemory((entry,)))
+
+        self.assertEqual(retriever.candidates_for(diagnosis, TYPE_DIAGNOSIS), ())
+
+    def test_candidate_memory_emits_only_well_supported_known_codes(self) -> None:
+        diagnosis = "tăng huyết áp"
+        record = CandidateRecord("I10", "Essential hypertension", "ICD10", TYPE_DIAGNOSIS, 10)
+        index = SlimCandidateIndex({(TYPE_DIAGNOSIS, "I10"): record}, {})
+        entry = MemoryEntry(
+            key="tang huyet ap",
+            surfaces=(diagnosis,),
+            concept_type=TYPE_DIAGNOSIS,
+            positive_count=10,
+            observed_count=10,
+            support_documents=5,
+            observed_documents=5,
+            type_purity=1.0,
+            annotation_rate=1.0,
+            sections={"document": (10, 10)},
+            left_cues=(),
+            right_cues=(),
+            assertions={"": 10},
+            candidates={"I10": 8},
+            candidate_sets={"": 2, "I10": 8},
+        )
+        retriever = CandidateRetriever(OntologyIndex(()), index, AnnotationMemory((entry,)))
+
+        self.assertEqual(retriever.candidates_for(diagnosis, TYPE_DIAGNOSIS), ("I10",))
+
     def test_rxnorm_prefers_matching_strength_and_oral_form(self) -> None:
         query = "clonazepam 0.5 mg po qam prn"
         matching = medication_match_score(query, "clonazepam 0.5 MG Oral Tablet")

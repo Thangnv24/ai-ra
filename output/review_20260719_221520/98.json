@@ -1,0 +1,119 @@
+[
+  {
+    "text": "tăng huyết áp",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "I10"
+    ],
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      53,
+      66
+    ]
+  },
+  {
+    "text": "ho",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      165,
+      167
+    ]
+  },
+  {
+    "text": "đau lưng",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      174,
+      182
+    ]
+  },
+  {
+    "text": "phim chụp CT",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      227,
+      239
+    ]
+  },
+  {
+    "text": "tổn thương tiêu xương lan tỏa",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      249,
+      278
+    ]
+  },
+  {
+    "text": "đa u tuỷ xương",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      291,
+      305
+    ],
+    "candidates": [
+      "C90.0"
+    ]
+  },
+  {
+    "text": "Định lượng IgA",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      325,
+      339
+    ]
+  },
+  {
+    "text": "tăng cao",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      340,
+      348
+    ]
+  },
+  {
+    "text": "đa u tuỷ xương",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      360,
+      374
+    ],
+    "candidates": [
+      "C90.0"
+    ]
+  },
+  {
+    "text": "các tổn thương ổ tiêu xương lan tỏa",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      434,
+      469
+    ]
+  },
+  {
+    "text": "Đa u tủy xương",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "C90.0"
+    ],
+    "assertions": [],
+    "position": [
+      485,
+      499
+    ]
+  }
+]

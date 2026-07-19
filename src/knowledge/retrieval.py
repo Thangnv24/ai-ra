@@ -8,14 +8,21 @@ from typing import Any
 from core.config import CODED_TYPES, TYPE_DIAGNOSIS, TYPE_DRUG
 from core.medication import medication_has_strength, medication_strength_relation
 from core.text import normalize_key
+from extraction.annotation_memory import AnnotationMemory
 from knowledge.candidates import SlimCandidateIndex
 from knowledge.ontology import OntologyIndex
 
 
 class CandidateRetriever:
-    def __init__(self, index: OntologyIndex, slim_index: SlimCandidateIndex | None = None):
+    def __init__(
+        self,
+        index: OntologyIndex,
+        slim_index: SlimCandidateIndex | None = None,
+        memory: AnnotationMemory | None = None,
+    ):
         self.index = index
         self.slim_index = slim_index or SlimCandidateIndex.empty()
+        self.memory = memory or AnnotationMemory.empty()
 
     def candidates_for(
         self,
@@ -31,6 +38,13 @@ class CandidateRetriever:
             return ()
         if not _candidate_eligible(concept_type, source_text, start, end):
             return ()
+        memory_decision = self.memory.candidate_decision(text, concept_type)
+        if memory_decision == ():
+            return ()
+        if memory_decision is not None and all(
+            (concept_type, code) in self.slim_index.records for code in memory_decision
+        ):
+            return memory_decision[:limit]
         return self._candidates_for_query(text, concept_type, limit)
 
     @lru_cache(maxsize=8192)

@@ -1,0 +1,75 @@
+[
+  {
+    "text": "Trào ngược dạ dày thực quản",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "K21.0"
+    ],
+    "assertions": [],
+    "position": [
+      149,
+      176
+    ]
+  },
+  {
+    "text": "triệu chứng trào ngược mức độ nhẹ",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      242,
+      275
+    ]
+  },
+  {
+    "text": "triệu chứng trào ngược",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      528,
+      550
+    ]
+  },
+  {
+    "text": "thoát vị hoành",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [],
+    "assertions": [
+      "isNegated",
+      "isHistorical"
+    ],
+    "position": [
+      638,
+      652
+    ]
+  },
+  {
+    "text": "thoát vị cạnh thực quản khá lớn",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [],
+    "assertions": [],
+    "position": [
+      694,
+      725
+    ]
+  },
+  {
+    "text": "Thoát vị này dường như bao gồm đáy vị và một phần của lớp băng cuốn lên lồng ngực",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      733,
+      814
+    ]
+  },
+  {
+    "text": "Vị trí nối thực quản - dạ dày thực tế có vẻ bình thường",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      822,
+      877
+    ]
+  }
+]

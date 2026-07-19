@@ -25,7 +25,9 @@ from core.io import discover_input_files, output_path_for, read_text, write_outp
 from core.schema import Concept, validate_output
 from extraction.context import ContextDetector
 from extraction.llm_entities import LLMEntityExtractor
-from extraction.ner import MedicalNER, SpanCandidate, resolve_span_types
+from extraction.annotation_memory import AnnotationMemory
+from extraction.ner import MedicalNER, SpanCandidate
+from extraction.span_verifier import SpanTypeVerifier
 from integrations.openai_client import ApiLLMClient
 from knowledge.candidates import load_slim_candidate_index
 from knowledge.ontology import OntologyIndex, load_ontology_index
@@ -101,9 +103,11 @@ class MedicalKGPipeline:
         self._ensure_indexes(paths)
         self.index = index or load_ontology_index(paths.index_file, paths.data_raw, paths.data_external)
         self.slim_candidate_index = load_slim_candidate_index(paths.root / "data" / "candidates")
-        self.ner = MedicalNER((paths.data_external / "vietnamese_clinical_lexicon.csv",))
+        self.ner = MedicalNER()
+        self.annotation_memory = AnnotationMemory.load(paths.data_external / "annotation_memory.jsonl")
+        self.span_verifier = SpanTypeVerifier(self.annotation_memory)
         self.context = ContextDetector()
-        self.retriever = CandidateRetriever(self.index, self.slim_candidate_index)
+        self.retriever = CandidateRetriever(self.index, self.slim_candidate_index, self.annotation_memory)
         self.llm = ApiLLMClient(self.settings)
         self.llm_entity_extractor = LLMEntityExtractor(self.llm)
 
@@ -133,12 +137,24 @@ class MedicalKGPipeline:
         stages: dict[str, dict[str, object]] = {}
 
         stage_start = time.perf_counter()
-        rule_spans = self.ner.extract(text)
+        rule_spans = self.ner.propose(text)
         stages["rule_proposal"] = {
             "spans": len(rule_spans),
             "seconds": round(time.perf_counter() - stage_start, 6),
         }
         logger.info("pipeline_stage stage=rule_proposal spans=%s seconds=%.6f", len(rule_spans), time.perf_counter() - stage_start)
+
+        stage_start = time.perf_counter()
+        memory_spans = self.annotation_memory.propose(text)
+        stages["memory_proposal"] = {
+            "spans": len(memory_spans),
+            "seconds": round(time.perf_counter() - stage_start, 6),
+        }
+        logger.info(
+            "pipeline_stage stage=memory_proposal spans=%s seconds=%.6f",
+            len(memory_spans),
+            time.perf_counter() - stage_start,
+        )
 
         stage_start = time.perf_counter()
         llm_spans, summary = self.llm_entity_extractor.extract(text)
@@ -159,34 +175,24 @@ class MedicalKGPipeline:
         )
 
         stage_start = time.perf_counter()
-        spans, merge_summary = _merge_span_candidates_with_summary([*rule_spans, *llm_spans])
-        stages["merge"] = {
-            **merge_summary.to_dict(),
-            "seconds": round(time.perf_counter() - stage_start, 6),
-        }
-        logger.info(
-            "pipeline_stage stage=merge inputs=%s selected=%s invalid=%s exact_duplicates=%s overlap_conflicts=%s seconds=%.6f",
-            merge_summary.inputs,
-            merge_summary.selected,
-            merge_summary.invalid,
-            merge_summary.exact_duplicates,
-            merge_summary.overlap_conflicts,
-            time.perf_counter() - stage_start,
+        spans, verification_summary = self.span_verifier.select(
+            text,
+            [*rule_spans, *memory_spans, *llm_spans],
         )
-
-        stage_start = time.perf_counter()
-        original_types = [span.type for span in spans]
-        spans = resolve_span_types(text, spans)
-        type_changes = sum(before != span.type for before, span in zip(original_types, spans))
-        stages["type_resolution"] = {
-            "spans": len(spans),
-            "changed": type_changes,
+        stages["span_verification"] = {
+            **verification_summary.to_dict(),
             "seconds": round(time.perf_counter() - stage_start, 6),
         }
         logger.info(
-            "pipeline_stage stage=type_resolution spans=%s changed=%s seconds=%.6f",
-            len(spans),
-            type_changes,
+            "pipeline_stage stage=span_verification inputs=%s selected=%s invalid=%s exact_duplicates=%s "
+            "type_conflicts=%s below_threshold=%s overlap_conflicts=%s seconds=%.6f",
+            verification_summary.inputs,
+            verification_summary.selected,
+            verification_summary.invalid,
+            verification_summary.exact_duplicates,
+            verification_summary.type_conflicts,
+            verification_summary.below_threshold,
+            verification_summary.overlap_conflicts,
             time.perf_counter() - stage_start,
         )
 
