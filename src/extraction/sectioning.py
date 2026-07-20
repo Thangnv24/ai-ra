@@ -27,6 +27,7 @@ class TextChunk:
     start: int
     end: int
     text: str
+    subsection: str = "document"
 
 
 MAJOR_SECTION_MARKERS: tuple[tuple[str, tuple[str, ...]], ...] = (
@@ -96,6 +97,98 @@ FALLBACK_SECTION_MARKERS: tuple[tuple[str, tuple[str, ...]], ...] = (
     ),
 )
 
+SUBSECTION_MARKERS: tuple[tuple[str, tuple[str, ...]], ...] = (
+    (
+        "medications",
+        (
+            "thuoc truoc khi nhap vien",
+            "thuoc truoc nhap vien",
+            "thuoc dang dieu tri",
+            "thuoc hien tai",
+            "don thuoc",
+            "dieu tri thuoc",
+            "xu tri thuoc",
+            "home medication",
+            "medications",
+        ),
+    ),
+    (
+        "laboratory",
+        (
+            "ket qua xet nghiem",
+            "ket qua phong thi nghiem",
+            "xet nghiem",
+            "cong thuc mau",
+            "sinh hoa mau",
+            "laboratory",
+            "lab results",
+        ),
+    ),
+    (
+        "imaging_procedure",
+        (
+            "chan doan hinh anh",
+            "ket qua chan doan hinh anh",
+            "thu thuat da thuc hien",
+            "thu thuat thuc hien",
+            "noi soi",
+            "sieu am",
+            "imaging",
+        ),
+    ),
+    (
+        "diagnoses",
+        (
+            "chan doan",
+            "chan doan ra vien",
+            "benh kem theo",
+            "problem list",
+        ),
+    ),
+    (
+        "symptoms_exam",
+        (
+            "trieu chung",
+            "trieu chung hien tai",
+            "ly do nhap vien",
+            "ly do vao vien",
+            "kham lam sang",
+            "kham benh",
+            "physical examination",
+        ),
+    ),
+    (
+        "history",
+        (
+            "tien su",
+            "tien su benh",
+            "tien su gia dinh",
+            "tien su phau thuat",
+            "past medical history",
+            "family history",
+        ),
+    ),
+    (
+        "vital_signs",
+        (
+            "dau hieu sinh ton",
+            "sinh hieu",
+            "vital signs",
+        ),
+    ),
+    (
+        "exposure_poisoning",
+        (
+            "ngo doc",
+            "phoi nhiem",
+            "tiep xuc hoa chat",
+            "chat doc",
+            "poisoning",
+            "exposure",
+        ),
+    ),
+)
+
 _CASE_ORDINALS = (
     "nhat",
     "hai",
@@ -144,27 +237,103 @@ def detect_sections(text: str) -> list[Section]:
     return sections or [Section("document", 0, len(text))]
 
 
-def split_chunks(text: str, max_chars: int = 1000, overlap: int = 0) -> list[TextChunk]:
-    del overlap  # Context overlap is carried separately; extraction targets remain disjoint.
+def detect_subsections(text: str) -> list[Section]:
+    hits = _subsection_hits(text)
+    if not hits:
+        return [Section("document", 0, len(text))]
+    if hits[0][0] > 0:
+        hits.insert(0, (0, "document"))
+    return [
+        Section(name, start, hits[index + 1][0] if index + 1 < len(hits) else len(text))
+        for index, (start, name) in enumerate(hits)
+        if start < (hits[index + 1][0] if index + 1 < len(hits) else len(text))
+    ]
+
+
+def split_chunks(text: str, max_chars: int = 480, overlap: int = 100) -> list[TextChunk]:
     chunks: list[TextChunk] = []
     semantic_sections = detect_sections(text)
+    subsections = detect_subsections(text)
     for case_index, (case_start, case_end) in enumerate(_case_spans(text), start=1):
         for segment_start, segment_end in _usable_segments(text, case_start, case_end):
-            for chunk_start, chunk_end in _semantic_section_spans(text, segment_start, segment_end, max_chars):
-                start, end = _trim_offsets(text, chunk_start, chunk_end)
-                if start >= end or _is_administrative_only(text[start:end]):
-                    continue
-                section_name = _section_name_at(semantic_sections, start)
-                chunks.append(
-                    TextChunk(
-                        chunk_id=f"c{len(chunks) + 1}",
-                        section=f"case_{case_index}:{section_name}",
-                        start=start,
-                        end=end,
-                        text=text[start:end],
+            for structure_start, structure_end in _structure_spans(
+                segment_start,
+                segment_end,
+                semantic_sections,
+                subsections,
+            ):
+                for chunk_start, chunk_end in _semantic_section_spans(
+                    text, structure_start, structure_end, max_chars
+                ):
+                    start, end = _expand_with_overlap(
+                        text,
+                        chunk_start,
+                        chunk_end,
+                        structure_start,
+                        structure_end,
+                        overlap,
                     )
-                )
+                    start, end = _trim_offsets(text, start, end)
+                    if start >= end or _is_administrative_only(text[start:end]):
+                        continue
+                    section_name = _section_name_at(semantic_sections, start)
+                    subsection_name = _section_name_at(subsections, start)
+                    chunks.append(
+                        TextChunk(
+                            chunk_id=f"c{len(chunks) + 1}",
+                            section=f"case_{case_index}:{section_name}",
+                            start=start,
+                            end=end,
+                            text=text[start:end],
+                            subsection=subsection_name,
+                        )
+                    )
     return chunks or [TextChunk("c1", "document", 0, len(text), text)]
+
+
+def _structure_spans(
+    start: int,
+    end: int,
+    sections: list[Section],
+    subsections: list[Section],
+) -> list[tuple[int, int]]:
+    boundaries = {start, end}
+    for item in (*sections, *subsections):
+        if start < item.start < end:
+            boundaries.add(item.start)
+        if start < item.end < end:
+            boundaries.add(item.end)
+    ordered = sorted(boundaries)
+    return [
+        (left, right)
+        for left, right in zip(ordered, ordered[1:])
+        if left < right
+    ]
+
+
+def _expand_with_overlap(
+    text: str,
+    start: int,
+    end: int,
+    scope_start: int,
+    scope_end: int,
+    overlap: int,
+) -> tuple[int, int]:
+    if overlap <= 0:
+        return start, end
+    expanded_start = max(scope_start, start - overlap)
+    expanded_end = min(scope_end, end + overlap)
+    if expanded_start < start:
+        window = text[expanded_start:start]
+        cut = max(window.find("\n"), window.find(". "))
+        if cut >= 0:
+            expanded_start += cut + 1
+    if end < expanded_end:
+        window = text[end:expanded_end]
+        cuts = [index + len(separator) for separator in ("\n", ". ") if (index := window.find(separator)) >= 0]
+        if cuts:
+            expanded_end = end + min(cuts)
+    return expanded_start, expanded_end
 
 
 def _case_spans(text: str) -> list[tuple[int, int]]:
@@ -436,6 +605,27 @@ def _section_hits(text: str) -> list[tuple[int, str]]:
         dedup.append((start, name))
     if dedup and dedup[0][0] > 0:
         dedup.insert(0, (0, "document"))
+    return dedup
+
+
+def _subsection_hits(text: str) -> list[tuple[int, str]]:
+    hits: list[tuple[int, str]] = []
+    offset = 0
+    for raw_line in text.splitlines(keepends=True):
+        stripped = raw_line.strip(" \t\r\n:-*#")
+        key = normalize_key(stripped)
+        if key and len(key) <= 140:
+            for name, markers in SUBSECTION_MARKERS:
+                if _starts_with_any(key, markers):
+                    local_start = raw_line.find(stripped)
+                    hits.append((offset + max(0, local_start), name))
+                    break
+        offset += len(raw_line)
+    dedup: list[tuple[int, str]] = []
+    for start, name in hits:
+        if dedup and dedup[-1] == (start, name):
+            continue
+        dedup.append((start, name))
     return dedup
 
 

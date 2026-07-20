@@ -1,0 +1,13 @@
+{
+  "documents": 100,
+  "folds": 5,
+  "epochs": 3,
+  "exact_span_and_type": {
+    "true_positive": 5436,
+    "false_positive": 17410,
+    "false_negative": 9971,
+    "precision": 0.237941,
+    "recall": 0.352827,
+    "f1": 0.284213
+  }
+}

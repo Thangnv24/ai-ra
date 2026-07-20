@@ -9,8 +9,9 @@ from typing import Iterable
 from core.config import TYPE_DIAGNOSIS, TYPE_DRUG, TYPE_SYMPTOM, TYPE_TEST_NAME, TYPE_TEST_RESULT
 from core.text import token_count
 from extraction.annotation_memory import AnnotationMemory, section_at
+from extraction.learned_models import SpanAcceptanceModel
 from extraction.ner import SpanCandidate
-from extraction.sectioning import detect_sections
+from extraction.sectioning import detect_sections, detect_subsections
 
 
 _SOURCE_PRIORS = {
@@ -22,6 +23,7 @@ _SOURCE_PRIORS = {
     "lexical_rule": 0.76,
     "rule": 0.78,
     "llm": 0.72,
+    "sequence_model": 0.74,
 }
 _SOURCE_PRIORITY = {
     "lab_rule": 8,
@@ -32,6 +34,7 @@ _SOURCE_PRIORITY = {
     "lexical_rule": 3,
     "rule": 2,
     "llm": 1,
+    "sequence_model": 2,
 }
 _TYPE_PRIORITY = {
     TYPE_DRUG: 5,
@@ -49,6 +52,7 @@ _SOURCE_THRESHOLDS = {
     "lexical_rule": 0.72,
     "rule": 0.72,
     "llm": 0.68,
+    "sequence_model": 0.7,
 }
 
 
@@ -84,12 +88,18 @@ class _VerifiedSpan:
 
 
 class SpanTypeVerifier:
-    def __init__(self, memory: AnnotationMemory | None = None) -> None:
+    def __init__(
+        self,
+        memory: AnnotationMemory | None = None,
+        acceptance_model: SpanAcceptanceModel | None = None,
+    ) -> None:
         self.memory = memory or AnnotationMemory.empty()
+        self.acceptance_model = acceptance_model or SpanAcceptanceModel.empty()
 
     def select(self, text: str, proposals: Iterable[SpanCandidate]) -> tuple[list[SpanCandidate], SpanVerificationSummary]:
         raw = list(proposals)
         sections = detect_sections(text)
+        subsections = detect_subsections(text)
         valid: list[SpanCandidate] = []
         for span in raw:
             if 0 <= span.start < span.end <= len(text) and text[span.start : span.end] == span.text:
@@ -103,7 +113,15 @@ class SpanTypeVerifier:
         verified: list[_VerifiedSpan] = []
         below_threshold = 0
         for group in grouped.values():
-            scored = [self._calibrate(text, span, section_at(sections, span.start)) for span in group]
+            scored = [
+                self._calibrate(
+                    text,
+                    span,
+                    section_at(sections, span.start),
+                    section_at(subsections, span.start),
+                )
+                for span in group
+            ]
             representative, score = max(
                 scored,
                 key=lambda item: (item[1], _SOURCE_PRIORITY.get(item[0].source, 0), item[0].score),
@@ -153,14 +171,52 @@ class SpanTypeVerifier:
             selected=len(spans),
         )
 
-    def _calibrate(self, text: str, span: SpanCandidate, section: str) -> tuple[SpanCandidate, float]:
+    def _calibrate(
+        self,
+        text: str,
+        span: SpanCandidate,
+        section: str,
+        subsection: str,
+    ) -> tuple[SpanCandidate, float]:
         prior = _SOURCE_PRIORS.get(span.source, 0.7)
         score = 0.6 * max(0.0, min(1.0, span.score)) + 0.4 * prior
-        evidence = self.memory.evidence_for_section(span, section, text)
+        evidence = self.memory.evidence_for_context(span, section, subsection, text)
+        memory_score: float | None = None
         if evidence is not None:
             entry, memory_score = evidence
             evidence_weight = 0.42 if entry.observed_count >= 3 else 0.2
             score = (1.0 - evidence_weight) * score + evidence_weight * memory_score
+        learned_score = self.acceptance_model.score(
+            text,
+            span,
+            section,
+            subsection,
+            memory_score,
+        )
+        if learned_score is not None:
+            source = span.parent_source or span.source
+            if span.type == TYPE_TEST_RESULT:
+                learned_weight = 0.08
+            elif span.type == TYPE_DRUG:
+                learned_weight = 0.16
+            elif span.variant != "original":
+                learned_weight = 0.42
+            elif source == "llm":
+                learned_weight = 0.42
+            elif source == "sequence_model":
+                learned_weight = 0.38
+            else:
+                learned_weight = 0.2
+            score = (1.0 - learned_weight) * score + learned_weight * learned_score
+            learned_threshold = self.acceptance_model.threshold_for(span.type, source)
+            if learned_score >= learned_threshold:
+                score += 0.025
+            elif (
+                source in {"llm", "sequence_model"}
+                and span.type not in {TYPE_TEST_RESULT, TYPE_DRUG}
+                and learned_score < max(0.12, learned_threshold - 0.12)
+            ):
+                score -= 0.1
         return span, score
 
 
@@ -169,9 +225,25 @@ def _best_source(sources: frozenset[str]) -> str:
 
 
 def _span_utility(span: SpanCandidate, source_count: int) -> float:
-    length_bonus = 0.012 * min(6, token_count(span.text))
+    tokens = token_count(span.text)
+    length_bonus = 0.0
+    if span.type == TYPE_TEST_NAME:
+        length_bonus = 0.008 * min(8, tokens)
+    elif span.type in {TYPE_DIAGNOSIS, TYPE_SYMPTOM}:
+        length_bonus = 0.003 * min(6, tokens)
+    variant_adjustment = {
+        "drug_without_sig": 0.025,
+        "drug_core": -0.005,
+        "test_full_label": 0.035,
+        "symptom_with_modifier": 0.02,
+        "symptom_with_negation": -0.005,
+        "diagnosis_core": 0.015,
+        "result_with_unit": -0.01,
+        "vital_label_with_value": 0.005,
+    }.get(span.variant, 0.0)
     corroboration_bonus = 0.025 * max(0, source_count - 1)
-    return max(0.0, span.score - 0.55) + length_bonus + corroboration_bonus
+    short_penalty = 0.035 if len(span.text.strip()) <= 2 else 0.0
+    return max(0.0, span.score - 0.55) + length_bonus + variant_adjustment + corroboration_bonus - short_penalty
 
 
 def _decode_non_overlapping(candidates: list[_VerifiedSpan]) -> list[_VerifiedSpan]:

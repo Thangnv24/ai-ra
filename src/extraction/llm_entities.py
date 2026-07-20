@@ -8,6 +8,7 @@ from typing import Any
 
 from core.config import ALLOWED_TYPES
 from core.text import normalize_key, trim_span_text
+from extraction.annotation_memory import AnnotationMemory
 from extraction.ner import SpanCandidate
 from extraction.sectioning import TextChunk, split_chunks
 from integrations.prompts import ENTITY_SYSTEM_PROMPT, build_entity_extraction_prompt
@@ -18,9 +19,12 @@ class EntityProposalSummary:
     chunks: int
     mentions: int
     aligned: int
+    calls: int = 0
     aligned_before_dedup: int = 0
     deduplicated: int = 0
     rejection_reasons: tuple[tuple[str, int], ...] = ()
+    mentions_by_type: tuple[tuple[str, int], ...] = ()
+    aligned_by_type: tuple[tuple[str, int], ...] = ()
     errors: tuple[str, ...] = ()
 
     def to_dict(self) -> dict[str, Any]:
@@ -28,10 +32,13 @@ class EntityProposalSummary:
             "chunks": self.chunks,
             "mentions": self.mentions,
             "aligned": self.aligned,
+            "calls": self.calls,
             "aligned_before_dedup": self.aligned_before_dedup,
             "deduplicated": self.deduplicated,
             "rejected": sum(count for _, count in self.rejection_reasons),
             "rejection_reasons": dict(self.rejection_reasons),
+            "mentions_by_type": dict(self.mentions_by_type),
+            "aligned_by_type": dict(self.aligned_by_type),
             "errors": list(self.errors),
         }
 
@@ -45,8 +52,15 @@ class TextUnit:
 
 
 class LLMEntityExtractor:
-    def __init__(self, llm_client: Any, max_chars: int = 1000, overlap: int = 0) -> None:
+    def __init__(
+        self,
+        llm_client: Any,
+        memory: AnnotationMemory | None = None,
+        max_chars: int = 480,
+        overlap: int = 100,
+    ) -> None:
         self.llm_client = llm_client
+        self.memory = memory or AnnotationMemory.empty()
         self.max_chars = max_chars
         self.overlap = overlap
 
@@ -57,53 +71,93 @@ class LLMEntityExtractor:
         chunks = split_chunks(text, max_chars=self.max_chars, overlap=self.overlap)
         spans: list[SpanCandidate] = []
         mention_count = 0
+        call_count = 0
+        mentions_by_type: Counter[str] = Counter()
+        aligned_by_type: Counter[str] = Counter()
         rejection_reasons: Counter[str] = Counter()
         for chunk_index, chunk in enumerate(chunks):
             units = _chunk_units(chunk)
             context_before, context_after = _neighbor_context(chunks, chunk_index)
-            result = self.llm_client.chat_json(
-                ENTITY_SYSTEM_PROMPT,
-                build_entity_extraction_prompt(
-                    _chunk_payload(
-                        chunk,
-                        units,
-                        context_before=context_before,
-                        context_after=context_after,
-                    )
-                ),
+            payload = _chunk_payload(
+                chunk,
+                units,
+                context_before=context_before,
+                context_after=context_after,
             )
-            if not result.ok or not isinstance(result.data, dict):
-                raise RuntimeError(
-                    f"LLM entity extraction failed for {chunk.chunk_id}: "
-                    f"{result.error or 'LLM returned no data'}"
+            section = chunk.section.split(":", 1)[-1]
+            for concept_type in ALLOWED_TYPES:
+                examples = self.memory.examples_for(
+                    chunk.text,
+                    concept_type,
+                    section=section,
+                    subsection=chunk.subsection,
+                    limit=4,
                 )
-            mentions = result.data.get("mentions")
-            if not isinstance(mentions, list):
-                raise RuntimeError(f"LLM entity extraction failed for {chunk.chunk_id}: JSON has no mentions list")
-            mention_count += len(mentions)
-            used_occurrences: dict[tuple[str, str], set[int]] = {}
-            for mention in mentions:
-                span, rejection_reason = _span_from_mention_with_reason(
-                    text,
-                    chunk,
-                    mention,
-                    units=units,
-                    used_occurrences=used_occurrences,
+                result = self.llm_client.chat_json(
+                    ENTITY_SYSTEM_PROMPT,
+                    build_entity_extraction_prompt(payload, concept_type, examples),
                 )
-                if span is None:
-                    rejection_reasons[rejection_reason or "unknown"] += 1
-                    continue
-                spans.append(span)
+                call_count += 1
+                if not result.ok or not isinstance(result.data, dict):
+                    raise RuntimeError(
+                        f"LLM entity extraction failed for {chunk.chunk_id}/{concept_type}: "
+                        f"{result.error or 'LLM returned no data'}"
+                    )
+                mentions = result.data.get("mentions")
+                if not isinstance(mentions, list):
+                    raise RuntimeError(
+                        f"LLM entity extraction failed for {chunk.chunk_id}/{concept_type}: "
+                        "JSON has no mentions list"
+                    )
+                mention_count += len(mentions)
+                mentions_by_type[concept_type] += len(mentions)
+                used_occurrences: dict[tuple[str, str], set[int]] = {}
+                for raw_mention in mentions:
+                    mention = _mention_for_requested_type(raw_mention, concept_type)
+                    span, rejection_reason = _span_from_mention_with_reason(
+                        text,
+                        chunk,
+                        mention,
+                        units=units,
+                        used_occurrences=used_occurrences,
+                    )
+                    if span is None:
+                        rejection_reasons[rejection_reason or "unknown"] += 1
+                        continue
+                    spans.append(span)
+                    aligned_by_type[concept_type] += 1
         aligned_before_dedup = len(spans)
         spans = _dedup_spans(spans)
         return spans, EntityProposalSummary(
             chunks=len(chunks),
             mentions=mention_count,
             aligned=len(spans),
+            calls=call_count,
             aligned_before_dedup=aligned_before_dedup,
             deduplicated=aligned_before_dedup - len(spans),
             rejection_reasons=tuple(sorted(rejection_reasons.items())),
+            mentions_by_type=tuple(sorted(mentions_by_type.items())),
+            aligned_by_type=tuple(sorted(aligned_by_type.items())),
         )
+
+
+def _mention_for_requested_type(mention: Any, concept_type: str) -> Any:
+    if isinstance(mention, dict):
+        output = dict(mention)
+        output["type"] = concept_type
+        return output
+    if isinstance(mention, list) and mention:
+        if len(mention) >= 2 and str(mention[1]) in ALLOWED_TYPES:
+            output = list(mention)
+            output[1] = concept_type
+            return output
+        return {
+            "unit_id": mention[0] if len(mention) > 1 else "",
+            "quote": mention[1] if len(mention) > 1 else mention[0],
+            "occurrence_index": mention[2] if len(mention) > 2 else 0,
+            "type": concept_type,
+        }
+    return mention
 
 
 def align_quote_in_chunk(chunk: TextChunk, quote: str) -> tuple[int, int] | None:
@@ -134,6 +188,7 @@ def _chunk_payload(
     return {
         "chunk_id": chunk.chunk_id,
         "section": chunk.section,
+        "subsection": chunk.subsection,
         "start": chunk.start,
         "end": chunk.end,
         "text": chunk.text,

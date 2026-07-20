@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import re
 import sys
 from collections import Counter, defaultdict
 from datetime import datetime
@@ -17,7 +18,7 @@ sys.path.insert(0, str(ROOT / "src"))
 from core.config import ALLOWED_TYPES
 from core.text import normalize_key
 from extraction.annotation_memory import NormalizedKeyMatcher, context_cues, normalized_projection, section_at
-from extraction.sectioning import detect_sections
+from extraction.sectioning import detect_sections, detect_subsections
 
 
 STOP_KEYS = {
@@ -68,7 +69,7 @@ def main(argv: list[str] | None = None) -> int:
 
     manifest = {
         "created_at": datetime.now().isoformat(timespec="seconds"),
-        "format_version": 1,
+        "format_version": 2,
         "datasets": [
             {"input_dir": str(input_dir), "gold_dir": str(gold_dir)} for input_dir, gold_dir in pairs
         ],
@@ -84,7 +85,8 @@ def main(argv: list[str] | None = None) -> int:
         "artifact": str(args.output.resolve()),
         "sha256": sha256_file(args.output),
     }
-    args.manifest.write_text(json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8")
+    with args.manifest.open("w", encoding="utf-8", newline="\n") as fh:
+        fh.write(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n")
     print(json.dumps(manifest, ensure_ascii=False, indent=2))
     return 0
 
@@ -103,8 +105,12 @@ def build_memory(
     positive_spans: dict[tuple[int, int, int], set[str]] = defaultdict(set)
     positive_documents: dict[str, set[int]] = defaultdict(set)
     cue_counts: dict[tuple[str, str], Counter[str]] = defaultdict(Counter)
+    negative_cue_counts: dict[tuple[str, str], Counter[str]] = defaultdict(Counter)
+    boundary_profiles: dict[tuple[str, str], Counter[str]] = defaultdict(Counter)
+    examples: dict[tuple[str, str], list[dict[str, str]]] = defaultdict(list)
+    provenance: dict[str, set[str]] = defaultdict(set)
 
-    for input_dir, gold_dir in datasets:
+    for dataset_index, (input_dir, gold_dir) in enumerate(datasets, start=1):
         for gold_path in sorted(gold_dir.glob("*.json"), key=natural_key):
             if include_stems is not None and gold_path.stem not in include_stems:
                 continue
@@ -115,6 +121,7 @@ def build_memory(
             raw = json.loads(gold_path.read_text(encoding="utf-8-sig"))
             document_id = len(documents)
             sections = detect_sections(text)
+            subsections = detect_subsections(text)
             concepts = [item for item in raw if isinstance(item, dict)] if isinstance(raw, list) else []
             for item in concepts:
                 concept_type = str(item.get("type") or "")
@@ -131,6 +138,7 @@ def build_memory(
                 type_counts[key][concept_type] += 1
                 surfaces[key][term] += 1
                 section_name = section_at(sections, start)
+                subsection_name = section_at(subsections, start)
                 left, right = context_cues(text, start, end)
                 cue_counts[(key, "left")].update(left)
                 cue_counts[(key, "right")].update(right)
@@ -140,27 +148,48 @@ def build_memory(
                 candidate_values = tuple(sorted(str(value) for value in item.get("candidates") or ()))
                 candidates[evidence_key].update(candidate_values)
                 candidate_sets[evidence_key]["|".join(candidate_values)] += 1
-            documents.append({"text": text, "sections": sections})
+                boundary_profiles[evidence_key].update(_boundary_features(term))
+                provenance[key].add(f"dataset_{dataset_index}")
+                _append_example(
+                    examples[evidence_key],
+                    text,
+                    start,
+                    end,
+                    term,
+                    section_name,
+                    subsection_name,
+                )
+            documents.append({"text": text, "sections": sections, "subsections": subsections})
 
     observed_count: Counter[str] = Counter()
     observed_documents: dict[str, set[int]] = defaultdict(set)
     positive_occurrences: Counter[str] = Counter()
     section_observed: dict[str, Counter[str]] = defaultdict(Counter)
     section_positive: dict[str, Counter[str]] = defaultdict(Counter)
+    subsection_observed: dict[str, Counter[str]] = defaultdict(Counter)
+    subsection_positive: dict[str, Counter[str]] = defaultdict(Counter)
     keys = tuple(type_counts)
     matcher = NormalizedKeyMatcher(keys)
     for document_id, document in enumerate(documents):
         text = str(document["text"])
         projection = normalized_projection(text)
         sections = document["sections"]
+        subsections = document["subsections"]
         for key, start, end in matcher.find(projection):
             observed_documents[key].add(document_id)
             observed_count[key] += 1
             section_name = section_at(sections, start)
+            subsection_name = section_at(subsections, start)
             section_observed[key][section_name] += 1
+            subsection_observed[key][subsection_name] += 1
             if key in positive_spans.get((document_id, start, end), set()):
                 positive_occurrences[key] += 1
                 section_positive[key][section_name] += 1
+                subsection_positive[key][subsection_name] += 1
+            else:
+                left, right = context_cues(text, start, end)
+                negative_cue_counts[(key, "left")].update(left)
+                negative_cue_counts[(key, "right")].update(right)
 
     rows: list[dict[str, Any]] = []
     for key in keys:
@@ -192,10 +221,28 @@ def build_memory(
                 },
                 "left_cues": [value for value, _ in cue_counts[(key, "left")].most_common(8)],
                 "right_cues": [value for value, _ in cue_counts[(key, "right")].most_common(8)],
+                "negative_left_cues": [
+                    value for value, _ in negative_cue_counts[(key, "left")].most_common(8)
+                ],
+                "negative_right_cues": [
+                    value for value, _ in negative_cue_counts[(key, "right")].most_common(8)
+                ],
+                "subsections": {
+                    name: {
+                        "positive": subsection_positive[key][name],
+                        "observed": count,
+                    }
+                    for name, count in sorted(subsection_observed[key].items())
+                },
+                "boundary_profile": dict(boundary_profiles[evidence_key]),
+                "examples": examples[evidence_key][:3],
                 "assertions": dict(assertions[evidence_key]),
                 "candidates": dict(candidates[evidence_key].most_common()),
                 "candidate_sets": dict(candidate_sets[evidence_key]),
-                "provenance": "reviewed_gold",
+                "provenance": {
+                    "kind": "reviewed_gold",
+                    "datasets": sorted(provenance[key]),
+                },
             }
         )
     rows.sort(key=lambda item: (-int(item["positive_count"]), str(item["key"])))
@@ -204,8 +251,52 @@ def build_memory(
         "row_count": len(rows),
         "positive_occurrences": sum(int(row["positive_count"]) for row in rows),
         "hard_negative_occurrences": sum(int(row["negative_count"]) for row in rows),
+        "rows_with_hard_negative_context": sum(
+            bool(row["negative_left_cues"] or row["negative_right_cues"]) for row in rows
+        ),
+        "rows_with_examples": sum(bool(row["examples"]) for row in rows),
         "by_type": dict(Counter(str(row["type"]) for row in rows)),
     }
+
+
+def _append_example(
+    output: list[dict[str, str]],
+    text: str,
+    start: int,
+    end: int,
+    quote: str,
+    section: str,
+    subsection: str,
+) -> None:
+    if len(output) >= 3:
+        return
+    left = text[max(0, start - 80) : start].replace("\n", " ").strip()
+    right = text[end : min(len(text), end + 80)].replace("\n", " ").strip()
+    item = {
+        "quote": quote,
+        "left": left[-80:],
+        "right": right[:80],
+        "section": section,
+        "subsection": subsection,
+    }
+    identity = (item["quote"], item["left"], item["right"])
+    if all((value["quote"], value["left"], value["right"]) != identity for value in output):
+        output.append(item)
+
+
+def _boundary_features(value: str) -> Counter[str]:
+    key = normalize_key(value)
+    features: Counter[str] = Counter()
+    features[f"tokens:{len(key.split())}"] += 1
+    if key.startswith(("khong ", "chua ", "phu nhan ")):
+        features["leading_negation"] += 1
+    if re.search(r"\b\d+(?:[.,]\d+)?\s*(?:mg|mcg|g|ml|iu|%)\b", key):
+        features["has_strength_or_unit"] += 1
+    if "(" in value and ")" in value:
+        features["has_parenthetical"] += 1
+    if re.search(r"\b(?:po|iv|im|sc|bid|tid|qid|qhs|prn)\b", key):
+        features["has_sig"] += 1
+    return features
 
 
 def eligible_key(key: str) -> bool:

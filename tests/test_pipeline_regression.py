@@ -18,9 +18,10 @@ from core.medication import medication_lookup_keys, medication_match_score, norm
 from core.schema import Concept, validate_output
 from extraction.context import ContextDetector
 from extraction.annotation_memory import AnnotationMemory, MemoryEntry, normalized_projection
-from extraction.llm_entities import _chunk_units, _span_from_mention_with_reason
+from extraction.boundary_variants import BoundaryVariantGenerator
+from extraction.llm_entities import LLMEntityExtractor, _chunk_units, _span_from_mention_with_reason
 from extraction.ner import MedicalNER, SpanCandidate, resolve_span_types
-from extraction.sectioning import TextChunk, split_chunks
+from extraction.sectioning import TextChunk, detect_subsections, split_chunks
 from extraction.span_verifier import SpanTypeVerifier
 from knowledge.candidates import (
     CandidateHit,
@@ -39,6 +40,26 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 class EntityOccurrenceTests(unittest.TestCase):
+    def test_specialized_discovery_calls_each_type(self) -> None:
+        class EmptyLLM:
+            enabled = True
+
+            def __init__(self) -> None:
+                self.calls = 0
+
+            def chat_json(self, system_prompt, user_prompt):
+                self.calls += 1
+                return type("Result", (), {"ok": True, "data": {"mentions": []}, "error": None})()
+
+        client = EmptyLLM()
+        spans, summary = LLMEntityExtractor(client, max_chars=480, overlap=0).extract(
+            "Bệnh nhân tỉnh, không khó thở."
+        )
+
+        self.assertEqual(spans, [])
+        self.assertEqual(summary.calls, 5)
+        self.assertEqual(client.calls, 5)
+
     def test_aligns_repeated_quotes_to_distinct_occurrences(self) -> None:
         quote = "\u0111\u00e1nh tr\u1ed1ng ng\u1ef1c"
         text = f"{quote}, {quote}"
@@ -111,6 +132,27 @@ class EntityOccurrenceTests(unittest.TestCase):
         self.assertIn("vi\u00eam ph\u1ed5i", payload)
         self.assertNotIn("n\u00f4ng n\u00f4ng n\u00f4ng", payload)
 
+    def test_structural_chunks_keep_offsets_and_subsection(self) -> None:
+        text = (
+            "K\u1ebeT QU\u1ea2 X\u00c9T NGHI\u1ec6M:\n"
+            "Th\u1eddi gian prothrombin (PT; TQ): 12 gi\u00e2y\n"
+            "CH\u1ea8N \u0110O\u00c1N:\nVi\u00eam ph\u1ed5i"
+        )
+
+        chunks = split_chunks(text, max_chars=55, overlap=15)
+
+        self.assertTrue(any(chunk.subsection == "laboratory" for chunk in chunks))
+        self.assertTrue(any(chunk.subsection == "diagnoses" for chunk in chunks))
+        for chunk in chunks:
+            self.assertEqual(text[chunk.start:chunk.end], chunk.text)
+
+    def test_detects_exposure_subsection(self) -> None:
+        text = "Ng\u1ed9 \u0111\u1ed9c:\nTi\u1ebfp x\u00fac Glufosinate"
+
+        sections = detect_subsections(text)
+
+        self.assertEqual(sections[0].name, "exposure_poisoning")
+
     def test_accepts_compact_mentions_for_a_smaller_llm_response(self) -> None:
         quote = "B\u1ec7nh nh\u00e2n t\u1ec9nh"
         chunk = TextChunk("c1", "case_1:document", 0, len(quote), quote)
@@ -133,18 +175,59 @@ class EntityOccurrenceTests(unittest.TestCase):
                 "text": "Tim \u0111\u1ec1u, T1 T2 r\u00f5",
                 "context_before": "B\u1ec7nh nh\u00e2n v\u00e0o vi\u1ec7n",
                 "context_after": "Ch\u1ea9n \u0111o\u00e1n",
-            }
+                "subsection": "symptoms_exam",
+                "units": [{"unit_id": "c2u1", "text": "Tim \u0111\u1ec1u, T1 T2 r\u00f5"}],
+            },
+            TYPE_SYMPTOM,
         )
 
-        self.assertIn("target_text", prompt)
+        self.assertIn("target_units", prompt)
         self.assertIn("clinical finding", prompt)
-        self.assertIn("must never be quoted", prompt)
-        self.assertIn("Be exhaustive", prompt)
-        self.assertIn("trầm cảm", prompt)
-        self.assertIn("CTM", prompt)
+        self.assertIn("may never be quoted", prompt)
+        self.assertNotIn("Be exhaustive", prompt)
+        self.assertIn("requested_type", prompt)
+        self.assertNotIn('"confidence":', prompt)
 
 
 class SpanAndTypeTests(unittest.TestCase):
+    def test_boundary_variants_are_exact_source_substrings(self) -> None:
+        cases = [
+            (
+                "Thuốc: Exforge 5/80mg x 1 viên sáng",
+                "Exforge 5/80mg x 1 viên sáng",
+                TYPE_DRUG,
+                "Exforge 5/80mg",
+            ),
+            (
+                "Triệu chứng: không đau đầu",
+                "đau đầu",
+                TYPE_SYMPTOM,
+                "không đau đầu",
+            ),
+            (
+                "Kết quả xét nghiệm:\nThời gian prothrombin (PT; TQ): 12 giây",
+                "PT",
+                TYPE_TEST_NAME,
+                "Thời gian prothrombin (PT; TQ)",
+            ),
+            (
+                "Natri: 132 mmol/L",
+                "132",
+                TYPE_TEST_RESULT,
+                "132 mmol/L",
+            ),
+        ]
+        generator = BoundaryVariantGenerator()
+        for text, quote, concept_type, expected in cases:
+            start = text.index(quote)
+            spans, _ = generator.expand(
+                text,
+                [SpanCandidate(start, start + len(quote), quote, concept_type, 0.8, "llm")],
+            )
+            self.assertIn(expected, [span.text for span in spans])
+            for span in spans:
+                self.assertEqual(text[span.start:span.end], span.text)
+
     def test_normalized_projection_preserves_source_offsets(self) -> None:
         text = "Tiền sử: TĂNG huyết áp."
         phrase = "TĂNG huyết áp"
@@ -406,6 +489,52 @@ class AssertionTests(unittest.TestCase):
 
 
 class CandidateMappingTests(unittest.TestCase):
+    def test_candidate_memory_keeps_diagnosis_consensus_conservative(self) -> None:
+        entry = MemoryEntry(
+            key="soi than",
+            surfaces=("sỏi thận",),
+            concept_type=TYPE_DIAGNOSIS,
+            positive_count=11,
+            observed_count=11,
+            support_documents=5,
+            observed_documents=5,
+            type_purity=1.0,
+            annotation_rate=1.0,
+            sections={"document": (11, 11)},
+            left_cues=(),
+            right_cues=(),
+            assertions={"": 11},
+            candidates={"N20.0": 4},
+            candidate_sets={"": 7, "N20.0": 4},
+        )
+
+        decision = AnnotationMemory((entry,)).candidate_decision("sỏi thận", TYPE_DIAGNOSIS)
+
+        self.assertIsNone(decision)
+
+    def test_candidate_memory_uses_two_document_consensus(self) -> None:
+        entry = MemoryEntry(
+            key="duloxetine",
+            surfaces=("duloxetine",),
+            concept_type=TYPE_DRUG,
+            positive_count=2,
+            observed_count=2,
+            support_documents=2,
+            observed_documents=2,
+            type_purity=1.0,
+            annotation_rate=1.0,
+            sections={"document": (2, 2)},
+            left_cues=(),
+            right_cues=(),
+            assertions={"": 2},
+            candidates={"72625": 2},
+            candidate_sets={"72625": 2},
+        )
+
+        decision = AnnotationMemory((entry,)).candidate_decision("duloxetine", TYPE_DRUG)
+
+        self.assertEqual(decision, ("72625",))
+
     def test_candidate_memory_treats_null_as_a_first_class_decision(self) -> None:
         diagnosis = "tăng huyết áp"
         record = CandidateRecord("I10", "Essential hypertension", "ICD10", TYPE_DIAGNOSIS, 10)

@@ -1,0 +1,401 @@
+{
+  "files": 100,
+  "input_dir": "D:\\downloads\\ai-race\\input_part2\\input\\input",
+  "gold_dir": "D:\\downloads\\ai-race\\input_part2\\gt\\output",
+  "external_lexicon": null,
+  "annotation_memory": "D:\\downloads\\ai-race\\data\\external\\annotation_memory.jsonl",
+  "token_span_model": "D:\\downloads\\ai-race\\data\\external\\token_span_model.json.gz",
+  "span_acceptance_model": "D:\\downloads\\ai-race\\data\\external\\span_acceptance_model.json",
+  "validation": {
+    "missing_input_files": 0,
+    "gold_files_with_strict_schema_errors": 100,
+    "gold_strict_schema_errors": 4658,
+    "gold_offset_mismatches": 0,
+    "missing_prediction_files": 0,
+    "prediction_files_with_strict_schema_errors": 0,
+    "prediction_strict_schema_errors": 0,
+    "prediction_offset_mismatches": 0
+  },
+  "rule_proposal": {
+    "exact_span_and_type": {
+      "true_positive": 2044,
+      "false_positive": 1935,
+      "false_negative": 13400,
+      "precision": 0.513697,
+      "recall": 0.132349,
+      "f1": 0.210472
+    },
+    "boundary_only": {
+      "true_positive": 2110,
+      "false_positive": 1869,
+      "false_negative": 13334,
+      "precision": 0.530284,
+      "recall": 0.136623,
+      "f1": 0.217268
+    },
+    "type_accuracy_on_matched_boundaries": 0.96872,
+    "by_type": {
+      "TRIỆU_CHỨNG": {
+        "true_positive": 1543,
+        "false_positive": 784,
+        "false_negative": 8852,
+        "precision": 0.663086,
+        "recall": 0.148437,
+        "f1": 0.242572
+      },
+      "TÊN_XÉT_NGHIỆM": {
+        "true_positive": 112,
+        "false_positive": 406,
+        "false_negative": 1272,
+        "precision": 0.216216,
+        "recall": 0.080925,
+        "f1": 0.117771
+      },
+      "KẾT_QUẢ_XÉT_NGHIỆM": {
+        "true_positive": 33,
+        "false_positive": 322,
+        "false_negative": 604,
+        "precision": 0.092958,
+        "recall": 0.051805,
+        "f1": 0.066532
+      },
+      "CHẨN_ĐOÁN": {
+        "true_positive": 333,
+        "false_positive": 346,
+        "false_negative": 2233,
+        "precision": 0.490427,
+        "recall": 0.129774,
+        "f1": 0.205239
+      },
+      "THUỐC": {
+        "true_positive": 23,
+        "false_positive": 77,
+        "false_negative": 439,
+        "precision": 0.23,
+        "recall": 0.049784,
+        "f1": 0.081851
+      }
+    }
+  },
+  "verified_proposal": {
+    "exact_span_and_type": {
+      "true_positive": 3899,
+      "false_positive": 1600,
+      "false_negative": 11545,
+      "precision": 0.709038,
+      "recall": 0.252461,
+      "f1": 0.372344
+    },
+    "boundary_only": {
+      "true_positive": 3938,
+      "false_positive": 1561,
+      "false_negative": 11506,
+      "precision": 0.71613,
+      "recall": 0.254986,
+      "f1": 0.376068
+    },
+    "by_type": {
+      "TRIỆU_CHỨNG": {
+        "true_positive": 2790,
+        "false_positive": 361,
+        "false_negative": 7605,
+        "precision": 0.885433,
+        "recall": 0.268398,
+        "f1": 0.41193
+      },
+      "TÊN_XÉT_NGHIỆM": {
+        "true_positive": 243,
+        "false_positive": 190,
+        "false_negative": 1141,
+        "precision": 0.561201,
+        "recall": 0.175578,
+        "f1": 0.267474
+      },
+      "KẾT_QUẢ_XÉT_NGHIỆM": {
+        "true_positive": 48,
+        "false_positive": 854,
+        "false_negative": 589,
+        "precision": 0.053215,
+        "recall": 0.075353,
+        "f1": 0.062378
+      },
+      "CHẨN_ĐOÁN": {
+        "true_positive": 727,
+        "false_positive": 120,
+        "false_negative": 1839,
+        "precision": 0.858323,
+        "recall": 0.28332,
+        "f1": 0.426018
+      },
+      "THUỐC": {
+        "true_positive": 91,
+        "false_positive": 75,
+        "false_negative": 371,
+        "precision": 0.548193,
+        "recall": 0.19697,
+        "f1": 0.289809
+      }
+    },
+    "error_taxonomy": {
+      "boundary_shift": 34,
+      "boundary_too_long": 38,
+      "boundary_too_short": 1255,
+      "no_gold_overlap": 234,
+      "wrong_type": 39
+    }
+  },
+  "proposal_lattice": {
+    "exact_span_and_type": {
+      "true_positive": 7453,
+      "false_positive": 24853,
+      "false_negative": 7991,
+      "precision": 0.2307,
+      "recall": 0.482582,
+      "f1": 0.312168
+    },
+    "boundary_only": {
+      "true_positive": 7725,
+      "false_positive": 24581,
+      "false_negative": 7719,
+      "precision": 0.23912,
+      "recall": 0.500194,
+      "f1": 0.32356
+    },
+    "by_variant": {
+      "diagnosis_core": {
+        "true_positive": 4,
+        "false_positive": 100,
+        "false_negative": 8342,
+        "precision": 0.038462,
+        "recall": 0.000479,
+        "f1": 0.000947
+      },
+      "drug_core": {
+        "true_positive": 1,
+        "false_positive": 299,
+        "false_negative": 12248,
+        "precision": 0.003333,
+        "recall": 8.2e-05,
+        "f1": 0.000159
+      },
+      "drug_without_sig": {
+        "true_positive": 14,
+        "false_positive": 23,
+        "false_negative": 4270,
+        "precision": 0.378378,
+        "recall": 0.003268,
+        "f1": 0.00648
+      },
+      "original": {
+        "true_positive": 7265,
+        "false_positive": 22289,
+        "false_negative": 8179,
+        "precision": 0.245821,
+        "recall": 0.470409,
+        "f1": 0.322903
+      },
+      "result_with_unit": {
+        "true_positive": 1,
+        "false_positive": 24,
+        "false_negative": 3080,
+        "precision": 0.04,
+        "recall": 0.000325,
+        "f1": 0.000644
+      },
+      "symptom_with_modifier": {
+        "true_positive": 102,
+        "false_positive": 439,
+        "false_negative": 15049,
+        "precision": 0.18854,
+        "recall": 0.006732,
+        "f1": 0.013
+      },
+      "symptom_with_negation": {
+        "true_positive": 56,
+        "false_positive": 1193,
+        "false_negative": 15310,
+        "precision": 0.044836,
+        "recall": 0.003644,
+        "f1": 0.006741
+      },
+      "test_full_label": {
+        "true_positive": 126,
+        "false_positive": 365,
+        "false_negative": 9657,
+        "precision": 0.256619,
+        "recall": 0.012879,
+        "f1": 0.024528
+      },
+      "vital_label_with_value": {
+        "true_positive": 0,
+        "false_positive": 5,
+        "false_negative": 616,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      }
+    }
+  },
+  "proposal_sources": {
+    "context_rule": {
+      "exact_span_and_type": {
+        "true_positive": 22,
+        "false_positive": 79,
+        "false_negative": 14255,
+        "precision": 0.217822,
+        "recall": 0.001541,
+        "f1": 0.00306
+      },
+      "boundary_only": {
+        "true_positive": 22,
+        "false_positive": 79,
+        "false_negative": 14255,
+        "precision": 0.217822,
+        "recall": 0.001541,
+        "f1": 0.00306
+      }
+    },
+    "drug_rule": {
+      "exact_span_and_type": {
+        "true_positive": 23,
+        "false_positive": 78,
+        "false_negative": 9054,
+        "precision": 0.227723,
+        "recall": 0.002534,
+        "f1": 0.005012
+      },
+      "boundary_only": {
+        "true_positive": 23,
+        "false_positive": 78,
+        "false_negative": 9054,
+        "precision": 0.227723,
+        "recall": 0.002534,
+        "f1": 0.005012
+      }
+    },
+    "lab_rule": {
+      "exact_span_and_type": {
+        "true_positive": 59,
+        "false_positive": 491,
+        "false_negative": 10173,
+        "precision": 0.107273,
+        "recall": 0.005766,
+        "f1": 0.010944
+      },
+      "boundary_only": {
+        "true_positive": 59,
+        "false_positive": 491,
+        "false_negative": 10173,
+        "precision": 0.107273,
+        "recall": 0.005766,
+        "f1": 0.010944
+      }
+    },
+    "lexical_rule": {
+      "exact_span_and_type": {
+        "true_positive": 1985,
+        "false_positive": 1559,
+        "false_negative": 13459,
+        "precision": 0.560102,
+        "recall": 0.128529,
+        "f1": 0.209079
+      },
+      "boundary_only": {
+        "true_positive": 2048,
+        "false_positive": 1496,
+        "false_negative": 13396,
+        "precision": 0.577878,
+        "recall": 0.132608,
+        "f1": 0.215715
+      }
+    },
+    "memory": {
+      "exact_span_and_type": {
+        "true_positive": 2821,
+        "false_positive": 171,
+        "false_negative": 12623,
+        "precision": 0.942848,
+        "recall": 0.18266,
+        "f1": 0.306032
+      },
+      "boundary_only": {
+        "true_positive": 2835,
+        "false_positive": 157,
+        "false_negative": 12609,
+        "precision": 0.947527,
+        "recall": 0.183566,
+        "f1": 0.30755
+      }
+    },
+    "result_rule": {
+      "exact_span_and_type": {
+        "true_positive": 8,
+        "false_positive": 97,
+        "false_negative": 8992,
+        "precision": 0.07619,
+        "recall": 0.000889,
+        "f1": 0.001757
+      },
+      "boundary_only": {
+        "true_positive": 12,
+        "false_positive": 93,
+        "false_negative": 8988,
+        "precision": 0.114286,
+        "recall": 0.001333,
+        "f1": 0.002636
+      }
+    },
+    "sequence_model": {
+      "exact_span_and_type": {
+        "true_positive": 6131,
+        "false_positive": 16129,
+        "false_negative": 9313,
+        "precision": 0.275427,
+        "recall": 0.396983,
+        "f1": 0.325217
+      },
+      "boundary_only": {
+        "true_positive": 6372,
+        "false_positive": 15888,
+        "false_negative": 9072,
+        "precision": 0.286253,
+        "recall": 0.412587,
+        "f1": 0.338001
+      }
+    }
+  },
+  "assertion_oracle_span": {
+    "mentions": 13423,
+    "exact_set_rate": 0.900469,
+    "mean_jaccard": 0.900805,
+    "weighted_jaccard": 0.900805,
+    "predicted_nonempty_rate": 0.041943,
+    "by_type": {
+      "CHẨN_ĐOÁN": {
+        "mentions": 2566,
+        "exact_set_rate": 0.897116,
+        "mean_jaccard": 0.897506,
+        "weighted_jaccard": 0.897506,
+        "predicted_nonempty_rate": 0.061964
+      },
+      "THUỐC": {
+        "mentions": 462,
+        "exact_set_rate": 0.800866,
+        "mean_jaccard": 0.800866,
+        "weighted_jaccard": 0.800866,
+        "predicted_nonempty_rate": 0.019481
+      },
+      "TRIỆU_CHỨNG": {
+        "mentions": 10395,
+        "exact_set_rate": 0.905724,
+        "mean_jaccard": 0.906061,
+        "weighted_jaccard": 0.906061,
+        "predicted_nonempty_rate": 0.037999
+      }
+    }
+  },
+  "timing": {
+    "candidate_index_load_seconds": 0.0,
+    "total_seconds": 184.022
+  }
+}

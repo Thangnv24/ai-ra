@@ -4,14 +4,14 @@ from __future__ import annotations
 
 import json
 import re
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Iterable
 
-from core.config import ALLOWED_TYPES
+from core.config import ALLOWED_TYPES, TYPE_DIAGNOSIS
 from core.text import normalize_key, trim_span_text
 from extraction.ner import SpanCandidate
-from extraction.sectioning import Section, detect_sections
+from extraction.sectioning import Section, detect_sections, detect_subsections
 
 
 _WORD_RE = re.compile(r"\w+", re.UNICODE)
@@ -34,6 +34,14 @@ class MemoryEntry:
     assertions: dict[str, int]
     candidates: dict[str, int]
     candidate_sets: dict[str, int]
+    type_counts: dict[str, int] = field(default_factory=dict)
+    negative_count: int = 0
+    subsections: dict[str, tuple[int, int]] = field(default_factory=dict)
+    negative_left_cues: tuple[str, ...] = ()
+    negative_right_cues: tuple[str, ...] = ()
+    boundary_profile: dict[str, int] = field(default_factory=dict)
+    examples: tuple[dict[str, str], ...] = ()
+    provenance: tuple[str, ...] = ()
 
     @classmethod
     def from_dict(cls, item: dict[str, Any]) -> MemoryEntry | None:
@@ -51,6 +59,21 @@ class MemoryEntry:
                     _nonnegative_int(counts.get("positive")),
                     _nonnegative_int(counts.get("observed")),
                 )
+        subsections: dict[str, tuple[int, int]] = {}
+        raw_subsections = item.get("subsections") or {}
+        if isinstance(raw_subsections, dict):
+            for name, counts in raw_subsections.items():
+                if not isinstance(counts, dict):
+                    continue
+                subsections[str(name)] = (
+                    _nonnegative_int(counts.get("positive")),
+                    _nonnegative_int(counts.get("observed")),
+                )
+        raw_provenance = item.get("provenance") or ()
+        if isinstance(raw_provenance, dict):
+            raw_provenance = raw_provenance.get("datasets") or ()
+        elif isinstance(raw_provenance, str):
+            raw_provenance = (raw_provenance,)
         return cls(
             key=key,
             surfaces=tuple(str(value) for value in item.get("surfaces") or () if str(value)),
@@ -69,6 +92,31 @@ class MemoryEntry:
             candidate_sets={
                 str(key): _nonnegative_int(value) for key, value in (item.get("candidate_sets") or {}).items()
             },
+            type_counts={
+                str(key): _nonnegative_int(value) for key, value in (item.get("type_counts") or {}).items()
+            },
+            negative_count=_nonnegative_int(item.get("negative_count")),
+            subsections=subsections,
+            negative_left_cues=tuple(
+                str(value) for value in item.get("negative_left_cues") or () if str(value)
+            ),
+            negative_right_cues=tuple(
+                str(value) for value in item.get("negative_right_cues") or () if str(value)
+            ),
+            boundary_profile={
+                str(key): _nonnegative_int(value)
+                for key, value in (item.get("boundary_profile") or {}).items()
+            },
+            examples=tuple(
+                {
+                    str(key): str(value)
+                    for key, value in example.items()
+                    if isinstance(key, str) and isinstance(value, str)
+                }
+                for example in item.get("examples") or ()
+                if isinstance(example, dict)
+            ),
+            provenance=tuple(str(value) for value in raw_provenance if str(value)),
         )
 
     def section_rate(self, section: str) -> float | None:
@@ -77,19 +125,54 @@ class MemoryEntry:
             return None
         return (positive + 1.0) / (observed + 2.0)
 
-    def proposal_score(self, text: str, start: int, end: int, section: str) -> float:
+    def subsection_rate(self, subsection: str) -> float | None:
+        positive, observed = self.subsections.get(subsection, (0, 0))
+        if observed < 2:
+            return None
+        return (positive + 1.0) / (observed + 2.0)
+
+    def proposal_score(
+        self,
+        text: str,
+        start: int,
+        end: int,
+        section: str,
+        subsection: str = "document",
+    ) -> float:
         global_rate = (self.positive_count + 2.0) / (self.observed_count + 4.0)
         section_rate = self.section_rate(section)
+        subsection_rate = self.subsection_rate(subsection)
         contextual_rate = section_rate if section_rate is not None else global_rate
+        local_rate = subsection_rate if subsection_rate is not None else contextual_rate
         cue_score = _cue_agreement(text, start, end, self.left_cues, self.right_cues)
-        score = 0.45 * global_rate + 0.25 * contextual_rate + 0.2 * self.type_purity + 0.1 * cue_score
+        negative_cue_score = _cue_agreement(
+            text,
+            start,
+            end,
+            self.negative_left_cues,
+            self.negative_right_cues,
+        )
+        score = (
+            0.32 * global_rate
+            + 0.18 * contextual_rate
+            + 0.18 * local_rate
+            + 0.2 * self.type_purity
+            + 0.12 * cue_score
+        )
+        if self.negative_count and (self.negative_left_cues or self.negative_right_cues):
+            score -= 0.16 * negative_cue_score
         return max(0.0, min(0.99, score))
 
-    def can_propose(self, section: str) -> bool:
+    def can_propose(self, section: str, subsection: str = "document") -> bool:
         if self.positive_count < 3 or self.support_documents < 2 or self.type_purity < 0.85:
             return False
         section_rate = self.section_rate(section)
-        evidence_rate = section_rate if section_rate is not None else self.annotation_rate
+        subsection_rate = self.subsection_rate(subsection)
+        evidence_rate = (
+            subsection_rate
+            if subsection_rate is not None
+            else section_rate if section_rate is not None else self.annotation_rate
+        )
         if len(self.key.split()) == 1:
             return self.positive_count >= 8 and evidence_rate >= 0.8
         return evidence_rate >= 0.62
@@ -129,13 +212,15 @@ class AnnotationMemory:
             return []
         projection = normalized_projection(text)
         sections = detect_sections(text)
+        subsections = detect_subsections(text)
         proposals: list[SpanCandidate] = []
         for key, start, end in self._matcher.find(projection):
             for entry in self._entries_by_key[key]:
                 section = section_at(sections, start)
-                if not entry.can_propose(section):
+                subsection = section_at(subsections, start)
+                if not entry.can_propose(section, subsection):
                     continue
-                score = entry.proposal_score(text, start, end, section)
+                score = entry.proposal_score(text, start, end, section, subsection)
                 if score < 0.7:
                     continue
                 start, end, span_text = trim_span_text(text, start, end)
@@ -148,19 +233,79 @@ class AnnotationMemory:
     def evidence_for(self, text: str, span: SpanCandidate) -> tuple[MemoryEntry, float] | None:
         key = normalize_key(span.text)
         section = section_at(detect_sections(text), span.start)
+        subsection = section_at(detect_subsections(text), span.start)
         matching = [entry for entry in self._entries_by_key.get(key, ()) if entry.concept_type == span.type]
         if not matching:
             return None
         entry = max(matching, key=lambda value: (value.positive_count, value.type_purity))
-        return entry, entry.proposal_score(text, span.start, span.end, section)
+        return entry, entry.proposal_score(text, span.start, span.end, section, subsection)
 
     def evidence_for_section(self, span: SpanCandidate, section: str, text: str) -> tuple[MemoryEntry, float] | None:
+        return self.evidence_for_context(span, section, "document", text)
+
+    def evidence_for_context(
+        self,
+        span: SpanCandidate,
+        section: str,
+        subsection: str,
+        text: str,
+    ) -> tuple[MemoryEntry, float] | None:
         key = normalize_key(span.text)
         matching = [entry for entry in self._entries_by_key.get(key, ()) if entry.concept_type == span.type]
         if not matching:
             return None
         entry = max(matching, key=lambda value: (value.positive_count, value.type_purity))
-        return entry, entry.proposal_score(text, span.start, span.end, section)
+        return entry, entry.proposal_score(text, span.start, span.end, section, subsection)
+
+    def examples_for(
+        self,
+        text: str,
+        concept_type: str,
+        *,
+        section: str = "document",
+        subsection: str = "document",
+        limit: int = 4,
+    ) -> list[dict[str, str]]:
+        target = normalize_key(text)
+        ranked: list[tuple[tuple[float, ...], MemoryEntry]] = []
+        for entry in self.entries:
+            if entry.concept_type != concept_type or not entry.examples:
+                continue
+            key_match = float(entry.key in target)
+            subsection_rate = entry.subsection_rate(subsection) or 0.0
+            section_rate = entry.section_rate(section) or 0.0
+            ranked.append(
+                (
+                    (
+                        key_match,
+                        subsection_rate,
+                        section_rate,
+                        entry.type_purity,
+                        min(1.0, entry.support_documents / 10.0),
+                    ),
+                    entry,
+                )
+            )
+        output: list[dict[str, str]] = []
+        seen: set[tuple[str, str, str]] = set()
+        ordered_entries = [entry for _, entry in sorted(ranked, key=lambda item: item[0], reverse=True)]
+        for example_index in range(3):
+            for entry in ordered_entries:
+                if example_index >= len(entry.examples):
+                    continue
+                example = entry.examples[example_index]
+                key = (
+                    example.get("quote", ""),
+                    example.get("left", ""),
+                    example.get("right", ""),
+                )
+                if not key[0] or key in seen:
+                    continue
+                seen.add(key)
+                output.append(dict(example))
+                if len(output) >= limit:
+                    return output
+        return output
 
     def candidate_decision(self, text: str, concept_type: str) -> tuple[str, ...] | None:
         key = normalize_key(text)
@@ -169,20 +314,42 @@ class AnnotationMemory:
             return None
         entry = max(matching, key=lambda value: (value.positive_count, value.type_purity))
         total = sum(entry.candidate_sets.values())
-        if total < 3 or entry.support_documents < 2:
+        if concept_type == TYPE_DIAGNOSIS:
+            if total < 3 or entry.support_documents < 2:
+                return None
+            null_count = entry.candidate_sets.get("", 0)
+            nonempty_count = total - null_count
+            nonempty_rate = nonempty_count / total
+            if null_count >= 3 and nonempty_rate <= 0.2:
+                return ()
+            nonempty_sets = [
+                (value, count) for value, count in entry.candidate_sets.items() if value
+            ]
+            if not nonempty_sets:
+                return None
+            value, support = max(nonempty_sets, key=lambda item: (item[1], item[0]))
+            if support < 3 or support / total < 0.6 or nonempty_rate < 0.5:
+                return None
+            return tuple(code for code in value.split("|") if code)
+        if total < 2 or entry.support_documents < 2:
             return None
         null_count = entry.candidate_sets.get("", 0)
-        nonempty_count = total - null_count
-        nonempty_rate = nonempty_count / total
-        if null_count >= 3 and nonempty_rate <= 0.2:
-            return ()
         nonempty_sets = [(value, count) for value, count in entry.candidate_sets.items() if value]
         if not nonempty_sets:
-            return None
+            return () if null_count >= 2 else None
         value, support = max(nonempty_sets, key=lambda item: (item[1], item[0]))
-        if support < 3 or support / total < 0.6 or nonempty_rate < 0.5:
+        nonempty_count = total - null_count
+        codes = tuple(code for code in value.split("|") if code)
+        code_weight = max(1, len(codes) + 1)
+        code_utility = support * code_weight
+        null_utility = null_count
+        if null_count >= 2 and null_utility >= code_utility:
+            return ()
+        if support < 2 or support / max(1, nonempty_count) < 0.65:
             return None
-        return tuple(code for code in value.split("|") if code)
+        if code_utility <= null_utility:
+            return None
+        return codes
 
 
 @dataclass(frozen=True, slots=True)

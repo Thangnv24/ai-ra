@@ -1,0 +1,69 @@
+{
+  "version": 1,
+  "source_priority": [
+    "problem/statement1.md",
+    "problem/statement2.md",
+    "problem/scoring.md",
+    "input_part2/gt/output"
+  ],
+  "global": {
+    "explicit_only": true,
+    "verbatim_only": true,
+    "infer_diagnoses": false,
+    "offsets": "zero_based_end_exclusive",
+    "neighbor_context_is_target": false,
+    "assert_after_decode": true,
+    "map_after_decode": true
+  },
+  "types": {
+    "TRIỆU_CHỨNG": {
+      "include_modifiers": ["location", "laterality", "severity", "temporal", "exertional"],
+      "boundary_variants": ["core", "core_with_modifiers", "negation_with_core"],
+      "reject_classes": ["generic_fragment", "administrative_text"]
+    },
+    "CHẨN_ĐOÁN": {
+      "explicit_context_only": true,
+      "boundary_variants": ["disease_core", "core_with_stage", "core_with_cause"],
+      "reject_classes": ["inferred_diagnosis", "evidence_only"]
+    },
+    "TÊN_XÉT_NGHIỆM": {
+      "prefer_complete_label": true,
+      "boundary_variants": ["alias", "test_core", "full_label_with_alias_method"],
+      "reject_classes": ["nested_alias", "generic_test_word"]
+    },
+    "KẾT_QUẢ_XÉT_NGHIỆM": {
+      "keep_visible_unit": true,
+      "boundary_variants": ["value", "value_with_unit", "complete_qualitative_finding", "vital_label_with_value"],
+      "reject_classes": ["detached_qualifier", "unanchored_number"]
+    },
+    "THUỐC": {
+      "require_medication_role": true,
+      "boundary_variants": ["drug_core", "core_with_strength_form", "full_sig"],
+      "template_conditioned_sig": true,
+      "reject_classes": ["exposure_as_drug", "poison_as_drug", "substance_use_as_drug"]
+    }
+  },
+  "assertions": {
+    "allowed_types": ["TRIỆU_CHỨNG", "CHẨN_ĐOÁN", "THUỐC"],
+    "labels": ["isNegated", "isFamily", "isHistorical"],
+    "multi_label": true
+  },
+  "candidates": {
+    "CHẨN_ĐOÁN": "ICD10",
+    "THUỐC": "RxNorm",
+    "null_is_first_class": true,
+    "validated_codes_only": true
+  },
+  "error_taxonomy": [
+    "hallucinated_or_inferred",
+    "generic_fragment",
+    "boundary_too_short",
+    "boundary_too_long",
+    "nested_alias",
+    "wrong_type",
+    "exposure_as_drug",
+    "assertion_scope",
+    "candidate_null",
+    "candidate_identity"
+  ]
+}

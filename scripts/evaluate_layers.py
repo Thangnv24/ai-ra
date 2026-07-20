@@ -18,7 +18,10 @@ sys.path.insert(0, str(ROOT / "src"))
 from core.config import ALLOWED_TYPES, ASSERTION_TYPES, CODED_TYPES
 from core.schema import validate_output
 from extraction.annotation_memory import AnnotationMemory
+from extraction.assertion_model import AssertionClassifier
+from extraction.boundary_variants import BoundaryVariantGenerator
 from extraction.context import ContextDetector
+from extraction.learned_models import SpanAcceptanceModel, TokenSpanModel
 from extraction.ner import MedicalNER
 from extraction.span_verifier import SpanTypeVerifier
 from knowledge.candidates import load_slim_candidate_index
@@ -100,6 +103,21 @@ def main(argv: list[str] | None = None) -> int:
         default=ROOT / "data" / "external" / "annotation_memory.jsonl",
     )
     parser.add_argument(
+        "--assertion-model-path",
+        type=Path,
+        default=ROOT / "data" / "external" / "assertion_model.json",
+    )
+    parser.add_argument(
+        "--token-model-path",
+        type=Path,
+        default=ROOT / "data" / "external" / "token_span_model.json.gz",
+    )
+    parser.add_argument(
+        "--acceptance-model-path",
+        type=Path,
+        default=ROOT / "data" / "external" / "span_acceptance_model.json",
+    )
+    parser.add_argument(
         "--with-candidates",
         action="store_true",
         help="Load the large local ICD-10/RxNorm index and run oracle-span candidate scoring.",
@@ -115,6 +133,9 @@ def main(argv: list[str] | None = None) -> int:
         candidate_dir=args.candidate_dir,
         lexicon_path=args.lexicon_path,
         memory_path=args.memory_path,
+        token_model_path=args.token_model_path,
+        acceptance_model_path=args.acceptance_model_path,
+        assertion_model_path=args.assertion_model_path,
         with_candidates=args.with_candidates,
         limit_files=args.limit_files,
     )
@@ -122,7 +143,10 @@ def main(argv: list[str] | None = None) -> int:
     if args.report:
         args.report.parent.mkdir(parents=True, exist_ok=True)
         args.report.write_text(payload, encoding="utf-8")
-    print(payload)
+    try:
+        print(payload)
+    except UnicodeEncodeError:
+        sys.stdout.buffer.write(payload.encode("utf-8") + b"\n")
     return 0
 
 
@@ -134,6 +158,9 @@ def evaluate_layers(
     candidate_dir: Path | None = None,
     lexicon_path: Path | None = None,
     memory_path: Path | None = None,
+    token_model_path: Path | None = None,
+    acceptance_model_path: Path | None = None,
+    assertion_model_path: Path | None = None,
     with_candidates: bool = False,
     limit_files: int | None = None,
 ) -> dict[str, Any]:
@@ -148,8 +175,24 @@ def evaluate_layers(
     lexicon_paths = (lexicon_path.resolve(),) if lexicon_path and lexicon_path.exists() else ()
     ner = MedicalNER(lexicon_paths)
     memory = AnnotationMemory.load(memory_path.resolve()) if memory_path and memory_path.exists() else AnnotationMemory.empty()
-    verifier = SpanTypeVerifier(memory)
-    context = ContextDetector()
+    token_model = (
+        TokenSpanModel.load(token_model_path.resolve())
+        if token_model_path and token_model_path.exists()
+        else TokenSpanModel.empty()
+    )
+    acceptance_model = (
+        SpanAcceptanceModel.load(acceptance_model_path.resolve())
+        if acceptance_model_path and acceptance_model_path.exists()
+        else SpanAcceptanceModel.empty()
+    )
+    verifier = SpanTypeVerifier(memory, acceptance_model)
+    boundary_variants = BoundaryVariantGenerator()
+    assertion_model = (
+        AssertionClassifier.load(assertion_model_path.resolve())
+        if assertion_model_path and assertion_model_path.exists()
+        else AssertionClassifier.empty()
+    )
+    context = ContextDetector(assertion_model)
     retriever: CandidateRetriever | None = None
     candidate_load_seconds = 0.0
     if with_candidates:
@@ -164,10 +207,26 @@ def evaluate_layers(
     verified_spans = SpanCounts()
     verified_spans_by_type = {concept_type: SpanCounts() for concept_type in ALLOWED_TYPES}
     verified_boundaries = SpanCounts()
+    lattice_spans = SpanCounts()
+    lattice_boundaries = SpanCounts()
+    lattice_by_variant: dict[str, SpanCounts] = defaultdict(SpanCounts)
     assertions = SetScores()
     assertions_by_type: dict[str, SetScores] = defaultdict(SetScores)
     candidates = SetScores()
     candidates_by_type: dict[str, SetScores] = defaultdict(SetScores)
+    proposal_sources: dict[str, dict[str, SpanCounts]] = defaultdict(
+        lambda: {"exact": SpanCounts(), "boundary": SpanCounts()}
+    )
+    verified_error_taxonomy: Counter[str] = Counter()
+    prediction_exact = SpanCounts()
+    prediction_boundaries = SpanCounts()
+    prediction_by_type = {concept_type: SpanCounts() for concept_type in ALLOWED_TYPES}
+    prediction_type_confusions: Counter[str] = Counter()
+    prediction_error_taxonomy: Counter[str] = Counter()
+    prediction_assertions = SetScores()
+    prediction_assertions_by_type: dict[str, SetScores] = defaultdict(SetScores)
+    prediction_candidates = SetScores()
+    prediction_candidates_by_type: dict[str, SetScores] = defaultdict(SetScores)
     validation = {
         "missing_input_files": 0,
         "gold_files_with_strict_schema_errors": 0,
@@ -196,21 +255,48 @@ def evaluate_layers(
         )
 
         rule_proposals = ner.propose(source_text)
+        memory_proposals = memory.propose(source_text)
+        sequence_proposals = token_model.propose(source_text)
         predicted_spans = ner.extract(source_text)
-        selected_spans, _ = verifier.select(source_text, [*rule_proposals, *memory.propose(source_text)])
+        proposal_lattice, _ = boundary_variants.expand(
+            source_text, [*rule_proposals, *memory_proposals, *sequence_proposals]
+        )
+        selected_spans, _ = verifier.select(source_text, proposal_lattice)
         gold_exact = Counter(_span_key(item) for item in gold if _valid_position(item))
+        gold_boundary = Counter((start, end) for start, end, _ in gold_exact.elements())
         pred_exact = Counter((span.start, span.end, span.type) for span in predicted_spans)
         selected_exact = Counter((span.start, span.end, span.type) for span in selected_spans)
+        lattice_exact = Counter((span.start, span.end, span.type) for span in proposal_lattice)
         exact_spans.add(gold_exact, pred_exact)
         boundaries.add(
             Counter((start, end) for start, end, _ in gold_exact.elements()),
             Counter((start, end) for start, end, _ in pred_exact.elements()),
         )
         verified_spans.add(gold_exact, selected_exact)
+        lattice_spans.add(gold_exact, lattice_exact)
+        lattice_boundaries.add(
+            gold_boundary,
+            Counter((start, end) for start, end, _ in lattice_exact.elements()),
+        )
+        for variant, variant_spans in _group_spans_by_variant(proposal_lattice).items():
+            lattice_by_variant[variant].add(
+                gold_exact,
+                Counter((span.start, span.end, span.type) for span in variant_spans),
+            )
         verified_boundaries.add(
-            Counter((start, end) for start, end, _ in gold_exact.elements()),
+            gold_boundary,
             Counter((start, end) for start, end, _ in selected_exact.elements()),
         )
+        for source, source_spans in _group_spans_by_source(
+            [*rule_proposals, *memory_proposals, *sequence_proposals]
+        ).items():
+            source_exact = Counter((span.start, span.end, span.type) for span in source_spans)
+            proposal_sources[source]["exact"].add(gold_exact, source_exact)
+            proposal_sources[source]["boundary"].add(
+                gold_boundary,
+                Counter((start, end) for start, end, _ in source_exact.elements()),
+            )
+        verified_error_taxonomy.update(_error_taxonomy(gold_exact, selected_exact))
         for concept_type in ALLOWED_TYPES:
             exact_spans_by_type[concept_type].add(
                 Counter(key for key in gold_exact.elements() if key[2] == concept_type),
@@ -260,6 +346,29 @@ def evaluate_layers(
                 validation["missing_prediction_files"] += 1
                 prediction = []
                 prediction_errors = ["missing prediction file"]
+            predicted_exact = Counter(
+                _span_key(item) for item in prediction if _valid_position(item)
+            )
+            predicted_boundary = Counter(
+                (start, end) for start, end, _ in predicted_exact.elements()
+            )
+            prediction_exact.add(gold_exact, predicted_exact)
+            prediction_boundaries.add(gold_boundary, predicted_boundary)
+            prediction_error_taxonomy.update(_error_taxonomy(gold_exact, predicted_exact))
+            prediction_type_confusions.update(_type_confusions(gold_exact, predicted_exact))
+            for concept_type in ALLOWED_TYPES:
+                prediction_by_type[concept_type].add(
+                    Counter(key for key in gold_exact.elements() if key[2] == concept_type),
+                    Counter(key for key in predicted_exact.elements() if key[2] == concept_type),
+                )
+            _score_conditional_fields(
+                gold,
+                prediction,
+                prediction_assertions,
+                prediction_assertions_by_type,
+                prediction_candidates,
+                prediction_candidates_by_type,
+            )
             file_report, _ = compare_file(
                 gold_path.name,
                 source_text,
@@ -279,6 +388,19 @@ def evaluate_layers(
         "gold_dir": str(gold_dir),
         "external_lexicon": str(lexicon_paths[0]) if lexicon_paths else None,
         "annotation_memory": str(memory_path.resolve()) if memory_path and memory_path.exists() else None,
+        "token_span_model": (
+            str(token_model_path.resolve()) if token_model_path and token_model_path.exists() else None
+        ),
+        "span_acceptance_model": (
+            str(acceptance_model_path.resolve())
+            if acceptance_model_path and acceptance_model_path.exists()
+            else None
+        ),
+        "assertion_model": (
+            str(assertion_model_path.resolve())
+            if assertion_model_path and assertion_model_path.exists()
+            else None
+        ),
         "validation": validation,
         "rule_proposal": {
             "exact_span_and_type": exact_summary,
@@ -298,6 +420,22 @@ def evaluate_layers(
                 concept_type: verified_spans_by_type[concept_type].to_dict()
                 for concept_type in ALLOWED_TYPES
             },
+            "error_taxonomy": dict(sorted(verified_error_taxonomy.items())),
+        },
+        "proposal_lattice": {
+            "exact_span_and_type": lattice_spans.to_dict(),
+            "boundary_only": lattice_boundaries.to_dict(),
+            "by_variant": {
+                variant: scores.to_dict()
+                for variant, scores in sorted(lattice_by_variant.items())
+            },
+        },
+        "proposal_sources": {
+            source: {
+                "exact_span_and_type": scores["exact"].to_dict(),
+                "boundary_only": scores["boundary"].to_dict(),
+            }
+            for source, scores in sorted(proposal_sources.items())
         },
         "assertion_oracle_span": {
             **assertions.to_dict(),
@@ -326,7 +464,148 @@ def evaluate_layers(
             validation["missing_prediction_files"] == 0
             and validation["prediction_offset_mismatches"] == 0
         )
+        prediction_boundary_summary = prediction_boundaries.to_dict()
+        prediction_exact_summary = prediction_exact.to_dict()
+        report["prediction_diagnostics"] = {
+            "exact_span_and_type": prediction_exact_summary,
+            "boundary_only": prediction_boundary_summary,
+            "type_accuracy_on_matched_boundaries": round(
+                _ratio(
+                    int(prediction_exact_summary["true_positive"]),
+                    int(prediction_boundary_summary["true_positive"]),
+                ),
+                6,
+            ),
+            "by_type": {
+                concept_type: prediction_by_type[concept_type].to_dict()
+                for concept_type in ALLOWED_TYPES
+            },
+            "type_confusions": dict(sorted(prediction_type_confusions.items())),
+            "error_taxonomy": dict(sorted(prediction_error_taxonomy.items())),
+            "assertion_on_exact_spans": {
+                **prediction_assertions.to_dict(),
+                "by_type": {
+                    concept_type: score.to_dict()
+                    for concept_type, score in sorted(prediction_assertions_by_type.items())
+                },
+            },
+            "candidate_on_exact_spans": {
+                **prediction_candidates.to_dict(),
+                "by_type": {
+                    concept_type: score.to_dict()
+                    for concept_type, score in sorted(prediction_candidates_by_type.items())
+                },
+            },
+        }
     return report
+
+
+def _group_spans_by_source(spans: Iterable[Any]) -> dict[str, list[Any]]:
+    grouped: dict[str, list[Any]] = defaultdict(list)
+    for span in spans:
+        grouped[str(getattr(span, "source", "unknown") or "unknown")].append(span)
+    return grouped
+
+
+def _group_spans_by_variant(spans: Iterable[Any]) -> dict[str, list[Any]]:
+    grouped: dict[str, list[Any]] = defaultdict(list)
+    for span in spans:
+        variant = str(getattr(span, "variant", "original") or "original")
+        grouped[variant].append(span)
+    return grouped
+
+
+def _error_taxonomy(
+    gold: Counter[tuple[int, int, str]],
+    predicted: Counter[tuple[int, int, str]],
+) -> Counter[str]:
+    errors: Counter[str] = Counter()
+    gold_items = list((gold - predicted).elements())
+    for pred_start, pred_end, pred_type in (predicted - gold).elements():
+        same_boundary = [item for item in gold_items if item[:2] == (pred_start, pred_end)]
+        if same_boundary:
+            errors["wrong_type"] += 1
+            continue
+        overlaps = [
+            item
+            for item in gold_items
+            if pred_start < item[1] and item[0] < pred_end
+        ]
+        same_type = [item for item in overlaps if item[2] == pred_type]
+        candidates = same_type or overlaps
+        if not candidates:
+            errors["no_gold_overlap"] += 1
+            continue
+        gold_start, gold_end, _ = max(
+            candidates,
+            key=lambda item: min(pred_end, item[1]) - max(pred_start, item[0]),
+        )
+        if gold_start <= pred_start and pred_end <= gold_end:
+            errors["boundary_too_short"] += 1
+        elif pred_start <= gold_start and gold_end <= pred_end:
+            errors["boundary_too_long"] += 1
+        else:
+            errors["boundary_shift"] += 1
+    return errors
+
+
+def _type_confusions(
+    gold: Counter[tuple[int, int, str]],
+    predicted: Counter[tuple[int, int, str]],
+) -> Counter[str]:
+    gold_by_boundary: dict[tuple[int, int], Counter[str]] = defaultdict(Counter)
+    predicted_by_boundary: dict[tuple[int, int], Counter[str]] = defaultdict(Counter)
+    for start, end, concept_type in gold.elements():
+        gold_by_boundary[(start, end)][concept_type] += 1
+    for start, end, concept_type in predicted.elements():
+        predicted_by_boundary[(start, end)][concept_type] += 1
+    output: Counter[str] = Counter()
+    for boundary in gold_by_boundary.keys() & predicted_by_boundary.keys():
+        missing = gold_by_boundary[boundary] - predicted_by_boundary[boundary]
+        extra = predicted_by_boundary[boundary] - gold_by_boundary[boundary]
+        for gold_type, gold_count in missing.items():
+            for predicted_type, predicted_count in extra.items():
+                count = min(gold_count, predicted_count)
+                if count:
+                    output[f"{gold_type} -> {predicted_type}"] += count
+    return output
+
+
+def _score_conditional_fields(
+    gold: list[dict[str, Any]],
+    predicted: list[dict[str, Any]],
+    assertions: SetScores,
+    assertions_by_type: dict[str, SetScores],
+    candidates: SetScores,
+    candidates_by_type: dict[str, SetScores],
+) -> None:
+    gold_by_span: dict[tuple[int, int, str], list[dict[str, Any]]] = defaultdict(list)
+    predicted_by_span: dict[tuple[int, int, str], list[dict[str, Any]]] = defaultdict(list)
+    for item in gold:
+        if _valid_position(item):
+            gold_by_span[_span_key(item)].append(item)
+    for item in predicted:
+        if _valid_position(item):
+            predicted_by_span[_span_key(item)].append(item)
+    for key in gold_by_span.keys() & predicted_by_span.keys():
+        concept_type = key[2]
+        for expected, actual in zip(gold_by_span[key], predicted_by_span[key]):
+            if concept_type in ASSERTION_TYPES:
+                assertions.add(expected.get("assertions") or [], actual.get("assertions") or [])
+                assertions_by_type[concept_type].add(
+                    expected.get("assertions") or [], actual.get("assertions") or []
+                )
+            if concept_type in CODED_TYPES:
+                candidates.add(
+                    expected.get("candidates") or [],
+                    actual.get("candidates") or [],
+                    weighted=True,
+                )
+                candidates_by_type[concept_type].add(
+                    expected.get("candidates") or [],
+                    actual.get("candidates") or [],
+                    weighted=True,
+                )
 
 
 def _summarize_end_to_end(file_reports: list[dict[str, Any]]) -> dict[str, float | int]:

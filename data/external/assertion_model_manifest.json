@@ -1,0 +1,13 @@
+{
+  "created_at": "2026-07-20T23:50:29",
+  "format_version": 1,
+  "source_documents": 100,
+  "examples": 13423,
+  "features": {
+    "isNegated": 4740,
+    "isHistorical": 5209
+  },
+  "artifact": "D:\\downloads\\ai-race\\data\\external\\assertion_model.json",
+  "sha256": "d8eced57eea858d03f62e0068cbb69124d4bd4782f73b6bb222f4c382142b270",
+  "report": "D:\\downloads\\ai-race\\data\\external\\assertion_model_cv_report.json"
+}

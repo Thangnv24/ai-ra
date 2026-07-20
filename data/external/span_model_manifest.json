@@ -1,0 +1,14 @@
+{
+  "created_at": "2026-07-20T23:29:22",
+  "format_version": 1,
+  "source_documents": 100,
+  "training_input": "D:\\downloads\\ai-race\\input_part2\\input\\input",
+  "training_gold": "D:\\downloads\\ai-race\\input_part2\\gt\\output",
+  "token_model": "D:\\downloads\\ai-race\\data\\external\\token_span_model.json.gz",
+  "token_model_sha256": "ce4170668370cbea5fa16e2b0a3ea5ccdf413eefd53aafac4abbff39625884b4",
+  "acceptance_model": "D:\\downloads\\ai-race\\data\\external\\span_acceptance_model.json",
+  "acceptance_model_sha256": "7b5ae6f3458325c23e1e1f4d6e3ce3efdedb3361e60d04db59ba4613b699532c",
+  "token_features": 17111,
+  "acceptance_features": 5373,
+  "report": "D:\\downloads\\ai-race\\data\\external\\span_model_cv_report.json"
+}

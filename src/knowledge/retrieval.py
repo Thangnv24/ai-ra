@@ -6,7 +6,12 @@ from functools import lru_cache
 from typing import Any
 
 from core.config import CODED_TYPES, TYPE_DIAGNOSIS, TYPE_DRUG
-from core.medication import medication_has_strength, medication_strength_relation
+from core.medication import (
+    medication_has_strength,
+    medication_strength_relation,
+    strip_drug_count,
+    strip_drug_route_frequency,
+)
 from core.text import normalize_key
 from extraction.annotation_memory import AnnotationMemory
 from knowledge.candidates import SlimCandidateIndex
@@ -45,7 +50,11 @@ class CandidateRetriever:
             (concept_type, code) in self.slim_index.records for code in memory_decision
         ):
             return memory_decision[:limit]
-        return self._candidates_for_query(text, concept_type, limit)
+        for query in _candidate_queries(text, concept_type):
+            candidates = self._candidates_for_query(query, concept_type, limit)
+            if candidates:
+                return candidates
+        return ()
 
     @lru_cache(maxsize=8192)
     def _candidates_for_query(self, text: str, concept_type: str, limit: int) -> tuple[str, ...]:
@@ -132,6 +141,26 @@ def _unique(codes: list[str]) -> list[str]:
         if code and code not in seen:
             seen.add(code)
             output.append(code)
+    return output
+
+
+def _candidate_queries(text: str, concept_type: str) -> tuple[str, ...]:
+    queries = [text.strip()]
+    if concept_type == TYPE_DRUG:
+        queries.extend((strip_drug_count(text), strip_drug_route_frequency(text)))
+    return tuple(_unique_text(queries))
+
+
+def _unique_text(values: list[str]) -> list[str]:
+    output: list[str] = []
+    seen: set[str] = set()
+    for value in values:
+        value = " ".join(value.split())
+        key = normalize_key(value)
+        if len(key) < 3 or key in seen:
+            continue
+        seen.add(key)
+        output.append(value)
     return output
 
 

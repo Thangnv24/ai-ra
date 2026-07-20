@@ -22,6 +22,8 @@ class SpanCandidate:
     type: str
     score: float = 1.0
     source: str = "rule"
+    variant: str = "original"
+    parent_source: str = ""
 
 
 SYMPTOM_TERMS = (

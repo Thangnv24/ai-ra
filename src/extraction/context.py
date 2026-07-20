@@ -6,6 +6,7 @@ import re
 from functools import lru_cache
 
 from core.config import (
+    ALLOWED_ASSERTIONS,
     ASSERTION_FAMILY,
     ASSERTION_HISTORICAL,
     ASSERTION_NEGATED,
@@ -16,6 +17,7 @@ from core.config import (
 )
 from core.text import normalize_key
 from extraction.sectioning import Section, case_bounds_at, detect_sections
+from extraction.assertion_model import AssertionClassifier
 
 
 NEGATION_RE = re.compile(
@@ -29,6 +31,13 @@ NEGATION_EXCLUSIONS = (
     "khong ro",
     "khong co cai thien",
     "khong lien quan",
+    "khong kin",
+    "khong mo",
+    "khong on dinh",
+    "khong dac hieu",
+    "khong xac dinh",
+    "khong bien chung",
+    "khong ro nguyen nhan",
 )
 CONTRAST_RE = re.compile(r"\b(?:nhung|tuy nhien|song|however|but)\b")
 FAMILY_SUBJECT_RE = re.compile(
@@ -42,7 +51,6 @@ EXPLICIT_HISTORY_RE = re.compile(
     r"\bman tinh\b|\bman tinh\b|\bcu\b)"
 )
 
-_NARRATIVE_LINE_MIN_CHARS = 300
 HISTORICAL_DRUG_RE = re.compile(
     r"(?:\bthuoc truoc khi nhap vien\b|\bthuoc truoc nhap vien\b|\bhome meds?\b|"
     r"\bprior to admission\b|\bda dung\b|\btung dung\b|\bsu dung\b|\bda ngung\b|"
@@ -52,6 +60,7 @@ CURRENT_TREATMENT_RE = re.compile(
     r"(?:\bduoc chi dinh dieu tri\b|\btai khoa cap cuu\b|\bden khoa cap cuu\b|"
     r"\bdanh gia tai benh vien\b|\bdieu tri tai benh vien\b|\bdang dieu tri\b)"
 )
+_NARRATIVE_LINE_MIN_CHARS = 300
 HISTORICAL_SUBSECTION_RE = re.compile(
     r"(?:\bcac benh ly (?:noi khoa )?man tinh\b|\bbenh ly man tinh\b|\bbenh ly man tinh\b|"
     r"\bthuoc truoc khi nhap vien\b|\bthuoc truoc nhap vien\b|\bcac tap kinh lam sang truoc day\b|"
@@ -64,6 +73,9 @@ PRESENT_ILLNESS_RE = re.compile(
 
 
 class ContextDetector:
+    def __init__(self, classifier: AssertionClassifier | None = None) -> None:
+        self.classifier = classifier or AssertionClassifier.empty()
+
     def assertions_for(self, text: str, start: int, end: int, concept_type: str) -> tuple[str, ...]:
         if concept_type not in ASSERTION_TYPES:
             return ()
@@ -74,8 +86,7 @@ class ContextDetector:
         if line_end < 0:
             line_end = len(text)
         if line_end - line_start >= _NARRATIVE_LINE_MIN_CHARS:
-            return ()
-
+            return self._merge_classifier(text, start, end, concept_type, ())
         clause_start = max(case_start, _clause_start(text, start))
         clause_before = normalize_key(text[clause_start:start])
         line_before = normalize_key(text[line_start:start])
@@ -96,7 +107,38 @@ class ContextDetector:
             recent_before=recent_before,
         ):
             assertions.append(ASSERTION_HISTORICAL)
-        return tuple(assertions)
+        return self._merge_classifier(text, start, end, concept_type, tuple(assertions))
+
+    def _merge_classifier(
+        self,
+        text: str,
+        start: int,
+        end: int,
+        concept_type: str,
+        rule_assertions: tuple[str, ...],
+    ) -> tuple[str, ...]:
+        probabilities = self.classifier.probabilities(
+            text,
+            start,
+            end,
+            concept_type,
+            rule_assertions,
+        )
+        if not probabilities:
+            return rule_assertions
+        selected: set[str] = {
+            label for label in rule_assertions if label not in probabilities
+        }
+        for label in ALLOWED_ASSERTIONS:
+            if label not in probabilities:
+                continue
+            probability = probabilities.get(label, 0.0)
+            threshold = self.classifier.threshold(label)
+            if probability >= threshold:
+                selected.add(label)
+            elif label in rule_assertions and probability >= max(0.05, threshold * 0.55):
+                selected.add(label)
+        return tuple(label for label in ALLOWED_ASSERTIONS if label in selected)
 
     @staticmethod
     def _has_negation(clause_before: str, mention_key: str = "") -> bool:
@@ -161,7 +203,7 @@ def _line_start(text: str, offset: int) -> int:
 
 def _clause_start(text: str, offset: int) -> int:
     last = _line_start(text, offset)
-    for separator in (".", ";", ":"):
+    for separator in (".", ";", ":", "!", "?"):
         index = text.rfind(separator, last, offset)
         if index >= 0:
             last = max(last, index + 1)

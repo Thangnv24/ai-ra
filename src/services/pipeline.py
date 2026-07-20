@@ -24,8 +24,11 @@ from core.config import (
 from core.io import discover_input_files, output_path_for, read_text, write_output
 from core.schema import Concept, validate_output
 from extraction.context import ContextDetector
+from extraction.assertion_model import AssertionClassifier
 from extraction.llm_entities import LLMEntityExtractor
 from extraction.annotation_memory import AnnotationMemory
+from extraction.boundary_variants import BoundaryVariantGenerator
+from extraction.learned_models import SpanAcceptanceModel, TokenSpanModel
 from extraction.ner import MedicalNER, SpanCandidate
 from extraction.span_verifier import SpanTypeVerifier
 from integrations.openai_client import ApiLLMClient
@@ -105,11 +108,19 @@ class MedicalKGPipeline:
         self.slim_candidate_index = load_slim_candidate_index(paths.root / "data" / "candidates")
         self.ner = MedicalNER()
         self.annotation_memory = AnnotationMemory.load(paths.data_external / "annotation_memory.jsonl")
-        self.span_verifier = SpanTypeVerifier(self.annotation_memory)
-        self.context = ContextDetector()
+        self.token_span_model = TokenSpanModel.load(paths.data_external / "token_span_model.json.gz")
+        self.span_acceptance_model = SpanAcceptanceModel.load(
+            paths.data_external / "span_acceptance_model.json"
+        )
+        self.span_verifier = SpanTypeVerifier(self.annotation_memory, self.span_acceptance_model)
+        self.boundary_variants = BoundaryVariantGenerator()
+        self.assertion_classifier = AssertionClassifier.load(
+            paths.data_external / "assertion_model.json"
+        )
+        self.context = ContextDetector(self.assertion_classifier)
         self.retriever = CandidateRetriever(self.index, self.slim_candidate_index, self.annotation_memory)
         self.llm = ApiLLMClient(self.settings)
-        self.llm_entity_extractor = LLMEntityExtractor(self.llm)
+        self.llm_entity_extractor = LLMEntityExtractor(self.llm, self.annotation_memory)
 
     def _ensure_indexes(self, paths) -> None:
         if paths.index_file.exists():
@@ -157,6 +168,18 @@ class MedicalKGPipeline:
         )
 
         stage_start = time.perf_counter()
+        sequence_spans = self.token_span_model.propose(text)
+        stages["sequence_proposal"] = {
+            "spans": len(sequence_spans),
+            "seconds": round(time.perf_counter() - stage_start, 6),
+        }
+        logger.info(
+            "pipeline_stage stage=sequence_proposal spans=%s seconds=%.6f",
+            len(sequence_spans),
+            time.perf_counter() - stage_start,
+        )
+
+        stage_start = time.perf_counter()
         llm_spans, summary = self.llm_entity_extractor.extract(text)
         llm_entity_meta = summary.to_dict()
         stages["llm_entity_proposal"] = {
@@ -175,9 +198,26 @@ class MedicalKGPipeline:
         )
 
         stage_start = time.perf_counter()
+        proposal_lattice, boundary_summary = self.boundary_variants.expand(
+            text,
+            [*rule_spans, *memory_spans, *sequence_spans, *llm_spans],
+        )
+        stages["boundary_variants"] = {
+            **boundary_summary.to_dict(),
+            "seconds": round(time.perf_counter() - stage_start, 6),
+        }
+        logger.info(
+            "pipeline_stage stage=boundary_variants inputs=%s outputs=%s generated=%s seconds=%.6f",
+            boundary_summary.inputs,
+            boundary_summary.outputs,
+            boundary_summary.generated,
+            time.perf_counter() - stage_start,
+        )
+
+        stage_start = time.perf_counter()
         spans, verification_summary = self.span_verifier.select(
             text,
-            [*rule_spans, *memory_spans, *llm_spans],
+            proposal_lattice,
         )
         stages["span_verification"] = {
             **verification_summary.to_dict(),
