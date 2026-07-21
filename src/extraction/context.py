@@ -21,7 +21,7 @@ from extraction.assertion_model import AssertionClassifier
 
 
 NEGATION_RE = re.compile(
-    r"(?:\bkhong\b|\bchua\b|\bphu nhan\b|\bkhong thay\b|\bno\b|\bdenies\b|"
+    r"(?:\bkhong\b|\bchua\b|\bphu nhan\b|\bkhong thay\b|\bdenies\b|"
     r"\bwithout\b|\bnegative for\b)"
 )
 NEGATION_EXCLUSIONS = (
@@ -44,6 +44,13 @@ FAMILY_SUBJECT_RE = re.compile(
     r"(?:\btien su gia dinh\s*(?::|la|co|ghi nhan)?\s*$|\bfamily history\s*(?::|of)?\s*$|"
     r"\b(?:bo|cha|me|ong|ba|anh trai|chi gai|em trai|em gai|father|mother)"
     r"(?:\s+benh nhan)?\s+(?:bi|mac|co|tien su|duoc chan doan|da tung)\s*$)"
+)
+FAMILY_REPORTED_RE = re.compile(
+    r"(?:\b(?:chau trai|chau gai|anh trai|chi gai|em trai|em gai|father|mother|wife|"
+    r"husband|son|daughter|sister|brother)\b.{0,120}\b(?:bi|mac|co|duoc chan doan|"
+    r"dung|su dung|phan ung|xet nghiem|theo loi)\b|"
+    r"\b(?:vo|chong)\s+(?:benh nhan\s+)?(?:bi|mac|co|duoc chan doan|dung|su dung|"
+    r"phan ung|xet nghiem)\b)"
 )
 EXPLICIT_HISTORY_RE = re.compile(
     r"(?:\btien su\b|\bda tung\b|\btung bi\b|\btruoc day\b|\bpreviously\b|\bhistory of\b|"
@@ -97,7 +104,11 @@ class ContextDetector:
         assertions: list[str] = []
         if self._has_negation(clause_before, mention_key):
             assertions.append(ASSERTION_NEGATED)
-        if FAMILY_SUBJECT_RE.search(line_before[-180:]) or FAMILY_SUBJECT_RE.search(recent_before[-180:]):
+        if (
+            FAMILY_SUBJECT_RE.search(line_before[-180:])
+            or FAMILY_SUBJECT_RE.search(recent_before[-180:])
+            or FAMILY_REPORTED_RE.search(line_before[-150:])
+        ):
             assertions.append(ASSERTION_FAMILY)
         if self._has_historical_context(
             concept_type=concept_type,

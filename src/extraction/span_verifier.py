@@ -2,12 +2,13 @@
 
 from __future__ import annotations
 
+import re
 from bisect import bisect_right
 from dataclasses import dataclass, replace
 from typing import Iterable
 
 from core.config import TYPE_DIAGNOSIS, TYPE_DRUG, TYPE_SYMPTOM, TYPE_TEST_NAME, TYPE_TEST_RESULT
-from core.text import token_count
+from core.text import normalize_key, token_count
 from extraction.annotation_memory import AnnotationMemory, section_at
 from extraction.learned_models import SpanAcceptanceModel
 from extraction.ner import SpanCandidate
@@ -20,6 +21,7 @@ _SOURCE_PRIORS = {
     "context_rule": 0.84,
     "result_rule": 0.82,
     "memory": 0.86,
+    "grammar": 0.88,
     "lexical_rule": 0.76,
     "rule": 0.78,
     "llm": 0.72,
@@ -29,6 +31,7 @@ _SOURCE_PRIORITY = {
     "lab_rule": 8,
     "drug_rule": 7,
     "memory": 6,
+    "grammar": 6,
     "context_rule": 5,
     "result_rule": 4,
     "lexical_rule": 3,
@@ -47,6 +50,7 @@ _SOURCE_THRESHOLDS = {
     "lab_rule": 0.76,
     "drug_rule": 0.76,
     "memory": 0.7,
+    "grammar": 0.72,
     "context_rule": 0.73,
     "result_rule": 0.74,
     "lexical_rule": 0.72,
@@ -54,6 +58,14 @@ _SOURCE_THRESHOLDS = {
     "llm": 0.68,
     "sequence_model": 0.7,
 }
+_GENERIC_RESULT_FRAGMENTS = {
+    "anh",
+    "chi so",
+    "hinh anh",
+    "ket qua",
+    "ket qua xet nghiem",
+}
+_GENERIC_DIAGNOSIS_FRAGMENTS = {"benh", "chan doan"}
 
 
 @dataclass(frozen=True, slots=True)
@@ -64,6 +76,10 @@ class SpanVerificationSummary:
     exact_duplicates: int
     type_conflicts: int
     below_threshold: int
+    corroborated: int
+    llm_only: int
+    sequence_only_rejected: int
+    generic_llm_rejected: int
     overlap_conflicts: int
     selected: int
 
@@ -75,6 +91,10 @@ class SpanVerificationSummary:
             "exact_duplicates": self.exact_duplicates,
             "type_conflicts": self.type_conflicts,
             "below_threshold": self.below_threshold,
+            "corroborated": self.corroborated,
+            "llm_only": self.llm_only,
+            "sequence_only_rejected": self.sequence_only_rejected,
+            "generic_llm_rejected": self.generic_llm_rejected,
             "overlap_conflicts": self.overlap_conflicts,
             "selected": self.selected,
         }
@@ -112,6 +132,10 @@ class SpanTypeVerifier:
 
         verified: list[_VerifiedSpan] = []
         below_threshold = 0
+        corroborated = 0
+        llm_only = 0
+        sequence_only_rejected = 0
+        generic_llm_rejected = 0
         for group in grouped.values():
             scored = [
                 self._calibrate(
@@ -127,7 +151,23 @@ class SpanTypeVerifier:
                 key=lambda item: (item[1], _SOURCE_PRIORITY.get(item[0].source, 0), item[0].score),
             )
             sources = frozenset(span.source for span in group)
-            score = min(0.995, score + 0.045 * max(0, len(sources) - 1))
+            evidence_sources = _evidence_sources(group)
+            if not evidence_sources:
+                sequence_only_rejected += 1
+                continue
+            if evidence_sources == {"llm"}:
+                llm_only += 1
+                if _is_generic_llm_fragment(text, representative):
+                    generic_llm_rejected += 1
+                    continue
+            elif len(evidence_sources) >= 2:
+                corroborated += 1
+            score = min(
+                0.995,
+                score
+                + 0.045 * max(0, len(evidence_sources) - 1)
+                + (0.01 if "sequence_model" in sources else 0.0),
+            )
             threshold = min(_SOURCE_THRESHOLDS.get(source, 0.72) for source in sources)
             if score < threshold:
                 below_threshold += 1
@@ -137,7 +177,7 @@ class SpanTypeVerifier:
                 _VerifiedSpan(
                     representative,
                     sources,
-                    _span_utility(representative, len(sources)),
+                    _span_utility(representative, len(evidence_sources)),
                 )
             )
 
@@ -167,6 +207,10 @@ class SpanTypeVerifier:
             exact_duplicates=exact_duplicates,
             type_conflicts=type_conflicts,
             below_threshold=below_threshold,
+            corroborated=corroborated,
+            llm_only=llm_only,
+            sequence_only_rejected=sequence_only_rejected,
+            generic_llm_rejected=generic_llm_rejected,
             overlap_conflicts=overlap_conflicts,
             selected=len(spans),
         )
@@ -221,7 +265,35 @@ class SpanTypeVerifier:
 
 
 def _best_source(sources: frozenset[str]) -> str:
-    return max(sources, key=lambda source: _SOURCE_PRIORITY.get(source, 0))
+    return max(sources, key=lambda source: (_SOURCE_PRIORITY.get(source, 0), source))
+
+
+def _evidence_sources(group: list[SpanCandidate]) -> set[str]:
+    evidence: set[str] = set()
+    for span in group:
+        if span.source == "sequence_model":
+            continue
+        if span.source == "grammar":
+            evidence.add(span.parent_source or "grammar")
+            continue
+        evidence.add(span.source)
+    return evidence
+
+
+def _is_generic_llm_fragment(text: str, span: SpanCandidate) -> bool:
+    key = normalize_key(span.text)
+    if len(key) < 2 or not re.search(r"[a-z0-9]", key):
+        return True
+    if span.type == TYPE_TEST_RESULT and key in _GENERIC_RESULT_FRAGMENTS:
+        return True
+    if span.type == TYPE_DIAGNOSIS and key in _GENERIC_DIAGNOSIS_FRAGMENTS:
+        return True
+    line_start = text.rfind("\n", 0, span.start) + 1
+    line_end = text.find("\n", span.end)
+    if line_end < 0:
+        line_end = len(text)
+    line = text[line_start:line_end].strip()
+    return line.endswith(":") and normalize_key(line) == key
 
 
 def _span_utility(span: SpanCandidate, source_count: int) -> float:
@@ -240,6 +312,11 @@ def _span_utility(span: SpanCandidate, source_count: int) -> float:
         "diagnosis_core": 0.015,
         "result_with_unit": -0.01,
         "vital_label_with_value": 0.005,
+        "grammar_drug_sig": 0.025,
+        "grammar_result_unit": 0.025,
+        "grammar_symptom_modifier": 0.02,
+        "grammar_symptom_negation": 0.01,
+        "grammar_diagnosis_core": 0.015,
     }.get(span.variant, 0.0)
     corroboration_bonus = 0.025 * max(0, source_count - 1)
     short_penalty = 0.035 if len(span.text.strip()) <= 2 else 0.0

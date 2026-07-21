@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 import unittest
 from pathlib import Path
 
@@ -22,6 +23,7 @@ from extraction.boundary_variants import BoundaryVariantGenerator
 from extraction.llm_entities import LLMEntityExtractor, _chunk_units, _span_from_mention_with_reason
 from extraction.ner import MedicalNER, SpanCandidate, resolve_span_types
 from extraction.sectioning import TextChunk, detect_subsections, split_chunks
+from extraction.span_grammar import SpanGrammar
 from extraction.span_verifier import SpanTypeVerifier
 from knowledge.candidates import (
     CandidateHit,
@@ -30,8 +32,13 @@ from knowledge.candidates import (
     diagnosis_qualifier_adjustment,
 )
 from knowledge.ontology import OntologyIndex
-from knowledge.retrieval import CandidateRetriever, _select_diagnosis_codes, _select_drug_code
-from services.pipeline import _merge_span_candidates_with_summary
+from knowledge.retrieval import (
+    CandidateQueryAliases,
+    CandidateRetriever,
+    _select_diagnosis_codes,
+    _select_drug_code,
+)
+from services.pipeline import _corroborated_sequence_spans, _merge_span_candidates_with_summary
 from services.postprocess import refine_concepts
 from integrations.prompts import build_entity_extraction_prompt
 
@@ -40,7 +47,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 class EntityOccurrenceTests(unittest.TestCase):
-    def test_specialized_discovery_calls_each_type(self) -> None:
+    def test_discovery_calls_once_per_chunk(self) -> None:
         class EmptyLLM:
             enabled = True
 
@@ -52,13 +59,36 @@ class EntityOccurrenceTests(unittest.TestCase):
                 return type("Result", (), {"ok": True, "data": {"mentions": []}, "error": None})()
 
         client = EmptyLLM()
-        spans, summary = LLMEntityExtractor(client, max_chars=480, overlap=0).extract(
+        spans, summary = LLMEntityExtractor(client, max_chars=1000, overlap=0).extract(
             "Bệnh nhân tỉnh, không khó thở."
         )
 
         self.assertEqual(spans, [])
-        self.assertEqual(summary.calls, 5)
-        self.assertEqual(client.calls, 5)
+        self.assertEqual(summary.calls, 1)
+        self.assertEqual(client.calls, 1)
+
+    def test_section_coverage_triggers_one_targeted_rescue(self) -> None:
+        class RescueLLM:
+            enabled = True
+
+            def __init__(self) -> None:
+                self.calls = 0
+
+            def chat_json(self, system_prompt, user_prompt):
+                self.calls += 1
+                mentions = [] if self.calls == 1 else [["Metformin 500mg", TYPE_DRUG, 0]]
+                return type("Result", (), {"ok": True, "data": {"mentions": mentions}, "error": None})()
+
+        client = RescueLLM()
+        spans, summary = LLMEntityExtractor(client).extract(
+            "THU\u1ed0C \u0110ANG \u0110I\u1ec0U TR\u1eca:\nMetformin 500mg"
+        )
+
+        self.assertEqual(client.calls, 2)
+        self.assertEqual(summary.base_calls, 1)
+        self.assertEqual(summary.rescue_calls, 1)
+        self.assertEqual(dict(summary.rescue_by_type), {TYPE_DRUG: 1})
+        self.assertEqual([(span.text, span.type) for span in spans], [("Metformin 500mg", TYPE_DRUG)])
 
     def test_aligns_repeated_quotes_to_distinct_occurrences(self) -> None:
         quote = "\u0111\u00e1nh tr\u1ed1ng ng\u1ef1c"
@@ -178,18 +208,127 @@ class EntityOccurrenceTests(unittest.TestCase):
                 "subsection": "symptoms_exam",
                 "units": [{"unit_id": "c2u1", "text": "Tim \u0111\u1ec1u, T1 T2 r\u00f5"}],
             },
-            TYPE_SYMPTOM,
         )
 
         self.assertIn("target_units", prompt)
-        self.assertIn("clinical finding", prompt)
-        self.assertIn("may never be quoted", prompt)
-        self.assertNotIn("Be exhaustive", prompt)
-        self.assertIn("requested_type", prompt)
+        self.assertIn("Be exhaustive", prompt)
+        self.assertIn(TYPE_SYMPTOM, prompt)
+        self.assertIn(TYPE_DIAGNOSIS, prompt)
+        self.assertNotIn("retrieved_positive_examples", prompt)
         self.assertNotIn('"confidence":', prompt)
+
+    def test_multi_type_prompt_contract_does_not_bias_the_first_type(self) -> None:
+        prompt = build_entity_extraction_prompt(
+            {
+                "chunk_id": "c1",
+                "section": "document",
+                "subsection": "document",
+                "text": "sample",
+                "units": [{"unit_id": "c1u1", "text": "sample"}],
+            }
+        )
+
+        self.assertIn('"allowed_values": [', prompt)
+        for concept_type in (TYPE_SYMPTOM, TYPE_TEST_NAME, TYPE_TEST_RESULT, TYPE_DIAGNOSIS, TYPE_DRUG):
+            self.assertIn(concept_type, prompt)
 
 
 class SpanAndTypeTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls.grammar = SpanGrammar.load(ROOT / "data" / "external" / "span_grammar.json")
+
+    def test_span_grammar_extends_english_drug_sig(self) -> None:
+        text = "metoprolol 25mg po bid"
+        parent = SpanCandidate(0, len("metoprolol"), "metoprolol", TYPE_DRUG, 0.75, source="llm")
+
+        spans, _ = self.grammar.expand(text, [parent])
+
+        self.assertTrue(any(span.text == text and span.variant == "grammar_drug_sig" for span in spans))
+
+    def test_span_grammar_stops_before_vietnamese_drug_instruction(self) -> None:
+        text = "Exforge 5/80mg x 1 vi\u00ean s\u00e1ng"
+        parent = SpanCandidate(0, len("Exforge"), "Exforge", TYPE_DRUG, 0.75, source="llm")
+
+        spans, _ = self.grammar.expand(text, [parent])
+
+        self.assertTrue(any(span.text == "Exforge 5/80mg" for span in spans))
+        self.assertFalse(any(span.text == text for span in spans))
+
+    def test_span_grammar_keeps_result_unit_and_symptom_modifiers(self) -> None:
+        policy = json.loads((ROOT / "data" / "external" / "span_grammar.json").read_text(encoding="utf-8"))
+        policy["enabled_variants"] = ["result_unit", "symptom_modifier"]
+        grammar = SpanGrammar(policy)
+        result_text = "132 mmol/L"
+        result = SpanCandidate(0, 3, "132", TYPE_TEST_RESULT, 0.75, source="llm")
+        symptom_text = "\u0111au ng\u1ef1c tr\u00e1i khi g\u1eafng s\u1ee9c"
+        symptom = SpanCandidate(0, len("\u0111au ng\u1ef1c"), "\u0111au ng\u1ef1c", TYPE_SYMPTOM, 0.75, source="llm")
+
+        result_spans, _ = grammar.expand(result_text, [result])
+        symptom_spans, _ = grammar.expand(symptom_text, [symptom])
+
+        self.assertTrue(any(span.text == result_text for span in result_spans))
+        self.assertTrue(any(span.text == symptom_text for span in symptom_spans))
+
+    def test_span_grammar_keeps_percent_unit(self) -> None:
+        policy = json.loads((ROOT / "data" / "external" / "span_grammar.json").read_text(encoding="utf-8"))
+        policy["enabled_variants"] = ["result_unit"]
+        grammar = SpanGrammar(policy)
+        text = "HbA1c 7.2%"
+        result = SpanCandidate(6, 9, "7.2", TYPE_TEST_RESULT, 0.75, source="llm")
+
+        spans, _ = grammar.expand(text, [result])
+
+        self.assertTrue(any(span.text == "7.2%" for span in spans))
+
+    def test_runtime_grammar_disables_variants_that_failed_cross_suite_gate(self) -> None:
+        result = SpanCandidate(0, 3, "132", TYPE_TEST_RESULT, 0.75, source="llm")
+        symptom = SpanCandidate(0, len("\u0111au ng\u1ef1c"), "\u0111au ng\u1ef1c", TYPE_SYMPTOM, 0.75, source="llm")
+
+        result_spans, _ = self.grammar.expand("132 mmol/L", [result])
+        symptom_spans, _ = self.grammar.expand("\u0111au ng\u1ef1c tr\u00e1i", [symptom])
+
+        self.assertEqual([span.text for span in result_spans], ["132"])
+        self.assertEqual([span.text for span in symptom_spans], ["\u0111au ng\u1ef1c"])
+
+    def test_sequence_model_requires_exact_trusted_corroboration(self) -> None:
+        trusted = SpanCandidate(0, 3, "abc", TYPE_SYMPTOM, 0.75, source="llm")
+        matching = SpanCandidate(0, 3, "abc", TYPE_SYMPTOM, 0.7, source="sequence_model")
+        independent = SpanCandidate(4, 7, "def", TYPE_SYMPTOM, 0.7, source="sequence_model")
+
+        selected = _corroborated_sequence_spans([matching, independent], [trusted])
+
+        self.assertEqual(selected, [matching])
+
+    def test_consensus_rejects_sequence_only_and_generic_llm_heading(self) -> None:
+        sequence = SpanCandidate(0, 3, "abc", TYPE_SYMPTOM, 0.9, source="sequence_model")
+        sequence_spans, sequence_summary = SpanTypeVerifier().select("abc", [sequence])
+        heading_text = "K\u1ebft qu\u1ea3:"
+        heading = SpanCandidate(
+            0,
+            len("K\u1ebft qu\u1ea3"),
+            "K\u1ebft qu\u1ea3",
+            TYPE_TEST_RESULT,
+            0.75,
+            source="llm",
+        )
+        heading_spans, heading_summary = SpanTypeVerifier().select(heading_text, [heading])
+
+        self.assertEqual(sequence_spans, [])
+        self.assertEqual(sequence_summary.sequence_only_rejected, 1)
+        self.assertEqual(heading_spans, [])
+        self.assertEqual(heading_summary.generic_llm_rejected, 1)
+
+    def test_consensus_tracks_independent_sources(self) -> None:
+        text = "\u0111au ng\u1ef1c"
+        llm = SpanCandidate(0, len(text), text, TYPE_SYMPTOM, 0.75, source="llm")
+        rule = SpanCandidate(0, len(text), text, TYPE_SYMPTOM, 0.78, source="lexical_rule")
+
+        spans, summary = SpanTypeVerifier().select(text, [llm, rule])
+
+        self.assertEqual(len(spans), 1)
+        self.assertEqual(summary.corroborated, 1)
+
     def test_boundary_variants_are_exact_source_substrings(self) -> None:
         cases = [
             (
@@ -487,6 +626,38 @@ class AssertionTests(unittest.TestCase):
             self.detector.assertions_for(inherited, inherited_start, inherited_start + len(symptom), TYPE_SYMPTOM),
         )
 
+    def test_family_assertion_handles_reported_relative_without_accent_collisions(self) -> None:
+        diagnosis = "gi\u00e3n ph\u1ebf qu\u1ea3n"
+        family = f"V\u1ee3 c\u00f3 tri\u1ec7u ch\u1ee9ng v\u00e0 \u0111\u01b0\u1ee3c ch\u1ea9n \u0111o\u00e1n l\u00e0 {diagnosis}."
+        patient = "B\u1ec7nh nh\u00e2n ch\u00f3ng m\u1eb7t tr\u01b0\u1edbc khi b\u1ecb ng\u00e3."
+
+        family_start = family.index(diagnosis)
+        patient_start = patient.index("ng\u00e3")
+
+        self.assertIn(
+            "isFamily",
+            self.detector.assertions_for(
+                family, family_start, family_start + len(diagnosis), TYPE_DIAGNOSIS
+            ),
+        )
+        self.assertNotIn(
+            "isFamily",
+            self.detector.assertions_for(
+                patient, patient_start, patient_start + len("ng\u00e3"), TYPE_SYMPTOM
+            ),
+        )
+
+    def test_vietnamese_ran_no_is_not_english_negation(self) -> None:
+        symptom = "ran n\u1ed5"
+        text = f"Kh\u00e1m th\u1ea5y {symptom}, ph\u00f9 hai ch\u00e2n."
+        start = text.index(symptom)
+
+        assertions = self.detector.assertions_for(
+            text, start, start + len(symptom), TYPE_SYMPTOM
+        )
+
+        self.assertNotIn(ASSERTION_NEGATED, assertions)
+
 
 class CandidateMappingTests(unittest.TestCase):
     def test_candidate_memory_keeps_diagnosis_consensus_conservative(self) -> None:
@@ -535,7 +706,7 @@ class CandidateMappingTests(unittest.TestCase):
 
         self.assertEqual(decision, ("72625",))
 
-    def test_candidate_memory_treats_null_as_a_first_class_decision(self) -> None:
+    def test_candidate_memory_null_does_not_override_ontology(self) -> None:
         diagnosis = "tăng huyết áp"
         record = CandidateRecord("I10", "Essential hypertension", "ICD10", TYPE_DIAGNOSIS, 10)
         index = SlimCandidateIndex(
@@ -561,7 +732,7 @@ class CandidateMappingTests(unittest.TestCase):
         )
         retriever = CandidateRetriever(OntologyIndex(()), index, AnnotationMemory((entry,)))
 
-        self.assertEqual(retriever.candidates_for(diagnosis, TYPE_DIAGNOSIS), ())
+        self.assertEqual(retriever.candidates_for(diagnosis, TYPE_DIAGNOSIS), ("I10",))
 
     def test_candidate_memory_emits_only_well_supported_known_codes(self) -> None:
         diagnosis = "tăng huyết áp"
@@ -587,6 +758,45 @@ class CandidateMappingTests(unittest.TestCase):
         retriever = CandidateRetriever(OntologyIndex(()), index, AnnotationMemory((entry,)))
 
         self.assertEqual(retriever.candidates_for(diagnosis, TYPE_DIAGNOSIS), ("I10",))
+
+    def test_candidate_query_alias_expands_without_storing_a_code(self) -> None:
+        record = CandidateRecord("I10", "Essential hypertension", "ICD10", TYPE_DIAGNOSIS, 10)
+        index = SlimCandidateIndex(
+            {(TYPE_DIAGNOSIS, "I10"): record},
+            {(TYPE_DIAGNOSIS, "tang huyet ap"): ("I10",)},
+        )
+        aliases = CandidateQueryAliases(
+            {(TYPE_DIAGNOSIS, "tha"): ("t\u0103ng huy\u1ebft \u00e1p",)}
+        )
+        retriever = CandidateRetriever(OntologyIndex(()), index, query_aliases=aliases)
+
+        decision = retriever.candidate_decision_for("THA", TYPE_DIAGNOSIS)
+
+        self.assertEqual(decision.codes, ("I10",))
+        self.assertEqual(decision.source, "query_alias")
+        self.assertEqual(decision.query, "t\u0103ng huy\u1ebft \u00e1p")
+
+    def test_candidate_query_alias_cannot_emit_without_kb_support(self) -> None:
+        aliases = CandidateQueryAliases(
+            {(TYPE_DIAGNOSIS, "benh la"): ("b\u1ec7nh kh\u00f4ng t\u1ed3n t\u1ea1i trong KB",)}
+        )
+        retriever = CandidateRetriever(
+            OntologyIndex(()),
+            SlimCandidateIndex.empty(),
+            query_aliases=aliases,
+        )
+
+        decision = retriever.candidate_decision_for("b\u1ec7nh l\u1ea1", TYPE_DIAGNOSIS)
+
+        self.assertEqual(decision.codes, ())
+        self.assertEqual(decision.source, "none")
+
+    def test_diagnosis_override_cannot_emit_an_unknown_code(self) -> None:
+        retriever = CandidateRetriever(OntologyIndex(()), SlimCandidateIndex.empty())
+
+        decision = retriever.candidate_decision_for("suy tim", TYPE_DIAGNOSIS)
+
+        self.assertEqual(decision.codes, ())
 
     def test_rxnorm_prefers_matching_strength_and_oral_form(self) -> None:
         query = "clonazepam 0.5 mg po qam prn"

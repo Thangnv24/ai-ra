@@ -19,14 +19,14 @@ from core.config import ALLOWED_TYPES, ASSERTION_TYPES, CODED_TYPES
 from core.schema import validate_output
 from extraction.annotation_memory import AnnotationMemory
 from extraction.assertion_model import AssertionClassifier
-from extraction.boundary_variants import BoundaryVariantGenerator
 from extraction.context import ContextDetector
 from extraction.learned_models import SpanAcceptanceModel, TokenSpanModel
 from extraction.ner import MedicalNER
+from extraction.span_grammar import SpanGrammar
 from extraction.span_verifier import SpanTypeVerifier
 from knowledge.candidates import load_slim_candidate_index
 from knowledge.ontology import OntologyIndex
-from knowledge.retrieval import CandidateRetriever
+from knowledge.retrieval import CandidateQueryAliases, CandidateRetriever
 from scripts.gold_workflow import compare_file, mean
 
 
@@ -105,7 +105,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument(
         "--assertion-model-path",
         type=Path,
-        default=ROOT / "data" / "external" / "assertion_model.json",
+        default=None,
     )
     parser.add_argument(
         "--token-model-path",
@@ -115,7 +115,17 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument(
         "--acceptance-model-path",
         type=Path,
-        default=ROOT / "data" / "external" / "span_acceptance_model.json",
+        default=None,
+    )
+    parser.add_argument(
+        "--span-grammar-path",
+        type=Path,
+        default=ROOT / "data" / "external" / "span_grammar.json",
+    )
+    parser.add_argument(
+        "--candidate-alias-path",
+        type=Path,
+        default=ROOT / "data" / "external" / "candidate_query_aliases.json",
     )
     parser.add_argument(
         "--with-candidates",
@@ -136,6 +146,8 @@ def main(argv: list[str] | None = None) -> int:
         token_model_path=args.token_model_path,
         acceptance_model_path=args.acceptance_model_path,
         assertion_model_path=args.assertion_model_path,
+        span_grammar_path=args.span_grammar_path,
+        candidate_alias_path=args.candidate_alias_path,
         with_candidates=args.with_candidates,
         limit_files=args.limit_files,
     )
@@ -161,6 +173,8 @@ def evaluate_layers(
     token_model_path: Path | None = None,
     acceptance_model_path: Path | None = None,
     assertion_model_path: Path | None = None,
+    span_grammar_path: Path | None = None,
+    candidate_alias_path: Path | None = None,
     with_candidates: bool = False,
     limit_files: int | None = None,
 ) -> dict[str, Any]:
@@ -186,7 +200,8 @@ def evaluate_layers(
         else SpanAcceptanceModel.empty()
     )
     verifier = SpanTypeVerifier(memory, acceptance_model)
-    boundary_variants = BoundaryVariantGenerator()
+    grammar_path = span_grammar_path or (ROOT / "data" / "external" / "span_grammar.json")
+    span_grammar = SpanGrammar.load(grammar_path.resolve())
     assertion_model = (
         AssertionClassifier.load(assertion_model_path.resolve())
         if assertion_model_path and assertion_model_path.exists()
@@ -198,7 +213,9 @@ def evaluate_layers(
     if with_candidates:
         candidate_started = time.perf_counter()
         slim_index = load_slim_candidate_index((candidate_dir or ROOT / "data" / "candidates").resolve())
-        retriever = CandidateRetriever(OntologyIndex(()), slim_index, memory)
+        alias_path = candidate_alias_path or (ROOT / "data" / "external" / "candidate_query_aliases.json")
+        query_aliases = CandidateQueryAliases.load(alias_path.resolve())
+        retriever = CandidateRetriever(OntologyIndex(()), slim_index, memory, query_aliases)
         candidate_load_seconds = time.perf_counter() - candidate_started
 
     exact_spans = SpanCounts()
@@ -258,9 +275,11 @@ def evaluate_layers(
         memory_proposals = memory.propose(source_text)
         sequence_proposals = token_model.propose(source_text)
         predicted_spans = ner.extract(source_text)
-        proposal_lattice, _ = boundary_variants.expand(
-            source_text, [*rule_proposals, *memory_proposals, *sequence_proposals]
+        grammar_spans, _ = span_grammar.expand(
+            source_text, [*rule_proposals, *memory_proposals]
         )
+        corroborated_sequence = _corroborated_sequence_spans(sequence_proposals, grammar_spans)
+        proposal_lattice = [*grammar_spans, *corroborated_sequence]
         selected_spans, _ = verifier.select(source_text, proposal_lattice)
         gold_exact = Counter(_span_key(item) for item in gold if _valid_position(item))
         gold_boundary = Counter((start, end) for start, end, _ in gold_exact.elements())
@@ -288,7 +307,7 @@ def evaluate_layers(
             Counter((start, end) for start, end, _ in selected_exact.elements()),
         )
         for source, source_spans in _group_spans_by_source(
-            [*rule_proposals, *memory_proposals, *sequence_proposals]
+            proposal_lattice
         ).items():
             source_exact = Counter((span.start, span.end, span.type) for span in source_spans)
             proposal_sources[source]["exact"].add(gold_exact, source_exact)
@@ -396,6 +415,7 @@ def evaluate_layers(
             if acceptance_model_path and acceptance_model_path.exists()
             else None
         ),
+        "span_grammar": str(grammar_path.resolve()),
         "assertion_model": (
             str(assertion_model_path.resolve())
             if assertion_model_path and assertion_model_path.exists()
@@ -505,6 +525,15 @@ def _group_spans_by_source(spans: Iterable[Any]) -> dict[str, list[Any]]:
     for span in spans:
         grouped[str(getattr(span, "source", "unknown") or "unknown")].append(span)
     return grouped
+
+
+def _corroborated_sequence_spans(sequence_spans: Iterable[Any], trusted_spans: Iterable[Any]) -> list[Any]:
+    trusted_keys = {(span.start, span.end, span.type) for span in trusted_spans}
+    return [
+        span
+        for span in sequence_spans
+        if (span.start, span.end, span.type) in trusted_keys
+    ]
 
 
 def _group_spans_by_variant(spans: Iterable[Any]) -> dict[str, list[Any]]:

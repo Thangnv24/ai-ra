@@ -34,8 +34,11 @@ class FileResult:
     llm_used: bool
 
 
-def default_output_dir() -> Path:
-    return ROOT / "output" / f"out_put_{datetime.now().strftime('%d%m%Y')}"
+def default_output_dir(target: Path | None = None) -> Path:
+    name = f"out_put_{datetime.now().strftime('%d%m%Y')}"
+    if target is not None and "input_part2" in {part.casefold() for part in target.resolve().parts}:
+        name += "_part2"
+    return ROOT / "output" / name
 
 
 def log_step(message: str, step_start: float | None = None) -> None:
@@ -149,6 +152,11 @@ def run_target(
         raise ValueError(f"Khong co file .txt trong {target}")
 
     output_dir.mkdir(parents=True, exist_ok=True)
+    incomplete_marker = output_dir / "_INCOMPLETE_RUN.txt"
+    incomplete_marker.write_text(
+        f"Run started with {len(files)} expected files. Do not submit this folder until this marker is removed.\n",
+        encoding="utf-8",
+    )
     max_workers = max(1, min(workers, len(files)))
     log_step(
         f"api_run_start target={target} files={len(files)} workers={max_workers} "
@@ -178,7 +186,26 @@ def run_target(
                 failures.append(f"{path}: {exc}")
 
     if failures:
+        incomplete_marker.write_text(
+            "Run failed. Missing or failed requests:\n" + "\n".join(failures) + "\n",
+            encoding="utf-8",
+        )
         raise RuntimeError("\n".join(failures))
+
+    expected_names = {f"{path.stem}.json" for path in files}
+    result_names = {item.output_path.name for item in results}
+    disk_names = {path.name for path in output_dir.glob("*.json")}
+    missing_results = expected_names - result_names
+    missing_disk = expected_names - disk_names
+    unexpected_disk = disk_names - expected_names if target.is_dir() and limit is None else set()
+    if missing_results or missing_disk or unexpected_disk:
+        details = (
+            f"Incomplete output set: missing_results={sorted(missing_results)} "
+            f"missing_disk={sorted(missing_disk)} unexpected_disk={sorted(unexpected_disk)}"
+        )
+        incomplete_marker.write_text(details + "\n", encoding="utf-8")
+        raise RuntimeError(details)
+    incomplete_marker.unlink()
     log_step(
         f"api_run_done files={len(results)} concepts={sum(item.concepts for item in results)} "
         f"output_dir={output_dir}",
@@ -224,7 +251,11 @@ def main(argv: list[str] | None = None) -> int:
     #   python tests/test.py input --workers 8 --timeout 600
     args = parser.parse_args(argv)
 
-    output_dir = args.output_dir.resolve() if args.output_dir else default_output_dir().resolve()
+    output_dir = (
+        args.output_dir.resolve()
+        if args.output_dir
+        else default_output_dir(args.target).resolve()
+    )
     log_step(
         f"runner_start mode=entity_llm_only target={args.target.resolve()} "
         f"output_dir={output_dir}"

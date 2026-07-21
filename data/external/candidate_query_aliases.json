@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "policy": "positive_query_expansion_only",
+  "aliases": {
+    "CH\u1ea8N_\u0110O\u00c1N": {
+      "THA": "t\u0103ng huy\u1ebft \u00e1p",
+      "t\u0103ng HA": "t\u0103ng huy\u1ebft \u00e1p",
+      "\u0110T\u0110": "\u0111\u00e1i th\u00e1o \u0111\u01b0\u1eddng",
+      "NMCT": "nh\u1ed3i m\u00e1u c\u01a1 tim",
+      "COPD": "b\u1ec7nh ph\u1ed5i t\u1eafc ngh\u1ebdn m\u1ea1n t\u00ednh",
+      "CKD": "b\u1ec7nh th\u1eadn m\u1ea1n",
+      "CAD": "b\u1ec7nh m\u1ea1ch v\u00e0nh"
+    },
+    "THU\u1ed0C": {}
+  }
+}

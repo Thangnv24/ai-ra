@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "enabled_variants": ["drug_sig"],
+  "drug": {
+    "route_frequency_tokens": ["po", "iv", "im", "sc", "sq", "sl", "pr", "oral", "topical", "bid", "tid", "qid", "qd", "qod", "qam", "qpm", "qhs", "hs", "daily", "prn", "stat"],
+    "form_tokens": ["tablet", "tablets", "tab", "tabs", "capsule", "capsules", "cap", "caps", "solution", "suspension", "cream", "ointment", "injection", "patch", "spray", "xl", "xr", "er", "sr", "cr"],
+    "units": ["mg/ml", "mcg/ml", "mg", "mcg", "g", "ml", "iu", "unit", "units", "%"],
+    "vietnamese_instruction_tokens": ["vi\u00ean", "\u1ed1ng", "g\u00f3i", "l\u1ecd", "chai", "s\u00e1ng", "tr\u01b0a", "chi\u1ec1u", "t\u1ed1i", "u\u1ed1ng", "ti\u00eam", "truy\u1ec1n"]
+  },
+  "test_result": {
+    "units": ["mmHg", "mmol/L", "\u00b5mol/L", "umol/L", "mg/dL", "g/L", "g/dL", "10^9/L", "10^12/L", "%", "bpm", "l\u1ea7n/ph\u00fat", "nh\u1ecbp/ph\u00fat", "\u00b0C"]
+  },
+  "symptom": {
+    "negation_prefixes": ["kh\u00f4ng", "ch\u01b0a", "ph\u1ee7 nh\u1eadn"],
+    "trailing_modifiers": ["tr\u00e1i", "ph\u1ea3i", "hai b\u00ean", "to\u00e0n th\u00e2n", "khi g\u1eafng s\u1ee9c", "khi n\u1eb1m", "v\u1ec1 \u0111\u00eam", "d\u1eef d\u1ed9i", "\u00e2m \u1ec9", "nh\u1eb9", "n\u1eb7ng", "t\u1eebng c\u01a1n", "li\u00ean t\u1ee5c"]
+  },
+  "diagnosis": {
+    "explanation_connectors": ["do", "nghi do", "k\u00e8m", "tr\u00ean n\u1ec1n", "th\u1ee9 ph\u00e1t sau"]
+  }
+}

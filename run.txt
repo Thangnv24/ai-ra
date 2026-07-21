@@ -2,5 +2,8 @@ python -m venv venv
 .\venv\scripts\activate
 pip install -r requirements.txt
 python main.py
-python tests/test.py input --workers 8 --timeout 600
-python tests/test.py input_part2/input/input --workers 8 --timeout 600
+python tests/test.py input --workers 10 --timeout 600
+python tests/test.py input_part2/input/input --workers 10 --timeout 600
+
+python main.py
+python tests/test.py input --workers 10 --timeout 600 --output-dir output/out_put_21072026_rollback_v1

@@ -272,6 +272,8 @@ class AnnotationMemory:
             if entry.concept_type != concept_type or not entry.examples:
                 continue
             key_match = float(entry.key in target)
+            if not key_match:
+                continue
             subsection_rate = entry.subsection_rate(subsection) or 0.0
             section_rate = entry.section_rate(section) or 0.0
             ranked.append(
@@ -321,7 +323,7 @@ class AnnotationMemory:
             nonempty_count = total - null_count
             nonempty_rate = nonempty_count / total
             if null_count >= 3 and nonempty_rate <= 0.2:
-                return ()
+                return None
             nonempty_sets = [
                 (value, count) for value, count in entry.candidate_sets.items() if value
             ]
@@ -336,7 +338,7 @@ class AnnotationMemory:
         null_count = entry.candidate_sets.get("", 0)
         nonempty_sets = [(value, count) for value, count in entry.candidate_sets.items() if value]
         if not nonempty_sets:
-            return () if null_count >= 2 else None
+            return None
         value, support = max(nonempty_sets, key=lambda item: (item[1], item[0]))
         nonempty_count = total - null_count
         codes = tuple(code for code in value.split("|") if code)
@@ -344,7 +346,7 @@ class AnnotationMemory:
         code_utility = support * code_weight
         null_utility = null_count
         if null_count >= 2 and null_utility >= code_utility:
-            return ()
+            return None
         if support < 2 or support / max(1, nonempty_count) < 0.65:
             return None
         if code_utility <= null_utility:

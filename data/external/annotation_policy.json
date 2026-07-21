@@ -51,7 +51,8 @@
   "candidates": {
     "CHẨN_ĐOÁN": "ICD10",
     "THUỐC": "RxNorm",
-    "null_is_first_class": true,
+    "empty_output_allowed": true,
+    "memory_null_can_override": false,
     "validated_codes_only": true
   },
   "error_taxonomy": [

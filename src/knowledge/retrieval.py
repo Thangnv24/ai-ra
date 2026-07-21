@@ -2,7 +2,10 @@
 
 from __future__ import annotations
 
+import json
+from dataclasses import dataclass
 from functools import lru_cache
+from pathlib import Path
 from typing import Any
 
 from core.config import CODED_TYPES, TYPE_DIAGNOSIS, TYPE_DRUG
@@ -18,16 +21,55 @@ from knowledge.candidates import SlimCandidateIndex
 from knowledge.ontology import OntologyIndex
 
 
+@dataclass(frozen=True, slots=True)
+class CandidateDecision:
+    codes: tuple[str, ...]
+    source: str
+    query: str
+
+
+class CandidateQueryAliases:
+    """High-precision surface aliases that only expand retrieval queries."""
+
+    def __init__(self, aliases: dict[tuple[str, str], tuple[str, ...]]):
+        self.aliases = aliases
+
+    @classmethod
+    def empty(cls) -> "CandidateQueryAliases":
+        return cls({})
+
+    @classmethod
+    def load(cls, path: Path) -> "CandidateQueryAliases":
+        if not path.exists():
+            return cls.empty()
+        payload = json.loads(path.read_text(encoding="utf-8"))
+        aliases: dict[tuple[str, str], tuple[str, ...]] = {}
+        for concept_type, rows in payload.get("aliases", {}).items():
+            if concept_type not in CODED_TYPES or not isinstance(rows, dict):
+                continue
+            for surface, targets in rows.items():
+                values = targets if isinstance(targets, list) else [targets]
+                cleaned = tuple(value.strip() for value in values if isinstance(value, str) and value.strip())
+                if cleaned:
+                    aliases[(concept_type, normalize_key(surface))] = cleaned
+        return cls(aliases)
+
+    def queries_for(self, text: str, concept_type: str) -> tuple[str, ...]:
+        return self.aliases.get((concept_type, normalize_key(text)), ())
+
+
 class CandidateRetriever:
     def __init__(
         self,
         index: OntologyIndex,
         slim_index: SlimCandidateIndex | None = None,
         memory: AnnotationMemory | None = None,
+        query_aliases: CandidateQueryAliases | None = None,
     ):
         self.index = index
         self.slim_index = slim_index or SlimCandidateIndex.empty()
         self.memory = memory or AnnotationMemory.empty()
+        self.query_aliases = query_aliases or CandidateQueryAliases.empty()
 
     def candidates_for(
         self,
@@ -39,22 +81,39 @@ class CandidateRetriever:
         start: int | None = None,
         end: int | None = None,
     ) -> tuple[str, ...]:
+        return self.candidate_decision_for(
+            text,
+            concept_type,
+            limit,
+            source_text=source_text,
+            start=start,
+            end=end,
+        ).codes
+
+    def candidate_decision_for(
+        self,
+        text: str,
+        concept_type: str,
+        limit: int = 5,
+        *,
+        source_text: str | None = None,
+        start: int | None = None,
+        end: int | None = None,
+    ) -> CandidateDecision:
         if concept_type not in CODED_TYPES:
-            return ()
+            return CandidateDecision((), "not_coded", text)
         if not _candidate_eligible(concept_type, source_text, start, end):
-            return ()
+            return CandidateDecision((), "ineligible", text)
         memory_decision = self.memory.candidate_decision(text, concept_type)
-        if memory_decision == ():
-            return ()
         if memory_decision is not None and all(
             (concept_type, code) in self.slim_index.records for code in memory_decision
         ):
-            return memory_decision[:limit]
-        for query in _candidate_queries(text, concept_type):
+            return CandidateDecision(memory_decision[:limit], "memory_positive", text)
+        for query, source in _candidate_query_rows(text, concept_type, self.query_aliases):
             candidates = self._candidates_for_query(query, concept_type, limit)
             if candidates:
-                return candidates
-        return ()
+                return CandidateDecision(candidates, source, query)
+        return CandidateDecision((), "none", text)
 
     @lru_cache(maxsize=8192)
     def _candidates_for_query(self, text: str, concept_type: str, limit: int) -> tuple[str, ...]:
@@ -64,6 +123,9 @@ class CandidateRetriever:
         if concept_type == TYPE_DIAGNOSIS:
             slim_hits = self.slim_index.lookup(text, concept_type, limit=max(limit * 6, 30))
             selected = _select_diagnosis_codes(text, slim_hits, limit=limit)
+            selected = tuple(
+                code for code in selected if (concept_type, code) in self.slim_index.records
+            )
             if selected or slim_hits:
                 return selected
         codes: list[str] = []
@@ -144,11 +206,34 @@ def _unique(codes: list[str]) -> list[str]:
     return output
 
 
-def _candidate_queries(text: str, concept_type: str) -> tuple[str, ...]:
-    queries = [text.strip()]
+def _candidate_query_rows(
+    text: str,
+    concept_type: str,
+    aliases: CandidateQueryAliases,
+) -> tuple[tuple[str, str], ...]:
+    rows = [(query, "query_alias") for query in aliases.queries_for(text, concept_type)]
+    rows.append((text.strip(), "local_index"))
     if concept_type == TYPE_DRUG:
-        queries.extend((strip_drug_count(text), strip_drug_route_frequency(text)))
-    return tuple(_unique_text(queries))
+        rows.extend(
+            (
+                (strip_drug_count(text), "normalized_query"),
+                (strip_drug_route_frequency(text), "normalized_query"),
+            )
+        )
+    output: list[tuple[str, str]] = []
+    seen: set[str] = set()
+    for query, source in rows:
+        query = " ".join(query.split())
+        key = normalize_key(query)
+        if len(key) < 3 or key in seen:
+            continue
+        seen.add(key)
+        output.append((query, source))
+    return tuple(output)
+
+
+def _candidate_queries(text: str, concept_type: str) -> tuple[str, ...]:
+    return tuple(query for query, _ in _candidate_query_rows(text, concept_type, CandidateQueryAliases.empty()))
 
 
 def _unique_text(values: list[str]) -> list[str]:

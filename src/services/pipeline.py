@@ -9,6 +9,7 @@ import statistics
 import subprocess
 import sys
 import time
+from collections import Counter
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -27,15 +28,15 @@ from extraction.context import ContextDetector
 from extraction.assertion_model import AssertionClassifier
 from extraction.llm_entities import LLMEntityExtractor
 from extraction.annotation_memory import AnnotationMemory
-from extraction.boundary_variants import BoundaryVariantGenerator
 from extraction.learned_models import SpanAcceptanceModel, TokenSpanModel
 from extraction.ner import MedicalNER, SpanCandidate
+from extraction.span_grammar import SpanGrammar
 from extraction.span_verifier import SpanTypeVerifier
 from integrations.openai_client import ApiLLMClient
 from knowledge.candidates import load_slim_candidate_index
 from knowledge.ontology import OntologyIndex, load_ontology_index
 from knowledge.reasoning import infer_relations
-from knowledge.retrieval import CandidateRetriever
+from knowledge.retrieval import CandidateQueryAliases, CandidateRetriever
 from services.postprocess import refine_concepts
 
 
@@ -109,16 +110,22 @@ class MedicalKGPipeline:
         self.ner = MedicalNER()
         self.annotation_memory = AnnotationMemory.load(paths.data_external / "annotation_memory.jsonl")
         self.token_span_model = TokenSpanModel.load(paths.data_external / "token_span_model.json.gz")
-        self.span_acceptance_model = SpanAcceptanceModel.load(
-            paths.data_external / "span_acceptance_model.json"
-        )
-        self.span_verifier = SpanTypeVerifier(self.annotation_memory, self.span_acceptance_model)
-        self.boundary_variants = BoundaryVariantGenerator()
-        self.assertion_classifier = AssertionClassifier.load(
-            paths.data_external / "assertion_model.json"
-        )
+        self.span_grammar = SpanGrammar.load(paths.data_external / "span_grammar.json")
+        # The learned acceptance artifact is trained on input_part2 templates.
+        # Keep it out of runtime decisions until it passes cross-domain validation.
+        self.span_acceptance_model = SpanAcceptanceModel.empty()
+        self.span_verifier = SpanTypeVerifier(self.annotation_memory)
+        # Rule assertions generalize across templates better than the
+        # input_part2-trained lexical classifier.
+        self.assertion_classifier = AssertionClassifier.empty()
         self.context = ContextDetector(self.assertion_classifier)
-        self.retriever = CandidateRetriever(self.index, self.slim_candidate_index, self.annotation_memory)
+        self.candidate_query_aliases = CandidateQueryAliases.load(paths.data_external / "candidate_query_aliases.json")
+        self.retriever = CandidateRetriever(
+            self.index,
+            self.slim_candidate_index,
+            self.annotation_memory,
+            self.candidate_query_aliases,
+        )
         self.llm = ApiLLMClient(self.settings)
         self.llm_entity_extractor = LLMEntityExtractor(self.llm, self.annotation_memory)
 
@@ -170,11 +177,12 @@ class MedicalKGPipeline:
         stage_start = time.perf_counter()
         sequence_spans = self.token_span_model.propose(text)
         stages["sequence_proposal"] = {
-            "spans": len(sequence_spans),
+            "raw_spans": len(sequence_spans),
+            "spans": 0,
             "seconds": round(time.perf_counter() - stage_start, 6),
         }
         logger.info(
-            "pipeline_stage stage=sequence_proposal spans=%s seconds=%.6f",
+            "pipeline_stage stage=sequence_proposal raw_spans=%s seconds=%.6f",
             len(sequence_spans),
             time.perf_counter() - stage_start,
         )
@@ -197,20 +205,33 @@ class MedicalKGPipeline:
             time.perf_counter() - stage_start,
         )
 
-        stage_start = time.perf_counter()
-        proposal_lattice, boundary_summary = self.boundary_variants.expand(
+        grammar_spans, grammar_summary = self.span_grammar.expand(
             text,
-            [*rule_spans, *memory_spans, *sequence_spans, *llm_spans],
+            [*rule_spans, *memory_spans, *llm_spans],
         )
+        stages["span_grammar"] = grammar_summary.to_dict()
+        corroborated_sequence_spans = _corroborated_sequence_spans(
+            sequence_spans,
+            grammar_spans,
+        )
+        stages["sequence_proposal"]["spans"] = len(corroborated_sequence_spans)
+
+        stage_start = time.perf_counter()
+        proposal_lattice = [
+            *grammar_spans,
+            *corroborated_sequence_spans,
+        ]
         stages["boundary_variants"] = {
-            **boundary_summary.to_dict(),
+            "inputs": len(proposal_lattice),
+            "outputs": len(proposal_lattice),
+            "generated": 0,
+            "enabled": False,
             "seconds": round(time.perf_counter() - stage_start, 6),
         }
         logger.info(
-            "pipeline_stage stage=boundary_variants inputs=%s outputs=%s generated=%s seconds=%.6f",
-            boundary_summary.inputs,
-            boundary_summary.outputs,
-            boundary_summary.generated,
+            "pipeline_stage stage=boundary_variants enabled=false inputs=%s outputs=%s generated=0 seconds=%.6f",
+            len(proposal_lattice),
+            len(proposal_lattice),
             time.perf_counter() - stage_start,
         )
 
@@ -238,27 +259,30 @@ class MedicalKGPipeline:
 
         stage_start = time.perf_counter()
         concepts: list[Concept] = []
+        candidate_sources: Counter[str] = Counter()
         for span in spans:
             assertions = self.context.assertions_for(text, span.start, span.end, span.type)
-            candidates = self.retriever.candidates_for(
+            candidate_decision = self.retriever.candidate_decision_for(
                 span.text,
                 span.type,
                 source_text=text,
                 start=span.start,
                 end=span.end,
             )
+            candidate_sources[candidate_decision.source] += 1
             concepts.append(
                 Concept(
                     text=span.text,
                     type=span.type,
                     position=(span.start, span.end),
                     assertions=assertions,
-                    candidates=candidates,
+                    candidates=candidate_decision.codes,
                 )
             )
         concepts = sorted(concepts, key=lambda c: (c.position[0], c.position[1], c.type))
         stages["concept_build"] = {
             "concepts": len(concepts),
+            "candidate_sources": dict(sorted(candidate_sources.items())),
             "seconds": round(time.perf_counter() - stage_start, 6),
         }
         logger.info("pipeline_stage stage=concept_build concepts=%s seconds=%.6f", len(concepts), time.perf_counter() - stage_start)
@@ -363,6 +387,20 @@ def _percentile(values: list[float], q: float) -> float:
     upper = min(lower + 1, len(ordered) - 1)
     fraction = pos - lower
     return ordered[lower] * (1 - fraction) + ordered[upper] * fraction
+
+
+def _corroborated_sequence_spans(
+    sequence_spans: list[SpanCandidate],
+    trusted_spans: list[SpanCandidate],
+) -> list[SpanCandidate]:
+    """Use token-model spans only as exact corroboration, never discovery."""
+
+    trusted_keys = {(span.start, span.end, span.type) for span in trusted_spans}
+    return [
+        span
+        for span in sequence_spans
+        if (span.start, span.end, span.type) in trusted_keys
+    ]
 
 
 def _merge_span_candidates(spans: list[SpanCandidate]) -> list[SpanCandidate]:
