@@ -1,0 +1,70 @@
+[
+  {
+    "text": "da rất nhiều dầu",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      57,
+      73
+    ]
+  },
+  {
+    "text": "mụn trứng cá",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      80,
+      92
+    ],
+    "candidates": [
+      "L70.9"
+    ]
+  },
+  {
+    "text": "đã đỡ hẳn",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      184,
+      193
+    ]
+  },
+  {
+    "text": "lên mụn trở lại",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      229,
+      244
+    ]
+  },
+  {
+    "text": "mụn ở trán",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      249,
+      259
+    ]
+  },
+  {
+    "text": "đau ngực trái cấp tính",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1115,
+      1137
+    ]
+  },
+  {
+    "text": "đau sau xương ức lan ra sau lưng",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1141,
+      1173
+    ]
+  }
+]

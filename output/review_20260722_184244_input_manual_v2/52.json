@@ -1,0 +1,177 @@
+[
+  {
+    "text": "nổi các dấu mề đay rất to",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      73,
+      98
+    ]
+  },
+  {
+    "text": "ngứa khắp người",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      102,
+      117
+    ]
+  },
+  {
+    "text": "nổi quanh năm",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      129,
+      142
+    ]
+  },
+  {
+    "text": "mề đay",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      161,
+      167
+    ]
+  },
+  {
+    "text": "ngứa",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      188,
+      192
+    ]
+  },
+  {
+    "text": "dị ứng",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      357,
+      363
+    ]
+  },
+  {
+    "text": "MÀY ĐAY VÔ CĂN",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      733,
+      747
+    ],
+    "candidates": [
+      "L50.1"
+    ]
+  },
+  {
+    "text": "MÀY ĐAY MẠN TÍNH",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      839,
+      855
+    ],
+    "candidates": [
+      "L50.8"
+    ]
+  },
+  {
+    "text": "Tổn thương mô",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      857,
+      871
+    ]
+  },
+  {
+    "text": "Nhuộm huỳnh quang miễn dịch",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1225,
+      1256
+    ]
+  },
+  {
+    "text": "lắng đọng các phức hợp miễn dịch, bổ thể hay sợi fibrin",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1313,
+      1378
+    ]
+  },
+  {
+    "text": "bệnh lý mày đay vô căn",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      1388,
+      1410
+    ],
+    "candidates": [
+      "L50.1"
+    ]
+  },
+  {
+    "text": "Mày đay vô căn",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      1508,
+      1522
+    ],
+    "candidates": [
+      "L50.1"
+    ]
+  },
+  {
+    "text": "tự tử",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      1662,
+      1667
+    ]
+  },
+  {
+    "text": "quá liều",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      1670,
+      1678
+    ]
+  },
+  {
+    "text": "klonopin",
+    "type": "THUỐC",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      1679,
+      1687
+    ],
+    "candidates": []
+  },
+  {
+    "text": "clonidine",
+    "type": "THUỐC",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      1687,
+      1696
+    ],
+    "candidates": []
+  }
+]

@@ -1,0 +1,100 @@
+{"file": "1.txt", "concepts": 62, "sources": {"baseline": 62}, "old_intervals": 0, "part2_intervals": 0}
+{"file": "2.txt", "concepts": 70, "sources": {"baseline": 67, "old_manual": 3}, "old_intervals": 1, "part2_intervals": 0}
+{"file": "3.txt", "concepts": 67, "sources": {"baseline": 13, "old_manual": 54}, "old_intervals": 1, "part2_intervals": 0}
+{"file": "4.txt", "concepts": 83, "sources": {"baseline": 4, "old_manual": 79}, "old_intervals": 2, "part2_intervals": 0}
+{"file": "5.txt", "concepts": 54, "sources": {"baseline": 16, "old_manual": 38}, "old_intervals": 6, "part2_intervals": 0}
+{"file": "6.txt", "concepts": 70, "sources": {"baseline": 15, "old_manual": 55}, "old_intervals": 2, "part2_intervals": 0}
+{"file": "7.txt", "concepts": 52, "sources": {"baseline": 46, "old_manual": 6}, "old_intervals": 1, "part2_intervals": 0}
+{"file": "8.txt", "concepts": 84, "sources": {"baseline": 39, "old_manual": 45}, "old_intervals": 1, "part2_intervals": 0}
+{"file": "9.txt", "concepts": 46, "sources": {"baseline": 38, "old_manual": 8}, "old_intervals": 1, "part2_intervals": 0}
+{"file": "10.txt", "concepts": 58, "sources": {"old_manual": 56, "part2_official": 2}, "old_intervals": 2, "part2_intervals": 2}
+{"file": "11.txt", "concepts": 52, "sources": {"baseline": 3, "old_manual": 49}, "old_intervals": 2, "part2_intervals": 0}
+{"file": "12.txt", "concepts": 36, "sources": {"baseline": 4, "old_manual": 32}, "old_intervals": 3, "part2_intervals": 0}
+{"file": "13.txt", "concepts": 34, "sources": {"baseline": 31, "old_manual": 3}, "old_intervals": 2, "part2_intervals": 0}
+{"file": "14.txt", "concepts": 48, "sources": {"baseline": 29, "old_manual": 19}, "old_intervals": 2, "part2_intervals": 0}
+{"file": "15.txt", "concepts": 37, "sources": {"baseline": 3, "old_manual": 34}, "old_intervals": 3, "part2_intervals": 0}
+{"file": "16.txt", "concepts": 32, "sources": {"baseline": 29, "old_manual": 3}, "old_intervals": 1, "part2_intervals": 0}
+{"file": "17.txt", "concepts": 64, "sources": {"baseline": 59, "old_manual": 5}, "old_intervals": 1, "part2_intervals": 0}
+{"file": "18.txt", "concepts": 58, "sources": {"baseline": 18, "old_manual": 40}, "old_intervals": 1, "part2_intervals": 0}
+{"file": "19.txt", "concepts": 33, "sources": {"baseline": 24, "old_manual": 9}, "old_intervals": 1, "part2_intervals": 0}
+{"file": "20.txt", "concepts": 46, "sources": {"baseline": 26, "old_manual": 20}, "old_intervals": 1, "part2_intervals": 0}
+{"file": "21.txt", "concepts": 36, "sources": {"baseline": 14, "old_manual": 22}, "old_intervals": 1, "part2_intervals": 0}
+{"file": "22.txt", "concepts": 48, "sources": {"baseline": 3, "old_manual": 45}, "old_intervals": 2, "part2_intervals": 0}
+{"file": "23.txt", "concepts": 29, "sources": {"baseline": 8, "old_manual": 21}, "old_intervals": 1, "part2_intervals": 0}
+{"file": "24.txt", "concepts": 88, "sources": {"baseline": 87, "old_manual": 1}, "old_intervals": 1, "part2_intervals": 0}
+{"file": "25.txt", "concepts": 40, "sources": {"baseline": 21, "old_manual": 19}, "old_intervals": 1, "part2_intervals": 0}
+{"file": "26.txt", "concepts": 63, "sources": {"baseline": 51, "old_manual": 12}, "old_intervals": 1, "part2_intervals": 0}
+{"file": "27.txt", "concepts": 36, "sources": {"baseline": 26, "old_manual": 10}, "old_intervals": 1, "part2_intervals": 0}
+{"file": "28.txt", "concepts": 33, "sources": {"baseline": 30, "old_manual": 3}, "old_intervals": 1, "part2_intervals": 0}
+{"file": "29.txt", "concepts": 33, "sources": {"baseline": 6, "old_manual": 27}, "old_intervals": 2, "part2_intervals": 0}
+{"file": "30.txt", "concepts": 27, "sources": {"baseline": 7, "old_manual": 20}, "old_intervals": 1, "part2_intervals": 0}
+{"file": "31.txt", "concepts": 41, "sources": {"baseline": 8, "old_manual": 33}, "old_intervals": 2, "part2_intervals": 0}
+{"file": "32.txt", "concepts": 36, "sources": {"baseline": 9, "old_manual": 27}, "old_intervals": 1, "part2_intervals": 0}
+{"file": "33.txt", "concepts": 50, "sources": {"baseline": 11, "old_manual": 39}, "old_intervals": 4, "part2_intervals": 0}
+{"file": "34.txt", "concepts": 45, "sources": {"baseline": 37, "old_manual": 7, "part2_official": 1}, "old_intervals": 1, "part2_intervals": 1}
+{"file": "35.txt", "concepts": 29, "sources": {"baseline": 16, "old_manual": 13}, "old_intervals": 1, "part2_intervals": 0}
+{"file": "36.txt", "concepts": 49, "sources": {"baseline": 44, "old_manual": 5}, "old_intervals": 1, "part2_intervals": 0}
+{"file": "37.txt", "concepts": 27, "sources": {"baseline": 19, "old_manual": 8}, "old_intervals": 1, "part2_intervals": 0}
+{"file": "38.txt", "concepts": 52, "sources": {"old_manual": 52}, "old_intervals": 3, "part2_intervals": 0}
+{"file": "39.txt", "concepts": 36, "sources": {"baseline": 2, "old_manual": 34}, "old_intervals": 2, "part2_intervals": 0}
+{"file": "40.txt", "concepts": 58, "sources": {"baseline": 48, "old_manual": 4, "part2_official": 6}, "old_intervals": 1, "part2_intervals": 4}
+{"file": "41.txt", "concepts": 31, "sources": {"baseline": 29, "old_manual": 2}, "old_intervals": 1, "part2_intervals": 0}
+{"file": "42.txt", "concepts": 48, "sources": {"baseline": 6, "old_manual": 42}, "old_intervals": 2, "part2_intervals": 0}
+{"file": "43.txt", "concepts": 25, "sources": {"baseline": 6, "old_manual": 18, "part2_official": 1}, "old_intervals": 3, "part2_intervals": 1}
+{"file": "44.txt", "concepts": 29, "sources": {"baseline": 6, "old_manual": 23}, "old_intervals": 1, "part2_intervals": 0}
+{"file": "45.txt", "concepts": 35, "sources": {"baseline": 16, "old_manual": 18, "part2_official": 1}, "old_intervals": 2, "part2_intervals": 1}
+{"file": "46.txt", "concepts": 82, "sources": {"baseline": 64, "old_manual": 18}, "old_intervals": 1, "part2_intervals": 2}
+{"file": "47.txt", "concepts": 51, "sources": {"old_manual": 51}, "old_intervals": 2, "part2_intervals": 0}
+{"file": "48.txt", "concepts": 19, "sources": {"baseline": 19}, "old_intervals": 0, "part2_intervals": 0}
+{"file": "49.txt", "concepts": 21, "sources": {"baseline": 16, "old_manual": 5}, "old_intervals": 1, "part2_intervals": 0}
+{"file": "50.txt", "concepts": 26, "sources": {"baseline": 11, "old_manual": 15}, "old_intervals": 1, "part2_intervals": 0}
+{"file": "51.txt", "concepts": 27, "sources": {"baseline": 1, "old_manual": 26}, "old_intervals": 3, "part2_intervals": 0}
+{"file": "52.txt", "concepts": 31, "sources": {"baseline": 27, "old_manual": 4}, "old_intervals": 1, "part2_intervals": 0}
+{"file": "53.txt", "concepts": 37, "sources": {"baseline": 23, "old_manual": 14}, "old_intervals": 1, "part2_intervals": 0}
+{"file": "54.txt", "concepts": 39, "sources": {"baseline": 15, "old_manual": 24}, "old_intervals": 1, "part2_intervals": 0}
+{"file": "55.txt", "concepts": 37, "sources": {"baseline": 30, "old_manual": 7}, "old_intervals": 1, "part2_intervals": 0}
+{"file": "56.txt", "concepts": 24, "sources": {"baseline": 17, "old_manual": 7}, "old_intervals": 1, "part2_intervals": 0}
+{"file": "57.txt", "concepts": 53, "sources": {"baseline": 4, "old_manual": 49}, "old_intervals": 2, "part2_intervals": 0}
+{"file": "58.txt", "concepts": 69, "sources": {"baseline": 28, "old_manual": 41}, "old_intervals": 2, "part2_intervals": 0}
+{"file": "59.txt", "concepts": 32, "sources": {"baseline": 19, "old_manual": 13}, "old_intervals": 1, "part2_intervals": 0}
+{"file": "60.txt", "concepts": 39, "sources": {"baseline": 15, "old_manual": 24}, "old_intervals": 1, "part2_intervals": 0}
+{"file": "61.txt", "concepts": 20, "sources": {"baseline": 9, "old_manual": 11}, "old_intervals": 1, "part2_intervals": 0}
+{"file": "62.txt", "concepts": 43, "sources": {"baseline": 3, "old_manual": 40}, "old_intervals": 1, "part2_intervals": 0}
+{"file": "63.txt", "concepts": 22, "sources": {"baseline": 3, "old_manual": 18, "part2_official": 1}, "old_intervals": 3, "part2_intervals": 1}
+{"file": "64.txt", "concepts": 22, "sources": {"baseline": 20, "old_manual": 2}, "old_intervals": 1, "part2_intervals": 0}
+{"file": "65.txt", "concepts": 18, "sources": {"baseline": 14, "old_manual": 4}, "old_intervals": 1, "part2_intervals": 0}
+{"file": "66.txt", "concepts": 36, "sources": {"baseline": 30, "old_manual": 6}, "old_intervals": 1, "part2_intervals": 0}
+{"file": "67.txt", "concepts": 22, "sources": {"baseline": 16, "old_manual": 6}, "old_intervals": 1, "part2_intervals": 0}
+{"file": "68.txt", "concepts": 24, "sources": {"baseline": 8, "old_manual": 16}, "old_intervals": 1, "part2_intervals": 0}
+{"file": "69.txt", "concepts": 17, "sources": {"baseline": 3, "old_manual": 14}, "old_intervals": 2, "part2_intervals": 0}
+{"file": "70.txt", "concepts": 34, "sources": {"baseline": 30, "old_manual": 4}, "old_intervals": 2, "part2_intervals": 0}
+{"file": "71.txt", "concepts": 16, "sources": {"baseline": 10, "old_manual": 6}, "old_intervals": 1, "part2_intervals": 0}
+{"file": "72.txt", "concepts": 21, "sources": {"baseline": 21}, "old_intervals": 0, "part2_intervals": 0}
+{"file": "73.txt", "concepts": 31, "sources": {"baseline": 4, "old_manual": 27}, "old_intervals": 5, "part2_intervals": 0}
+{"file": "74.txt", "concepts": 28, "sources": {"baseline": 1, "old_manual": 27}, "old_intervals": 5, "part2_intervals": 0}
+{"file": "75.txt", "concepts": 13, "sources": {"baseline": 9, "old_manual": 4}, "old_intervals": 1, "part2_intervals": 0}
+{"file": "76.txt", "concepts": 8, "sources": {"baseline": 8}, "old_intervals": 1, "part2_intervals": 0}
+{"file": "77.txt", "concepts": 24, "sources": {"baseline": 15, "old_manual": 9}, "old_intervals": 5, "part2_intervals": 0}
+{"file": "78.txt", "concepts": 23, "sources": {"baseline": 14, "old_manual": 9}, "old_intervals": 1, "part2_intervals": 0}
+{"file": "79.txt", "concepts": 12, "sources": {"baseline": 11, "old_manual": 1}, "old_intervals": 1, "part2_intervals": 0}
+{"file": "80.txt", "concepts": 23, "sources": {"baseline": 15, "old_manual": 8}, "old_intervals": 3, "part2_intervals": 0}
+{"file": "81.txt", "concepts": 23, "sources": {"baseline": 23}, "old_intervals": 1, "part2_intervals": 0}
+{"file": "82.txt", "concepts": 25, "sources": {"baseline": 2, "old_manual": 23}, "old_intervals": 2, "part2_intervals": 0}
+{"file": "83.txt", "concepts": 9, "sources": {"baseline": 9}, "old_intervals": 0, "part2_intervals": 0}
+{"file": "84.txt", "concepts": 10, "sources": {"baseline": 10}, "old_intervals": 0, "part2_intervals": 0}
+{"file": "85.txt", "concepts": 42, "sources": {"baseline": 1, "old_manual": 41}, "old_intervals": 2, "part2_intervals": 0}
+{"file": "86.txt", "concepts": 23, "sources": {"baseline": 18, "old_manual": 5}, "old_intervals": 1, "part2_intervals": 0}
+{"file": "87.txt", "concepts": 38, "sources": {"baseline": 34, "old_manual": 4}, "old_intervals": 2, "part2_intervals": 0}
+{"file": "88.txt", "concepts": 15, "sources": {"baseline": 6, "old_manual": 9}, "old_intervals": 5, "part2_intervals": 0}
+{"file": "89.txt", "concepts": 41, "sources": {"old_manual": 41}, "old_intervals": 2, "part2_intervals": 0}
+{"file": "90.txt", "concepts": 47, "sources": {"baseline": 1, "old_manual": 46}, "old_intervals": 1, "part2_intervals": 0}
+{"file": "91.txt", "concepts": 28, "sources": {"baseline": 2, "old_manual": 26}, "old_intervals": 3, "part2_intervals": 0}
+{"file": "92.txt", "concepts": 41, "sources": {"baseline": 2, "old_manual": 39}, "old_intervals": 2, "part2_intervals": 0}
+{"file": "93.txt", "concepts": 31, "sources": {"baseline": 28, "old_manual": 3}, "old_intervals": 1, "part2_intervals": 0}
+{"file": "94.txt", "concepts": 19, "sources": {"baseline": 19}, "old_intervals": 0, "part2_intervals": 0}
+{"file": "95.txt", "concepts": 35, "sources": {"baseline": 28, "old_manual": 7}, "old_intervals": 1, "part2_intervals": 0}
+{"file": "96.txt", "concepts": 13, "sources": {"baseline": 9, "old_manual": 4}, "old_intervals": 4, "part2_intervals": 0}
+{"file": "97.txt", "concepts": 25, "sources": {"baseline": 1, "old_manual": 24}, "old_intervals": 2, "part2_intervals": 0}
+{"file": "98.txt", "concepts": 24, "sources": {"baseline": 2, "old_manual": 22}, "old_intervals": 1, "part2_intervals": 0}
+{"file": "99.txt", "concepts": 41, "sources": {"baseline": 18, "old_manual": 23}, "old_intervals": 2, "part2_intervals": 0}
+{"file": "100.txt", "concepts": 9, "sources": {"baseline": 8, "old_manual": 1}, "old_intervals": 1, "part2_intervals": 0}

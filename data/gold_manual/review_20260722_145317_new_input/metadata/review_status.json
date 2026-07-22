@@ -1,0 +1,702 @@
+[
+  {
+    "file": "1.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:05:22",
+    "notes": "pure educational G6PD article; no patient-specific facts",
+    "concept_count": 0
+  },
+  {
+    "file": "2.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:05:22",
+    "notes": "Kawasaki article excluded; retained inserted assessment lines 39-46",
+    "concept_count": 14
+  },
+  {
+    "file": "3.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:05:22",
+    "notes": "family question curated; generic adverse-effect list excluded; clinical case retained",
+    "concept_count": 59
+  },
+  {
+    "file": "4.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:05:22",
+    "notes": "GI case retained; consultation limited to patient cancer and prescribed drugs",
+    "concept_count": 82
+  },
+  {
+    "file": "5.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:05:22",
+    "notes": "biliary case retained; infertility QA limited to direct patient facts/assessment",
+    "concept_count": 42
+  },
+  {
+    "file": "6.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:06:58",
+    "notes": "clinical record retained; CT abdomen-pelvis boundary consolidated",
+    "concept_count": 69
+  },
+  {
+    "file": "7.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:06:58",
+    "notes": "pregnancy QA rebuilt from direct facts; inserted lesion block retained",
+    "concept_count": 29
+  },
+  {
+    "file": "8.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:06:58",
+    "notes": "psychiatric record retained; appended Kawasaki article excluded",
+    "concept_count": 45
+  },
+  {
+    "file": "9.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:06:58",
+    "notes": "pregnancy QA rebuilt from direct facts; inserted megacolon presentation retained",
+    "concept_count": 31
+  },
+  {
+    "file": "10.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:06:58",
+    "notes": "clinical record retained; nested hepatitis diagnosis collapsed to full phrase",
+    "concept_count": 57
+  },
+  {
+    "file": "11.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:10:16",
+    "notes": "clinical record retained; child flat-foot consultation curated",
+    "concept_count": 52
+  },
+  {
+    "file": "12.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:10:16",
+    "notes": "cellulitis record retained; child congenital-ear consultation curated",
+    "concept_count": 36
+  },
+  {
+    "file": "13.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:10:16",
+    "notes": "rabies education excluded; direct wound and inserted chest-pain facts retained",
+    "concept_count": 4
+  },
+  {
+    "file": "14.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:10:16",
+    "notes": "clinical record retained; friend urticaria symptoms retained; generic pathology/treatment excluded",
+    "concept_count": 23
+  },
+  {
+    "file": "15.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:10:16",
+    "notes": "cellulitis record retained; unrelated pregnancy drug-safety insert excluded",
+    "concept_count": 34
+  },
+  {
+    "file": "16.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:10:16",
+    "notes": "rabies education excluded; direct wound and inserted administered drugs retained",
+    "concept_count": 5
+  },
+  {
+    "file": "17.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:10:16",
+    "notes": "direct dental symptoms and inserted chronic diagnoses retained; differential/advice excluded",
+    "concept_count": 8
+  },
+  {
+    "file": "18.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:10:16",
+    "notes": "coronary educational material excluded; acute biliary clinical record retained",
+    "concept_count": 40
+  },
+  {
+    "file": "19.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:10:16",
+    "notes": "abdominal record plus direct urticaria case/diagnosis retained; generic explanation excluded",
+    "concept_count": 14
+  },
+  {
+    "file": "20.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:10:16",
+    "notes": "rabies education excluded; direct wound and inserted clinical block retained",
+    "concept_count": 22
+  },
+  {
+    "file": "21.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:15:15",
+    "notes": "amyloidosis QA limited to direct diagnosis; biliary record retained",
+    "concept_count": 23
+  },
+  {
+    "file": "22.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:15:15",
+    "notes": "clinical blocks retained; corrupted unrelated QA line excluded",
+    "concept_count": 45
+  },
+  {
+    "file": "23.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:15:15",
+    "notes": "generic insomnia advice excluded; hydrocephalus and papilledema record retained",
+    "concept_count": 21
+  },
+  {
+    "file": "24.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:15:15",
+    "notes": "clinical hepatitis record retained; hallucinated sentence diagnosis removed and malformed diagnosis span repaired",
+    "concept_count": 87
+  },
+  {
+    "file": "25.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:15:15",
+    "notes": "contraception QA limited to direct symptoms; postoperative record retained",
+    "concept_count": 23
+  },
+  {
+    "file": "26.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:15:15",
+    "notes": "coronary education and prevention excluded; pancreatitis record retained",
+    "concept_count": 12
+  },
+  {
+    "file": "27.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:15:15",
+    "notes": "generic pneumonia lesson excluded; headache and papilledema record retained",
+    "concept_count": 10
+  },
+  {
+    "file": "28.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:15:15",
+    "notes": "friend urticaria QA curated; MRI finding retained; generic pathology and treatment excluded",
+    "concept_count": 8
+  },
+  {
+    "file": "29.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:15:15",
+    "notes": "cardiorespiratory record retained; child flat-foot QA curated with family assertions",
+    "concept_count": 33
+  },
+  {
+    "file": "30.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:15:15",
+    "notes": "edema clinical record retained; unrelated urticaria answer excluded",
+    "concept_count": 20
+  },
+  {
+    "file": "31.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:21:52",
+    "notes": "family varicocele QA curated; biliary record and medication history retained",
+    "concept_count": 38
+  },
+  {
+    "file": "32.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:21:52",
+    "notes": "amyloidosis QA limited to direct diagnosis; CML clinical record retained",
+    "concept_count": 30
+  },
+  {
+    "file": "33.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:21:52",
+    "notes": "acne QA direct facts curated; cardiopulmonary record retained",
+    "concept_count": 47
+  },
+  {
+    "file": "34.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:21:52",
+    "notes": "migraine QA limited to direct symptoms and clinician assessment; unrelated clinical record retained",
+    "concept_count": 13
+  },
+  {
+    "file": "35.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:21:52",
+    "notes": "stress-test clinical record retained; generic gastritis article excluded",
+    "concept_count": 13
+  },
+  {
+    "file": "36.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:21:52",
+    "notes": "nephrotic and biliary clinical records retained; obvious lab and assertion errors repaired",
+    "concept_count": 63
+  },
+  {
+    "file": "37.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:21:52",
+    "notes": "child congenital-ear facts curated with family assertions; cellulitis record retained; recommendations excluded",
+    "concept_count": 18
+  },
+  {
+    "file": "38.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:21:52",
+    "notes": "CML clinical record and labs retained; unrelated contraception response excluded",
+    "concept_count": 54
+  },
+  {
+    "file": "39.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:21:52",
+    "notes": "clinical record retained; unrelated flat-foot answer excluded",
+    "concept_count": 34
+  },
+  {
+    "file": "40.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:21:52",
+    "notes": "clinical GI-bleed record retained; composite diagnoses, vitals, negatives, and labs repaired",
+    "concept_count": 61
+  },
+  {
+    "file": "41.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:25:46",
+    "notes": "acne QA limited to direct patient facts; inserted acute chest-pain facts retained; education excluded",
+    "concept_count": 7
+  },
+  {
+    "file": "42.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:25:46",
+    "notes": "clinical respiratory record retained; embedded GI QA rebuilt from direct symptoms and endoscopy findings",
+    "concept_count": 48
+  },
+  {
+    "file": "43.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:25:46",
+    "notes": "CML hallucination record retained; unrelated infant-digestion answer excluded while preserving appended medications",
+    "concept_count": 19
+  },
+  {
+    "file": "44.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:25:46",
+    "notes": "hepatobiliary clinical record retained; unrelated urticaria answer and never-performed lab excluded",
+    "concept_count": 22
+  },
+  {
+    "file": "45.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:25:46",
+    "notes": "two clinical records retained; wrapped ordered-test spans consolidated",
+    "concept_count": 27
+  },
+  {
+    "file": "46.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:25:46",
+    "notes": "two clinical records retained; composite diagnoses, negatives, BP, and wrapped lactate test repaired",
+    "concept_count": 84
+  },
+  {
+    "file": "47.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:25:46",
+    "notes": "complete postoperative clinical record retained",
+    "concept_count": 51
+  },
+  {
+    "file": "48.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:25:46",
+    "notes": "child congenital-ear QA curated with family assertions and explicit ICD candidates",
+    "concept_count": 17
+  },
+  {
+    "file": "49.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:25:46",
+    "notes": "direct alopecia diagnosis and oncology record retained; generic treatment article excluded",
+    "concept_count": 6
+  },
+  {
+    "file": "50.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:25:46",
+    "notes": "neurologic clinical record retained; inserted necrotizing-pneumonia education excluded",
+    "concept_count": 16
+  },
+  {
+    "file": "51.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:27:26",
+    "notes": "heart-failure clinical record retained; unrelated ACL advice excluded while appended acute medications retained",
+    "concept_count": 26
+  },
+  {
+    "file": "52.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:27:26",
+    "notes": "friend urticaria QA curated; historical overdose record retained; pathology explanation excluded",
+    "concept_count": 9
+  },
+  {
+    "file": "53.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:27:26",
+    "notes": "two clinical records retained; active torsemide and diabetes coding repaired",
+    "concept_count": 37
+  },
+  {
+    "file": "54.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:27:26",
+    "notes": "direct pregnancy fact and CML clinical record retained; masked drug and screening advice excluded",
+    "concept_count": 25
+  },
+  {
+    "file": "55.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:27:26",
+    "notes": "direct episodic BP measurements and second clinical record retained; generic hypertension advice excluded",
+    "concept_count": 27
+  },
+  {
+    "file": "56.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:27:26",
+    "notes": "cardiac imaging record retained; unrelated gastritis article excluded",
+    "concept_count": 7
+  },
+  {
+    "file": "57.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:27:26",
+    "notes": "complete renal and hyperkalemia record retained; stray diet sentence excluded",
+    "concept_count": 49
+  },
+  {
+    "file": "58.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:27:26",
+    "notes": "two clinical records retained; diabetes and hypertension diagnosis split and coded",
+    "concept_count": 66
+  },
+  {
+    "file": "59.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:27:26",
+    "notes": "direct acne facts and infection workup retained; generic acne explanation excluded",
+    "concept_count": 21
+  },
+  {
+    "file": "60.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:27:26",
+    "notes": "direct acne facts and anticoagulation record retained; generic acne advice excluded",
+    "concept_count": 35
+  },
+  {
+    "file": "61.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:29:39",
+    "notes": "contraception advice excluded; embedded postoperative clinical symptoms retained",
+    "concept_count": 11
+  },
+  {
+    "file": "62.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:29:39",
+    "notes": "leading gout advice excluded; respiratory clinical record retained",
+    "concept_count": 40
+  },
+  {
+    "file": "63.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:29:39",
+    "notes": "direct rash and antihistamine facts curated; CML hallucination record retained",
+    "concept_count": 22
+  },
+  {
+    "file": "64.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:29:39",
+    "notes": "mother coronary disease and actual drug adverse effect curated with family assertions; hypothetical side effects excluded",
+    "concept_count": 9
+  },
+  {
+    "file": "65.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:29:39",
+    "notes": "direct alopecia diagnosis and inserted positive stress test retained; generic therapies excluded",
+    "concept_count": 5
+  },
+  {
+    "file": "66.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:29:39",
+    "notes": "general breast-cyst vitamin discussion excluded; inserted flu and chest imaging retained",
+    "concept_count": 6
+  },
+  {
+    "file": "67.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:29:39",
+    "notes": "chronic clinical history retained; unrelated gastritis article excluded",
+    "concept_count": 6
+  },
+  {
+    "file": "68.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:29:39",
+    "notes": "cardiac clinical record retained; child Augmentin facts curated with family assertions; hypothetical adverse effects excluded",
+    "concept_count": 20
+  },
+  {
+    "file": "69.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:29:39",
+    "notes": "psychiatric trauma record retained; corrupted unrelated urticaria question excluded",
+    "concept_count": 14
+  },
+  {
+    "file": "70.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:29:39",
+    "notes": "heart-failure clinical record retained; rabies fragment excluded and symptom boundaries consolidated",
+    "concept_count": 29
+  },
+  {
+    "file": "71.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:31:02",
+    "notes": "trauma clinical record retained; ungrounded rash differential response excluded",
+    "concept_count": 6
+  },
+  {
+    "file": "72.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:31:02",
+    "notes": "leading urticaria treatment fragment excluded; psychiatric record retained with history assertions repaired",
+    "concept_count": 18
+  },
+  {
+    "file": "73.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:31:02",
+    "notes": "GI clinical record retained; inserted amyloidosis education excluded",
+    "concept_count": 27
+  },
+  {
+    "file": "74.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:31:02",
+    "notes": "GI clinical record retained; direct recurrent tinea cruris diagnosis coded",
+    "concept_count": 28
+  },
+  {
+    "file": "75.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:31:02",
+    "notes": "rectal tumor assessment retained; unrelated tinea education excluded",
+    "concept_count": 4
+  },
+  {
+    "file": "76.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:31:02",
+    "notes": "no grounded medical entity remains after excluding unlinked urticaria answer",
+    "concept_count": 0
+  },
+  {
+    "file": "77.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:31:02",
+    "notes": "knee and cardiac clinical records retained; imaging names and merged diagnoses repaired",
+    "concept_count": 26
+  },
+  {
+    "file": "78.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:31:02",
+    "notes": "direct epistaxis facts and postoperative wound record retained; generic causation and advice excluded",
+    "concept_count": 12
+  },
+  {
+    "file": "79.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:31:02",
+    "notes": "direct amyloidosis diagnosis and inserted abdominal symptom retained; education excluded",
+    "concept_count": 2
+  },
+  {
+    "file": "80.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:31:02",
+    "notes": "grandfather gout and tophi curated with family assertions; liver clinical record retained; generic complications excluded",
+    "concept_count": 14
+  },
+  {
+    "file": "81.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:33:36",
+    "notes": "direct thrombophilia diagnosis and miscarriage history retained; hypothetical pregnancy complications and medications excluded; inserted procedure retained",
+    "concept_count": 7
+  },
+  {
+    "file": "82.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:33:36",
+    "notes": "biliary clinical record retained; amyloidosis advice fragment excluded and medication history repaired",
+    "concept_count": 24
+  },
+  {
+    "file": "83.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:33:36",
+    "notes": "weight-cycling history retained; unlinked urticaria answer excluded",
+    "concept_count": 2
+  },
+  {
+    "file": "84.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:33:36",
+    "notes": "only grounded preadmission opioid medication retained; unlinked tinea answer excluded",
+    "concept_count": 1
+  },
+  {
+    "file": "85.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:33:36",
+    "notes": "complete diabetic-foot clinical record retained; stray lip-care advice absent and positive DVT duplicate removed",
+    "concept_count": 41
+  },
+  {
+    "file": "86.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:33:36",
+    "notes": "direct respiratory symptom list retained; unrelated gastritis article excluded",
+    "concept_count": 5
+  },
+  {
+    "file": "87.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:33:36",
+    "notes": "angina and weight clinical records retained; wrapped tests rebuilt and unstable-angina negation error repaired",
+    "concept_count": 37
+  },
+  {
+    "file": "88.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:33:36",
+    "notes": "hepatobiliary clinical record retained; infant advice excluded while appended stent fact preserved",
+    "concept_count": 10
+  },
+  {
+    "file": "89.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:33:36",
+    "notes": "complete stress-test clinical record retained",
+    "concept_count": 41
+  },
+  {
+    "file": "90.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:33:36",
+    "notes": "complete respiratory infection record retained; greeting false positive removed and constipation type repaired",
+    "concept_count": 46
+  },
+  {
+    "file": "91.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:35:17",
+    "notes": "complete respiratory record retained; kidney-stone advice excluded while appended metoprolol response preserved",
+    "concept_count": 27
+  },
+  {
+    "file": "92.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:35:17",
+    "notes": "sepsis and osteomyelitis record retained; inserted acne education excluded",
+    "concept_count": 39
+  },
+  {
+    "file": "93.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:35:17",
+    "notes": "direct episodic BP facts and CT finding retained; generic hypertension advice excluded",
+    "concept_count": 22
+  },
+  {
+    "file": "94.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:35:17",
+    "notes": "only grounded echocardiographic tamponade finding retained; gastritis article excluded",
+    "concept_count": 2
+  },
+  {
+    "file": "95.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:35:17",
+    "notes": "grandfather gout and tophi curated with family assertions; respiratory medication history retained; generic complications excluded",
+    "concept_count": 13
+  },
+  {
+    "file": "96.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:35:17",
+    "notes": "renal-artery CT findings retained and coded; unlinked cosmetic-lip advice excluded",
+    "concept_count": 4
+  },
+  {
+    "file": "97.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:35:17",
+    "notes": "renal clinical record retained; direct hemorrhoid assessment and dialysis treatment retained",
+    "concept_count": 25
+  },
+  {
+    "file": "98.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:35:17",
+    "notes": "direct skin symptoms and psychiatric record retained; current skin assertions repaired",
+    "concept_count": 24
+  },
+  {
+    "file": "99.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:35:17",
+    "notes": "complete mixed critical-care record retained; irregular-rhythm negation and merged diagnoses repaired",
+    "concept_count": 44
+  },
+  {
+    "file": "100.txt",
+    "status": "reviewed",
+    "reviewed_at": "2026-07-22T15:35:17",
+    "notes": "pregnancy risk-test result, actual bleeding symptoms, aspirin, and clinical hematochezia retained; risk was not promoted to diagnosis",
+    "concept_count": 7
+  }
+]

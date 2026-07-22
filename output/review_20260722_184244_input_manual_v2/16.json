@@ -1,0 +1,268 @@
+[
+  {
+    "text": "bị thương nhẹ ở tay",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      73,
+      95
+    ]
+  },
+  {
+    "text": "bị chảy máu",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      102,
+      116
+    ]
+  },
+  {
+    "text": "dính nước dãi của chó con vào tay",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      209,
+      242
+    ]
+  },
+  {
+    "text": "bệnh dại",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      327,
+      335
+    ],
+    "candidates": [
+      "A82.9"
+    ]
+  },
+  {
+    "text": "Bệnh dại",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      549,
+      557
+    ],
+    "candidates": [
+      "A82.9"
+    ]
+  },
+  {
+    "text": "vết cắn",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      580,
+      587
+    ]
+  },
+  {
+    "text": "bệnh dại",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      612,
+      620
+    ],
+    "candidates": [
+      "A82.9"
+    ]
+  },
+  {
+    "text": "Bệnh dại",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      662,
+      670
+    ],
+    "candidates": [
+      "A82.9"
+    ]
+  },
+  {
+    "text": "bệnh dại",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      746,
+      754
+    ],
+    "candidates": [
+      "A82.9"
+    ]
+  },
+  {
+    "text": "vết thương",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      776,
+      786
+    ]
+  },
+  {
+    "text": "trầy xước",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      805,
+      814
+    ]
+  },
+  {
+    "text": "Bệnh dại",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      830,
+      838
+    ],
+    "candidates": [
+      "A82.9"
+    ]
+  },
+  {
+    "text": "Bệnh dại",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      853,
+      861
+    ],
+    "candidates": [
+      "A82.9"
+    ]
+  },
+  {
+    "text": "Bệnh dại",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      1111,
+      1119
+    ],
+    "candidates": [
+      "A82.9"
+    ]
+  },
+  {
+    "text": "Bệnh dại",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      1344,
+      1352
+    ],
+    "candidates": [
+      "A82.9"
+    ]
+  },
+  {
+    "text": "Bệnh dại",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      1381,
+      1389
+    ],
+    "candidates": [
+      "A82.9"
+    ]
+  },
+  {
+    "text": "bệnh dại",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      1450,
+      1458
+    ],
+    "candidates": [
+      "A82.9"
+    ]
+  },
+  {
+    "text": "Bệnh dại",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      1484,
+      1492
+    ],
+    "candidates": [
+      "A82.9"
+    ]
+  },
+  {
+    "text": "bệnh dại",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      2009,
+      2017
+    ],
+    "candidates": [
+      "A82.9"
+    ]
+  },
+  {
+    "text": "bumetanide 2mg iv",
+    "type": "THUỐC",
+    "assertions": [],
+    "position": [
+      2178,
+      2195
+    ],
+    "candidates": []
+  },
+  {
+    "text": "vancomycin 1 gram",
+    "type": "THUỐC",
+    "assertions": [],
+    "position": [
+      2211,
+      2228
+    ],
+    "candidates": []
+  },
+  {
+    "text": "levofloxacin 750mg iv",
+    "type": "THUỐC",
+    "assertions": [],
+    "position": [
+      2244,
+      2265
+    ],
+    "candidates": [
+      "82122"
+    ]
+  },
+  {
+    "text": "vết thương ở đầu và cổ",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      2348,
+      2370
+    ]
+  },
+  {
+    "text": "vết thương ở các khu vực đầu mút thần kinh như ngón tay",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      2387,
+      2442
+    ]
+  }
+]

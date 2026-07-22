@@ -1,0 +1,116 @@
+[
+  {
+    "text": "Rối loạn chuyển hóa tinh bột (amyloidosis)",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      29,
+      71
+    ],
+    "candidates": [
+      "E85.9"
+    ]
+  },
+  {
+    "text": "bệnh amyloidosis",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      337,
+      353
+    ],
+    "candidates": [
+      "E85.9"
+    ]
+  },
+  {
+    "text": "lắng đọng của protein amyloid",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      770,
+      799
+    ]
+  },
+  {
+    "text": "bệnh thoái hóa tinh bột",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      806,
+      829
+    ],
+    "candidates": [
+      "E85.9"
+    ]
+  },
+  {
+    "text": "bệnh ung thư máu",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      1089,
+      1105
+    ],
+    "candidates": [
+      "C96.9"
+    ]
+  },
+  {
+    "text": "đa u tủy",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      1110,
+      1118
+    ],
+    "candidates": [
+      "C90.0"
+    ]
+  },
+  {
+    "text": "amyloidosis",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      1134,
+      1145
+    ],
+    "candidates": [
+      "E85.9"
+    ]
+  },
+  {
+    "text": "Bệnh amyloidosis chuỗi nhẹ",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      1190,
+      1216
+    ],
+    "candidates": [
+      "E85.8"
+    ]
+  },
+  {
+    "text": "Bệnh amyloidosis tự miễn dịch",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      1226,
+      1255
+    ],
+    "candidates": [
+      "E85.3"
+    ]
+  },
+  {
+    "text": "đau bụng/khó chịu vùng bụng tăng dần",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1301,
+      1337
+    ]
+  }
+]

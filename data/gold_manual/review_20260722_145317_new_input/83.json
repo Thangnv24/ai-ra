@@ -1,0 +1,24 @@
+[
+  {
+    "text": "giảm cân",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      24,
+      32
+    ]
+  },
+  {
+    "text": "tăng cân",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      36,
+      44
+    ]
+  }
+]

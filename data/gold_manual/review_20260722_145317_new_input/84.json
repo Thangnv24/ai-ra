@@ -1,0 +1,14 @@
+[
+  {
+    "text": "thuốc giảm đau opioid",
+    "type": "THUỐC",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      55,
+      76
+    ],
+    "candidates": []
+  }
+]

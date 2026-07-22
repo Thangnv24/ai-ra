@@ -20,6 +20,7 @@ from core.schema import validate_output
 from extraction.context import ContextDetector
 from extraction.ner import MedicalNER
 from knowledge.candidates import load_slim_candidate_index
+from knowledge.candidate_policy import CandidateEmissionPolicy, load_candidate_emission_policy
 from knowledge.ontology import OntologyIndex
 from knowledge.retrieval import CandidateRetriever
 from scripts.gold_workflow import compare_file, mean
@@ -140,11 +141,16 @@ def evaluate_layers(
     ner = MedicalNER(lexicon_paths)
     context = ContextDetector()
     retriever: CandidateRetriever | None = None
+    candidate_policy = CandidateEmissionPolicy.empty()
     candidate_load_seconds = 0.0
     if with_candidates:
         candidate_started = time.perf_counter()
-        slim_index = load_slim_candidate_index((candidate_dir or ROOT / "data" / "candidates").resolve())
+        resolved_candidate_dir = (candidate_dir or ROOT / "data" / "candidates").resolve()
+        slim_index = load_slim_candidate_index(resolved_candidate_dir)
         retriever = CandidateRetriever(OntologyIndex(()), slim_index)
+        candidate_policy = load_candidate_emission_policy(
+            resolved_candidate_dir / "candidate_emission_policy.json"
+        )
         candidate_load_seconds = time.perf_counter() - candidate_started
 
     exact_spans = SpanCounts()
@@ -212,6 +218,22 @@ def evaluate_layers(
                     source_text=source_text,
                     start=start,
                     end=end,
+                )
+                predicted_candidates = candidate_policy.apply(
+                    str(item.get("text") or ""),
+                    concept_type,
+                    predicted_candidates,
+                    source_text=source_text,
+                    start=start,
+                    end=end,
+                    profile_candidates=slim_index.candidates_for_profile(
+                        str(item.get("text") or ""),
+                        concept_type,
+                        source_text,
+                        start,
+                        end,
+                    ),
+                    assertions=tuple(str(value) for value in item.get("assertions") or () if value),
                 )
                 expected_candidates = item.get("candidates") or []
                 candidates.add(expected_candidates, predicted_candidates, weighted=True)

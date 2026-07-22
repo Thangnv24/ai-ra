@@ -1,0 +1,150 @@
+[
+  {
+    "text": "Siêu âm tim",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      16,
+      27
+    ]
+  },
+  {
+    "text": "chèn ép tim",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      29,
+      40
+    ],
+    "candidates": []
+  },
+  {
+    "text": "Viêm hang vị sung huyết",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      43,
+      66
+    ],
+    "candidates": [
+      "K29.7"
+    ]
+  },
+  {
+    "text": "đau bụng",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      184,
+      192
+    ]
+  },
+  {
+    "text": "ợ hơi",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      210,
+      215
+    ]
+  },
+  {
+    "text": "ợ chua",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      217,
+      223
+    ]
+  },
+  {
+    "text": "buồn nôn",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      244,
+      252
+    ]
+  },
+  {
+    "text": "nôn",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      258,
+      261
+    ]
+  },
+  {
+    "text": "bệnh dạ dày",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      273,
+      284
+    ],
+    "candidates": []
+  },
+  {
+    "text": "nội soi",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      352,
+      359
+    ]
+  },
+  {
+    "text": "viêm sung huyết hang vị dạ dày",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      433,
+      463
+    ],
+    "candidates": [
+      "K29.7"
+    ]
+  },
+  {
+    "text": "nội soi dạ dày",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      519,
+      533
+    ]
+  },
+  {
+    "text": "viêm sung huyết hang vị dạ dày",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      913,
+      943
+    ],
+    "candidates": [
+      "K29.7"
+    ]
+  },
+  {
+    "text": "nghệ",
+    "type": "THUỐC",
+    "assertions": [],
+    "position": [
+      987,
+      991
+    ],
+    "candidates": []
+  },
+  {
+    "text": "mật ong",
+    "type": "THUỐC",
+    "assertions": [],
+    "position": [
+      993,
+      1000
+    ],
+    "candidates": []
+  }
+]

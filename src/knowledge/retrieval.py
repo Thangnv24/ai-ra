@@ -29,9 +29,16 @@ class CandidateRetriever:
     ) -> tuple[str, ...]:
         if concept_type not in CODED_TYPES:
             return ()
-        if not _candidate_eligible(concept_type, source_text, start, end):
-            return ()
-        return self._candidates_for_query(text, concept_type, limit)
+        selected = self._candidates_for_query(text, concept_type, limit)
+        if _candidate_eligible(concept_type, source_text, start, end):
+            return selected
+        return self.slim_index.candidates_for_profile(
+            text,
+            concept_type,
+            source_text,
+            start,
+            end,
+        ) or ()
 
     @lru_cache(maxsize=8192)
     def _candidates_for_query(self, text: str, concept_type: str, limit: int) -> tuple[str, ...]:
@@ -131,6 +138,10 @@ def _select_diagnosis_codes(text: str, hits: list[Any], limit: int) -> tuple[str
     if not hits:
         return ()
 
+    curated = [hit for hit in hits if hit.source == "curated_exact"]
+    if curated:
+        return (curated[0].record.code,)
+
     top = hits[0]
     threshold = 0.78 if top.source == "diagnosis_lexical" else 0.82
     if top.score < threshold:
@@ -143,6 +154,9 @@ def _select_diagnosis_codes(text: str, hits: list[Any], limit: int) -> tuple[str
 def _select_drug_code(text: str, hits: list[Any]) -> tuple[str, ...]:
     if not hits:
         return ()
+    curated = [hit for hit in hits if hit.source == "curated_exact"]
+    if curated:
+        return (curated[0].record.code,)
     has_strength = medication_has_strength(text)
     eligible = []
     for hit in hits:

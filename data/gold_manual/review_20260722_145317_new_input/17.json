@@ -1,0 +1,86 @@
+[
+  {
+    "text": "chảy máu chân răng",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      74,
+      92
+    ]
+  },
+  {
+    "text": "hơi thở mùi khó chịu",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      105,
+      125
+    ]
+  },
+  {
+    "text": "nhiều mảng bám quanh răng",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      141,
+      166
+    ]
+  },
+  {
+    "text": "bệnh mạch máu ngoại biên",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      1850,
+      1874
+    ],
+    "candidates": []
+  },
+  {
+    "text": "bệnh phổi tắc nghẽn mạn tính",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      1881,
+      1909
+    ],
+    "candidates": []
+  },
+  {
+    "text": "Ngưng thở khi ngủ do tắc nghẽn",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      1916,
+      1946
+    ],
+    "candidates": []
+  },
+  {
+    "text": "Ung thư biểu mô tế bào vảy xâm nhập của dương vậtbiệt hóa kém",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      1969,
+      2030
+    ],
+    "candidates": []
+  },
+  {
+    "text": "bờ diện cắt dương tính",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      2056,
+      2078
+    ]
+  }
+]

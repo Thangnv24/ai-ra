@@ -1,0 +1,114 @@
+[
+  {
+    "text": "chảy máu cam",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      52,
+      64
+    ]
+  },
+  {
+    "text": "chảy ở mũi bên phải",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      88,
+      107
+    ]
+  },
+  {
+    "text": "hơi choáng",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      121,
+      131
+    ]
+  },
+  {
+    "text": "ban đỏ",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      488,
+      494
+    ]
+  },
+  {
+    "text": "chóng mặt",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      513,
+      522
+    ]
+  },
+  {
+    "text": "ban đỏ xuất hiện nhiểu ở vị trí phẫu thuật",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      659,
+      701
+    ]
+  },
+  {
+    "text": "đau khi sờ nắn vùng mổ",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      708,
+      730
+    ]
+  },
+  {
+    "text": "chóng mặt",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      737,
+      746
+    ]
+  },
+  {
+    "text": "sốt",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      759,
+      762
+    ]
+  },
+  {
+    "text": "ban đỏ ở vị trí phẫu thuật",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      875,
+      901
+    ]
+  },
+  {
+    "text": "đau ấn vùng mổ",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      908,
+      922
+    ]
+  },
+  {
+    "text": "sốt",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      935,
+      938
+    ]
+  }
+]

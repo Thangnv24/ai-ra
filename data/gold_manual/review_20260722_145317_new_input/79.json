@@ -1,0 +1,23 @@
+[
+  {
+    "text": "Rối loạn chuyển hóa tinh bột (amyloidosis)",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      29,
+      71
+    ],
+    "candidates": [
+      "E85.9"
+    ]
+  },
+  {
+    "text": "đau bụng/khó chịu vùng bụng tăng dần",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1301,
+      1337
+    ]
+  }
+]

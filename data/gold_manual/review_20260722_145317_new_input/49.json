@@ -1,0 +1,67 @@
+[
+  {
+    "text": "bệnh rụng tóc từng mảng",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      30,
+      53
+    ],
+    "candidates": [
+      "L63.9"
+    ]
+  },
+  {
+    "text": "Ung thư vú di căn",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      195,
+      212
+    ],
+    "candidates": []
+  },
+  {
+    "text": "tràn dịch màng phổi trái tái phát",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      214,
+      247
+    ],
+    "candidates": []
+  },
+  {
+    "text": "khó thở",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      286,
+      293
+    ]
+  },
+  {
+    "text": "tràn dịch màng ngoài tim mức độ trung bình",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      326,
+      368
+    ],
+    "candidates": []
+  },
+  {
+    "text": "ung thư di căn theo đường bạch huyết ở hai phổi",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      397,
+      444
+    ],
+    "candidates": []
+  }
+]

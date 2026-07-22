@@ -1,0 +1,32 @@
+[
+  {
+    "text": "xuất huyết nội sọ không do chấn thương, không đặc hiệu",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [],
+    "assertions": [],
+    "position": [
+      37,
+      91
+    ]
+  },
+  {
+    "text": "Truyền dịch yếu tố IX đậm đặc",
+    "type": "THUỐC",
+    "candidates": [],
+    "assertions": [],
+    "position": [
+      144,
+      173
+    ]
+  },
+  {
+    "text": "xuất huyết nội sọ không do chấn thương, không đặc hiệu",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [],
+    "assertions": [],
+    "position": [
+      205,
+      259
+    ]
+  }
+]

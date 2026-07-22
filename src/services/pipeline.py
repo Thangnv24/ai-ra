@@ -28,6 +28,7 @@ from extraction.llm_entities import LLMEntityExtractor
 from extraction.ner import MedicalNER, SpanCandidate, resolve_span_types
 from integrations.openai_client import ApiLLMClient
 from knowledge.candidates import load_slim_candidate_index
+from knowledge.candidate_policy import load_candidate_emission_policy
 from knowledge.ontology import OntologyIndex, load_ontology_index
 from knowledge.reasoning import infer_relations
 from knowledge.retrieval import CandidateRetriever
@@ -104,6 +105,9 @@ class MedicalKGPipeline:
         self.ner = MedicalNER((paths.data_external / "vietnamese_clinical_lexicon.csv",))
         self.context = ContextDetector()
         self.retriever = CandidateRetriever(self.index, self.slim_candidate_index)
+        self.candidate_policy = load_candidate_emission_policy(
+            paths.root / "data" / "candidates" / "candidate_emission_policy.json"
+        )
         self.llm = ApiLLMClient(self.settings)
         self.llm_entity_extractor = LLMEntityExtractor(self.llm)
 
@@ -200,6 +204,22 @@ class MedicalKGPipeline:
                 source_text=text,
                 start=span.start,
                 end=span.end,
+            )
+            candidates = self.candidate_policy.apply(
+                span.text,
+                span.type,
+                candidates,
+                source_text=text,
+                start=span.start,
+                end=span.end,
+                profile_candidates=self.slim_candidate_index.candidates_for_profile(
+                    span.text,
+                    span.type,
+                    text,
+                    span.start,
+                    span.end,
+                ),
+                assertions=assertions,
             )
             concepts.append(
                 Concept(

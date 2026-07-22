@@ -1,0 +1,262 @@
+[
+  {
+    "text": "bệnh động mạch vành",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      34,
+      53
+    ],
+    "candidates": []
+  },
+  {
+    "text": "bệnh lý thần kinh ngoại biên",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      55,
+      83
+    ],
+    "candidates": []
+  },
+  {
+    "text": "mệt mỏi",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      160,
+      167
+    ]
+  },
+  {
+    "text": "khó thở tăng",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      199,
+      211
+    ]
+  },
+  {
+    "text": "mệt mỏi",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      248,
+      255
+    ]
+  },
+  {
+    "text": "Khó thở tăng khi vận động gắng sức",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      258,
+      292
+    ]
+  },
+  {
+    "text": "Đi lại khó khăn",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      295,
+      310
+    ]
+  },
+  {
+    "text": "cần dùng gậy hỗ trợ đi lại",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      312,
+      338
+    ]
+  },
+  {
+    "text": "Đau hai bàn chân",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      341,
+      357
+    ]
+  },
+  {
+    "text": "bệnh lý thần kinh ngoại biên",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      361,
+      389
+    ],
+    "candidates": []
+  },
+  {
+    "text": "Đo sức bền cơ tim bằng đồng vị phóng xạ",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      434,
+      473
+    ]
+  },
+  {
+    "text": "dị tật cố định vùng trước vách và vách dưới",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      485,
+      528
+    ]
+  },
+  {
+    "text": "giảm chức năng tâm thu thất trái nghiêm trọng",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      534,
+      579
+    ],
+    "candidates": []
+  },
+  {
+    "text": "rối loạn chức năng thất trái",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      589,
+      617
+    ],
+    "candidates": []
+  },
+  {
+    "text": "Chụp động mạch vành",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      621,
+      640
+    ]
+  },
+  {
+    "text": "bệnh ba thân động mạch vành nghiêm trọng",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      650,
+      690
+    ],
+    "candidates": [
+      "I25.1"
+    ]
+  },
+  {
+    "text": "Chụp động mạch vành",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      721,
+      740
+    ]
+  },
+  {
+    "text": "Augmentin (amoxicillin/acid clavulanic)",
+    "type": "THUỐC",
+    "assertions": [
+      "isFamily",
+      "isHistorical"
+    ],
+    "position": [
+      799,
+      838
+    ],
+    "candidates": [
+      "151392"
+    ]
+  },
+  {
+    "text": "có đỡ bệnh",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isFamily",
+      "isHistorical"
+    ],
+    "position": [
+      1008,
+      1018
+    ]
+  },
+  {
+    "text": "bệnh tái phát",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isFamily"
+    ],
+    "position": [
+      1085,
+      1098
+    ]
+  },
+  {
+    "text": "bệnh tái lại",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isFamily"
+    ],
+    "position": [
+      1146,
+      1158
+    ]
+  },
+  {
+    "text": "Augmentin",
+    "type": "THUỐC",
+    "assertions": [
+      "isFamily"
+    ],
+    "position": [
+      1360,
+      1369
+    ],
+    "candidates": [
+      "151392"
+    ]
+  },
+  {
+    "text": "tiêu chảy",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1434,
+      1443
+    ]
+  },
+  {
+    "text": "men tiêu hóa",
+    "type": "THUỐC",
+    "assertions": [
+      "isFamily"
+    ],
+    "position": [
+      1498,
+      1510
+    ],
+    "candidates": []
+  },
+  {
+    "text": "nhiễm trùng",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1649,
+      1660
+    ]
+  }
+]

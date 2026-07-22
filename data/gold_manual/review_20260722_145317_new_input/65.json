@@ -1,0 +1,53 @@
+[
+  {
+    "text": "bệnh rụng tóc từng mảng",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      30,
+      53
+    ],
+    "candidates": [
+      "L63.9"
+    ]
+  },
+  {
+    "text": "Nghiệm pháp gắng sức",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      962,
+      982
+    ]
+  },
+  {
+    "text": "dương tính",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      983,
+      993
+    ]
+  },
+  {
+    "text": "thiếu máu cơ tim cục bộ",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      998,
+      1021
+    ],
+    "candidates": [
+      "I25.9"
+    ]
+  },
+  {
+    "text": "ST chênh xuống",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1033,
+      1047
+    ]
+  }
+]

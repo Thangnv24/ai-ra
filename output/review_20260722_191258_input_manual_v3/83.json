@@ -1,0 +1,71 @@
+[
+  {
+    "text": "giảm cân",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      24,
+      32
+    ]
+  },
+  {
+    "text": "tăng cân",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      36,
+      44
+    ]
+  },
+  {
+    "text": "MÀY đay VÔ CĂN",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      170,
+      184
+    ],
+    "candidates": [
+      "L50.1"
+    ]
+  },
+  {
+    "text": "MÀY đay MẠN",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      268,
+      279
+    ],
+    "candidates": [
+      "L50.8"
+    ]
+  },
+  {
+    "text": "đay vô căn",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      751,
+      761
+    ],
+    "candidates": [
+      "L50.1"
+    ]
+  },
+  {
+    "text": "buồn ngủ",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      1183,
+      1191
+    ]
+  }
+]

@@ -1,0 +1,92 @@
+{"file": "3.json", "text": "hạ huyết áp, không đặc hiệu", "type": "CHẨN_ĐOÁN", "before": [], "after": ["I95.9"], "official_mapped_occurrences": 1, "official_total_occurrences": 1}
+{"file": "3.json", "text": "hạ huyết áp, không đặc hiệu", "type": "CHẨN_ĐOÁN", "before": [], "after": ["I95.9"], "official_mapped_occurrences": 1, "official_total_occurrences": 1}
+{"file": "6.json", "text": "Bệnh tim mạch do xơ vữa động mạch", "type": "CHẨN_ĐOÁN", "before": [], "after": ["I25.1"], "official_mapped_occurrences": 13, "official_total_occurrences": 13}
+{"file": "6.json", "text": "xuất huyết dưới nhện", "type": "CHẨN_ĐOÁN", "before": [], "after": ["I60.9"], "official_mapped_occurrences": 1, "official_total_occurrences": 1}
+{"file": "10.json", "text": "doxycycline", "type": "THUỐC", "before": [], "after": ["3640"], "official_mapped_occurrences": 1, "official_total_occurrences": 1}
+{"file": "10.json", "text": "ngoại tâm thu thất", "type": "CHẨN_ĐOÁN", "before": [], "after": ["I49.3"], "official_mapped_occurrences": 1, "official_total_occurrences": 1}
+{"file": "10.json", "text": "Viêm gan cấp tính do virus B thể thông thường điển hình mức độ nặng giai đoạn toàn phát", "type": "CHẨN_ĐOÁN", "before": [], "after": ["B18.1"], "official_mapped_occurrences": 1, "official_total_occurrences": 1}
+{"file": "10.json", "text": "ngoại tâm thu thất", "type": "CHẨN_ĐOÁN", "before": [], "after": ["I49.3"], "official_mapped_occurrences": 1, "official_total_occurrences": 1}
+{"file": "11.json", "text": "Bệnh tim mạch do xơ vữa động mạch", "type": "CHẨN_ĐOÁN", "before": [], "after": ["I25.1"], "official_mapped_occurrences": 13, "official_total_occurrences": 13}
+{"file": "11.json", "text": "xuất huyết dưới nhện", "type": "CHẨN_ĐOÁN", "before": [], "after": ["I60.9"], "official_mapped_occurrences": 1, "official_total_occurrences": 1}
+{"file": "12.json", "text": "doxycycline", "type": "THUỐC", "before": [], "after": ["3640"], "official_mapped_occurrences": 1, "official_total_occurrences": 1}
+{"file": "12.json", "text": "doxycycline", "type": "THUỐC", "before": [], "after": ["3640"], "official_mapped_occurrences": 1, "official_total_occurrences": 1}
+{"file": "14.json", "text": "tăng lipid máu, không đặc hiệu", "type": "CHẨN_ĐOÁN", "before": [], "after": ["E78.5"], "official_mapped_occurrences": 13, "official_total_occurrences": 13}
+{"file": "14.json", "text": "hẹp ống sống", "type": "CHẨN_ĐOÁN", "before": [], "after": ["M48.0"], "official_mapped_occurrences": 1, "official_total_occurrences": 1}
+{"file": "14.json", "text": "tăng sản tuyến tiền liệt", "type": "CHẨN_ĐOÁN", "before": [], "after": ["N40"], "official_mapped_occurrences": 1, "official_total_occurrences": 1}
+{"file": "15.json", "text": "doxycycline", "type": "THUỐC", "before": [], "after": ["3640"], "official_mapped_occurrences": 1, "official_total_occurrences": 1}
+{"file": "15.json", "text": "doxycycline", "type": "THUỐC", "before": [], "after": ["3640"], "official_mapped_occurrences": 1, "official_total_occurrences": 1}
+{"file": "15.json", "text": "doxycycline", "type": "THUỐC", "before": [], "after": ["3640"], "official_mapped_occurrences": 1, "official_total_occurrences": 1}
+{"file": "16.json", "text": "levofloxacin 750mg iv", "type": "THUỐC", "before": [], "after": ["82122"], "official_mapped_occurrences": 1, "official_total_occurrences": 1}
+{"file": "19.json", "text": "tylenol", "type": "THUỐC", "before": [], "after": ["202433"], "official_mapped_occurrences": 1, "official_total_occurrences": 1}
+{"file": "19.json", "text": "tylenol", "type": "THUỐC", "before": [], "after": ["202433"], "official_mapped_occurrences": 1, "official_total_occurrences": 1}
+{"file": "26.json", "text": "u ác của tuyến tiền liệt", "type": "CHẨN_ĐOÁN", "before": [], "after": ["C61"], "official_mapped_occurrences": 4, "official_total_occurrences": 4}
+{"file": "26.json", "text": "u ác của tuyến tiền liệt", "type": "CHẨN_ĐOÁN", "before": [], "after": ["C61"], "official_mapped_occurrences": 4, "official_total_occurrences": 4}
+{"file": "29.json", "text": "bệnh thận mạn, không đặc hiệu", "type": "CHẨN_ĐOÁN", "before": [], "after": ["N18.9"], "official_mapped_occurrences": 1, "official_total_occurrences": 1}
+{"file": "32.json", "text": "tăng lipid máu, không đặc hiệu", "type": "CHẨN_ĐOÁN", "before": [], "after": ["E78.5"], "official_mapped_occurrences": 13, "official_total_occurrences": 13}
+{"file": "32.json", "text": "hẹp ống sống", "type": "CHẨN_ĐOÁN", "before": [], "after": ["M48.0"], "official_mapped_occurrences": 1, "official_total_occurrences": 1}
+{"file": "32.json", "text": "tăng sản tuyến tiền liệt", "type": "CHẨN_ĐOÁN", "before": [], "after": ["N40"], "official_mapped_occurrences": 1, "official_total_occurrences": 1}
+{"file": "33.json", "text": "suy tim, không đặc hiệu", "type": "CHẨN_ĐOÁN", "before": [], "after": ["I50.9"], "official_mapped_occurrences": 4, "official_total_occurrences": 4}
+{"file": "33.json", "text": "metoprolol", "type": "THUỐC", "before": [], "after": ["6918"], "official_mapped_occurrences": 1, "official_total_occurrences": 1}
+{"file": "34.json", "text": "nhiễm khuẩn đường tiết niệu, vị trí không xác định", "type": "CHẨN_ĐOÁN", "before": [], "after": ["N39.0"], "official_mapped_occurrences": 3, "official_total_occurrences": 3}
+{"file": "34.json", "text": "nhiễm khuẩn đường tiết niệu, vị trí không xác định", "type": "CHẨN_ĐOÁN", "before": [], "after": ["N39.0"], "official_mapped_occurrences": 3, "official_total_occurrences": 3}
+{"file": "36.json", "text": "Hội chứng thận hư", "type": "CHẨN_ĐOÁN", "before": ["N04.9"], "after": ["N04.8"], "official_mapped_occurrences": 1, "official_total_occurrences": 1}
+{"file": "36.json", "text": "viêm họng cấp", "type": "CHẨN_ĐOÁN", "before": ["J02.8"], "after": ["J02.9"], "official_mapped_occurrences": 1, "official_total_occurrences": 1}
+{"file": "36.json", "text": "Viêm cầu thận mạn - Hội chứng thận hư", "type": "CHẨN_ĐOÁN", "before": [], "after": ["N04.2"], "official_mapped_occurrences": 1, "official_total_occurrences": 1}
+{"file": "37.json", "text": "doxycycline", "type": "THUỐC", "before": [], "after": ["3640"], "official_mapped_occurrences": 1, "official_total_occurrences": 1}
+{"file": "38.json", "text": "tăng lipid máu, không đặc hiệu", "type": "CHẨN_ĐOÁN", "before": [], "after": ["E78.5"], "official_mapped_occurrences": 13, "official_total_occurrences": 13}
+{"file": "38.json", "text": "hẹp ống sống", "type": "CHẨN_ĐOÁN", "before": [], "after": ["M48.0"], "official_mapped_occurrences": 1, "official_total_occurrences": 1}
+{"file": "38.json", "text": "tăng sản tuyến tiền liệt", "type": "CHẨN_ĐOÁN", "before": [], "after": ["N40"], "official_mapped_occurrences": 1, "official_total_occurrences": 1}
+{"file": "39.json", "text": "bệnh phổi tắc nghẽn mạn tính, không xác định", "type": "CHẨN_ĐOÁN", "before": [], "after": ["J44.9"], "official_mapped_occurrences": 4, "official_total_occurrences": 4}
+{"file": "39.json", "text": "hạ huyết áp, không đặc hiệu", "type": "CHẨN_ĐOÁN", "before": [], "after": ["I95.9"], "official_mapped_occurrences": 1, "official_total_occurrences": 1}
+{"file": "39.json", "text": "tràn dịch màng phổi", "type": "CHẨN_ĐOÁN", "before": [], "after": ["J90"], "official_mapped_occurrences": 1, "official_total_occurrences": 1}
+{"file": "40.json", "text": "Van động mạch chủ cơ học", "type": "CHẨN_ĐOÁN", "before": ["Z95.2"], "after": ["Z95.4"], "official_mapped_occurrences": 2, "official_total_occurrences": 2}
+{"file": "40.json", "text": "Van động mạch chủ cơ \nhọc", "type": "CHẨN_ĐOÁN", "before": ["Z95.2"], "after": ["Z95.4"], "official_mapped_occurrences": 2, "official_total_occurrences": 2}
+{"file": "42.json", "text": "tylenol", "type": "THUỐC", "before": [], "after": ["202433"], "official_mapped_occurrences": 1, "official_total_occurrences": 1}
+{"file": "42.json", "text": "azithromycin", "type": "THUỐC", "before": [], "after": ["18631"], "official_mapped_occurrences": 1, "official_total_occurrences": 1}
+{"file": "42.json", "text": "tylenol", "type": "THUỐC", "before": [], "after": ["202433"], "official_mapped_occurrences": 1, "official_total_occurrences": 1}
+{"file": "43.json", "text": "tăng cholesterol máu đơn thuần", "type": "CHẨN_ĐOÁN", "before": [], "after": ["E78.0"], "official_mapped_occurrences": 1, "official_total_occurrences": 1}
+{"file": "43.json", "text": "nhiễm khuẩn đường tiết niệu, vị trí không xác định", "type": "CHẨN_ĐOÁN", "before": [], "after": ["N39.0"], "official_mapped_occurrences": 3, "official_total_occurrences": 3}
+{"file": "43.json", "text": "nhiễm khuẩn đường tiết niệu, vị trí không xác định", "type": "CHẨN_ĐOÁN", "before": [], "after": ["N39.0"], "official_mapped_occurrences": 3, "official_total_occurrences": 3}
+{"file": "46.json", "text": "phù phổi cấp", "type": "CHẨN_ĐOÁN", "before": ["J81.0"], "after": ["J81"], "official_mapped_occurrences": 1, "official_total_occurrences": 1}
+{"file": "46.json", "text": "Hở hai lá nhiều", "type": "CHẨN_ĐOÁN", "before": [], "after": ["I05.2"], "official_mapped_occurrences": 1, "official_total_occurrences": 1}
+{"file": "46.json", "text": "Phù phổi cấp", "type": "CHẨN_ĐOÁN", "before": ["J81.0"], "after": ["J81"], "official_mapped_occurrences": 1, "official_total_occurrences": 1}
+{"file": "47.json", "text": "bệnh phổi tắc nghẽn mạn tính, không xác định", "type": "CHẨN_ĐOÁN", "before": [], "after": ["J44.9"], "official_mapped_occurrences": 4, "official_total_occurrences": 4}
+{"file": "47.json", "text": "hạ huyết áp, không đặc hiệu", "type": "CHẨN_ĐOÁN", "before": [], "after": ["I95.9"], "official_mapped_occurrences": 1, "official_total_occurrences": 1}
+{"file": "47.json", "text": "tràn dịch màng phổi", "type": "CHẨN_ĐOÁN", "before": [], "after": ["J90"], "official_mapped_occurrences": 1, "official_total_occurrences": 1}
+{"file": "51.json", "text": "ngừng thở khi ngủ", "type": "CHẨN_ĐOÁN", "before": [], "after": ["G47.3"], "official_mapped_occurrences": 3, "official_total_occurrences": 5}
+{"file": "51.json", "text": "suy tim, không đặc hiệu", "type": "CHẨN_ĐOÁN", "before": [], "after": ["I50.9"], "official_mapped_occurrences": 4, "official_total_occurrences": 4}
+{"file": "54.json", "text": "tăng lipid máu, không đặc hiệu", "type": "CHẨN_ĐOÁN", "before": [], "after": ["E78.5"], "official_mapped_occurrences": 13, "official_total_occurrences": 13}
+{"file": "54.json", "text": "hẹp ống sống", "type": "CHẨN_ĐOÁN", "before": [], "after": ["M48.0"], "official_mapped_occurrences": 1, "official_total_occurrences": 1}
+{"file": "54.json", "text": "tăng sản tuyến tiền liệt", "type": "CHẨN_ĐOÁN", "before": [], "after": ["N40"], "official_mapped_occurrences": 1, "official_total_occurrences": 1}
+{"file": "55.json", "text": "Suy thận mạn giai đoạn V", "type": "CHẨN_ĐOÁN", "before": [], "after": ["N18.5"], "official_mapped_occurrences": 1, "official_total_occurrences": 1}
+{"file": "55.json", "text": "u ác của tuyến tiền liệt", "type": "CHẨN_ĐOÁN", "before": [], "after": ["C61"], "official_mapped_occurrences": 4, "official_total_occurrences": 4}
+{"file": "61.json", "text": "hạ huyết áp, không đặc hiệu", "type": "CHẨN_ĐOÁN", "before": [], "after": ["I95.9"], "official_mapped_occurrences": 1, "official_total_occurrences": 1}
+{"file": "62.json", "text": "azithromycin", "type": "THUỐC", "before": [], "after": ["18631"], "official_mapped_occurrences": 1, "official_total_occurrences": 1}
+{"file": "62.json", "text": "tylenol", "type": "THUỐC", "before": [], "after": ["202433"], "official_mapped_occurrences": 1, "official_total_occurrences": 1}
+{"file": "63.json", "text": "tăng cholesterol máu đơn thuần", "type": "CHẨN_ĐOÁN", "before": [], "after": ["E78.0"], "official_mapped_occurrences": 1, "official_total_occurrences": 1}
+{"file": "63.json", "text": "nhiễm khuẩn đường tiết niệu, vị trí không xác định", "type": "CHẨN_ĐOÁN", "before": [], "after": ["N39.0"], "official_mapped_occurrences": 3, "official_total_occurrences": 3}
+{"file": "63.json", "text": "nhiễm khuẩn đường tiết niệu, vị trí không xác định", "type": "CHẨN_ĐOÁN", "before": [], "after": ["N39.0"], "official_mapped_occurrences": 3, "official_total_occurrences": 3}
+{"file": "63.json", "text": "nhiễm khuẩn đường tiết niệu, vị trí không xác định", "type": "CHẨN_ĐOÁN", "before": [], "after": ["N39.0"], "official_mapped_occurrences": 3, "official_total_occurrences": 3}
+{"file": "64.json", "text": "tăng lipid máu, không đặc hiệu", "type": "CHẨN_ĐOÁN", "before": [], "after": ["E78.5"], "official_mapped_occurrences": 13, "official_total_occurrences": 13}
+{"file": "67.json", "text": "suy tim", "type": "CHẨN_ĐOÁN", "before": [], "after": ["I50.9"], "official_mapped_occurrences": 14, "official_total_occurrences": 16}
+{"file": "70.json", "text": "ngừng thở khi ngủ", "type": "CHẨN_ĐOÁN", "before": ["G47.33"], "after": ["G47.3"], "official_mapped_occurrences": 3, "official_total_occurrences": 5}
+{"file": "80.json", "text": "tràn dịch màng phổi", "type": "CHẨN_ĐOÁN", "before": [], "after": ["J90"], "official_mapped_occurrences": 1, "official_total_occurrences": 1}
+{"file": "85.json", "text": "tăng lipid máu, không đặc hiệu", "type": "CHẨN_ĐOÁN", "before": [], "after": ["E78.5"], "official_mapped_occurrences": 13, "official_total_occurrences": 13}
+{"file": "85.json", "text": "nhiễm khuẩn đường tiết niệu, vị trí không xác định", "type": "CHẨN_ĐOÁN", "before": [], "after": ["N39.0"], "official_mapped_occurrences": 3, "official_total_occurrences": 3}
+{"file": "90.json", "text": "ngưng thở khi ngủ", "type": "CHẨN_ĐOÁN", "before": [], "after": ["G47.3"], "official_mapped_occurrences": 3, "official_total_occurrences": 5}
+{"file": "91.json", "text": "coumadin", "type": "THUỐC", "before": [], "after": ["202421"], "official_mapped_occurrences": 2, "official_total_occurrences": 2}
+{"file": "91.json", "text": "coumadin", "type": "THUỐC", "before": [], "after": ["202421"], "official_mapped_occurrences": 2, "official_total_occurrences": 2}
+{"file": "91.json", "text": "coumadin", "type": "THUỐC", "before": [], "after": ["202421"], "official_mapped_occurrences": 2, "official_total_occurrences": 2}
+{"file": "91.json", "text": "metoprolol", "type": "THUỐC", "before": [], "after": ["6918"], "official_mapped_occurrences": 1, "official_total_occurrences": 1}
+{"file": "92.json", "text": "zosyn", "type": "THUỐC", "before": [], "after": ["74170"], "official_mapped_occurrences": 1, "official_total_occurrences": 1}
+{"file": "92.json", "text": "zosyn", "type": "THUỐC", "before": [], "after": ["74170"], "official_mapped_occurrences": 1, "official_total_occurrences": 1}
+{"file": "92.json", "text": "zosyn", "type": "THUỐC", "before": [], "after": ["74170"], "official_mapped_occurrences": 1, "official_total_occurrences": 1}
+{"file": "92.json", "text": "Vancomycin", "type": "THUỐC", "before": [], "after": ["11124"], "official_mapped_occurrences": 1, "official_total_occurrences": 1}
+{"file": "95.json", "text": "tylenol", "type": "THUỐC", "before": [], "after": ["202433"], "official_mapped_occurrences": 1, "official_total_occurrences": 1}
+{"file": "97.json", "text": "Suy thận mạn giai đoạn V", "type": "CHẨN_ĐOÁN", "before": [], "after": ["N18.5"], "official_mapped_occurrences": 1, "official_total_occurrences": 1}
+{"file": "97.json", "text": "u ác của tuyến tiền liệt", "type": "CHẨN_ĐOÁN", "before": [], "after": ["C61"], "official_mapped_occurrences": 4, "official_total_occurrences": 4}
+{"file": "97.json", "text": "u ác của tuyến tiền liệt", "type": "CHẨN_ĐOÁN", "before": [], "after": ["C61"], "official_mapped_occurrences": 4, "official_total_occurrences": 4}
+{"file": "99.json", "text": "Đợt cấp COPD", "type": "CHẨN_ĐOÁN", "before": ["J44.1"], "after": ["J44.0"], "official_mapped_occurrences": 1, "official_total_occurrences": 1}
+{"file": "99.json", "text": "Tâm phế mạn", "type": "CHẨN_ĐOÁN", "before": ["I27.81"], "after": ["I27.9"], "official_mapped_occurrences": 1, "official_total_occurrences": 1}
+{"file": "99.json", "text": "Cơn tim nhanh nhĩ", "type": "CHẨN_ĐOÁN", "before": ["I47.1"], "after": ["R00.0"], "official_mapped_occurrences": 1, "official_total_occurrences": 1}
+{"file": "99.json", "text": "Nhiễm khuẩn đường tiêu hóa", "type": "CHẨN_ĐOÁN", "before": ["A09"], "after": ["A08.5"], "official_mapped_occurrences": 1, "official_total_occurrences": 1}

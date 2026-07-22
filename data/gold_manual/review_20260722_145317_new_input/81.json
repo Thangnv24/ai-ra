@@ -1,0 +1,79 @@
+[
+  {
+    "text": "sảy thai",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      78,
+      86
+    ]
+  },
+  {
+    "text": "xét nghiệm máu",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      97,
+      114
+    ]
+  },
+  {
+    "text": "hội chứng tăng đông",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      140,
+      160
+    ],
+    "candidates": [
+      "D68.59"
+    ]
+  },
+  {
+    "text": "thrombophilia",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      208,
+      221
+    ],
+    "candidates": [
+      "D68.59"
+    ]
+  },
+  {
+    "text": "thrombophilia",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      364,
+      377
+    ],
+    "candidates": [
+      "D68.59"
+    ]
+  },
+  {
+    "text": "Thrombophilia",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      784,
+      797
+    ],
+    "candidates": [
+      "D68.59"
+    ]
+  },
+  {
+    "text": "đặt shunt dẫn lưu tĩnh mạch cửa qua da",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1478,
+      1516
+    ]
+  }
+]

@@ -104,6 +104,10 @@ _MEDICATION_SPELLING_REPLACEMENTS = (
     (re.compile(r"\brisperidon\b"), "risperidone"),
     # The Vietnamese market spelling is Forxiga; RxNorm stores Farxiga.
     (re.compile(r"\bforxiga\b"), "farxiga"),
+    (re.compile(r"\bmetronidazol\b"), "metronidazole"),
+    (re.compile(r"\bamlordipin\b"), "amlodipine"),
+    (re.compile(r"\benoxaparin\s+natri\b"), "enoxaparin sodium"),
+    (re.compile(r"\bsolu\s*-?\s*medrol\b"), "solu-medrol"),
 )
 _TAIL_TOKEN_RE = re.compile(
     rf"""
@@ -189,7 +193,7 @@ def normalize_prescription_text(text: str) -> str:
 def medication_lookup_keys(text: str) -> tuple[str, ...]:
     """Return ingredient and brand keys without losing parenthetical drug names."""
 
-    segments = [text, _strip_leading_dose_route(text)]
+    segments = [text, _strip_leading_dose_route(text), strip_drug_context(text)]
     leading = re.split(r"[\(\[]", text, maxsplit=1)[0]
     if leading != text:
         segments.append(leading)
@@ -204,6 +208,22 @@ def medication_lookup_keys(text: str) -> tuple[str, ...]:
         if len(key) >= 3 and key not in keys:
             keys.append(key)
     return tuple(keys)
+
+
+def strip_drug_context(text: str) -> str:
+    """Remove administration narrative while preserving the drug expression."""
+
+    key = normalize_prescription_text(text)
+    key = re.sub(
+        r"\s+(?:trong|for)\s+(?:tong cong\s+)?\d+(?:[\.,]\d+)?\s+"
+        r"(?:ngay|tuan|thang|day|days|week|weeks|month|months|chu ky)\b.*$",
+        "",
+        key,
+    )
+    key = re.sub(r"\s+(?:hang tuan|moi ngay|daily|weekly)\b.*$", "", key)
+    key = re.sub(r"\s+(?:tiem|truyen)\s+(?:tuy song|tinh mach|duoi da)\b.*$", "", key)
+    key = re.sub(r"\s+(?:lieu|dose)\s+", " ", key)
+    return " ".join(key.split())
 
 
 def strip_drug_count(text: str) -> str:

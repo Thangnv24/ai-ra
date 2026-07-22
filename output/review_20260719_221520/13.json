@@ -1,0 +1,431 @@
+[
+  {
+    "text": "Bệnh phổi kẽ",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [],
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      44,
+      56
+    ]
+  },
+  {
+    "text": "Hội chứng kháng enzym tổng hợp protein",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [],
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      124,
+      162
+    ]
+  },
+  {
+    "text": "béo phì",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "E66.0"
+    ],
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      170,
+      177
+    ]
+  },
+  {
+    "text": "Tăng huyết áp nguyên phát",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [],
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      184,
+      209
+    ]
+  },
+  {
+    "text": "Sinh thiết nội mạc tử cung",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      247,
+      273
+    ]
+  },
+  {
+    "text": "bactrim",
+    "type": "THUỐC",
+    "candidates": [
+      "151399"
+    ],
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      382,
+      389
+    ]
+  },
+  {
+    "text": "doxycycline",
+    "type": "THUỐC",
+    "candidates": [
+      "3640"
+    ],
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      430,
+      441
+    ]
+  },
+  {
+    "text": "Suy giảm miễn dịch",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [],
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      478,
+      496
+    ]
+  },
+  {
+    "text": "tổn thương vùng âm hộ và mông bên phải",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      584,
+      622
+    ]
+  },
+  {
+    "text": "tổn thương vùng âm hộ phải",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      682,
+      708
+    ]
+  },
+  {
+    "text": "lan rộng sang mông phải",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      709,
+      732
+    ]
+  },
+  {
+    "text": "tổn thương đơn độc vùng âm hộ phải",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      839,
+      873
+    ]
+  },
+  {
+    "text": "cotrimoxazol",
+    "type": "THUỐC",
+    "candidates": [],
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      921,
+      933
+    ]
+  },
+  {
+    "text": "doxycyclin",
+    "type": "THUỐC",
+    "candidates": [
+      "3640"
+    ],
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      953,
+      963
+    ]
+  },
+  {
+    "text": "viêm mô tế bào",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "H60.1"
+    ],
+    "assertions": [],
+    "position": [
+      976,
+      990
+    ]
+  },
+  {
+    "text": "ban đỏ",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1008,
+      1014
+    ]
+  },
+  {
+    "text": "bọng nước",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1114,
+      1123
+    ]
+  },
+  {
+    "text": "lan rộng sang mông phải",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1125,
+      1148
+    ]
+  },
+  {
+    "text": "đau nhiều",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1150,
+      1159
+    ]
+  },
+  {
+    "text": "rỉ dịch vàng đục giống mủ",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1175,
+      1200
+    ]
+  },
+  {
+    "text": "tổn thương vùng âm hộ và mông bên phải",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1344,
+      1382
+    ]
+  },
+  {
+    "text": "cực kỳ đau đớn",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1400,
+      1414
+    ]
+  },
+  {
+    "text": "bóng nước",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1448,
+      1457
+    ]
+  },
+  {
+    "text": "Lan đến mông bên phải",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1479,
+      1500
+    ]
+  },
+  {
+    "text": "dịch giống mủ có màu vàng",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1510,
+      1535
+    ]
+  },
+  {
+    "text": "chảy ra từ tổn thương",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1537,
+      1558
+    ]
+  },
+  {
+    "text": "cực kỳ đau đớn",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1659,
+      1673
+    ]
+  },
+  {
+    "text": "ban đỏ",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1763,
+      1769
+    ]
+  },
+  {
+    "text": "chảy mủ",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1771,
+      1778
+    ]
+  },
+  {
+    "text": "bactrim",
+    "type": "THUỐC",
+    "candidates": [
+      "151399"
+    ],
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      1887,
+      1894
+    ]
+  },
+  {
+    "text": "doxycycline",
+    "type": "THUỐC",
+    "candidates": [
+      "3640"
+    ],
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      1898,
+      1909
+    ]
+  },
+  {
+    "text": "Viêm mô tế bào",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "H60.1"
+    ],
+    "assertions": [],
+    "position": [
+      1932,
+      1946
+    ]
+  },
+  {
+    "text": "ban đỏ",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1986,
+      1992
+    ]
+  },
+  {
+    "text": "dịch tiết có vẻ như mủ",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1999,
+      2021
+    ]
+  },
+  {
+    "text": "doxycycline",
+    "type": "THUỐC",
+    "candidates": [
+      "3640"
+    ],
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      2235,
+      2246
+    ]
+  },
+  {
+    "text": "bactrim",
+    "type": "THUỐC",
+    "candidates": [
+      "151399"
+    ],
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      2246,
+      2253
+    ]
+  },
+  {
+    "text": "Viêm mô tế bào",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "H60.1"
+    ],
+    "assertions": [],
+    "position": [
+      2267,
+      2281
+    ]
+  },
+  {
+    "text": "Nhiễm virus Herpes simplex",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [],
+    "assertions": [],
+    "position": [
+      2488,
+      2514
+    ]
+  },
+  {
+    "text": "Bệnh thủy đậu",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [
+      "B01.0†"
+    ],
+    "assertions": [],
+    "position": [
+      2526,
+      2539
+    ]
+  },
+  {
+    "text": "Zona",
+    "type": "CHẨN_ĐOÁN",
+    "candidates": [],
+    "assertions": [],
+    "position": [
+      2540,
+      2544
+    ]
+  }
+]

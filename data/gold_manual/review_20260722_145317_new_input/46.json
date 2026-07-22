@@ -1,0 +1,814 @@
+[
+  {
+    "text": "khó thở",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      35,
+      42
+    ]
+  },
+  {
+    "text": "stent mạch vành",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      53,
+      68
+    ],
+    "candidates": []
+  },
+  {
+    "text": "suy tim",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      71,
+      78
+    ],
+    "candidates": [
+      "I50.9"
+    ]
+  },
+  {
+    "text": "tăng huyết áp",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      82,
+      95
+    ],
+    "candidates": [
+      "I10"
+    ]
+  },
+  {
+    "text": "HoHL",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      98,
+      102
+    ],
+    "candidates": []
+  },
+  {
+    "text": "khó thở",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      190,
+      197
+    ]
+  },
+  {
+    "text": "NYHA III-IV",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      208,
+      219
+    ]
+  },
+  {
+    "text": "mệt mỏi",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      221,
+      228
+    ]
+  },
+  {
+    "text": "sốt",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      243,
+      246
+    ]
+  },
+  {
+    "text": "đau bụng",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      254,
+      262
+    ]
+  },
+  {
+    "text": "phù phổi cấp",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      303,
+      315
+    ],
+    "candidates": [
+      "J81"
+    ]
+  },
+  {
+    "text": "suy tim",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      318,
+      325
+    ],
+    "candidates": [
+      "I50.9"
+    ]
+  },
+  {
+    "text": "stent mạch vành",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      329,
+      344
+    ],
+    "candidates": []
+  },
+  {
+    "text": "tăng huyết áp",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      347,
+      360
+    ],
+    "candidates": [
+      "I10"
+    ]
+  },
+  {
+    "text": "HoHL",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      363,
+      367
+    ],
+    "candidates": []
+  },
+  {
+    "text": "khó thở",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      393,
+      400
+    ]
+  },
+  {
+    "text": "cải thiện chậm",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      412,
+      426
+    ]
+  },
+  {
+    "text": "Tỉnh",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      445,
+      449
+    ]
+  },
+  {
+    "text": "Glasgow",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      451,
+      458
+    ]
+  },
+  {
+    "text": "15 điểm",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      460,
+      467
+    ]
+  },
+  {
+    "text": "Da niêm mạc hồng",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      469,
+      485
+    ]
+  },
+  {
+    "text": "phù",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      493,
+      496
+    ]
+  },
+  {
+    "text": "sốt",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      504,
+      507
+    ]
+  },
+  {
+    "text": "Tim đều TTT ở mỏm 3/6",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      509,
+      530
+    ]
+  },
+  {
+    "text": "M",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      532,
+      533
+    ]
+  },
+  {
+    "text": "82 ck/ph",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      535,
+      543
+    ]
+  },
+  {
+    "text": "HA",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      545,
+      547
+    ]
+  },
+  {
+    "text": "160/ 80 mmHg",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      549,
+      561
+    ]
+  },
+  {
+    "text": "Phổi RRPN rõ",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      563,
+      575
+    ]
+  },
+  {
+    "text": "rale ẩm",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      577,
+      584
+    ]
+  },
+  {
+    "text": "Bụng mềm",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      586,
+      594
+    ]
+  },
+  {
+    "text": "chướng",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      601,
+      607
+    ]
+  },
+  {
+    "text": "Khí máu",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      624,
+      631
+    ]
+  },
+  {
+    "text": "Lactat",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      633,
+      639
+    ]
+  },
+  {
+    "text": "0.8",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      641,
+      644
+    ]
+  },
+  {
+    "text": "HCO3",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      648,
+      652
+    ]
+  },
+  {
+    "text": "32.09",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      654,
+      659
+    ]
+  },
+  {
+    "text": "PO2",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      664,
+      667
+    ]
+  },
+  {
+    "text": "97.0",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      669,
+      673
+    ]
+  },
+  {
+    "text": "PCO2",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      677,
+      681
+    ]
+  },
+  {
+    "text": "39",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      683,
+      685
+    ]
+  },
+  {
+    "text": "pH",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      689,
+      691
+    ]
+  },
+  {
+    "text": "7.517",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      693,
+      698
+    ]
+  },
+  {
+    "text": "điện tim",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      707,
+      715
+    ]
+  },
+  {
+    "text": "nhịp  xoang ts 74, không biến đổi ST-T",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      736,
+      774
+    ]
+  },
+  {
+    "text": "Định lượng Lactat (Acid \nLactic)",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      792,
+      824
+    ]
+  },
+  {
+    "text": "0.8",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      826,
+      829
+    ]
+  },
+  {
+    "text": "HCO3",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      833,
+      837
+    ]
+  },
+  {
+    "text": "32.09",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      839,
+      844
+    ]
+  },
+  {
+    "text": "PO2",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      848,
+      851
+    ]
+  },
+  {
+    "text": "97.0",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      853,
+      857
+    ]
+  },
+  {
+    "text": "PCO2",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      862,
+      866
+    ]
+  },
+  {
+    "text": "39",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      868,
+      870
+    ]
+  },
+  {
+    "text": "pH",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      874,
+      876
+    ]
+  },
+  {
+    "text": "7.517",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      878,
+      883
+    ]
+  },
+  {
+    "text": "Siêu âm doper tim",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      887,
+      904
+    ]
+  },
+  {
+    "text": "Phình thành sau và thành bên thất trái",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      909,
+      947
+    ]
+  },
+  {
+    "text": "Giảm vận động 2/3 thành bên và 2/3 thành sau dưới thất trái về phía đáy",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      949,
+      1020
+    ]
+  },
+  {
+    "text": "EF BP",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1108,
+      1113
+    ]
+  },
+  {
+    "text": "55%",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1115,
+      1118
+    ]
+  },
+  {
+    "text": "Hở hai lá nhiều",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      1120,
+      1135
+    ],
+    "candidates": [
+      "I05.2"
+    ]
+  },
+  {
+    "text": "Hở chủ vừa",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      1137,
+      1147
+    ],
+    "candidates": []
+  },
+  {
+    "text": "Tăng áp lực động mạch phổi nhẹ",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1149,
+      1179
+    ]
+  },
+  {
+    "text": "Phù phổi cấp",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      1192,
+      1204
+    ],
+    "candidates": [
+      "J81"
+    ]
+  },
+  {
+    "text": "Suy tim",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      1207,
+      1214
+    ],
+    "candidates": [
+      "I50.9"
+    ]
+  },
+  {
+    "text": "Stent mạch vành",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      1217,
+      1232
+    ],
+    "candidates": [
+      "Z95.5"
+    ]
+  },
+  {
+    "text": "Tăng huyết áp",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      1235,
+      1248
+    ],
+    "candidates": [
+      "I10"
+    ]
+  },
+  {
+    "text": "u dây thần kinh số VIII",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      1285,
+      1308
+    ],
+    "candidates": []
+  },
+  {
+    "text": "mệt mỏi",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1444,
+      1451
+    ]
+  },
+  {
+    "text": "mất trí nhớ chi tiết",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1453,
+      1473
+    ]
+  },
+  {
+    "text": "mệt mỏi nhiều",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1505,
+      1518
+    ]
+  },
+  {
+    "text": "ăn không ngon miệng",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1520,
+      1539
+    ]
+  },
+  {
+    "text": "ngứa da toàn thân nhiều",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1541,
+      1564
+    ]
+  },
+  {
+    "text": "mất trí nhớ chi tiết",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1569,
+      1589
+    ]
+  },
+  {
+    "text": "khó thở khi gắng sức",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1591,
+      1611
+    ]
+  },
+  {
+    "text": "buồn nôn",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1625,
+      1633
+    ]
+  },
+  {
+    "text": "nôn",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1638,
+      1641
+    ]
+  },
+  {
+    "text": "Mệt mỏi nhiều",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1685,
+      1698
+    ]
+  },
+  {
+    "text": "Ăn không ngon miệng",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1705,
+      1724
+    ]
+  },
+  {
+    "text": "Ngứa da toàn thân nhiều",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1731,
+      1754
+    ]
+  },
+  {
+    "text": "mất trí nhớ chi tiết",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1761,
+      1781
+    ]
+  },
+  {
+    "text": "khó thở khi gắng sức",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1788,
+      1808
+    ]
+  },
+  {
+    "text": "buồn nôn",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1816,
+      1824
+    ]
+  },
+  {
+    "text": "nôn",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1828,
+      1831
+    ]
+  }
+]

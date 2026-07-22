@@ -1,0 +1,24 @@
+Run failed. Missing or failed requests:
+C:\Users\thangnv108\Downloads\ai-ra-2 (1)\ai-ra-2\input\4.txt: HTTP Error 500: Internal Server Error
+C:\Users\thangnv108\Downloads\ai-ra-2 (1)\ai-ra-2\input\12.txt: HTTP Error 500: Internal Server Error
+C:\Users\thangnv108\Downloads\ai-ra-2 (1)\ai-ra-2\input\20.txt: HTTP Error 500: Internal Server Error
+C:\Users\thangnv108\Downloads\ai-ra-2 (1)\ai-ra-2\input\22.txt: HTTP Error 500: Internal Server Error
+C:\Users\thangnv108\Downloads\ai-ra-2 (1)\ai-ra-2\input\31.txt: HTTP Error 500: Internal Server Error
+C:\Users\thangnv108\Downloads\ai-ra-2 (1)\ai-ra-2\input\35.txt: HTTP Error 500: Internal Server Error
+C:\Users\thangnv108\Downloads\ai-ra-2 (1)\ai-ra-2\input\39.txt: HTTP Error 500: Internal Server Error
+C:\Users\thangnv108\Downloads\ai-ra-2 (1)\ai-ra-2\input\38.txt: HTTP Error 500: Internal Server Error
+C:\Users\thangnv108\Downloads\ai-ra-2 (1)\ai-ra-2\input\42.txt: HTTP Error 500: Internal Server Error
+C:\Users\thangnv108\Downloads\ai-ra-2 (1)\ai-ra-2\input\43.txt: HTTP Error 500: Internal Server Error
+C:\Users\thangnv108\Downloads\ai-ra-2 (1)\ai-ra-2\input\48.txt: HTTP Error 500: Internal Server Error
+C:\Users\thangnv108\Downloads\ai-ra-2 (1)\ai-ra-2\input\49.txt: HTTP Error 500: Internal Server Error
+C:\Users\thangnv108\Downloads\ai-ra-2 (1)\ai-ra-2\input\52.txt: HTTP Error 500: Internal Server Error
+C:\Users\thangnv108\Downloads\ai-ra-2 (1)\ai-ra-2\input\53.txt: HTTP Error 500: Internal Server Error
+C:\Users\thangnv108\Downloads\ai-ra-2 (1)\ai-ra-2\input\56.txt: HTTP Error 500: Internal Server Error
+C:\Users\thangnv108\Downloads\ai-ra-2 (1)\ai-ra-2\input\60.txt: HTTP Error 500: Internal Server Error
+C:\Users\thangnv108\Downloads\ai-ra-2 (1)\ai-ra-2\input\75.txt: HTTP Error 500: Internal Server Error
+C:\Users\thangnv108\Downloads\ai-ra-2 (1)\ai-ra-2\input\76.txt: HTTP Error 500: Internal Server Error
+C:\Users\thangnv108\Downloads\ai-ra-2 (1)\ai-ra-2\input\78.txt: HTTP Error 500: Internal Server Error
+C:\Users\thangnv108\Downloads\ai-ra-2 (1)\ai-ra-2\input\86.txt: HTTP Error 500: Internal Server Error
+C:\Users\thangnv108\Downloads\ai-ra-2 (1)\ai-ra-2\input\90.txt: HTTP Error 500: Internal Server Error
+C:\Users\thangnv108\Downloads\ai-ra-2 (1)\ai-ra-2\input\96.txt: HTTP Error 500: Internal Server Error
+C:\Users\thangnv108\Downloads\ai-ra-2 (1)\ai-ra-2\input\97.txt: HTTP Error 500: Internal Server Error

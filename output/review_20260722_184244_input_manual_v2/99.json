@@ -1,0 +1,334 @@
+[
+  {
+    "text": "viêm tủy xương",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      52,
+      66
+    ],
+    "candidates": []
+  },
+  {
+    "text": "bàng quang thần kinh",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      70,
+      90
+    ],
+    "candidates": []
+  },
+  {
+    "text": "liệt hai chi dưới",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      105,
+      122
+    ],
+    "candidates": []
+  },
+  {
+    "text": "biến đổi ý thức",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      166,
+      181
+    ]
+  },
+  {
+    "text": "hạ thân nhiệt",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      191,
+      204
+    ],
+    "candidates": []
+  },
+  {
+    "text": "hạ huyết áp",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      208,
+      219
+    ],
+    "candidates": []
+  },
+  {
+    "text": "biến đổi ý thức",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      378,
+      393
+    ]
+  },
+  {
+    "text": "hạ thân nhiệt",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      395,
+      408
+    ],
+    "candidates": []
+  },
+  {
+    "text": "hạ huyết áp",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      410,
+      421
+    ],
+    "candidates": []
+  },
+  {
+    "text": "huyết áp tâm thu",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      426,
+      442
+    ]
+  },
+  {
+    "text": "90",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      446,
+      448
+    ]
+  },
+  {
+    "text": "biến đổi ý thức",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      484,
+      499
+    ]
+  },
+  {
+    "text": "hạ thân nhiệt",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      506,
+      519
+    ],
+    "candidates": []
+  },
+  {
+    "text": "Khó thở",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      520,
+      527
+    ]
+  },
+  {
+    "text": "Tim nhịp không đều, tần số 105 chu  kì/phút ",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      571,
+      615
+    ]
+  },
+  {
+    "text": "T1, T2 rõ, không có tiếng tim bệnh lí\n",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      616,
+      654
+    ]
+  },
+  {
+    "text": "Huyết áp 110/70  mmHg ",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      654,
+      676
+    ]
+  },
+  {
+    "text": "\nPhổi rì rào phế nang giảm, không có tiếng rales bệnh lí\n",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      676,
+      733
+    ]
+  },
+  {
+    "text": "Bụng mềm, không chướng ",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      733,
+      756
+    ]
+  },
+  {
+    "text": "Không có điểm đau, gan lách không sờ thấy ",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      757,
+      799
+    ]
+  },
+  {
+    "text": "Đợt cấp COPD",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      853,
+      865
+    ],
+    "candidates": [
+      "J44.0"
+    ]
+  },
+  {
+    "text": "Tâm phế mạn",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      868,
+      879
+    ],
+    "candidates": [
+      "I27.9"
+    ]
+  },
+  {
+    "text": "Cơn tim nhanh nhĩ ",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      882,
+      900
+    ],
+    "candidates": [
+      "R00.0"
+    ]
+  },
+  {
+    "text": "Nhiễm khuẩn đường tiêu hóa",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      902,
+      928
+    ],
+    "candidates": [
+      "A08.5"
+    ]
+  },
+  {
+    "text": "chụp x-quang ngực",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1003,
+      1020
+    ]
+  },
+  {
+    "text": "không có hình ảnh tổn thương viêm cấp tính",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1030,
+      1072
+    ]
+  },
+  {
+    "text": "chụp x-quang ngực",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1080,
+      1097
+    ]
+  },
+  {
+    "text": "Đặt sonde bàng quang",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1144,
+      1164
+    ]
+  },
+  {
+    "text": "xét nghiệm máu",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1175,
+      1189
+    ]
+  },
+  {
+    "text": "cấy nước tiểu",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1193,
+      1206
+    ]
+  },
+  {
+    "text": "điện tâm đồ",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1235,
+      1246
+    ]
+  },
+  {
+    "text": "nhịp chậm xoang",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1256,
+      1271
+    ]
+  },
+  {
+    "text": "đường huyết lúc đói",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1275,
+      1294
+    ]
+  },
+  {
+    "text": "thấp",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1306,
+      1310
+    ]
+  }
+]

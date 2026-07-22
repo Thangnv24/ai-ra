@@ -1,0 +1,100 @@
+[
+  {
+    "text": "chụp cắt lớp vi tính (ct)",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      57,
+      82
+    ]
+  },
+  {
+    "text": "tắc hẹp 80% động mạch thận trái",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      107,
+      138
+    ],
+    "candidates": [
+      "I70.1"
+    ]
+  },
+  {
+    "text": "chụp cắt lớp vi tính (ct)",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      201,
+      226
+    ]
+  },
+  {
+    "text": "tắc hẹp 80% động mạch thận trái",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      236,
+      267
+    ],
+    "candidates": [
+      "I70.1"
+    ]
+  },
+  {
+    "text": "thương tổn",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      353,
+      363
+    ]
+  },
+  {
+    "text": "thương tổn",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      543,
+      553
+    ]
+  },
+  {
+    "text": "Môi bong vẩy trắng",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      592,
+      610
+    ]
+  },
+  {
+    "text": "môi khô",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      635,
+      642
+    ]
+  },
+  {
+    "text": "da chết",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      653,
+      660
+    ]
+  },
+  {
+    "text": "thương tổn",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1244,
+      1254
+    ]
+  }
+]

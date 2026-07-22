@@ -1,0 +1,58 @@
+[
+  {
+    "text": "cúm",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1381,
+      1384
+    ]
+  },
+  {
+    "text": "âm tính",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1385,
+      1392
+    ]
+  },
+  {
+    "text": "chụp x-quang ngực",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1421,
+      1438
+    ]
+  },
+  {
+    "text": "Tăng gánh nhẹ tuần hoàn phổi",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1440,
+      1468
+    ]
+  },
+  {
+    "text": "tràn dịch màng phổi hai bên nhẹ",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      1470,
+      1501
+    ],
+    "candidates": []
+  },
+  {
+    "text": "tim to",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      1503,
+      1509
+    ],
+    "candidates": []
+  }
+]

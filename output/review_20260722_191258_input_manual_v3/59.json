@@ -1,0 +1,230 @@
+[
+  {
+    "text": "da rất nhiều dầu",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      46,
+      62
+    ]
+  },
+  {
+    "text": "mụn trứng cá",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      69,
+      81
+    ],
+    "candidates": [
+      "L70.9"
+    ]
+  },
+  {
+    "text": "ít dầu hơn",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      173,
+      183
+    ]
+  },
+  {
+    "text": "mụn",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated",
+      "isHistorical"
+    ],
+    "position": [
+      207,
+      210
+    ]
+  },
+  {
+    "text": "lên mụn trở lại",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      246,
+      261
+    ]
+  },
+  {
+    "text": "mụn ở trán, má, 2 bên quai hàm và cằm",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      266,
+      303
+    ]
+  },
+  {
+    "text": "mụn cám",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      316,
+      323
+    ]
+  },
+  {
+    "text": "mụn đầu trắng",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      327,
+      340
+    ]
+  },
+  {
+    "text": "nước tiểu có cặn",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      703,
+      719
+    ]
+  },
+  {
+    "text": "lactate",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      737,
+      744
+    ]
+  },
+  {
+    "text": "1.1",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      745,
+      748
+    ]
+  },
+  {
+    "text": "0.8",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      751,
+      754
+    ]
+  },
+  {
+    "text": "Cấy nước tiểu",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      757,
+      770
+    ]
+  },
+  {
+    "text": "nhiễm khuẩn đường tiết niệu",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      773,
+      800
+    ],
+    "candidates": []
+  },
+  {
+    "text": "các vi khuẩn hỗn hợp",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      804,
+      824
+    ]
+  },
+  {
+    "text": "cấy máu",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      827,
+      834
+    ]
+  },
+  {
+    "text": "âm tính",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      836,
+      843
+    ]
+  },
+  {
+    "text": "chỉ số marker viêm",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      845,
+      863
+    ]
+  },
+  {
+    "text": "đã có xu hướng tăng",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      875,
+      894
+    ]
+  },
+  {
+    "text": "MRI",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      920,
+      923
+    ]
+  },
+  {
+    "text": "không thấy tình trạng viêm xương tủy nặng hơn",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      926,
+      971
+    ]
+  },
+  {
+    "text": "Viêm tại chỗ",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1019,
+      1031
+    ]
+  },
+  {
+    "text": "mụn trứng cá",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      1060,
+      1072
+    ],
+    "candidates": [
+      "L70.9"
+    ]
+  },
+  {
+    "text": "nhân mụn",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1680,
+      1688
+    ]
+  }
+]

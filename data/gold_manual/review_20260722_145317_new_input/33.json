@@ -1,0 +1,469 @@
+[
+  {
+    "text": "rung nhĩ",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      39,
+      47
+    ],
+    "candidates": []
+  },
+  {
+    "text": "tăng huyết áp",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      50,
+      63
+    ],
+    "candidates": []
+  },
+  {
+    "text": "suy tim, không đặc hiệu",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      66,
+      89
+    ],
+    "candidates": [
+      "I50.9"
+    ]
+  },
+  {
+    "text": "béo phì",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      92,
+      99
+    ],
+    "candidates": []
+  },
+  {
+    "text": "da rất nhiều dầu",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      122,
+      138
+    ]
+  },
+  {
+    "text": "mụn trứng cá",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      145,
+      157
+    ],
+    "candidates": [
+      "L70.9"
+    ]
+  },
+  {
+    "text": "ít dầu hơn",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      249,
+      259
+    ]
+  },
+  {
+    "text": "mụn",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated",
+      "isHistorical"
+    ],
+    "position": [
+      283,
+      286
+    ]
+  },
+  {
+    "text": "lên mụn trở lại",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      322,
+      337
+    ]
+  },
+  {
+    "text": "mụn ở trán, má, 2 bên quai hàm và cằm",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      342,
+      379
+    ]
+  },
+  {
+    "text": "mụn cám",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      392,
+      399
+    ]
+  },
+  {
+    "text": "mụn đầu trắng",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      403,
+      416
+    ]
+  },
+  {
+    "text": "mệt mỏi",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      720,
+      727
+    ]
+  },
+  {
+    "text": "weak",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      731,
+      735
+    ]
+  },
+  {
+    "text": "Thường xuyên ngủ quên",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      738,
+      759
+    ]
+  },
+  {
+    "text": "ngất xỉu",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      772,
+      780
+    ]
+  },
+  {
+    "text": "giảm khả năng quan hệ tình dục với bạn tình",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      783,
+      826
+    ]
+  },
+  {
+    "text": "Đau buốt khi đi tiểu",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      829,
+      849
+    ]
+  },
+  {
+    "text": "chán ăn",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      852,
+      859
+    ]
+  },
+  {
+    "text": "nôn từng đợt sau khi ăn",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      862,
+      885
+    ]
+  },
+  {
+    "text": "đau ngực",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      909,
+      917
+    ]
+  },
+  {
+    "text": "nhói",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      980,
+      984
+    ]
+  },
+  {
+    "text": "lan xuống cánh tay trái",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      998,
+      1021
+    ]
+  },
+  {
+    "text": "tê bì ở cánh tay trái trên",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1033,
+      1059
+    ]
+  },
+  {
+    "text": "đau ở cánh tay trái dưới và bàn tay",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1063,
+      1098
+    ]
+  },
+  {
+    "text": "shortness of breath",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1200,
+      1219
+    ]
+  },
+  {
+    "text": "yếu",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1253,
+      1256
+    ]
+  },
+  {
+    "text": "đau rát khi đi tiểu",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1290,
+      1309
+    ]
+  },
+  {
+    "text": "Nôn mửa",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1373,
+      1380
+    ]
+  },
+  {
+    "text": "ngất xỉu",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      1427,
+      1435
+    ]
+  },
+  {
+    "text": "đánh trống ngực",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      1554,
+      1569
+    ]
+  },
+  {
+    "text": "chóng mặt",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      1571,
+      1580
+    ]
+  },
+  {
+    "text": "ngã",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      1594,
+      1597
+    ]
+  },
+  {
+    "text": "80mg po lasix",
+    "type": "THUỐC",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      1651,
+      1664
+    ],
+    "candidates": []
+  },
+  {
+    "text": "ntg",
+    "type": "THUỐC",
+    "assertions": [],
+    "position": [
+      1912,
+      1915
+    ],
+    "candidates": []
+  },
+  {
+    "text": "asa",
+    "type": "THUỐC",
+    "assertions": [],
+    "position": [
+      1923,
+      1926
+    ],
+    "candidates": []
+  },
+  {
+    "text": "80mg lasix iv",
+    "type": "THUỐC",
+    "assertions": [],
+    "position": [
+      1934,
+      1947
+    ],
+    "candidates": []
+  },
+  {
+    "text": "morphine",
+    "type": "THUỐC",
+    "assertions": [],
+    "position": [
+      1959,
+      1967
+    ],
+    "candidates": []
+  },
+  {
+    "text": "dilaudid",
+    "type": "THUỐC",
+    "assertions": [],
+    "position": [
+      1979,
+      1987
+    ],
+    "candidates": []
+  },
+  {
+    "text": "metoprolol",
+    "type": "THUỐC",
+    "assertions": [],
+    "position": [
+      2002,
+      2012
+    ],
+    "candidates": [
+      "6918"
+    ]
+  },
+  {
+    "text": "10mg iv diltiazem",
+    "type": "THUỐC",
+    "assertions": [],
+    "position": [
+      2024,
+      2041
+    ],
+    "candidates": []
+  },
+  {
+    "text": "ntg",
+    "type": "THUỐC",
+    "assertions": [],
+    "position": [
+      2077,
+      2080
+    ],
+    "candidates": []
+  },
+  {
+    "text": "khó thở",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      2081,
+      2088
+    ]
+  },
+  {
+    "text": "đau ngực",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      2105,
+      2113
+    ]
+  },
+  {
+    "text": "ntg",
+    "type": "THUỐC",
+    "assertions": [],
+    "position": [
+      2128,
+      2131
+    ],
+    "candidates": []
+  },
+  {
+    "text": "khó thở",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      2132,
+      2139
+    ]
+  },
+  {
+    "text": "đau ngực",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      2156,
+      2164
+    ]
+  }
+]

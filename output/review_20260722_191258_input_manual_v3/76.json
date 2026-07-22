@@ -1,0 +1,58 @@
+[
+  {
+    "text": "chấn thương",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      124,
+      135
+    ]
+  },
+  {
+    "text": "MÀY đay VÔ CĂN",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      267,
+      281
+    ],
+    "candidates": [
+      "L50.1"
+    ]
+  },
+  {
+    "text": "MÀY đay MẠN",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      365,
+      376
+    ],
+    "candidates": [
+      "L50.8"
+    ]
+  },
+  {
+    "text": "đay vô căn",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      848,
+      858
+    ],
+    "candidates": [
+      "L50.1"
+    ]
+  },
+  {
+    "text": "buồn ngủ",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      1280,
+      1288
+    ]
+  }
+]

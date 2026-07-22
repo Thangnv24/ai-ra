@@ -1,0 +1,52 @@
+[
+  {
+    "text": "bị thương nhẹ ở tay",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      73,
+      95
+    ]
+  },
+  {
+    "text": "bị chảy máu",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      102,
+      116
+    ]
+  },
+  {
+    "text": "bumetanide 2mg iv",
+    "type": "THUỐC",
+    "assertions": [],
+    "position": [
+      2178,
+      2195
+    ],
+    "candidates": []
+  },
+  {
+    "text": "vancomycin 1 gram",
+    "type": "THUỐC",
+    "assertions": [],
+    "position": [
+      2211,
+      2228
+    ],
+    "candidates": []
+  },
+  {
+    "text": "levofloxacin 750mg iv",
+    "type": "THUỐC",
+    "assertions": [],
+    "position": [
+      2244,
+      2265
+    ],
+    "candidates": [
+      "82122"
+    ]
+  }
+]

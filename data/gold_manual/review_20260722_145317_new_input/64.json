@@ -1,0 +1,123 @@
+[
+  {
+    "text": "bệnh động mạch vành",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isFamily"
+    ],
+    "position": [
+      62,
+      81
+    ],
+    "candidates": [
+      "I25.1"
+    ]
+  },
+  {
+    "text": "Vastarel",
+    "type": "THUỐC",
+    "assertions": [
+      "isFamily",
+      "isHistorical"
+    ],
+    "position": [
+      129,
+      137
+    ],
+    "candidates": [
+      "10826"
+    ]
+  },
+  {
+    "text": "run tay",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isFamily"
+    ],
+    "position": [
+      203,
+      210
+    ]
+  },
+  {
+    "text": "Vastarel",
+    "type": "THUỐC",
+    "assertions": [
+      "isFamily",
+      "isHistorical"
+    ],
+    "position": [
+      243,
+      251
+    ],
+    "candidates": [
+      "10826"
+    ]
+  },
+  {
+    "text": "bệnh Graves",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      283,
+      294
+    ],
+    "candidates": []
+  },
+  {
+    "text": "tăng lipid máu, không đặc hiệu",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      301,
+      331
+    ],
+    "candidates": [
+      "E78.5"
+    ]
+  },
+  {
+    "text": "run tay",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isFamily"
+    ],
+    "position": [
+      417,
+      424
+    ]
+  },
+  {
+    "text": "thuốc trimetazidine",
+    "type": "THUỐC",
+    "assertions": [
+      "isFamily",
+      "isHistorical"
+    ],
+    "position": [
+      512,
+      531
+    ],
+    "candidates": [
+      "10826"
+    ]
+  },
+  {
+    "text": "Nitramyl 2,5 mg/viên (nitroglycerin)",
+    "type": "THUỐC",
+    "assertions": [
+      "isFamily"
+    ],
+    "position": [
+      810,
+      846
+    ],
+    "candidates": [
+      "4917"
+    ]
+  }
+]

@@ -1,0 +1,369 @@
+[
+  {
+    "text": "bị thương nhẹ ở tay",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      73,
+      95
+    ]
+  },
+  {
+    "text": "bị chảy máu",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      102,
+      116
+    ]
+  },
+  {
+    "text": "bệnh dại",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      327,
+      335
+    ],
+    "candidates": [
+      "A82.9"
+    ]
+  },
+  {
+    "text": "Bệnh dại",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      549,
+      557
+    ],
+    "candidates": [
+      "A82.9"
+    ]
+  },
+  {
+    "text": "vết cắn",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      580,
+      587
+    ]
+  },
+  {
+    "text": "bệnh dại",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      612,
+      620
+    ],
+    "candidates": [
+      "A82.9"
+    ]
+  },
+  {
+    "text": "Bệnh dại",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      662,
+      670
+    ],
+    "candidates": [
+      "A82.9"
+    ]
+  },
+  {
+    "text": "bệnh dại",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      746,
+      754
+    ],
+    "candidates": [
+      "A82.9"
+    ]
+  },
+  {
+    "text": "vết thương",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      776,
+      786
+    ]
+  },
+  {
+    "text": "trầy xước",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      805,
+      814
+    ]
+  },
+  {
+    "text": "Bệnh dại",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      830,
+      838
+    ],
+    "candidates": [
+      "A82.9"
+    ]
+  },
+  {
+    "text": "Bệnh dại",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      853,
+      861
+    ],
+    "candidates": [
+      "A82.9"
+    ]
+  },
+  {
+    "text": "Đau bụng hạ sườn phải",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1082,
+      1103
+    ]
+  },
+  {
+    "text": "Buồn nôn",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1105,
+      1113
+    ]
+  },
+  {
+    "text": "nôn ra thức ăn và dịch dạ dày",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1115,
+      1144
+    ]
+  },
+  {
+    "text": "máu",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      1155,
+      1158
+    ]
+  },
+  {
+    "text": "Huyết áp:130/76 mmHg",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1170,
+      1190
+    ]
+  },
+  {
+    "text": "Mạch: 93 l/p",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1191,
+      1203
+    ]
+  },
+  {
+    "text": "Nhiệt độ : 36.3 độ C",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1204,
+      1224
+    ]
+  },
+  {
+    "text": "Nhịp thở: 14 l/p",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1225,
+      1241
+    ]
+  },
+  {
+    "text": "SPO2: 99 %",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1243,
+      1253
+    ]
+  },
+  {
+    "text": "compazine",
+    "type": "THUỐC",
+    "assertions": [],
+    "position": [
+      1287,
+      1296
+    ],
+    "candidates": []
+  },
+  {
+    "text": "aleve",
+    "type": "THUỐC",
+    "assertions": [],
+    "position": [
+      1300,
+      1305
+    ],
+    "candidates": []
+  },
+  {
+    "text": "vẫn còn đau",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1311,
+      1322
+    ]
+  },
+  {
+    "text": "morphineoral",
+    "type": "THUỐC",
+    "assertions": [],
+    "position": [
+      1335,
+      1347
+    ],
+    "candidates": []
+  },
+  {
+    "text": "lorazepam",
+    "type": "THUỐC",
+    "assertions": [],
+    "position": [
+      1352,
+      1361
+    ],
+    "candidates": []
+  },
+  {
+    "text": "đỡ đau",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1362,
+      1368
+    ]
+  },
+  {
+    "text": "Bệnh dại",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      1413,
+      1421
+    ],
+    "candidates": [
+      "A82.9"
+    ]
+  },
+  {
+    "text": "vết cắn",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1539,
+      1546
+    ]
+  },
+  {
+    "text": "vết trầy xước",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1556,
+      1569
+    ]
+  },
+  {
+    "text": "bệnh dại",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      1618,
+      1626
+    ],
+    "candidates": [
+      "A82.9"
+    ]
+  },
+  {
+    "text": "bệnh dại",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      1938,
+      1946
+    ],
+    "candidates": [
+      "A82.9"
+    ]
+  },
+  {
+    "text": "bệnh dại",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      2123,
+      2131
+    ],
+    "candidates": [
+      "A82.9"
+    ]
+  },
+  {
+    "text": "vết cắn",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      2205,
+      2212
+    ]
+  },
+  {
+    "text": "vết thương ở đầu và cổ",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      2295,
+      2317
+    ]
+  },
+  {
+    "text": "vết thương ở các khu vực đầu mút thần kinh như ngón tay",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      2334,
+      2389
+    ]
+  }
+]

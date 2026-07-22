@@ -1,0 +1,68 @@
+[
+  {
+    "text": "đang mang thai được 22 tuần",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      55,
+      84
+    ]
+  },
+  {
+    "text": "xét nghiệm",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      117,
+      129
+    ]
+  },
+  {
+    "text": "nguy cơ tiền sản giật cao",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      149,
+      177
+    ]
+  },
+  {
+    "text": "cục máu đông",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      280,
+      294
+    ]
+  },
+  {
+    "text": "đi tiêu ra máu",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      309,
+      324
+    ]
+  },
+  {
+    "text": "aspirin",
+    "type": "THUỐC",
+    "assertions": [],
+    "position": [
+      1114,
+      1121
+    ],
+    "candidates": [
+      "1191"
+    ]
+  },
+  {
+    "text": "đại tiện ra máu đỏ tươi gián đoạn",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1219,
+      1252
+    ]
+  }
+]

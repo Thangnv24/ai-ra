@@ -1,0 +1,273 @@
+[
+  {
+    "text": "tăng men gan",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      31,
+      43
+    ],
+    "candidates": []
+  },
+  {
+    "text": "tăng bilirubin máu",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      48,
+      66
+    ],
+    "candidates": []
+  },
+  {
+    "text": "ast",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      68,
+      71
+    ]
+  },
+  {
+    "text": "421",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      72,
+      75
+    ]
+  },
+  {
+    "text": "alt",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      77,
+      80
+    ]
+  },
+  {
+    "text": "336",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      81,
+      84
+    ]
+  },
+  {
+    "text": "alp",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      86,
+      89
+    ]
+  },
+  {
+    "text": "185",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      90,
+      93
+    ]
+  },
+  {
+    "text": "bilirubin toàn phần",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      95,
+      114
+    ]
+  },
+  {
+    "text": "0.9",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      115,
+      118
+    ]
+  },
+  {
+    "text": "âm tính",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      121,
+      128
+    ]
+  },
+  {
+    "text": "siêu âm bụng có doppler",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      129,
+      152
+    ]
+  },
+  {
+    "text": "âm tính",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      155,
+      162
+    ]
+  },
+  {
+    "text": "chụp hida",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      163,
+      172
+    ]
+  },
+  {
+    "text": "acetaminophen",
+    "type": "THUỐC",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      204,
+      217
+    ],
+    "candidates": [
+      "161"
+    ]
+  },
+  {
+    "text": "nac",
+    "type": "THUỐC",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      235,
+      238
+    ],
+    "candidates": []
+  },
+  {
+    "text": "ercp",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      270,
+      274
+    ]
+  },
+  {
+    "text": "ercp",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      277,
+      281
+    ]
+  },
+  {
+    "text": "túi mật giãn nở rõ rệt",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      291,
+      313
+    ]
+  },
+  {
+    "text": "không có sỏi hoặc bệnh lý khác",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      320,
+      350
+    ]
+  },
+  {
+    "text": "sỏi mật",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      413,
+      420
+    ],
+    "candidates": []
+  },
+  {
+    "text": "tăng bilirubin máu",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      458,
+      476
+    ],
+    "candidates": []
+  },
+  {
+    "text": "tăng men gan",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      480,
+      492
+    ],
+    "candidates": []
+  },
+  {
+    "text": "MÀY đay VÔ CĂN",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      618,
+      632
+    ],
+    "candidates": [
+      "L50.1"
+    ]
+  },
+  {
+    "text": "MÀY đay MẠN",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      716,
+      727
+    ],
+    "candidates": [
+      "L50.8"
+    ]
+  },
+  {
+    "text": "đay vô căn",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      1199,
+      1209
+    ],
+    "candidates": [
+      "L50.1"
+    ]
+  },
+  {
+    "text": "buồn ngủ",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1631,
+      1639
+    ]
+  }
+]

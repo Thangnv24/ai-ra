@@ -1,0 +1,206 @@
+[
+  {
+    "text": "bị thương nhẹ ở tay",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      73,
+      95
+    ]
+  },
+  {
+    "text": "bị chảy máu",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      102,
+      116
+    ]
+  },
+  {
+    "text": "Đau bụng hạ sườn phải",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1082,
+      1103
+    ]
+  },
+  {
+    "text": "Buồn nôn",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1105,
+      1113
+    ]
+  },
+  {
+    "text": "nôn ra thức ăn và dịch dạ dày",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1115,
+      1144
+    ]
+  },
+  {
+    "text": "máu",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      1155,
+      1158
+    ]
+  },
+  {
+    "text": "Huyết áp",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1170,
+      1178
+    ]
+  },
+  {
+    "text": "130/76",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1179,
+      1185
+    ]
+  },
+  {
+    "text": "Mạch",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1191,
+      1195
+    ]
+  },
+  {
+    "text": "93",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1197,
+      1199
+    ]
+  },
+  {
+    "text": "Nhiệt độ",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1204,
+      1212
+    ]
+  },
+  {
+    "text": "36.3",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1215,
+      1219
+    ]
+  },
+  {
+    "text": "Nhịp thở",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1225,
+      1233
+    ]
+  },
+  {
+    "text": "14",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1235,
+      1237
+    ]
+  },
+  {
+    "text": "SPO2",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1243,
+      1247
+    ]
+  },
+  {
+    "text": "99 %",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1249,
+      1253
+    ]
+  },
+  {
+    "text": "compazine",
+    "type": "THUỐC",
+    "assertions": [],
+    "position": [
+      1287,
+      1296
+    ],
+    "candidates": []
+  },
+  {
+    "text": "aleve",
+    "type": "THUỐC",
+    "assertions": [],
+    "position": [
+      1300,
+      1305
+    ],
+    "candidates": []
+  },
+  {
+    "text": "vẫn còn đau",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1311,
+      1322
+    ]
+  },
+  {
+    "text": "morphineoral",
+    "type": "THUỐC",
+    "assertions": [],
+    "position": [
+      1335,
+      1347
+    ],
+    "candidates": []
+  },
+  {
+    "text": "lorazepam",
+    "type": "THUỐC",
+    "assertions": [],
+    "position": [
+      1352,
+      1361
+    ],
+    "candidates": []
+  },
+  {
+    "text": "đỡ đau",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1362,
+      1368
+    ]
+  }
+]

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 import unittest
 from pathlib import Path
 
@@ -14,10 +15,20 @@ from core.config import (
     TYPE_TEST_NAME,
     TYPE_TEST_RESULT,
 )
-from core.medication import medication_lookup_keys, medication_match_score, normalize_prescription_text
+from core.medication import (
+    medication_lookup_keys,
+    medication_match_score,
+    normalize_prescription_text,
+    strip_drug_context,
+)
 from core.schema import Concept, validate_output
 from extraction.context import ContextDetector
-from extraction.llm_entities import _chunk_units, _span_from_mention_with_reason
+from extraction.llm_entities import (
+    _chunk_payload,
+    _chunk_units,
+    _neighbor_context,
+    _span_from_mention_with_reason,
+)
 from extraction.ner import MedicalNER, SpanCandidate, resolve_span_types
 from extraction.sectioning import TextChunk, split_chunks
 from knowledge.candidates import (
@@ -26,6 +37,7 @@ from knowledge.candidates import (
     SlimCandidateIndex,
     diagnosis_qualifier_adjustment,
 )
+from knowledge.candidate_policy import CandidateEmissionPolicy, CandidatePolicyRule
 from knowledge.ontology import OntologyIndex
 from knowledge.retrieval import CandidateRetriever, _select_diagnosis_codes, _select_drug_code
 from services.pipeline import _merge_span_candidates_with_summary
@@ -69,19 +81,20 @@ class EntityOccurrenceTests(unittest.TestCase):
         )
         self.assertEqual([text[span.start : span.end] for span in spans], [quote, quote])
 
-    def test_first_ten_inputs_keep_chunk_and_unit_offsets(self) -> None:
-        for file_number in range(1, 11):
+    def test_current_inputs_keep_short_chunk_and_unit_offsets(self) -> None:
+        for file_number in range(1, 101):
             text = (ROOT / "input" / f"{file_number}.txt").read_text(encoding="utf-8")
-            chunks = split_chunks(text, max_chars=1000, overlap=0)
+            chunks = split_chunks(text, max_chars=650, overlap=0)
             self.assertTrue(chunks, file_number)
-            self.assertLessEqual(max(len(chunk.text) for chunk in chunks), 1000, file_number)
+            self.assertLessEqual(max(len(chunk.text) for chunk in chunks), 650, file_number)
             for chunk in chunks:
+                self.assertEqual(text[chunk.start : chunk.end], chunk.text, file_number)
                 for unit in _chunk_units(chunk):
                     self.assertEqual(text[unit.start : unit.end], unit.text, (file_number, unit.unit_id))
 
-    def test_rule_extractor_keeps_all_input_one_palpitations(self) -> None:
+    def test_rule_extractor_keeps_repeated_palpitations(self) -> None:
         phrase = "\u0111\u00e1nh tr\u1ed1ng ng\u1ef1c"
-        text = (ROOT / "input" / "1.txt").read_text(encoding="utf-8")
+        text = ", ".join([phrase] * 10)
         spans = MedicalNER().extract(text)
 
         self.assertEqual(sum(span.text.casefold() == phrase for span in spans), 10)
@@ -93,8 +106,44 @@ class EntityOccurrenceTests(unittest.TestCase):
         case_start = text.index(second_case)
 
         self.assertFalse(any(chunk.start < case_start < chunk.end for chunk in chunks))
-        first_after_boundary = next(chunk for chunk in chunks if chunk.start > case_start)
+        first_after_boundary = next(chunk for chunk in chunks if chunk.start >= case_start)
         self.assertIn("case_", first_after_boundary.section)
+
+    def test_new_input_structure_markers_are_hard_boundaries(self) -> None:
+        examples = (
+            (1, "3.  \u0110\u00e1nh gi\u00e1 t\u1ea1i b\u1ec7nh vi\u1ec7n", "hospital_evaluation"),
+            (7, "Tr\u1ea3 l\u1eddi :", "answer"),
+            (37, "C\u00e1c s\u1ef1 ki\u1ec7n tr\u01b0\u1edbc khi nh\u1eadp vi\u1ec7n", "pre_admission_events"),
+            (37, "D\u00f9 hi\u1ec7n t\u1ea1i", "answer"),
+            (53, "C\u00e1c s\u1ef1 ki\u1ec7n tr\u01b0\u1edbc khi nh\u1eadp vi\u1ec7n", "pre_admission_events"),
+            (82, "2.  Ti\u1ec1n s\u1eed b\u1ec7nh hi\u1ec7n t\u1ea1i", "present_illness"),
+        )
+        for file_number, marker, expected_role in examples:
+            text = (ROOT / "input" / f"{file_number}.txt").read_text(encoding="utf-8")
+            boundary = text.index(marker)
+            chunks = split_chunks(text, max_chars=650)
+
+            self.assertFalse(
+                any(chunk.start < boundary < chunk.end for chunk in chunks),
+                (file_number, marker),
+            )
+            boundary_chunk = next(chunk for chunk in chunks if chunk.start <= boundary < chunk.end)
+            self.assertEqual(boundary_chunk.structure_role, expected_role, (file_number, marker))
+
+    def test_neighbor_context_stays_inside_structural_block(self) -> None:
+        text = (ROOT / "input" / "7.txt").read_text(encoding="utf-8")
+        chunks = split_chunks(text, max_chars=650)
+        answer_index = next(index for index, chunk in enumerate(chunks) if chunk.structure_role == "answer")
+
+        before, _ = _neighbor_context(chunks, answer_index)
+        self.assertEqual(before, "")
+        self.assertTrue(
+            any(
+                _neighbor_context(chunks, index)[1]
+                for index in range(len(chunks) - 1)
+                if chunks[index].context_scope == chunks[index + 1].context_scope
+            )
+        )
 
     def test_pathological_token_run_is_not_sent_to_llm(self) -> None:
         prefix = "B\u1ec7nh nh\u00e2n t\u0103ng huy\u1ebft \u00e1p "
@@ -124,17 +173,26 @@ class EntityOccurrenceTests(unittest.TestCase):
         self.assertEqual((span.text, span.type), (quote, TYPE_SYMPTOM))
 
     def test_prompt_separates_context_from_extraction_target(self) -> None:
-        prompt = build_entity_extraction_prompt(
-            {
-                "chunk_id": "c2",
-                "section": "case_1:document",
-                "text": "Tim \u0111\u1ec1u, T1 T2 r\u00f5",
-                "context_before": "B\u1ec7nh nh\u00e2n v\u00e0o vi\u1ec7n",
-                "context_after": "Ch\u1ea9n \u0111o\u00e1n",
-            }
+        chunk = TextChunk(
+            "c2",
+            "case_1:document",
+            0,
+            len("Tim \u0111\u1ec1u, T1 T2 r\u00f5"),
+            "Tim \u0111\u1ec1u, T1 T2 r\u00f5",
+            structure_role="answer",
+            context_scope="case_1:block_2:segment_1",
         )
+        payload = _chunk_payload(
+            chunk,
+            context_before="B\u1ec7nh nh\u00e2n v\u00e0o vi\u1ec7n",
+            context_after="Ch\u1ea9n \u0111o\u00e1n",
+        )
+        prompt = build_entity_extraction_prompt(payload)
+        prompt_data = json.loads(prompt)
 
         self.assertIn("target_text", prompt)
+        self.assertEqual(payload["structure_role"], "answer")
+        self.assertEqual(prompt_data["target"]["structure_role"], "answer")
         self.assertIn("clinical finding", prompt)
         self.assertIn("must never be quoted", prompt)
         self.assertIn("Be exhaustive", prompt)
@@ -320,6 +378,317 @@ class AssertionTests(unittest.TestCase):
 
 
 class CandidateMappingTests(unittest.TestCase):
+    def test_curated_exact_alias_is_a_high_recall_retrieval_channel(self) -> None:
+        expected = CandidateRecord("R74.0", "Abnormal enzyme levels", "ICD10", TYPE_DIAGNOSIS, 20)
+        lexical = CandidateRecord("R74.8", "Other abnormal enzyme levels", "ICD10", TYPE_DIAGNOSIS, 10)
+        index = SlimCandidateIndex(
+            {
+                (TYPE_DIAGNOSIS, expected.code): expected,
+                (TYPE_DIAGNOSIS, lexical.code): lexical,
+            },
+            {(TYPE_DIAGNOSIS, "tang men gan"): (lexical.code,)},
+            {(TYPE_DIAGNOSIS, "tang men gan"): (expected.code,)},
+        )
+
+        hits = index.lookup("Tăng men gan", TYPE_DIAGNOSIS, 10)
+
+        self.assertEqual(hits[0].source, "curated_exact")
+        self.assertEqual(_select_diagnosis_codes("Tăng men gan", hits, 5), ("R74.0",))
+
+    def test_curated_rxnorm_alias_can_retain_gold_ingredient_identifier(self) -> None:
+        ingredient = CandidateRecord("5224", "heparin", "RxNorm", TYPE_DRUG, 20, True, ("IN",))
+        product = CandidateRecord("1857598", "heparin Injection", "RxNorm", TYPE_DRUG, 10, False, ("SCDF",))
+        index = SlimCandidateIndex(
+            {(TYPE_DRUG, ingredient.code): ingredient, (TYPE_DRUG, product.code): product},
+            {},
+            {(TYPE_DRUG, "heparin drip"): (ingredient.code,)},
+        )
+
+        hits = index.lookup("heparin drip", TYPE_DRUG, 10)
+
+        self.assertEqual(_select_drug_code("heparin drip", hits), ("5224",))
+
+    def test_drug_context_stripping_preserves_name(self) -> None:
+        self.assertEqual(strip_drug_context("Vancomycin trong 20 ngày"), "vancomycin")
+        self.assertEqual(strip_drug_context("Romidepsin trong tổng cộng 7 chu kỳ"), "romidepsin")
+
+    def test_candidate_policy_is_profile_specific_and_can_abstain(self) -> None:
+        policy = CandidateEmissionPolicy(
+            (
+                CandidatePolicyRule(
+                    TYPE_DRUG,
+                    "crestor 10 mg",
+                    "short_line",
+                    (),
+                    support=3,
+                    file_support=3,
+                ),
+            )
+        )
+        short_text = "Thu\u1ed1c: Crestor 10 mg"
+        long_text = (
+            "B\u1ec7nh nh\u00e2n \u0111\u01b0\u1ee3c theo d\u00f5i v\u00e0 \u0111i\u1ec1u tr\u1ecb. " * 12
+        ) + "Crestor 10 mg"
+
+        self.assertEqual(
+            policy.apply(
+                "Crestor 10 mg",
+                TYPE_DRUG,
+                ("576402",),
+                source_text=short_text,
+                start=short_text.index("Crestor"),
+                end=len(short_text),
+            ),
+            (),
+        )
+        self.assertEqual(
+            policy.apply(
+                "Crestor 10 mg",
+                TYPE_DRUG,
+                ("576402",),
+                source_text=long_text,
+                start=long_text.index("Crestor"),
+                end=len(long_text),
+            ),
+            ("576402",),
+        )
+
+    def test_candidate_policy_can_resolve_same_alias_by_assertion_profile(self) -> None:
+        policy = CandidateEmissionPolicy(
+            (
+                CandidatePolicyRule(
+                    TYPE_DIAGNOSIS,
+                    "tram cam",
+                    "short_line",
+                    (),
+                    assertions=(ASSERTION_HISTORICAL,),
+                    support=3,
+                    file_support=3,
+                ),
+            )
+        )
+        text = "Tiền sử: trầm cảm"
+        start = text.index("trầm cảm")
+
+        self.assertEqual(
+            policy.apply(
+                "trầm cảm",
+                TYPE_DIAGNOSIS,
+                ("F32.8",),
+                source_text=text,
+                start=start,
+                end=len(text),
+                assertions=(ASSERTION_HISTORICAL,),
+            ),
+            (),
+        )
+
+    def test_candidate_policy_uses_renal_context_for_secondary_hypertension(self) -> None:
+        text = "Ch\u1ea9n \u0111o\u00e1n: h\u1eb9p \u0111\u1ed9ng m\u1ea1ch th\u1eadn tr\u00e1i, t\u0103ng huy\u1ebft \u00e1p"
+        mention = "t\u0103ng huy\u1ebft \u00e1p"
+        start = text.index(mention)
+
+        self.assertEqual(
+            CandidateEmissionPolicy.empty().apply(
+                mention,
+                TYPE_DIAGNOSIS,
+                ("I10",),
+                source_text=text,
+                start=start,
+                end=start + len(mention),
+            ),
+            ("I15.0",),
+        )
+
+    def test_candidate_policy_keeps_primary_code_in_renal_history(self) -> None:
+        text = (
+            "B\u1ec7nh s\u1eed: h\u1eb9p kh\u00edt \u0111\u1ed9ng m\u1ea1ch th\u1eadn tr\u00e1i, c\u00f3 "
+            "t\u0103ng huy\u1ebft \u00e1p c\u00e1ch m\u1ed9t n\u0103m."
+        )
+        mention = "t\u0103ng huy\u1ebft \u00e1p"
+        start = text.index(mention)
+
+        self.assertEqual(
+            CandidateEmissionPolicy.empty().apply(
+                mention,
+                TYPE_DIAGNOSIS,
+                ("I10",),
+                source_text=text,
+                start=start,
+                end=start + len(mention),
+            ),
+            ("I10",),
+        )
+
+    def test_candidate_policy_resolves_diabetes_neurologic_complication(self) -> None:
+        text = "Chẩn đoán: ĐTĐ type 2 biến chứng thần kinh ngoại biên"
+        mention = "ĐTĐ type 2"
+        start = text.index(mention)
+
+        self.assertEqual(
+            CandidateEmissionPolicy.empty().apply(
+                mention,
+                TYPE_DIAGNOSIS,
+                ("E11.9",),
+                source_text=text,
+                start=start,
+                end=start + len(mention),
+            ),
+            ("E11.4†",),
+        )
+
+    def test_candidate_policy_does_not_force_conflicting_atrial_fibrillation_code(self) -> None:
+        text = "Chẩn đoán: Rung nhĩ cơn, xem xét can thiệp"
+        mention = "Rung nhĩ"
+        start = text.index(mention)
+
+        self.assertEqual(
+            CandidateEmissionPolicy.empty().apply(
+                mention,
+                TYPE_DIAGNOSIS,
+                ("I48.2",),
+                source_text=text,
+                start=start,
+                end=start + len(mention),
+            ),
+            ("I48.2",),
+        )
+
+    def test_candidate_policy_resolves_alcohol_related_cirrhosis(self) -> None:
+        text = "Tiền sử uống rượu 20 năm. Chẩn đoán: Xơ gan child C"
+        mention = "Xơ gan"
+        start = text.index(mention)
+
+        self.assertEqual(
+            CandidateEmissionPolicy.empty().apply(
+                mention,
+                TYPE_DIAGNOSIS,
+                ("K74.6",),
+                source_text=text,
+                start=start,
+                end=start + len(mention),
+            ),
+            ("K70.3",),
+        )
+
+    def test_candidate_policy_does_not_retype_historical_cirrhosis(self) -> None:
+        text = "Tiền sử uống rượu, xơ gan"
+        mention = "xơ gan"
+        start = text.index(mention)
+
+        self.assertEqual(
+            CandidateEmissionPolicy.empty().apply(
+                mention,
+                TYPE_DIAGNOSIS,
+                ("K74.6",),
+                source_text=text,
+                start=start,
+                end=start + len(mention),
+                assertions=(ASSERTION_HISTORICAL,),
+            ),
+            ("K74.6",),
+        )
+
+    def test_candidate_policy_context_does_not_invent_a_suppressed_code(self) -> None:
+        text = "Bệnh nhân uống rượu nhiều, có xơ gan trong phần tư vấn."
+        mention = "xơ gan"
+        start = text.index(mention)
+
+        self.assertEqual(
+            CandidateEmissionPolicy.empty().apply(
+                mention,
+                TYPE_DIAGNOSIS,
+                (),
+                source_text=text,
+                start=start,
+                end=start + len(mention),
+            ),
+            (),
+        )
+
+    def test_candidate_policy_resolves_current_gallbladder_stone(self) -> None:
+        text = "Chẩn đoán: Sỏi túi mật. Phẫu thuật nội soi cắt túi mật."
+        mention = "Sỏi túi mật"
+        start = text.index(mention)
+
+        self.assertEqual(
+            CandidateEmissionPolicy.empty().apply(
+                mention,
+                TYPE_DIAGNOSIS,
+                ("K80.2",),
+                source_text=text,
+                start=start,
+                end=start + len(mention),
+            ),
+            ("K80.0",),
+        )
+
+    def test_candidate_policy_keeps_unknown_short_drug_mapping_as_fallback(self) -> None:
+        text = "Thuốc: Solumedrol"
+        start = text.index("Solumedrol")
+
+        self.assertEqual(
+            CandidateEmissionPolicy.empty().apply(
+                "Solumedrol",
+                TYPE_DRUG,
+                ("203856",),
+                source_text=text,
+                start=start,
+                end=start + len("Solumedrol"),
+            ),
+            ("203856",),
+        )
+
+    def test_candidate_policy_uses_positive_short_drug_profile(self) -> None:
+        text = "Thuốc: Aspirin 81 mg"
+        start = text.index("Aspirin")
+
+        self.assertEqual(
+            CandidateEmissionPolicy.empty().apply(
+                "Aspirin 81 mg",
+                TYPE_DRUG,
+                ("wrong",),
+                source_text=text,
+                start=start,
+                end=len(text),
+                profile_candidates=("315431",),
+            ),
+            ("315431",),
+        )
+
+    def test_candidate_policy_honors_known_empty_profile(self) -> None:
+        text = "Thuá»‘c: Solumedrol"
+        start = text.index("Solumedrol")
+
+        self.assertEqual(
+            CandidateEmissionPolicy.empty().apply(
+                "Solumedrol",
+                TYPE_DRUG,
+                ("203856",),
+                source_text=text,
+                start=start,
+                end=start + len("Solumedrol"),
+                profile_candidates=(),
+            ),
+            (),
+        )
+
+    def test_candidate_policy_keeps_unknown_long_drug_mapping(self) -> None:
+        text = ("Bệnh nhân được điều trị và theo dõi. " * 15) + "Vancomycin"
+        start = text.index("Vancomycin")
+
+        self.assertEqual(
+            CandidateEmissionPolicy.empty().apply(
+                "Vancomycin",
+                TYPE_DRUG,
+                ("11124",),
+                source_text=text,
+                start=start,
+                end=start + len("Vancomycin"),
+            ),
+            ("11124",),
+        )
+
     def test_rxnorm_prefers_matching_strength_and_oral_form(self) -> None:
         query = "clonazepam 0.5 mg po qam prn"
         matching = medication_match_score(query, "clonazepam 0.5 MG Oral Tablet")
@@ -496,6 +865,30 @@ class CandidateMappingTests(unittest.TestCase):
                 end=start + len(diagnosis),
             ),
             ("I25.1",),
+        )
+
+    def test_candidate_gate_uses_training_profile_evidence_on_long_lines(self) -> None:
+        record = CandidateRecord("N62", "Breast hypertrophy", "ICD10", TYPE_DIAGNOSIS, 20)
+        index = SlimCandidateIndex(
+            {(TYPE_DIAGNOSIS, record.code): record},
+            {},
+            {(TYPE_DIAGNOSIS, "phi dai vu"): (record.code,)},
+            {(TYPE_DIAGNOSIS, "phi dai vu", "long_line"): (record.code,)},
+        )
+        retriever = CandidateRetriever(OntologyIndex(()), index)
+        mention = "phì đại vú"
+        narrative = ("Bệnh nhân có nhiều thông tin lâm sàng. " * 15) + mention
+        start = narrative.index(mention)
+
+        self.assertEqual(
+            retriever.candidates_for(
+                mention,
+                TYPE_DIAGNOSIS,
+                source_text=narrative,
+                start=start,
+                end=start + len(mention),
+            ),
+            ("N62",),
         )
 
     def test_drug_ingredient_only_alias_is_not_emitted(self) -> None:

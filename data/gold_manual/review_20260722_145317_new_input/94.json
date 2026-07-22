@@ -1,0 +1,23 @@
+[
+  {
+    "text": "Siêu âm tim",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      16,
+      27
+    ]
+  },
+  {
+    "text": "chèn ép tim",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      29,
+      40
+    ],
+    "candidates": [
+      "I31.4"
+    ]
+  }
+]

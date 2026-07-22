@@ -1,0 +1,408 @@
+[
+  {
+    "text": "mệt mỏi,",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      49,
+      57
+    ]
+  },
+  {
+    "text": "vàng da",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      58,
+      65
+    ]
+  },
+  {
+    "text": "vàng mắt",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      67,
+      75
+    ]
+  },
+  {
+    "text": "sốt",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      238,
+      241
+    ]
+  },
+  {
+    "text": "có gai rét",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      274,
+      284
+    ]
+  },
+  {
+    "text": "cơn rét run",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      295,
+      306
+    ]
+  },
+  {
+    "text": "paracetamol",
+    "type": "THUỐC",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      320,
+      331
+    ],
+    "candidates": [
+      "161"
+    ]
+  },
+  {
+    "text": "vàng da",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      400,
+      407
+    ]
+  },
+  {
+    "text": "vàng niêm mạc",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      409,
+      422
+    ]
+  },
+  {
+    "text": "sốt",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      441,
+      444
+    ]
+  },
+  {
+    "text": "mệt mỏi",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      448,
+      455
+    ]
+  },
+  {
+    "text": "BC",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      544,
+      546
+    ]
+  },
+  {
+    "text": "5,38 G/l",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      547,
+      555
+    ]
+  },
+  {
+    "text": "N 51,4%",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      557,
+      564
+    ]
+  },
+  {
+    "text": "HBsAg (+)",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      573,
+      582
+    ]
+  },
+  {
+    "text": "Anti HBe",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      584,
+      592
+    ]
+  },
+  {
+    "text": "Anti HBc IgG",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      605,
+      617
+    ]
+  },
+  {
+    "text": "Anti HBc IgM",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      623,
+      635
+    ]
+  },
+  {
+    "text": "da niêm mạc vàng",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      712,
+      728
+    ]
+  },
+  {
+    "text": "sốt",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      741,
+      744
+    ]
+  },
+  {
+    "text": "nước tiểu ít hơn so với bình thường",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      758,
+      793
+    ]
+  },
+  {
+    "text": "vàng sậm như nước vối",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      795,
+      816
+    ]
+  },
+  {
+    "text": "vàng da giảm",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      860,
+      872
+    ]
+  },
+  {
+    "text": "1000ml/24h",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      934,
+      944
+    ]
+  },
+  {
+    "text": "Gan to dưới bờ sườn 3cm, bờ tù, mật độ mềm, bề mặt nhẵn, ấn tức. ",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      954,
+      1019
+    ]
+  },
+  {
+    "text": "Bilirubin  toàn phần: 43 mmol/l; trực tiếp: 27 mmol/l\n",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1053,
+      1107
+    ]
+  },
+  {
+    "text": " Ure: 5,9 mmol/l; Creatinin: 89 micromol/l",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1114,
+      1156
+    ]
+  },
+  {
+    "text": "GOT: 542 U/l; GPT: 628 U/l; GGT: 234 U/l\n        Chỉ số Deritis = GOT/GPT < 1",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1224,
+      1301
+    ]
+  },
+  {
+    "text": "Tỷ lệ prothrombin: 55%",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1328,
+      1350
+    ]
+  },
+  {
+    "text": " vàng da,",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1409,
+      1418
+    ]
+  },
+  {
+    "text": " vàng mắt",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1418,
+      1427
+    ]
+  },
+  {
+    "text": "nhiễm virus viêm gan B, C",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      1566,
+      1591
+    ],
+    "candidates": []
+  },
+  {
+    "text": "viêm gan B",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      1653,
+      1663
+    ],
+    "candidates": []
+  },
+  {
+    "text": "mệt mỏi hết, vàng da giảm nhẹ, ăn ngủ được, đánh răng không chảy máu, tiểu tiện 1000ml/24h, nước tiểu vàng nhẹ, đại tiện phân thành khuôn. Không xuất hiện thêm triệu chứng gì",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      1712,
+      1886
+    ]
+  },
+  {
+    "text": "khó chịu vùng ngực",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      1970,
+      1988
+    ]
+  },
+  {
+    "text": "Glucose 5%",
+    "type": "THUỐC",
+    "assertions": [],
+    "position": [
+      1997,
+      2007
+    ],
+    "candidates": []
+  },
+  {
+    "text": "Philpovin 5g",
+    "type": "THUỐC",
+    "assertions": [],
+    "position": [
+      2108,
+      2120
+    ],
+    "candidates": []
+  },
+  {
+    "text": "Fortex 25mg",
+    "type": "THUỐC",
+    "assertions": [],
+    "position": [
+      2230,
+      2241
+    ],
+    "candidates": []
+  },
+  {
+    "text": "Vitamin 3B",
+    "type": "THUỐC",
+    "assertions": [],
+    "position": [
+      2332,
+      2342
+    ],
+    "candidates": []
+  },
+  {
+    "text": "cấp tính do virus B thể thông thường điển hình mức độ nặng giai đoạn toàn phát",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      2386,
+      2464
+    ],
+    "candidates": [
+      "B16.9"
+    ]
+  }
+]

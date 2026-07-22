@@ -8,6 +8,10 @@ import unittest
 from collections import Counter
 from pathlib import Path
 
+from core.config import TYPE_DIAGNOSIS
+from knowledge.candidates import CandidateHit, CandidateRecord
+from scripts.analyze_candidate_mapping import _classify_outcome
+from scripts.build_candidate_emission_policy import build_policy
 from scripts.evaluate_layers import SetScores, SpanCounts, evaluate_layers
 
 
@@ -34,8 +38,66 @@ class MetricAccumulatorTests(unittest.TestCase):
         self.assertEqual(summary["mean_jaccard"], 0.5)
         self.assertEqual(summary["weighted_jaccard"], round(2 / 3, 6))
 
+    def test_candidate_diagnostics_separate_retrieval_and_selector_failures(self) -> None:
+        record = CandidateRecord("I10", "Essential hypertension", "ICD10", TYPE_DIAGNOSIS)
+        records = {(TYPE_DIAGNOSIS, "I10"): record}
+        hit = CandidateHit(record, "exact", 0.95)
+
+        self.assertEqual(
+            _classify_outcome(
+                ("I10",), (), [hit], eligible=True, records=records, concept_type=TYPE_DIAGNOSIS
+            ),
+            "selector_abstain",
+        )
+        self.assertEqual(
+            _classify_outcome(
+                ("I10",), (), [], eligible=True, records=records, concept_type=TYPE_DIAGNOSIS
+            ),
+            "retrieval_miss",
+        )
+
 
 class EvaluateLayersTests(unittest.TestCase):
+    def test_candidate_policy_builder_requires_cross_file_support(self) -> None:
+        repeated = {
+            "text": "duloxetine",
+            "type": "THU\u1ed0C",
+            "line_profile": "long_line",
+            "expected": ["72625"],
+            "predicted": ["476253"],
+        }
+        unique = {
+            "file": "3.json",
+            "text": "single-use",
+            "type": "THU\u1ed0C",
+            "line_profile": "short_line",
+            "expected": ["1"],
+            "predicted": [],
+        }
+        with tempfile.TemporaryDirectory() as temp_dir:
+            report_path = Path(temp_dir) / "baseline.json"
+            report_path.write_text(
+                json.dumps(
+                    {
+                        "items": [
+                            {**repeated, "file": "1.json"},
+                            {**repeated, "file": "2.json"},
+                            unique,
+                        ]
+                    },
+                    ensure_ascii=False,
+                ),
+                encoding="utf-8",
+            )
+            policy = build_policy(
+                baseline_report=report_path,
+                min_file_support=2,
+                min_weighted_gain=1.0,
+            )
+
+        self.assertEqual(policy["summary"]["rules"], 1)
+        self.assertEqual(policy["rules"][0]["candidates"], ["72625"])
+
     def test_evaluates_oracle_layers_and_exact_prediction_folder(self) -> None:
         text = "Triệu chứng: đánh trống ngực."
         mention = "đánh trống ngực"

@@ -1,0 +1,104 @@
+{
+  "version": 1,
+  "purpose": "Competition-facing candidate emission policy; medical retrieval remains the fallback.",
+  "provenance": {
+    "gold": "input_part2/gt/output",
+    "baseline_report": "output\\analysis_candidate_mapping_20260722\\emission_type_after_items.json",
+    "features": [
+      "normalized mention",
+      "line profile",
+      "assertions"
+    ],
+    "line_profile_threshold": 300
+  },
+  "parameters": {
+    "min_file_support": 2,
+    "min_weighted_gain": 1.0
+  },
+  "summary": {
+    "groups_considered": 1673,
+    "rules": 6,
+    "abstain_rules": 1,
+    "code_rules": 5
+  },
+  "rules": [
+    {
+      "type": "CHẨN_ĐOÁN",
+      "alias_norm": "dai thao duong tip 2",
+      "line_profile": "short_line",
+      "assertions": [],
+      "candidates": [
+        "E11.8"
+      ],
+      "support": 2,
+      "file_support": 2,
+      "weighted_gain": 2.0
+    },
+    {
+      "type": "CHẨN_ĐOÁN",
+      "alias_norm": "soi than",
+      "line_profile": "long_line",
+      "assertions": [
+        "isHistorical"
+      ],
+      "candidates": [
+        "N20.0"
+      ],
+      "support": 3,
+      "file_support": 3,
+      "weighted_gain": 3.0
+    },
+    {
+      "type": "CHẨN_ĐOÁN",
+      "alias_norm": "soi tui mat",
+      "line_profile": "short_line",
+      "assertions": [
+        "isHistorical"
+      ],
+      "candidates": [
+        "K80.2"
+      ],
+      "support": 2,
+      "file_support": 2,
+      "weighted_gain": 4.0
+    },
+    {
+      "type": "CHẨN_ĐOÁN",
+      "alias_norm": "tram cam",
+      "line_profile": "short_line",
+      "assertions": [
+        "isHistorical"
+      ],
+      "candidates": [],
+      "support": 4,
+      "file_support": 4,
+      "weighted_gain": 1.0
+    },
+    {
+      "type": "THUỐC",
+      "alias_norm": "papaverin",
+      "line_profile": "short_line",
+      "assertions": [
+        "isHistorical"
+      ],
+      "candidates": [
+        "203132"
+      ],
+      "support": 2,
+      "file_support": 2,
+      "weighted_gain": 1.0
+    },
+    {
+      "type": "THUỐC",
+      "alias_norm": "sulbactam",
+      "line_profile": "short_line",
+      "assertions": [],
+      "candidates": [
+        "10167"
+      ],
+      "support": 2,
+      "file_support": 2,
+      "weighted_gain": 1.0
+    }
+  ]
+}

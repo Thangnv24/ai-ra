@@ -1,0 +1,703 @@
+{
+  "files": 100,
+  "input_dir": "D:\\downloads\\ai-race\\input_part2\\input\\input",
+  "gold_dir": "D:\\downloads\\ai-race\\input_part2\\gt\\output",
+  "candidate_dir": "D:\\downloads\\ai-race\\data\\candidates",
+  "policy_path": "D:\\downloads\\ai-race\\data\\candidates\\candidate_emission_policy.json",
+  "retrieval_limit": 30,
+  "min_training_file_support": 1,
+  "validation": {},
+  "index": {
+    "records": 346555,
+    "aliases": 553970,
+    "load_seconds": 101.148,
+    "unique_queries": 1720
+  },
+  "summary": {
+    "all": {
+      "mentions": 3028,
+      "gold_nonempty": 567,
+      "gold_nonempty_rate": 0.187252,
+      "predicted_nonempty": 694,
+      "predicted_nonempty_rate": 0.229194,
+      "exact_set_rate": 0.950793,
+      "weighted_jaccard": 0.954482,
+      "all_empty_weighted_jaccard": 0.683042,
+      "lift_over_all_empty": 0.27144,
+      "positive_exact_rate": 0.970018,
+      "positive_overlap_rate": 0.973545,
+      "negative_abstain_rate": 0.946363,
+      "kb_all_codes_coverage": 0.998236,
+      "retrieval_hit_at_1": 0.973545,
+      "retrieval_hit_at_5": 0.998236,
+      "retrieval_hit_at_30": 0.998236,
+      "outcomes": {
+        "correct_abstain": 2329,
+        "exact_positive": 550,
+        "false_positive": 132,
+        "selector_wrong": 10,
+        "context_gate_abstain": 3,
+        "kb_missing": 1,
+        "selector_abstain": 1,
+        "partial_positive": 2
+      },
+      "false_positive_sources": {
+        "medication_lexical": 51,
+        "curated_exact": 35,
+        "exact": 29,
+        "drug_unit": 10,
+        "diagnosis_lexical": 6,
+        "drug_no_count": 2,
+        "drug_core": 1,
+        "drug_context_core": 1,
+        "diagnosis_with_benh_prefix": 1
+      }
+    },
+    "CHẨN_ĐOÁN": {
+      "mentions": 2566,
+      "gold_nonempty": 427,
+      "gold_nonempty_rate": 0.166407,
+      "predicted_nonempty": 460,
+      "predicted_nonempty_rate": 0.179267,
+      "exact_set_rate": 0.979345,
+      "weighted_jaccard": 0.977674,
+      "all_empty_weighted_jaccard": 0.712762,
+      "lift_over_all_empty": 0.264912,
+      "positive_exact_rate": 0.962529,
+      "positive_overlap_rate": 0.967213,
+      "negative_abstain_rate": 0.982702,
+      "kb_all_codes_coverage": 1.0,
+      "retrieval_hit_at_1": 0.967213,
+      "retrieval_hit_at_5": 1.0,
+      "retrieval_hit_at_30": 1.0,
+      "outcomes": {
+        "correct_abstain": 2102,
+        "exact_positive": 411,
+        "false_positive": 37,
+        "selector_wrong": 10,
+        "context_gate_abstain": 3,
+        "selector_abstain": 1,
+        "partial_positive": 2
+      },
+      "false_positive_sources": {
+        "curated_exact": 27,
+        "exact": 7,
+        "diagnosis_lexical": 6,
+        "diagnosis_with_benh_prefix": 1
+      }
+    },
+    "THUỐC": {
+      "mentions": 462,
+      "gold_nonempty": 140,
+      "gold_nonempty_rate": 0.30303,
+      "predicted_nonempty": 234,
+      "predicted_nonempty_rate": 0.506494,
+      "exact_set_rate": 0.792208,
+      "weighted_jaccard": 0.83887,
+      "all_empty_weighted_jaccard": 0.534884,
+      "lift_over_all_empty": 0.303987,
+      "positive_exact_rate": 0.992857,
+      "positive_overlap_rate": 0.992857,
+      "negative_abstain_rate": 0.704969,
+      "kb_all_codes_coverage": 0.992857,
+      "retrieval_hit_at_1": 0.992857,
+      "retrieval_hit_at_5": 0.992857,
+      "retrieval_hit_at_30": 0.992857,
+      "outcomes": {
+        "false_positive": 95,
+        "correct_abstain": 227,
+        "exact_positive": 139,
+        "kb_missing": 1
+      },
+      "false_positive_sources": {
+        "medication_lexical": 51,
+        "exact": 22,
+        "drug_unit": 10,
+        "curated_exact": 8,
+        "drug_no_count": 2,
+        "drug_core": 1,
+        "drug_context_core": 1
+      }
+    }
+  },
+  "line_profiles": {
+    "CHẨN_ĐOÁN:short_line": {
+      "mentions": 396,
+      "gold_nonempty": 315,
+      "gold_nonempty_rate": 0.795455,
+      "predicted_nonempty": 347,
+      "predicted_nonempty_rate": 0.876263,
+      "exact_set_rate": 0.883838,
+      "weighted_jaccard": 0.920502,
+      "all_empty_weighted_jaccard": 0.112971,
+      "lift_over_all_empty": 0.807531,
+      "positive_exact_rate": 0.95873,
+      "positive_overlap_rate": 0.965079,
+      "negative_abstain_rate": 0.592593,
+      "kb_all_codes_coverage": 1.0,
+      "retrieval_hit_at_1": 0.955556,
+      "retrieval_hit_at_5": 1.0,
+      "retrieval_hit_at_30": 1.0,
+      "outcomes": {
+        "exact_positive": 302,
+        "correct_abstain": 48,
+        "false_positive": 33,
+        "selector_wrong": 10,
+        "selector_abstain": 1,
+        "partial_positive": 2
+      },
+      "false_positive_sources": {
+        "curated_exact": 23,
+        "exact": 7,
+        "diagnosis_lexical": 6,
+        "diagnosis_with_benh_prefix": 1
+      }
+    },
+    "CHẨN_ĐOÁN:long_line": {
+      "mentions": 2170,
+      "gold_nonempty": 112,
+      "gold_nonempty_rate": 0.051613,
+      "predicted_nonempty": 113,
+      "predicted_nonempty_rate": 0.052074,
+      "exact_set_rate": 0.996774,
+      "weighted_jaccard": 0.995622,
+      "all_empty_weighted_jaccard": 0.901051,
+      "lift_over_all_empty": 0.094571,
+      "positive_exact_rate": 0.973214,
+      "positive_overlap_rate": 0.973214,
+      "negative_abstain_rate": 0.998056,
+      "kb_all_codes_coverage": 1.0,
+      "retrieval_hit_at_1": 1.0,
+      "retrieval_hit_at_5": 1.0,
+      "retrieval_hit_at_30": 1.0,
+      "outcomes": {
+        "correct_abstain": 2054,
+        "exact_positive": 109,
+        "false_positive": 4,
+        "context_gate_abstain": 3
+      },
+      "false_positive_sources": {
+        "curated_exact": 4
+      }
+    },
+    "THUỐC:short_line": {
+      "mentions": 354,
+      "gold_nonempty": 66,
+      "gold_nonempty_rate": 0.186441,
+      "predicted_nonempty": 143,
+      "predicted_nonempty_rate": 0.403955,
+      "exact_set_rate": 0.776836,
+      "weighted_jaccard": 0.809524,
+      "all_empty_weighted_jaccard": 0.685714,
+      "lift_over_all_empty": 0.12381,
+      "positive_exact_rate": 0.984848,
+      "positive_overlap_rate": 0.984848,
+      "negative_abstain_rate": 0.729167,
+      "kb_all_codes_coverage": 0.984848,
+      "retrieval_hit_at_1": 0.984848,
+      "retrieval_hit_at_5": 0.984848,
+      "retrieval_hit_at_30": 0.984848,
+      "outcomes": {
+        "false_positive": 78,
+        "correct_abstain": 210,
+        "exact_positive": 65,
+        "kb_missing": 1
+      },
+      "false_positive_sources": {
+        "medication_lexical": 51,
+        "exact": 10,
+        "drug_unit": 10,
+        "curated_exact": 6,
+        "drug_no_count": 1
+      }
+    },
+    "THUỐC:long_line": {
+      "mentions": 108,
+      "gold_nonempty": 74,
+      "gold_nonempty_rate": 0.685185,
+      "predicted_nonempty": 91,
+      "predicted_nonempty_rate": 0.842593,
+      "exact_set_rate": 0.842593,
+      "weighted_jaccard": 0.906593,
+      "all_empty_weighted_jaccard": 0.186813,
+      "lift_over_all_empty": 0.71978,
+      "positive_exact_rate": 1.0,
+      "positive_overlap_rate": 1.0,
+      "negative_abstain_rate": 0.5,
+      "kb_all_codes_coverage": 1.0,
+      "retrieval_hit_at_1": 1.0,
+      "retrieval_hit_at_5": 1.0,
+      "retrieval_hit_at_30": 1.0,
+      "outcomes": {
+        "exact_positive": 74,
+        "false_positive": 17,
+        "correct_abstain": 17
+      },
+      "false_positive_sources": {
+        "exact": 12,
+        "curated_exact": 2,
+        "drug_core": 1,
+        "drug_context_core": 1,
+        "drug_no_count": 1
+      }
+    }
+  },
+  "top_errors": {
+    "CHẨN_ĐOÁN": [
+      {
+        "count": 3,
+        "outcome": "false_positive",
+        "text": "tăng huyết áp",
+        "expected": [],
+        "predicted": [
+          "I10"
+        ]
+      },
+      {
+        "count": 2,
+        "outcome": "false_positive",
+        "text": "tắc ruột",
+        "expected": [],
+        "predicted": [
+          "C16.9",
+          "K91.3"
+        ]
+      },
+      {
+        "count": 2,
+        "outcome": "false_positive",
+        "text": "Tăng huyết áp",
+        "expected": [],
+        "predicted": [
+          "I10"
+        ]
+      },
+      {
+        "count": 1,
+        "outcome": "false_positive",
+        "text": "thực quản Barrett",
+        "expected": [],
+        "predicted": [
+          "K22.7"
+        ]
+      },
+      {
+        "count": 1,
+        "outcome": "selector_wrong",
+        "text": "xơ gan",
+        "expected": [
+          "K74.6"
+        ],
+        "predicted": [
+          "K70.3"
+        ]
+      },
+      {
+        "count": 1,
+        "outcome": "false_positive",
+        "text": "Ngưng thở khi ngủ",
+        "expected": [],
+        "predicted": [
+          "G47.3"
+        ]
+      },
+      {
+        "count": 1,
+        "outcome": "context_gate_abstain",
+        "text": "gãy xương sườn",
+        "expected": [
+          "S22.3"
+        ],
+        "predicted": []
+      },
+      {
+        "count": 1,
+        "outcome": "selector_wrong",
+        "text": "Suy hô hấp",
+        "expected": [
+          "J96.9"
+        ],
+        "predicted": [
+          "J96.0"
+        ]
+      },
+      {
+        "count": 1,
+        "outcome": "selector_wrong",
+        "text": "ĐTĐ type 2",
+        "expected": [
+          "E11.8"
+        ],
+        "predicted": [
+          "E11.4†"
+        ]
+      },
+      {
+        "count": 1,
+        "outcome": "context_gate_abstain",
+        "text": "Polyp đại tràng",
+        "expected": [
+          "K63.5"
+        ],
+        "predicted": []
+      },
+      {
+        "count": 1,
+        "outcome": "false_positive",
+        "text": "Sỏi thận",
+        "expected": [],
+        "predicted": [
+          "N20.0"
+        ]
+      },
+      {
+        "count": 1,
+        "outcome": "false_positive",
+        "text": "thiếu máu do thiếu sắt",
+        "expected": [],
+        "predicted": [
+          "D50.0"
+        ]
+      },
+      {
+        "count": 1,
+        "outcome": "false_positive",
+        "text": "rối loạn lipid máu",
+        "expected": [],
+        "predicted": [
+          "E78.8"
+        ]
+      },
+      {
+        "count": 1,
+        "outcome": "context_gate_abstain",
+        "text": " lạm dụng rượu",
+        "expected": [
+          "F10.1"
+        ],
+        "predicted": []
+      },
+      {
+        "count": 1,
+        "outcome": "selector_wrong",
+        "text": "Viêm gan B,",
+        "expected": [
+          "B18.10"
+        ],
+        "predicted": [
+          "B18.1"
+        ]
+      },
+      {
+        "count": 1,
+        "outcome": "false_positive",
+        "text": "Cơn đau thắt ngực",
+        "expected": [],
+        "predicted": [
+          "I20.0"
+        ]
+      },
+      {
+        "count": 1,
+        "outcome": "selector_abstain",
+        "text": "Trầm cảm",
+        "expected": [
+          "F32.8"
+        ],
+        "predicted": []
+      },
+      {
+        "count": 1,
+        "outcome": "false_positive",
+        "text": "chấn thương đám rối thần kinh cánh tay",
+        "expected": [],
+        "predicted": [
+          "S14.3"
+        ]
+      },
+      {
+        "count": 1,
+        "outcome": "false_positive",
+        "text": "Gout",
+        "expected": [],
+        "predicted": [
+          "M10.00"
+        ]
+      },
+      {
+        "count": 1,
+        "outcome": "false_positive",
+        "text": "Gout ",
+        "expected": [],
+        "predicted": [
+          "M10.00"
+        ]
+      }
+    ],
+    "THUỐC": [
+      {
+        "count": 3,
+        "outcome": "false_positive",
+        "text": "Lipitor 10mg x 1 viên",
+        "expected": [],
+        "predicted": [
+          "617313"
+        ]
+      },
+      {
+        "count": 2,
+        "outcome": "false_positive",
+        "text": "Crestor 10 mg",
+        "expected": [],
+        "predicted": [
+          "576402"
+        ]
+      },
+      {
+        "count": 2,
+        "outcome": "false_positive",
+        "text": "progesterone",
+        "expected": [],
+        "predicted": [
+          "8727"
+        ]
+      },
+      {
+        "count": 2,
+        "outcome": "false_positive",
+        "text": " Aspirin Stella 81mg (Aspirin)",
+        "expected": [],
+        "predicted": [
+          "243670"
+        ]
+      },
+      {
+        "count": 2,
+        "outcome": "false_positive",
+        "text": "Aspirin Stella 81mg (Aspirin) ",
+        "expected": [],
+        "predicted": [
+          "243670"
+        ]
+      },
+      {
+        "count": 2,
+        "outcome": "false_positive",
+        "text": " Plavix 75mg (Clopidogrel base)",
+        "expected": [],
+        "predicted": [
+          "573094"
+        ]
+      },
+      {
+        "count": 2,
+        "outcome": "false_positive",
+        "text": "Lipitor 20mg",
+        "expected": [],
+        "predicted": [
+          "617317"
+        ]
+      },
+      {
+        "count": 2,
+        "outcome": "false_positive",
+        "text": "Betaloc Zok 25mg (Metoprolol)",
+        "expected": [],
+        "predicted": [
+          "430618"
+        ]
+      },
+      {
+        "count": 2,
+        "outcome": "false_positive",
+        "text": "Crestor 10mg (Rosuvastatin)",
+        "expected": [],
+        "predicted": [
+          "401962"
+        ]
+      },
+      {
+        "count": 2,
+        "outcome": "false_positive",
+        "text": "Jardiance 10mg ",
+        "expected": [],
+        "predicted": [
+          "1545660"
+        ]
+      },
+      {
+        "count": 2,
+        "outcome": "false_positive",
+        "text": "Lipitor 20mg (Atorvastatin )",
+        "expected": [],
+        "predicted": [
+          "617310"
+        ]
+      },
+      {
+        "count": 2,
+        "outcome": "false_positive",
+        "text": "Ertapenem ",
+        "expected": [],
+        "predicted": [
+          "325642"
+        ]
+      },
+      {
+        "count": 2,
+        "outcome": "false_positive",
+        "text": "Duphalac ",
+        "expected": [],
+        "predicted": [
+          "151674"
+        ]
+      },
+      {
+        "count": 2,
+        "outcome": "false_positive",
+        "text": "Lasix 40mg",
+        "expected": [],
+        "predicted": [
+          "565458"
+        ]
+      },
+      {
+        "count": 1,
+        "outcome": "false_positive",
+        "text": "Solumedrol",
+        "expected": [],
+        "predicted": [
+          "203856"
+        ]
+      },
+      {
+        "count": 1,
+        "outcome": "false_positive",
+        "text": " crestor 10mg",
+        "expected": [],
+        "predicted": [
+          "576402"
+        ]
+      },
+      {
+        "count": 1,
+        "outcome": "false_positive",
+        "text": "Crestor 10 mg ",
+        "expected": [],
+        "predicted": [
+          "576402"
+        ]
+      },
+      {
+        "count": 1,
+        "outcome": "false_positive",
+        "text": " Spironolacton 50 mg ",
+        "expected": [],
+        "predicted": [
+          "317508"
+        ]
+      },
+      {
+        "count": 1,
+        "outcome": "false_positive",
+        "text": "EpiPen",
+        "expected": [],
+        "predicted": [
+          "727341"
+        ]
+      },
+      {
+        "count": 1,
+        "outcome": "false_positive",
+        "text": "Spironolacton 50 mg ",
+        "expected": [],
+        "predicted": [
+          "317508"
+        ]
+      }
+    ]
+  },
+  "worst_files": [
+    {
+      "file": "81.json",
+      "weighted_jaccard": 0.787234
+    },
+    {
+      "file": "36.json",
+      "weighted_jaccard": 0.823529
+    },
+    {
+      "file": "38.json",
+      "weighted_jaccard": 0.833333
+    },
+    {
+      "file": "56.json",
+      "weighted_jaccard": 0.833333
+    },
+    {
+      "file": "5.json",
+      "weighted_jaccard": 0.85
+    },
+    {
+      "file": "49.json",
+      "weighted_jaccard": 0.857143
+    },
+    {
+      "file": "95.json",
+      "weighted_jaccard": 0.863636
+    },
+    {
+      "file": "55.json",
+      "weighted_jaccard": 0.866667
+    },
+    {
+      "file": "40.json",
+      "weighted_jaccard": 0.869565
+    },
+    {
+      "file": "30.json",
+      "weighted_jaccard": 0.875
+    },
+    {
+      "file": "58.json",
+      "weighted_jaccard": 0.88
+    },
+    {
+      "file": "23.json",
+      "weighted_jaccard": 0.888889
+    },
+    {
+      "file": "57.json",
+      "weighted_jaccard": 0.892857
+    },
+    {
+      "file": "84.json",
+      "weighted_jaccard": 0.906977
+    },
+    {
+      "file": "48.json",
+      "weighted_jaccard": 0.913043
+    },
+    {
+      "file": "93.json",
+      "weighted_jaccard": 0.914894
+    },
+    {
+      "file": "29.json",
+      "weighted_jaccard": 0.918033
+    },
+    {
+      "file": "64.json",
+      "weighted_jaccard": 0.918367
+    },
+    {
+      "file": "21.json",
+      "weighted_jaccard": 0.923077
+    },
+    {
+      "file": "32.json",
+      "weighted_jaccard": 0.923077
+    }
+  ],
+  "timing_seconds": 279.954
+}

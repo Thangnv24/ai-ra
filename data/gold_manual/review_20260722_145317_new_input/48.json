@@ -1,0 +1,193 @@
+[
+  {
+    "text": "không có lỗ tai",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isFamily"
+    ],
+    "position": [
+      84,
+      99
+    ]
+  },
+  {
+    "text": "vành tai đầy đủ",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isFamily"
+    ],
+    "position": [
+      108,
+      123
+    ]
+  },
+  {
+    "text": "đo âm tai",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      213,
+      222
+    ]
+  },
+  {
+    "text": "nghe nói bình thường",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isFamily"
+    ],
+    "position": [
+      250,
+      270
+    ]
+  },
+  {
+    "text": "mọi sinh hoạt bình thường",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isFamily"
+    ],
+    "position": [
+      272,
+      297
+    ]
+  },
+  {
+    "text": "phát triển đều",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isFamily"
+    ],
+    "position": [
+      299,
+      313
+    ]
+  },
+  {
+    "text": "vành tai không phát triển đều",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isFamily"
+    ],
+    "position": [
+      375,
+      404
+    ]
+  },
+  {
+    "text": "nhỏ hơn tai còn lại",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isFamily"
+    ],
+    "position": [
+      409,
+      428
+    ]
+  },
+  {
+    "text": "bên tai trái thì rất to",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isFamily"
+    ],
+    "position": [
+      441,
+      464
+    ]
+  },
+  {
+    "text": "nghe bìng thường",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isFamily"
+    ],
+    "position": [
+      546,
+      562
+    ]
+  },
+  {
+    "text": "dị tật thiểu sản vành tai",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isFamily"
+    ],
+    "position": [
+      1042,
+      1067
+    ],
+    "candidates": [
+      "Q17.2"
+    ]
+  },
+  {
+    "text": "tịt ống tai ngoài bẩm sinh",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isFamily"
+    ],
+    "position": [
+      1071,
+      1097
+    ],
+    "candidates": [
+      "Q16.1"
+    ]
+  },
+  {
+    "text": "phát triển tốt",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isFamily"
+    ],
+    "position": [
+      1190,
+      1204
+    ]
+  },
+  {
+    "text": "phản xạ được âm thanh",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isFamily"
+    ],
+    "position": [
+      1214,
+      1235
+    ]
+  },
+  {
+    "text": "tai trái khỏe mạnh",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isFamily"
+    ],
+    "position": [
+      1272,
+      1290
+    ]
+  },
+  {
+    "text": "nghe khá tốt",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isFamily"
+    ],
+    "position": [
+      1333,
+      1345
+    ]
+  },
+  {
+    "text": "chỉ nghe một bên",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isFamily"
+    ],
+    "position": [
+      1358,
+      1374
+    ]
+  }
+]

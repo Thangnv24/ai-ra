@@ -45,7 +45,7 @@ class TextUnit:
 
 
 class LLMEntityExtractor:
-    def __init__(self, llm_client: Any, max_chars: int = 1000, overlap: int = 0) -> None:
+    def __init__(self, llm_client: Any, max_chars: int = 650, overlap: int = 0) -> None:
         self.llm_client = llm_client
         self.max_chars = max_chars
         self.overlap = overlap
@@ -134,6 +134,7 @@ def _chunk_payload(
     return {
         "chunk_id": chunk.chunk_id,
         "section": chunk.section,
+        "structure_role": chunk.structure_role,
         "start": chunk.start,
         "end": chunk.end,
         "text": chunk.text,
@@ -151,12 +152,22 @@ def _chunk_payload(
 
 def _neighbor_context(chunks: list[TextChunk], index: int, max_chars: int = 240) -> tuple[str, str]:
     chunk = chunks[index]
-    case_id = chunk.section.split(":", 1)[0]
+    scope = chunk.context_scope or chunk.section.split(":", 1)[0]
     before = ""
     after = ""
-    if index > 0 and chunks[index - 1].section.split(":", 1)[0] == case_id:
+    previous_scope = (
+        chunks[index - 1].context_scope or chunks[index - 1].section.split(":", 1)[0]
+        if index > 0
+        else ""
+    )
+    next_scope = (
+        chunks[index + 1].context_scope or chunks[index + 1].section.split(":", 1)[0]
+        if index + 1 < len(chunks)
+        else ""
+    )
+    if index > 0 and previous_scope == scope:
         before = chunks[index - 1].text[-max_chars:]
-    if index + 1 < len(chunks) and chunks[index + 1].section.split(":", 1)[0] == case_id:
+    if index + 1 < len(chunks) and next_scope == scope:
         after = chunks[index + 1].text[:max_chars]
     return before, after
 

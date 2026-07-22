@@ -27,6 +27,9 @@ def build_entity_extraction_prompt(chunk: dict[str, Any]) -> str:
             "Be exhaustive. Do not summarize the case or return only the most important diagnoses; list every visible medical mention occurrence.",
             "Return every medical mention occurrence separately, including repeated text at different positions.",
             "Extract only from target_text. context_before and context_after are classification context and must never be quoted.",
+            "structure_role describes the rhetorical block. Use it to interpret local wording, but still extract every visible medical mention from every role.",
+            "For question, answer, and medical_article blocks, extract stated medical terms exactly without inventing an unstated patient diagnosis or finding.",
+            "For personal_history, family_history, epidemiology_history, and medical_history blocks, extract visible diagnoses, symptoms, tests, and drugs even though assertion context is assigned later.",
             "Return exact quotes only; each quote must appear verbatim in target_text.",
             "occurrence_index is zero-based among exact matches of the same quote inside target_text.",
             "Use only the allowed_types.",
@@ -54,6 +57,7 @@ def build_entity_extraction_prompt(chunk: dict[str, Any]) -> str:
         "target": {
             "chunk_id": chunk["chunk_id"],
             "section": chunk["section"],
+            "structure_role": chunk.get("structure_role", "document"),
             "context_before": chunk.get("context_before", ""),
             "target_text": chunk["text"],
             "context_after": chunk.get("context_after", ""),

@@ -1,0 +1,384 @@
+[
+  {
+    "text": "sì nước",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      255,
+      262
+    ]
+  },
+  {
+    "text": "đau bụng",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      386,
+      394
+    ]
+  },
+  {
+    "text": "chảy máu",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      403,
+      411
+    ]
+  },
+  {
+    "text": "trễ kinh",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      416,
+      424
+    ]
+  },
+  {
+    "text": "kinh tới rất đều",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      428,
+      444
+    ]
+  },
+  {
+    "text": "tắc ống dẫn trứng",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      757,
+      774
+    ],
+    "candidates": [
+      "N97.1"
+    ]
+  },
+  {
+    "text": "teo niêm mạc tử cung",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      801,
+      821
+    ],
+    "candidates": []
+  },
+  {
+    "text": "vô sinh",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      848,
+      855
+    ],
+    "candidates": []
+  },
+  {
+    "text": "ung thư cổ tử cung",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      895,
+      913
+    ],
+    "candidates": [
+      "C53.9"
+    ]
+  },
+  {
+    "text": "tăng nguy cơ mang thai ngoài tử cung",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      1001,
+      1037
+    ],
+    "candidates": []
+  },
+  {
+    "text": "mụn trứng cá",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      1227,
+      1239
+    ],
+    "candidates": [
+      "L70.9"
+    ]
+  },
+  {
+    "text": "nám",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      1241,
+      1244
+    ],
+    "candidates": []
+  },
+  {
+    "text": "tàn nhang",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      1246,
+      1255
+    ],
+    "candidates": [
+      "L81.2"
+    ]
+  },
+  {
+    "text": "sạm da",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      1257,
+      1263
+    ],
+    "candidates": []
+  },
+  {
+    "text": "bồn chồn",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1317,
+      1325
+    ]
+  },
+  {
+    "text": "lo lắng",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1327,
+      1334
+    ]
+  },
+  {
+    "text": "bứt rứt",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1336,
+      1343
+    ]
+  },
+  {
+    "text": "giảm ham muốn",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1361,
+      1374
+    ]
+  },
+  {
+    "text": "lãnh cảm",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1376,
+      1384
+    ]
+  },
+  {
+    "text": "suy giảm hưng phấn đối với tình dục",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1386,
+      1421
+    ]
+  },
+  {
+    "text": "ban đỏ",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1494,
+      1500
+    ]
+  },
+  {
+    "text": "đau khi sờ nắn",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1504,
+      1518
+    ]
+  },
+  {
+    "text": "sưng nề",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1649,
+      1656
+    ]
+  },
+  {
+    "text": "đau khi sờ nắn",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1657,
+      1671
+    ]
+  },
+  {
+    "text": "ban đỏ",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1694,
+      1700
+    ]
+  },
+  {
+    "text": "đau khi sờ nắn",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1741,
+      1755
+    ]
+  },
+  {
+    "text": "ban đỏ",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1778,
+      1784
+    ]
+  },
+  {
+    "text": "sưng nề",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1829,
+      1836
+    ]
+  },
+  {
+    "text": "chọc hút dịch",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1842,
+      1855
+    ]
+  },
+  {
+    "text": "cấy mẫu bệnh phẩm",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1864,
+      1881
+    ]
+  },
+  {
+    "text": "levafloxacin",
+    "type": "THUỐC",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      1914,
+      1926
+    ],
+    "candidates": []
+  },
+  {
+    "text": "cephalexin",
+    "type": "THUỐC",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      1930,
+      1940
+    ],
+    "candidates": []
+  },
+  {
+    "text": "ban đỏ",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1983,
+      1989
+    ]
+  },
+  {
+    "text": "chóng mặt",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      2008,
+      2017
+    ]
+  },
+  {
+    "text": "ban đỏ xuất hiện nhiểu ở vị trí phẫu thuật",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      2154,
+      2196
+    ]
+  },
+  {
+    "text": "đau khi sờ nắn vùng mổ",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      2203,
+      2225
+    ]
+  },
+  {
+    "text": "chóng mặt",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      2232,
+      2241
+    ]
+  },
+  {
+    "text": "sốt",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      2254,
+      2257
+    ]
+  },
+  {
+    "text": "ban đỏ ở vị trí phẫu thuật",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      2370,
+      2396
+    ]
+  }
+]

@@ -1,0 +1,534 @@
+[
+  {
+    "text": "BỆNH MẠCH VÀNH",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      1,
+      15
+    ],
+    "candidates": []
+  },
+  {
+    "text": "Bệnh mạch vành",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      52,
+      66
+    ],
+    "candidates": []
+  },
+  {
+    "text": "Bệnh mạch vành",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      76,
+      90
+    ],
+    "candidates": []
+  },
+  {
+    "text": "xơ vữa động mạch",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      208,
+      224
+    ],
+    "candidates": [
+      "I70.9"
+    ]
+  },
+  {
+    "text": "đau thắt ngực",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      288,
+      301
+    ],
+    "candidates": []
+  },
+  {
+    "text": "nhồi máu cơ tim",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      303,
+      318
+    ],
+    "candidates": []
+  },
+  {
+    "text": "suy tim",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      320,
+      327
+    ],
+    "candidates": [
+      "I50.9"
+    ]
+  },
+  {
+    "text": "Xơ vữa động mạch vành",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      399,
+      420
+    ],
+    "candidates": [
+      "I25.1"
+    ]
+  },
+  {
+    "text": "LDL-cholesterol",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      425,
+      440
+    ]
+  },
+  {
+    "text": "tăng",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      441,
+      445
+    ]
+  },
+  {
+    "text": "huyết khối",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      552,
+      562
+    ],
+    "candidates": []
+  },
+  {
+    "text": "tắc mạch cấp",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      565,
+      577
+    ],
+    "candidates": []
+  },
+  {
+    "text": "bệnh tim mạch",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      661,
+      674
+    ],
+    "candidates": []
+  },
+  {
+    "text": "Tăng huyết áp",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      716,
+      729
+    ],
+    "candidates": []
+  },
+  {
+    "text": "Đái tháo đường",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      733,
+      747
+    ],
+    "candidates": []
+  },
+  {
+    "text": "Rối loạn lipid máu",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      752,
+      770
+    ],
+    "candidates": []
+  },
+  {
+    "text": "Béo phì",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      774,
+      781
+    ],
+    "candidates": []
+  },
+  {
+    "text": "Đau thắt ngực",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      838,
+      851
+    ],
+    "candidates": []
+  },
+  {
+    "text": "đè nặng",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      909,
+      916
+    ]
+  },
+  {
+    "text": "bóp nghẹt",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      918,
+      927
+    ]
+  },
+  {
+    "text": "thắt chặt",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      929,
+      938
+    ]
+  },
+  {
+    "text": "Giảm khi nghỉ",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1005,
+      1018
+    ]
+  },
+  {
+    "text": "nitroglycerin",
+    "type": "THUỐC",
+    "assertions": [],
+    "position": [
+      1029,
+      1042
+    ],
+    "candidates": [
+      "4917"
+    ]
+  },
+  {
+    "text": "Đau thắt ngực",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      1061,
+      1074
+    ],
+    "candidates": []
+  },
+  {
+    "text": "Giảm khi nghỉ",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1109,
+      1122
+    ]
+  },
+  {
+    "text": "Hội chứng vành cấp",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      1124,
+      1142
+    ],
+    "candidates": []
+  },
+  {
+    "text": "Đau dữ dội, kéo dài",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1146,
+      1165
+    ]
+  },
+  {
+    "text": "Không đỡ khi nghỉ",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      1169,
+      1186
+    ]
+  },
+  {
+    "text": "Nhồi máu cơ tim",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      1198,
+      1213
+    ],
+    "candidates": []
+  },
+  {
+    "text": "Nhồi máu không ST chênh",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      1226,
+      1249
+    ],
+    "candidates": []
+  },
+  {
+    "text": "Đau thắt ngực",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      1253,
+      1266
+    ],
+    "candidates": []
+  },
+  {
+    "text": "ĐTĐ",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      1336,
+      1339
+    ],
+    "candidates": []
+  },
+  {
+    "text": "Khó thở",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1345,
+      1352
+    ]
+  },
+  {
+    "text": "Mệt",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1356,
+      1359
+    ]
+  },
+  {
+    "text": "Buồn nôn",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1363,
+      1371
+    ]
+  },
+  {
+    "text": "Đau thượng vị",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1375,
+      1388
+    ]
+  },
+  {
+    "text": "đau ngực",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1428,
+      1436
+    ]
+  },
+  {
+    "text": "viêm tụy",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      1517,
+      1525
+    ],
+    "candidates": []
+  },
+  {
+    "text": "rung nhĩ",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      1561,
+      1569
+    ],
+    "candidates": []
+  },
+  {
+    "text": "u ác của tuyến tiền liệt",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      1611,
+      1635
+    ],
+    "candidates": [
+      "C61"
+    ]
+  },
+  {
+    "text": "rối loạn cảm xúc lưỡng cực khác",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      1643,
+      1674
+    ],
+    "candidates": []
+  },
+  {
+    "text": "u ác của tuyến tiền liệt",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      1746,
+      1770
+    ],
+    "candidates": [
+      "C61"
+    ]
+  },
+  {
+    "text": "eliquis",
+    "type": "THUỐC",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      1813,
+      1820
+    ],
+    "candidates": []
+  },
+  {
+    "text": "rung nhĩ",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      1826,
+      1834
+    ],
+    "candidates": []
+  },
+  {
+    "text": "sốt",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1883,
+      1886
+    ]
+  },
+  {
+    "text": "đau bụng",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1890,
+      1898
+    ]
+  },
+  {
+    "text": "đau bụng trên",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      1951,
+      1964
+    ]
+  },
+  {
+    "text": "sốt nhẹ đến 38.3°C",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      2015,
+      2033
+    ]
+  },
+  {
+    "text": "đau hạ sườn phải tái phát, ngày càng nặng hơn",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      2043,
+      2088
+    ]
+  },
+  {
+    "text": "LDL",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      2296,
+      2299
+    ]
+  },
+  {
+    "text": "< 1,8 mmol/L (hoặc <70 mg/dL)",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      2300,
+      2329
+    ]
+  },
+  {
+    "text": "đau ngực",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      2353,
+      2361
+    ]
+  }
+]

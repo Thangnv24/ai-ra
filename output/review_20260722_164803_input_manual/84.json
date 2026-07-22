@@ -1,0 +1,60 @@
+[
+  {
+    "text": "thuốc giảm đau opioid",
+    "type": "THUỐC",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      55,
+      76
+    ],
+    "candidates": []
+  },
+  {
+    "text": "Nấm bẹn",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      114,
+      121
+    ],
+    "candidates": [
+      "B35.6"
+    ]
+  },
+  {
+    "text": "béo phì",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      306,
+      313
+    ],
+    "candidates": [
+      "E66.9"
+    ]
+  },
+  {
+    "text": "nhiễm nấm da",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      347,
+      359
+    ],
+    "candidates": [
+      "B35.9"
+    ]
+  },
+  {
+    "text": "thuốc kháng nấm dạng bôi",
+    "type": "THUỐC",
+    "assertions": [],
+    "position": [
+      415,
+      439
+    ],
+    "candidates": []
+  }
+]

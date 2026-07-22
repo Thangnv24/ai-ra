@@ -1,0 +1,220 @@
+[
+  {
+    "text": "da rất nhiều dầu",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      57,
+      73
+    ]
+  },
+  {
+    "text": "mụn trứng cá",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      80,
+      92
+    ],
+    "candidates": [
+      "L70.9"
+    ]
+  },
+  {
+    "text": "khám da liễu",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      130,
+      142
+    ]
+  },
+  {
+    "text": "đã đỡ hẳn",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      184,
+      193
+    ]
+  },
+  {
+    "text": "lên mụn trở lại",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      229,
+      244
+    ]
+  },
+  {
+    "text": "mụn ở trán",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      249,
+      259
+    ]
+  },
+  {
+    "text": "Trứng cá",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      681,
+      689
+    ],
+    "candidates": [
+      "L70.0"
+    ]
+  },
+  {
+    "text": "nhân mụn",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      744,
+      752
+    ]
+  },
+  {
+    "text": "sẹo",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      775,
+      778
+    ]
+  },
+  {
+    "text": "mụn mủ",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      780,
+      786
+    ]
+  },
+  {
+    "text": "nốt sần",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      788,
+      795
+    ]
+  },
+  {
+    "text": "Trứng cá",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      808,
+      816
+    ],
+    "candidates": [
+      "L70.0"
+    ]
+  },
+  {
+    "text": "Tăng sản tuyến bã nhờn",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      850,
+      872
+    ]
+  },
+  {
+    "text": "Sừng hóa nang lông bất thường",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      875,
+      904
+    ]
+  },
+  {
+    "text": "Viêm tại chỗ",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      926,
+      938
+    ]
+  },
+  {
+    "text": "Tretinoin",
+    "type": "THUỐC",
+    "assertions": [],
+    "position": [
+      962,
+      971
+    ],
+    "candidates": [
+      "10753"
+    ]
+  },
+  {
+    "text": "Trứng cá",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      982,
+      990
+    ],
+    "candidates": [
+      "L70.0"
+    ]
+  },
+  {
+    "text": "đau ngực trái cấp tính",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1115,
+      1137
+    ]
+  },
+  {
+    "text": "đau sau xương ức lan ra sau lưng",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1141,
+      1173
+    ]
+  },
+  {
+    "text": "sẹo",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1280,
+      1283
+    ]
+  },
+  {
+    "text": "mụn trứng cá",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      1333,
+      1345
+    ],
+    "candidates": [
+      "L70.9"
+    ]
+  },
+  {
+    "text": "nhân mụn",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1953,
+      1961
+    ]
+  }
+]

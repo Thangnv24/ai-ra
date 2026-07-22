@@ -17,6 +17,7 @@ from core.medication import (
     medication_tty_score,
     normalize_prescription_text,
     strip_drug_count,
+    strip_drug_context,
     strip_drug_modifiers,
     strip_drug_release_tokens,
     strip_drug_route_frequency,
@@ -47,9 +48,13 @@ class SlimCandidateIndex:
         self,
         records: dict[tuple[str, str], CandidateRecord],
         aliases: dict[tuple[str, str], tuple[str, ...]],
+        curated_aliases: dict[tuple[str, str], tuple[str, ...]] | None = None,
+        curated_profile_candidates: dict[tuple[str, str, str], tuple[str, ...]] | None = None,
     ) -> None:
         self.records = records
         self.aliases = aliases
+        self.curated_aliases = curated_aliases or {}
+        self.curated_profile_candidates = curated_profile_candidates or {}
         self.diagnosis_lexical_index = DiagnosisLexicalIndex.build(records, aliases)
         self.medication_lexical_index = MedicationLexicalIndex.build(records, aliases)
 
@@ -63,6 +68,19 @@ class SlimCandidateIndex:
 
         hits: list[CandidateHit] = []
         seen: set[str] = set()
+        exact_key = normalize_key(text)
+        for rank, code in enumerate(self.curated_aliases.get((concept_type, exact_key), ())):
+            record = self.records.get((concept_type, code))
+            if record is None or code in seen:
+                continue
+            seen.add(code)
+            hits.append(
+                CandidateHit(
+                    record=record,
+                    source="curated_exact",
+                    score=1.65 - min(rank, 20) * 0.025,
+                )
+            )
         for source, key in _query_variants(text, concept_type):
             codes = self.aliases.get((concept_type, key), ())
             for rank, code in enumerate(codes):
@@ -94,6 +112,19 @@ class SlimCandidateIndex:
                 hits.append(hit)
         hits.sort(key=lambda hit: (-hit.score, hit.record.priority, hit.record.code))
         return hits[:limit]
+
+    def candidates_for_profile(
+        self,
+        text: str,
+        concept_type: str,
+        source_text: str | None,
+        start: int | None,
+        end: int | None,
+    ) -> tuple[str, ...] | None:
+        profile = _candidate_line_profile(source_text, start, end)
+        return self.curated_profile_candidates.get(
+            (concept_type, normalize_key(text), profile),
+        )
 
 
 class MedicationLexicalIndex:
@@ -305,7 +336,11 @@ class DiagnosisLexicalIndex:
         return scored[:limit]
 
 
-def load_slim_candidate_index(candidate_dir: Path) -> SlimCandidateIndex:
+def load_slim_candidate_index(
+    candidate_dir: Path,
+    *,
+    min_training_file_support: int = 1,
+) -> SlimCandidateIndex:
     if not candidate_dir.exists():
         return SlimCandidateIndex.empty()
 
@@ -333,6 +368,33 @@ def load_slim_candidate_index(candidate_dir: Path) -> SlimCandidateIndex:
             for alias in _row_alias_norms(row):
                 _add_alias_code(inline_aliases, concept_type, alias, code)
 
+    curated_aliases: dict[tuple[str, str], tuple[str, ...]] = {}
+    curated_profile_candidates: dict[tuple[str, str, str], tuple[str, ...]] = {}
+    training_path = candidate_dir / "candidate_training_lexicon.json"
+    training_payload: dict[str, object] = {}
+    if training_path.exists():
+        raw_payload = json.loads(training_path.read_text(encoding="utf-8-sig"))
+        if isinstance(raw_payload, dict):
+            training_payload = raw_payload
+        for row in training_payload.get("supplemental_records") or []:
+            if not isinstance(row, dict):
+                continue
+            if min_training_file_support > 1:
+                continue
+            concept_type = str(row.get("type") or "")
+            code = str(row.get("code") or "").strip()
+            if concept_type not in CODED_TYPES or not code or (concept_type, code) in records:
+                continue
+            records[(concept_type, code)] = CandidateRecord(
+                code=code,
+                name=str(row.get("name") or ""),
+                system=str(row.get("system") or ""),
+                concept_type=concept_type,
+                priority=_safe_int(row.get("priority"), 20),
+                archive=bool(row.get("archive")),
+                ttys=tuple(str(item) for item in row.get("ttys") or () if item),
+            )
+
     aliases: dict[tuple[str, str], tuple[str, ...]] = {}
     alias_path = candidate_dir / "candidate_aliases.jsonl"
     if alias_path.exists():
@@ -354,7 +416,46 @@ def load_slim_candidate_index(candidate_dir: Path) -> SlimCandidateIndex:
         if key not in aliases:
             aliases[key] = tuple(_sort_codes(key[0], codes, records))
 
-    return SlimCandidateIndex(records, aliases)
+    for row in training_payload.get("aliases") or []:
+        if not isinstance(row, dict):
+            continue
+        concept_type = str(row.get("type") or "")
+        alias = normalize_key(str(row.get("alias_norm") or ""))
+        if concept_type not in CODED_TYPES or not alias:
+            continue
+        codes = tuple(
+            str(item.get("code") or "").strip()
+            for item in row.get("candidates") or []
+            if isinstance(item, dict)
+            and _safe_int(item.get("file_support"), 0) >= min_training_file_support
+            and str(item.get("code") or "").strip()
+            and (concept_type, str(item.get("code") or "").strip()) in records
+        )
+        if not codes:
+            continue
+        key = (concept_type, alias)
+        curated_aliases[key] = codes
+        aliases[key] = tuple(_unique_codes([*codes, *aliases.get(key, ())]))
+
+        for profile in row.get("profiles") or []:
+            if not isinstance(profile, dict):
+                continue
+            profile_name = str(profile.get("name") or "")
+            if profile_name not in {"short_line", "long_line"}:
+                continue
+            if _safe_int(profile.get("file_support"), 0) < min_training_file_support:
+                continue
+            raw_preferred = profile.get("preferred_candidates")
+            if not isinstance(raw_preferred, list):
+                continue
+            preferred = tuple(
+                str(code).strip()
+                for code in raw_preferred
+                if str(code).strip() and (concept_type, str(code).strip()) in records
+            )
+            curated_profile_candidates[(concept_type, alias, profile_name)] = preferred
+
+    return SlimCandidateIndex(records, aliases, curated_aliases, curated_profile_candidates)
 
 
 def _read_jsonl(path: Path):
@@ -422,6 +523,30 @@ def _sort_codes(
     )
 
 
+def _unique_codes(codes: list[str]) -> list[str]:
+    seen: set[str] = set()
+    output: list[str] = []
+    for code in codes:
+        if code and code not in seen:
+            seen.add(code)
+            output.append(code)
+    return output
+
+
+def _candidate_line_profile(
+    source_text: str | None,
+    start: int | None,
+    end: int | None,
+) -> str:
+    if source_text is None or start is None or end is None:
+        return "short_line"
+    line_start = source_text.rfind("\n", 0, start) + 1
+    line_end = source_text.find("\n", end)
+    if line_end < 0:
+        line_end = len(source_text)
+    return "short_line" if line_end - line_start < 300 else "long_line"
+
+
 def _query_variants(text: str, concept_type: str) -> list[tuple[str, str]]:
     key = normalize_key(text)
     variants: list[tuple[str, str]] = []
@@ -439,6 +564,9 @@ def _query_variants(text: str, concept_type: str) -> list[tuple[str, str]]:
         _add_variant(variants, "drug_core", drug_core)
         _add_variant(variants, "drug_no_release_token", strip_drug_release_tokens(drug_core))
         _add_variant(variants, "drug_ingredient", strip_drug_modifiers(normalized_drug))
+        contextual_core = strip_drug_context(normalized_drug)
+        _add_variant(variants, "drug_context_core", contextual_core)
+        _add_variant(variants, "drug_context_ingredient", strip_drug_modifiers(contextual_core))
     elif concept_type == TYPE_DIAGNOSIS:
         _add_variant(variants, "diagnosis_core", _strip_diagnosis_prefix(key))
         _add_variant(variants, "diagnosis_spelling", _normalize_diagnosis_spelling(key))
@@ -463,6 +591,8 @@ def _hit_score(
         "drug_core": 0.03,
         "drug_no_release_token": 0.04,
         "drug_ingredient": 0.12,
+        "drug_context_core": 0.035,
+        "drug_context_ingredient": 0.10,
         "diagnosis_core": 0.02,
         "diagnosis_canonical": -0.03,
         "diagnosis_unspecified": 0.03,
@@ -567,6 +697,8 @@ def _diagnosis_search_variants(text: str) -> list[str]:
     _add_variant(variants, "diagnosis_core_search", _diagnosis_search_key(_strip_diagnosis_prefix(key)))
     _add_variant(variants, "diagnosis_spelling_search", _diagnosis_search_key(_normalize_diagnosis_spelling(key)))
     _add_variant(variants, "diagnosis_unspecified_search", _diagnosis_search_key(_strip_unspecified_suffix(key)))
+    _add_variant(variants, "diagnosis_measurement_search", _diagnosis_search_key(_strip_diagnosis_measurements(key)))
+    _add_variant(variants, "diagnosis_context_search", _diagnosis_search_key(_strip_diagnosis_context(key)))
     return [value for _, value in variants]
 
 
@@ -701,7 +833,32 @@ def _normalize_diagnosis_spelling(key: str) -> str:
     }
     for source, target in replacements.items():
         key = key.replace(source, target)
+    token_replacements = {
+        "dtd": "dai thao duong",
+        "gut": "gout",
+        "vkdt": "viem khop dang thap",
+    }
+    for source, target in token_replacements.items():
+        key = re.sub(rf"\b{re.escape(source)}\b", target, key)
+    key = re.sub(r"\btang\s+ha\b", "tang huyet ap", key)
+    key = re.sub(r"\btang\s+huyet+t\s+ap\b", "tang huyet ap", key)
+    key = re.sub(r"\btyp\s*ii\b", "type 2", key)
     return _expand_diagnosis_shorthand(key)
+
+
+def _strip_diagnosis_measurements(key: str) -> str:
+    key = normalize_key(key)
+    key = re.sub(r"\b\d+(?:[\.,-]\d+)?\s*%\b", " ", key)
+    key = re.sub(r"\b(?:m?rs|abcd2|balthazar)\s*\w*\b", " ", key)
+    key = re.sub(r"\b\d+\s*(?:d|diem)\b", " ", key)
+    return " ".join(key.split())
+
+
+def _strip_diagnosis_context(key: str) -> str:
+    key = normalize_key(key)
+    key = re.sub(r"^(?:theo doi|nghi ngo|tien su|co tien su)\s+", "", key)
+    key = re.sub(r"\s+(?:gio thu|cach day)\s+\d+\b.*$", "", key)
+    return " ".join(key.split())
 
 
 def _expand_diagnosis_shorthand(key: str) -> str:

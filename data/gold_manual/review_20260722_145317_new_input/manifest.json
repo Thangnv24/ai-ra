@@ -1,0 +1,49 @@
+{
+  "created_at": "2026-07-22T14:53:18",
+  "input_dir": "D:\\downloads\\ai-race\\input",
+  "prediction_dir": "D:\\downloads\\ai-race\\output\\out_put_main",
+  "gold_dir": "D:\\downloads\\ai-race\\data\\gold_manual\\review_20260722_145317_new_input",
+  "files": 100,
+  "files_with_validation_issues": 0,
+  "next_step": "Use this reviewed folder as manual gold for scoring and baseline analysis.",
+  "draft_projection": {
+    "baseline": "output/out_put_main",
+    "old_manual": "output/review_20260719_221520",
+    "part2_official": "input_part2/gt/output",
+    "source_counts": {
+      "baseline": 1790,
+      "old_manual": 1891,
+      "part2_official": 12
+    },
+    "review_status": "all 100 files manually reviewed"
+  },
+  "completed_at": "2026-07-22T15:39:05",
+  "manual_review": {
+    "status": "complete",
+    "files_reviewed": 100,
+    "policy": "patient-specific facts and directly applicable clinician conclusions; educational, hypothetical, and unrelated inserted blocks excluded"
+  },
+  "candidate_alignment": {
+    "source": "input_part2/gt/output exact normalized text mappings",
+    "minimum_nonempty_rate": 0.6,
+    "changes": 92,
+    "conflicting_nonempty_mappings_excluded": true
+  },
+  "validation": {
+    "numeric_files": 100,
+    "total_concepts": 2638,
+    "schema_or_offset_errors": 0,
+    "duplicate_concepts": 0,
+    "overlapping_spans": 0,
+    "review_queue_items": 0
+  },
+  "baseline_benchmark": {
+    "prediction_dir": "output/out_put_main",
+    "num_records": 100,
+    "text_score": 40.8541,
+    "J_assertion": 34.779,
+    "J_candidates": 24.3624,
+    "final_score_estimate": 32.4349,
+    "report": "data/gold_manual/score_report_20260722_154435.json"
+  }
+}

@@ -1,0 +1,345 @@
+[
+  {
+    "text": "bệnh gút",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      64,
+      72
+    ],
+    "candidates": [
+      "M10.9"
+    ]
+  },
+  {
+    "text": "đau",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated",
+      "isHistorical"
+    ],
+    "position": [
+      115,
+      118
+    ]
+  },
+  {
+    "text": "hạt nhỏ màu trắng trên da chỗ mấy khớp ngón tay với ngón chân",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      166,
+      227
+    ]
+  },
+  {
+    "text": "bệnhgout",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      396,
+      404
+    ],
+    "candidates": [
+      "M10.9"
+    ]
+  },
+  {
+    "text": "hạt tophi",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      508,
+      517
+    ]
+  },
+  {
+    "text": "bệnh gout mạn tính",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      524,
+      542
+    ],
+    "candidates": [
+      "M10.9"
+    ]
+  },
+  {
+    "text": "hạt tophi",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      558,
+      567
+    ]
+  },
+  {
+    "text": "hạt tophi",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      588,
+      597
+    ]
+  },
+  {
+    "text": "màu trắng",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      601,
+      610
+    ]
+  },
+  {
+    "text": "có thể di động",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      622,
+      636
+    ]
+  },
+  {
+    "text": "lượng axit urictăng nhanh",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      646,
+      671
+    ]
+  },
+  {
+    "text": "tích tụ nhiều",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      673,
+      686
+    ]
+  },
+  {
+    "text": "hạt lớn",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      696,
+      703
+    ]
+  },
+  {
+    "text": "cục u cứng",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      718,
+      728
+    ]
+  },
+  {
+    "text": "cố định ở một vị trí",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      730,
+      750
+    ]
+  },
+  {
+    "text": "hạt tophi",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      764,
+      773
+    ]
+  },
+  {
+    "text": "sưng",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      788,
+      792
+    ]
+  },
+  {
+    "text": "tấy đỏ",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      794,
+      800
+    ]
+  },
+  {
+    "text": "Tích tụ nhiều",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      802,
+      815
+    ]
+  },
+  {
+    "text": "cản trở vận động",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      859,
+      875
+    ]
+  },
+  {
+    "text": "hạt tophi",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      908,
+      917
+    ]
+  },
+  {
+    "text": "hoại tử",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      938,
+      945
+    ]
+  },
+  {
+    "text": "biến dạng xương khớp",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      947,
+      967
+    ]
+  },
+  {
+    "text": "nhiễm trùng",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      973,
+      984
+    ]
+  },
+  {
+    "text": "hạt tophi",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1039,
+      1048
+    ]
+  },
+  {
+    "text": "cơn gout cấp",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      1072,
+      1084
+    ],
+    "candidates": [
+      "M10.9"
+    ]
+  },
+  {
+    "text": "đau các khớp rất nhiều",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1086,
+      1108
+    ]
+  },
+  {
+    "text": "đái tháo đường",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      1165,
+      1179
+    ],
+    "candidates": []
+  },
+  {
+    "text": "tăng huyết áp",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      1186,
+      1199
+    ],
+    "candidates": []
+  },
+  {
+    "text": "béo phì",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      1206,
+      1213
+    ],
+    "candidates": []
+  },
+  {
+    "text": "ngưng thở khi ngủ do tắc nghẽn",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      1220,
+      1250
+    ],
+    "candidates": []
+  },
+  {
+    "text": "tylenol",
+    "type": "THUỐC",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      1287,
+      1294
+    ],
+    "candidates": [
+      "202433"
+    ]
+  },
+  {
+    "text": "mucinex d",
+    "type": "THUỐC",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      1301,
+      1310
+    ],
+    "candidates": []
+  },
+  {
+    "text": "tiêu chảy",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      1330,
+      1339
+    ]
+  }
+]

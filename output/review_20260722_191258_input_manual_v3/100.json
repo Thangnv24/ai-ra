@@ -1,0 +1,115 @@
+[
+  {
+    "text": "xét nghiệm",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      117,
+      129
+    ]
+  },
+  {
+    "text": "nguy cơ tiền sản giật cao",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      149,
+      177
+    ]
+  },
+  {
+    "text": "cục máu đông",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      280,
+      294
+    ]
+  },
+  {
+    "text": "đi tiêu ra máu",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      309,
+      324
+    ]
+  },
+  {
+    "text": "tiền sản giật",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      584,
+      597
+    ],
+    "candidates": [
+      "O14.9"
+    ]
+  },
+  {
+    "text": "tiền sản giật",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      616,
+      629
+    ],
+    "candidates": [
+      "O14.9"
+    ]
+  },
+  {
+    "text": "tiền sản giật",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      664,
+      677
+    ],
+    "candidates": [
+      "O14.9"
+    ]
+  },
+  {
+    "text": "chảy máu",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      777,
+      785
+    ]
+  },
+  {
+    "text": "lo lắng",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      878,
+      885
+    ]
+  },
+  {
+    "text": "aspirin",
+    "type": "THUỐC",
+    "assertions": [],
+    "position": [
+      1114,
+      1121
+    ],
+    "candidates": [
+      "1191"
+    ]
+  },
+  {
+    "text": "đại tiện ra máu đỏ tươi gián đoạn",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1219,
+      1252
+    ]
+  }
+]

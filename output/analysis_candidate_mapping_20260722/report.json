@@ -1,0 +1,777 @@
+{
+  "files": 100,
+  "input_dir": "D:\\downloads\\ai-race\\input_part2\\input\\input",
+  "gold_dir": "D:\\downloads\\ai-race\\input_part2\\gt\\output",
+  "candidate_dir": "D:\\downloads\\ai-race\\data\\candidates",
+  "retrieval_limit": 30,
+  "validation": {},
+  "index": {
+    "records": 346552,
+    "aliases": 553687,
+    "load_seconds": 103.577,
+    "unique_queries": 1720
+  },
+  "summary": {
+    "all": {
+      "mentions": 3028,
+      "gold_nonempty": 567,
+      "gold_nonempty_rate": 0.187252,
+      "predicted_nonempty": 452,
+      "predicted_nonempty_rate": 0.149273,
+      "exact_set_rate": 0.858653,
+      "weighted_jaccard": 0.795309,
+      "all_empty_weighted_jaccard": 0.683042,
+      "lift_over_all_empty": 0.112268,
+      "positive_exact_rate": 0.465608,
+      "positive_overlap_rate": 0.467372,
+      "negative_abstain_rate": 0.949208,
+      "kb_all_codes_coverage": 0.992945,
+      "retrieval_hit_at_1": 0.522046,
+      "retrieval_hit_at_5": 0.693122,
+      "retrieval_hit_at_30": 0.786596,
+      "outcomes": {
+        "correct_abstain": 2336,
+        "exact_positive": 264,
+        "false_positive": 125,
+        "selector_abstain": 88,
+        "context_gate_abstain": 67,
+        "selector_wrong": 42,
+        "retrieval_miss": 81,
+        "retrieval_wrong": 20,
+        "kb_missing": 4,
+        "partial_positive": 1
+      },
+      "false_positive_sources": {
+        "medication_lexical": 57,
+        "exact": 42,
+        "diagnosis_lexical": 9,
+        "diagnosis_canonical": 6,
+        "drug_unit": 5,
+        "diagnosis_with_benh_prefix": 3,
+        "drug_core": 1,
+        "diagnosis_spelling": 1,
+        "drug_no_count": 1
+      }
+    },
+    "CHẨN_ĐOÁN": {
+      "mentions": 2566,
+      "gold_nonempty": 427,
+      "gold_nonempty_rate": 0.166407,
+      "predicted_nonempty": 246,
+      "predicted_nonempty_rate": 0.095869,
+      "exact_set_rate": 0.892829,
+      "weighted_jaccard": 0.824225,
+      "all_empty_weighted_jaccard": 0.712762,
+      "lift_over_all_empty": 0.111463,
+      "positive_exact_rate": 0.423888,
+      "positive_overlap_rate": 0.42623,
+      "negative_abstain_rate": 0.986442,
+      "kb_all_codes_coverage": 1.0,
+      "retrieval_hit_at_1": 0.494145,
+      "retrieval_hit_at_5": 0.693208,
+      "retrieval_hit_at_30": 0.803279,
+      "outcomes": {
+        "correct_abstain": 2110,
+        "exact_positive": 181,
+        "false_positive": 29,
+        "selector_abstain": 84,
+        "context_gate_abstain": 67,
+        "retrieval_miss": 59,
+        "selector_wrong": 26,
+        "retrieval_wrong": 9,
+        "partial_positive": 1
+      },
+      "false_positive_sources": {
+        "exact": 10,
+        "diagnosis_lexical": 9,
+        "diagnosis_canonical": 6,
+        "diagnosis_with_benh_prefix": 3,
+        "diagnosis_spelling": 1
+      }
+    },
+    "THUỐC": {
+      "mentions": 462,
+      "gold_nonempty": 140,
+      "gold_nonempty_rate": 0.30303,
+      "predicted_nonempty": 206,
+      "predicted_nonempty_rate": 0.445887,
+      "exact_set_rate": 0.668831,
+      "weighted_jaccard": 0.651163,
+      "all_empty_weighted_jaccard": 0.534884,
+      "lift_over_all_empty": 0.116279,
+      "positive_exact_rate": 0.592857,
+      "positive_overlap_rate": 0.592857,
+      "negative_abstain_rate": 0.701863,
+      "kb_all_codes_coverage": 0.971429,
+      "retrieval_hit_at_1": 0.607143,
+      "retrieval_hit_at_5": 0.692857,
+      "retrieval_hit_at_30": 0.735714,
+      "outcomes": {
+        "false_positive": 96,
+        "correct_abstain": 226,
+        "exact_positive": 83,
+        "selector_wrong": 16,
+        "selector_abstain": 4,
+        "retrieval_wrong": 11,
+        "retrieval_miss": 22,
+        "kb_missing": 4
+      },
+      "false_positive_sources": {
+        "medication_lexical": 57,
+        "exact": 32,
+        "drug_unit": 5,
+        "drug_core": 1,
+        "drug_no_count": 1
+      }
+    }
+  },
+  "top_errors": {
+    "CHẨN_ĐOÁN": [
+      {
+        "count": 4,
+        "outcome": "context_gate_abstain",
+        "text": "bệnh trào ngược dạ dày- thực quản không có viêm thực quản",
+        "expected": [
+          "K21.9"
+        ],
+        "predicted": []
+      },
+      {
+        "count": 3,
+        "outcome": "false_positive",
+        "text": "tăng huyết áp",
+        "expected": [],
+        "predicted": [
+          "I10"
+        ]
+      },
+      {
+        "count": 3,
+        "outcome": "selector_abstain",
+        "text": "Đái tháo đường ",
+        "expected": [
+          "E11.8"
+        ],
+        "predicted": []
+      },
+      {
+        "count": 2,
+        "outcome": "selector_abstain",
+        "text": "đái tháo đường",
+        "expected": [
+          "E11.8"
+        ],
+        "predicted": []
+      },
+      {
+        "count": 2,
+        "outcome": "context_gate_abstain",
+        "text": "sỏi thận",
+        "expected": [
+          "N20.0"
+        ],
+        "predicted": []
+      },
+      {
+        "count": 2,
+        "outcome": "context_gate_abstain",
+        "text": "nhiễm khuẩn đường tiết niệu, vị trí không xác định",
+        "expected": [
+          "N39.0"
+        ],
+        "predicted": []
+      },
+      {
+        "count": 2,
+        "outcome": "context_gate_abstain",
+        "text": "bệnh gút không đặc hiệu",
+        "expected": [
+          "M10.9"
+        ],
+        "predicted": []
+      },
+      {
+        "count": 2,
+        "outcome": "false_positive",
+        "text": "tắc ruột",
+        "expected": [],
+        "predicted": [
+          "K56.7"
+        ]
+      },
+      {
+        "count": 2,
+        "outcome": "context_gate_abstain",
+        "text": "viêm tuỷ ngang cấp trong bệnh thoái hoá myelin của hệ thần kinh trung ương",
+        "expected": [
+          "G37.3"
+        ],
+        "predicted": []
+      },
+      {
+        "count": 2,
+        "outcome": "context_gate_abstain",
+        "text": "rung nhĩ kịch phát",
+        "expected": [
+          "I48.0"
+        ],
+        "predicted": []
+      },
+      {
+        "count": 2,
+        "outcome": "selector_abstain",
+        "text": " Đái tháo đường ",
+        "expected": [
+          "E11.8"
+        ],
+        "predicted": []
+      },
+      {
+        "count": 2,
+        "outcome": "selector_abstain",
+        "text": "Thận đa nang",
+        "expected": [
+          "Q61.3"
+        ],
+        "predicted": []
+      },
+      {
+        "count": 2,
+        "outcome": "selector_abstain",
+        "text": "nhồi máu cơ tim",
+        "expected": [
+          "I21.9"
+        ],
+        "predicted": []
+      },
+      {
+        "count": 2,
+        "outcome": "context_gate_abstain",
+        "text": "giảm tiểu cầu không đặc hiệu",
+        "expected": [
+          "D69.6"
+        ],
+        "predicted": []
+      },
+      {
+        "count": 2,
+        "outcome": "false_positive",
+        "text": "Tăng huyết áp",
+        "expected": [],
+        "predicted": [
+          "I10"
+        ]
+      },
+      {
+        "count": 2,
+        "outcome": "selector_abstain",
+        "text": "Ung thư biểu mô tế gan giai đoạn sớm",
+        "expected": [
+          "C22.0"
+        ],
+        "predicted": []
+      },
+      {
+        "count": 2,
+        "outcome": "selector_abstain",
+        "text": " Xơ gan child C",
+        "expected": [
+          "K70.3"
+        ],
+        "predicted": []
+      },
+      {
+        "count": 1,
+        "outcome": "false_positive",
+        "text": "thực quản Barrett",
+        "expected": [],
+        "predicted": [
+          "K22.7"
+        ]
+      },
+      {
+        "count": 1,
+        "outcome": "selector_abstain",
+        "text": "hẹp động mạch cảnh trong phải",
+        "expected": [
+          "I65.2"
+        ],
+        "predicted": []
+      },
+      {
+        "count": 1,
+        "outcome": "context_gate_abstain",
+        "text": "phì đại vú",
+        "expected": [
+          "N62"
+        ],
+        "predicted": []
+      },
+      {
+        "count": 1,
+        "outcome": "selector_abstain",
+        "text": "xơ gan",
+        "expected": [
+          "K74.6"
+        ],
+        "predicted": []
+      },
+      {
+        "count": 1,
+        "outcome": "context_gate_abstain",
+        "text": "thiếu máu không đặc hiệu",
+        "expected": [
+          "D64.9"
+        ],
+        "predicted": []
+      },
+      {
+        "count": 1,
+        "outcome": "false_positive",
+        "text": "Ngưng thở khi ngủ",
+        "expected": [],
+        "predicted": [
+          "G47.3"
+        ]
+      },
+      {
+        "count": 1,
+        "outcome": "retrieval_miss",
+        "text": " Rối loạn mỡ máu",
+        "expected": [
+          "E78.8"
+        ],
+        "predicted": []
+      },
+      {
+        "count": 1,
+        "outcome": "context_gate_abstain",
+        "text": "chấn thương ngực kín",
+        "expected": [
+          "S29.8"
+        ],
+        "predicted": []
+      },
+      {
+        "count": 1,
+        "outcome": "context_gate_abstain",
+        "text": "gãy xương sườn",
+        "expected": [
+          "S22.3"
+        ],
+        "predicted": []
+      },
+      {
+        "count": 1,
+        "outcome": "selector_abstain",
+        "text": "Suy hô hấp",
+        "expected": [
+          "J96.9"
+        ],
+        "predicted": []
+      },
+      {
+        "count": 1,
+        "outcome": "selector_abstain",
+        "text": "Tắc mạch phổi",
+        "expected": [
+          "I26.9"
+        ],
+        "predicted": []
+      },
+      {
+        "count": 1,
+        "outcome": "retrieval_miss",
+        "text": " Chấn thương ngực kín",
+        "expected": [
+          "S29.8"
+        ],
+        "predicted": []
+      },
+      {
+        "count": 1,
+        "outcome": "retrieval_miss",
+        "text": "ĐTĐ type 2",
+        "expected": [
+          "E11.8"
+        ],
+        "predicted": []
+      }
+    ],
+    "THUỐC": [
+      {
+        "count": 3,
+        "outcome": "false_positive",
+        "text": "Lipitor 10mg x 1 viên",
+        "expected": [],
+        "predicted": [
+          "617313"
+        ]
+      },
+      {
+        "count": 2,
+        "outcome": "false_positive",
+        "text": "Crestor 10 mg",
+        "expected": [],
+        "predicted": [
+          "576402"
+        ]
+      },
+      {
+        "count": 2,
+        "outcome": "false_positive",
+        "text": "progesterone",
+        "expected": [],
+        "predicted": [
+          "8727"
+        ]
+      },
+      {
+        "count": 2,
+        "outcome": "false_positive",
+        "text": " Aspirin Stella 81mg (Aspirin)",
+        "expected": [],
+        "predicted": [
+          "243670"
+        ]
+      },
+      {
+        "count": 2,
+        "outcome": "false_positive",
+        "text": "Aspirin Stella 81mg (Aspirin) ",
+        "expected": [],
+        "predicted": [
+          "243670"
+        ]
+      },
+      {
+        "count": 2,
+        "outcome": "false_positive",
+        "text": " Plavix 75mg (Clopidogrel base)",
+        "expected": [],
+        "predicted": [
+          "573094"
+        ]
+      },
+      {
+        "count": 2,
+        "outcome": "selector_wrong",
+        "text": "duloxetine",
+        "expected": [
+          "72625"
+        ],
+        "predicted": [
+          "476253"
+        ]
+      },
+      {
+        "count": 2,
+        "outcome": "false_positive",
+        "text": "Lipitor 20mg",
+        "expected": [],
+        "predicted": [
+          "617317"
+        ]
+      },
+      {
+        "count": 2,
+        "outcome": "false_positive",
+        "text": "Betaloc Zok 25mg (Metoprolol)",
+        "expected": [],
+        "predicted": [
+          "430618"
+        ]
+      },
+      {
+        "count": 2,
+        "outcome": "false_positive",
+        "text": "Crestor 10mg (Rosuvastatin)",
+        "expected": [],
+        "predicted": [
+          "401962"
+        ]
+      },
+      {
+        "count": 2,
+        "outcome": "false_positive",
+        "text": "Jardiance 10mg ",
+        "expected": [],
+        "predicted": [
+          "1545660"
+        ]
+      },
+      {
+        "count": 2,
+        "outcome": "false_positive",
+        "text": "Lipitor 20mg (Atorvastatin )",
+        "expected": [],
+        "predicted": [
+          "617310"
+        ]
+      },
+      {
+        "count": 2,
+        "outcome": "false_positive",
+        "text": "Ertapenem ",
+        "expected": [],
+        "predicted": [
+          "325642"
+        ]
+      },
+      {
+        "count": 2,
+        "outcome": "false_positive",
+        "text": "Duphalac ",
+        "expected": [],
+        "predicted": [
+          "151674"
+        ]
+      },
+      {
+        "count": 2,
+        "outcome": "retrieval_wrong",
+        "text": "aldactol",
+        "expected": [
+          "151317"
+        ],
+        "predicted": [
+          "9997"
+        ]
+      },
+      {
+        "count": 2,
+        "outcome": "false_positive",
+        "text": "Lasix 40mg",
+        "expected": [],
+        "predicted": [
+          "565458"
+        ]
+      },
+      {
+        "count": 1,
+        "outcome": "false_positive",
+        "text": "Solumedrol",
+        "expected": [],
+        "predicted": [
+          "203856"
+        ]
+      },
+      {
+        "count": 1,
+        "outcome": "selector_wrong",
+        "text": "asa 325mg po x1 truyền dịch tĩnh mạch",
+        "expected": [
+          "212033"
+        ],
+        "predicted": [
+          "317300"
+        ]
+      },
+      {
+        "count": 1,
+        "outcome": "selector_wrong",
+        "text": "asa 324mg",
+        "expected": [
+          "212033"
+        ],
+        "predicted": [
+          "315419"
+        ]
+      },
+      {
+        "count": 1,
+        "outcome": "selector_abstain",
+        "text": "heparin drip",
+        "expected": [
+          "5224"
+        ],
+        "predicted": []
+      },
+      {
+        "count": 1,
+        "outcome": "retrieval_wrong",
+        "text": "10mg clobazam",
+        "expected": [
+          "21241"
+        ],
+        "predicted": [
+          "199450"
+        ]
+      },
+      {
+        "count": 1,
+        "outcome": "retrieval_wrong",
+        "text": "lorazepam 2mg iv x2",
+        "expected": [
+          "1665188"
+        ],
+        "predicted": [
+          "316170"
+        ]
+      },
+      {
+        "count": 1,
+        "outcome": "false_positive",
+        "text": " crestor 10mg",
+        "expected": [],
+        "predicted": [
+          "576402"
+        ]
+      },
+      {
+        "count": 1,
+        "outcome": "false_positive",
+        "text": "Crestor 10 mg ",
+        "expected": [],
+        "predicted": [
+          "576402"
+        ]
+      },
+      {
+        "count": 1,
+        "outcome": "false_positive",
+        "text": " Spironolacton 50 mg ",
+        "expected": [],
+        "predicted": [
+          "317508"
+        ]
+      },
+      {
+        "count": 1,
+        "outcome": "selector_wrong",
+        "text": "Forxiga 10 mg",
+        "expected": [
+          "1534397"
+        ],
+        "predicted": [
+          "1486973"
+        ]
+      },
+      {
+        "count": 1,
+        "outcome": "retrieval_wrong",
+        "text": "Benadryl 50mg tiêm tĩnh mạch (IV)",
+        "expected": [
+          "203457"
+        ],
+        "predicted": [
+          "1050076"
+        ]
+      },
+      {
+        "count": 1,
+        "outcome": "selector_wrong",
+        "text": "Famotidine 20mg",
+        "expected": [
+          "310273"
+        ],
+        "predicted": [
+          "315921"
+        ]
+      },
+      {
+        "count": 1,
+        "outcome": "selector_wrong",
+        "text": "Solu-Medrol 125mg 1 liều IV",
+        "expected": [
+          "203856"
+        ],
+        "predicted": [
+          "1743705"
+        ]
+      },
+      {
+        "count": 1,
+        "outcome": "false_positive",
+        "text": "EpiPen",
+        "expected": [],
+        "predicted": [
+          "727341"
+        ]
+      }
+    ]
+  },
+  "worst_files": [
+    {
+      "file": "35.json",
+      "weighted_jaccard": 0.25
+    },
+    {
+      "file": "18.json",
+      "weighted_jaccard": 0.5
+    },
+    {
+      "file": "65.json",
+      "weighted_jaccard": 0.571429
+    },
+    {
+      "file": "38.json",
+      "weighted_jaccard": 0.583333
+    },
+    {
+      "file": "36.json",
+      "weighted_jaccard": 0.588235
+    },
+    {
+      "file": "11.json",
+      "weighted_jaccard": 0.611111
+    },
+    {
+      "file": "23.json",
+      "weighted_jaccard": 0.611111
+    },
+    {
+      "file": "34.json",
+      "weighted_jaccard": 0.641026
+    },
+    {
+      "file": "51.json",
+      "weighted_jaccard": 0.657895
+    },
+    {
+      "file": "47.json",
+      "weighted_jaccard": 0.666667
+    },
+    {
+      "file": "56.json",
+      "weighted_jaccard": 0.666667
+    },
+    {
+      "file": "63.json",
+      "weighted_jaccard": 0.666667
+    },
+    {
+      "file": "42.json",
+      "weighted_jaccard": 0.681818
+    },
+    {
+      "file": "95.json",
+      "weighted_jaccard": 0.681818
+    },
+    {
+      "file": "26.json",
+      "weighted_jaccard": 0.682927
+    },
+    {
+      "file": "32.json",
+      "weighted_jaccard": 0.692308
+    },
+    {
+      "file": "40.json",
+      "weighted_jaccard": 0.695652
+    },
+    {
+      "file": "90.json",
+      "weighted_jaccard": 0.697674
+    },
+    {
+      "file": "5.json",
+      "weighted_jaccard": 0.7
+    },
+    {
+      "file": "67.json",
+      "weighted_jaccard": 0.710526
+    }
+  ],
+  "timing_seconds": 346.868
+}

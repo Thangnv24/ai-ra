@@ -1,0 +1,47 @@
+[
+  {
+    "text": "khối u trực tràng",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      25,
+      42
+    ],
+    "candidates": [
+      "C20"
+    ]
+  },
+  {
+    "text": "u ác trực tràng",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      64,
+      79
+    ],
+    "candidates": [
+      "C20"
+    ]
+  },
+  {
+    "text": "sinh thiết",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      90,
+      100
+    ]
+  },
+  {
+    "text": "u tuyến",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      118,
+      125
+    ],
+    "candidates": [
+      "D12.9"
+    ]
+  }
+]
