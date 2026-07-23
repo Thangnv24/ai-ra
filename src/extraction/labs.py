@@ -18,6 +18,9 @@ class LabSpan:
 
 
 LAB_ABBREVIATIONS = {
+    "bc",
+    "ha",
+    "n",
     "wbc",
     "twbc",
     "rbc",
@@ -47,6 +50,8 @@ LAB_ABBREVIATIONS = {
     "glucose",
     "ure",
     "bun",
+    "hbsag",
+    "spo2",
     "na",
     "k",
     "cl",
@@ -64,16 +69,60 @@ LAB_KEYWORDS = (
     "aspartate aminotransferase",
     "alanine aminotransferase",
     "creatinine",
+    "creatinin",
     "glucose",
     "protein",
     "albumin",
     "men gan",
+    "anti hbe",
+    "anti hbc",
+    "prothrombin",
+    "deritis",
+    "huyet ap",
+    "nhiet do",
+    "mach",
+    "nhip tim",
+    "nhip tho",
+    "do bao hoa oxy",
+)
+
+_LAB_UNIT = (
+    r"mg/dL|g/L|g/dL|mmol/L|mmol|micromol/L|umol/L|IU/L|U/L|mEq/L|"
+    r"ng/mL|ng/L|pg/mL|x10\^?\d*/L|G/L|T/L|ck/p|lần/phút|lan/phut|mmHg|°C|%"
+)
+_LAB_RESULT = (
+    rf"(?:\d{{2,3}}\s*/\s*\d{{2,3}}(?:\s*mmHg)?|"
+    rf"[<>]?\s*\d+(?:[,.]\d+)?(?:\s*(?:{_LAB_UNIT}))?|\(\s*[+-]\s*\))"
+)
+_LAB_QUALITATIVE_RESULT = (
+    r"(?:chưa phát hiện bất thường(?: trên phim chụp)?|"
+    r"không phát hiện bất thường(?: trên phim chụp)?|"
+    r"đều tăng|bình thường|bất thường|âm tính|dương tính)"
 )
 
 LAB_PAIR_RE = re.compile(
     r"(?P<name>[^\n;:=]{1,120}?)\s*(?P<sep>:|=|\bl\u00e0\b)\s*"
-    r"(?P<result>[<>]?\s*\d+(?:[,.]\d+)?(?:\s*(?:mg/dL|g/L|g/dL|mmol/L|"
-    r"mmol|IU/L|U/L|mEq/L|ng/mL|pg/mL|x10\^?\d*/L|%))?)",
+    rf"(?P<result>{_LAB_RESULT})",
+    re.IGNORECASE,
+)
+LAB_RATIO_RESULT_RE = re.compile(
+    rf"(?P<result>[A-Za-z]{{2,10}}\s*/\s*[A-Za-z]{{2,10}}\s*[<>=]\s*"
+    rf"\d+(?:[,.]\d+)?(?:\s*(?:{_LAB_UNIT}))?)",
+    re.IGNORECASE,
+)
+_LAB_INLINE_NAMES = LAB_ABBREVIATIONS | {
+    "anti hbe",
+    "anti hbc igg",
+    "anti hbc igm",
+}
+LAB_INLINE_PAIR_RE = re.compile(
+    rf"(?<!\w)(?P<name>{'|'.join(re.escape(name) for name in sorted(_LAB_INLINE_NAMES, key=len, reverse=True))})"
+    rf"(?!\w)\s+(?P<result>{_LAB_RESULT})",
+    re.IGNORECASE,
+)
+LAB_QUALITATIVE_PAIR_RE = re.compile(
+    rf"(?<!\w)(?P<name>{'|'.join(re.escape(name) for name in sorted(_LAB_INLINE_NAMES, key=len, reverse=True))})"
+    rf"(?!\w)(?P<middle>[^\n.;:]{{0,45}}?)\s+(?P<result>{_LAB_QUALITATIVE_RESULT})",
     re.IGNORECASE,
 )
 
@@ -87,14 +136,48 @@ def extract_lab_spans(text: str) -> list[LabSpan]:
         name_start, name_end, name_text = trim_span_text(text, name_start, name_end)
         name_start, name_end, name_text = _strip_lab_prefix(text, name_start, name_end)
         result_start, result_end, result_text = trim_span_text(text, result_start, result_end)
-        if not name_text or not result_text or not _looks_like_lab_name(name_text):
+        if not name_text or not result_text:
             continue
+        looks_like_name = _looks_like_lab_name(name_text)
+        candidates = []
+        if looks_like_name:
+            candidates.append((name_start, name_end, name_text, TYPE_TEST_NAME))
+        if looks_like_name or _line_has_lab_context(text, match.start()):
+            candidates.append((result_start, result_end, result_text, TYPE_TEST_RESULT))
+        for start, end, span_text, span_type in candidates:
+            key = (start, end, span_type)
+            if key not in seen:
+                seen.add(key)
+                spans.append(LabSpan(start, end, span_text, span_type))
+
+    for match in LAB_RATIO_RESULT_RE.finditer(text):
+        start, end, result_text = trim_span_text(text, *match.span("result"))
+        key = (start, end, TYPE_TEST_RESULT)
+        if result_text and key not in seen:
+            seen.add(key)
+            spans.append(LabSpan(start, end, result_text, TYPE_TEST_RESULT))
+
+    for match in LAB_INLINE_PAIR_RE.finditer(text):
+        name_start, name_end, name_text = trim_span_text(text, *match.span("name"))
+        result_start, result_end, result_text = trim_span_text(text, *match.span("result"))
         for start, end, span_text, span_type in (
             (name_start, name_end, name_text, TYPE_TEST_NAME),
             (result_start, result_end, result_text, TYPE_TEST_RESULT),
         ):
             key = (start, end, span_type)
-            if key not in seen:
+            if span_text and key not in seen:
+                seen.add(key)
+                spans.append(LabSpan(start, end, span_text, span_type))
+
+    for match in LAB_QUALITATIVE_PAIR_RE.finditer(text):
+        name_start, name_end, name_text = trim_span_text(text, *match.span("name"))
+        result_start, result_end, result_text = trim_span_text(text, *match.span("result"))
+        for start, end, span_text, span_type in (
+            (name_start, name_end, name_text, TYPE_TEST_NAME),
+            (result_start, result_end, result_text, TYPE_TEST_RESULT),
+        ):
+            key = (start, end, span_type)
+            if span_text and key not in seen:
                 seen.add(key)
                 spans.append(LabSpan(start, end, span_text, span_type))
     return sorted(spans, key=lambda span: (span.start, span.end, span.type))
@@ -134,3 +217,15 @@ def _looks_like_lab_name(name: str) -> bool:
     if re.fullmatch(r"[a-z]{2,8}%?(?:\s*\([^)]+\))?", key):
         return True
     return False
+
+
+def _line_has_lab_context(text: str, offset: int) -> bool:
+    line_start = text.rfind("\n", 0, offset) + 1
+    line_end = text.find("\n", offset)
+    if line_end < 0:
+        line_end = len(text)
+    line_key = normalize_key(text[line_start:line_end])
+    if any(keyword in line_key for keyword in LAB_KEYWORDS):
+        return True
+    tokens = {token.strip(":()") for token in line_key.split()}
+    return bool(tokens & LAB_ABBREVIATIONS)

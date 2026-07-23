@@ -1,0 +1,202 @@
+[
+  {
+    "text": "em năm nay 22 tuổi",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      25,
+      43
+    ]
+  },
+  {
+    "text": "160/70 mmHg",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      89,
+      100
+    ]
+  },
+  {
+    "text": "170/60 mmHg",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      123,
+      134
+    ]
+  },
+  {
+    "text": "150/60 mmHg",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      159,
+      170
+    ]
+  },
+  {
+    "text": "HA bình thường",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      272,
+      286
+    ]
+  },
+  {
+    "text": "HA nhịp tim đều tăng",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      391,
+      411
+    ]
+  },
+  {
+    "text": "hồi hộp",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      447,
+      454
+    ]
+  },
+  {
+    "text": "cảm nhận được tim đập rất mạnh",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      456,
+      486
+    ]
+  },
+  {
+    "text": "tăng HA thật sự không ạ",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      692,
+      715
+    ],
+    "candidates": []
+  },
+  {
+    "text": "hoang mang",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      733,
+      743
+    ]
+  },
+  {
+    "text": "huyết áp của em mỗi lần đo đều bình thường",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      806,
+      848
+    ]
+  },
+  {
+    "text": "Huyết áp có thể tạm thời thay đổi trong một số hoàn cảnh như",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      899,
+      959
+    ]
+  },
+  {
+    "text": "Khi ở trong tâm trạng lo âu căng thẳng thì huyết áp tăng lên đáng kể và sẽ trở lại bình thường sau khi thoải mái thư giãn",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      964,
+      1085
+    ]
+  },
+  {
+    "text": "Vì thế khi đi khám bệnh huyết áp thường hơi cao hơn khi đo ở nhà do đó nên nghỉ vài phút trước khi đo",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1087,
+      1188
+    ]
+  },
+  {
+    "text": "Nói chuyện khi đo, huyết áp cũng lên cao",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1191,
+      1231
+    ]
+  },
+  {
+    "text": "Vì thế nên giữ im lặng trong khi đo",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1233,
+      1268
+    ]
+  },
+  {
+    "text": "chẩn đoán hình ảnh",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      1282,
+      1300
+    ],
+    "candidates": []
+  },
+  {
+    "text": "chụp",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1302,
+      1306
+    ]
+  },
+  {
+    "text": "bất thường",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1324,
+      1334
+    ]
+  },
+  {
+    "text": "phim chụp",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1340,
+      1349
+    ]
+  },
+  {
+    "text": "Theo dõi",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1373,
+      1381
+    ]
+  },
+  {
+    "text": "đại tràng",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1382,
+      1391
+    ]
+  }
+]

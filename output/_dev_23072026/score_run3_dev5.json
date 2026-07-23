@@ -1,0 +1,98 @@
+{
+  "created_at": "2026-07-23T23:58:31",
+  "input_dir": "D:\\downloads\\ai-race\\output\\_dev_23072026\\input",
+  "gold_dir": "D:\\downloads\\ai-race\\output\\_dev_23072026\\gold",
+  "prediction_dir": "D:\\downloads\\ai-race\\output\\_dev_23072026\\run3_8b_dev5",
+  "num_records": 5,
+  "text_score": 38.2261,
+  "J_assertion": 34.7417,
+  "J_candidates": 35.4839,
+  "final_score_estimate": 36.0839,
+  "files": [
+    {
+      "file": "24.json",
+      "gold": 87,
+      "prediction": 67,
+      "matched": 61,
+      "missing": 26,
+      "extra": 6,
+      "text_score": 0.635305,
+      "assertion_score": 0.574074,
+      "candidate_score": 0.583333,
+      "candidate_numerator": 7.0,
+      "candidate_denominator": 12.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "36.json",
+      "gold": 63,
+      "prediction": 64,
+      "matched": 46,
+      "missing": 17,
+      "extra": 18,
+      "text_score": 0.499213,
+      "assertion_score": 0.444444,
+      "candidate_score": 0.310345,
+      "candidate_numerator": 9.0,
+      "candidate_denominator": 29.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "72.json",
+      "gold": 18,
+      "prediction": 24,
+      "matched": 11,
+      "missing": 7,
+      "extra": 13,
+      "text_score": 0.333333,
+      "assertion_score": 0.258065,
+      "candidate_score": 0.5,
+      "candidate_numerator": 6.0,
+      "candidate_denominator": 12.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "89.json",
+      "gold": 41,
+      "prediction": 40,
+      "matched": 18,
+      "missing": 23,
+      "extra": 22,
+      "text_score": 0.269841,
+      "assertion_score": 0.342857,
+      "candidate_score": 0.0,
+      "candidate_numerator": 0.0,
+      "candidate_denominator": 6.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "93.json",
+      "gold": 22,
+      "prediction": 22,
+      "matched": 8,
+      "missing": 14,
+      "extra": 14,
+      "text_score": 0.173611,
+      "assertion_score": 0.117647,
+      "candidate_score": 0.0,
+      "candidate_numerator": 0.0,
+      "candidate_denominator": 3.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    }
+  ]
+}

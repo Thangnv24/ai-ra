@@ -4,7 +4,9 @@ from __future__ import annotations
 
 import json
 import logging
+import re
 import time
+import urllib.error
 import urllib.request
 from dataclasses import dataclass
 from typing import Any
@@ -24,6 +26,12 @@ class LLMResult:
 
 class MaxTokensExceededError(Exception):
     """Raised when LLM hits max_tokens limit and returns empty content."""
+
+
+class RetryableRateLimitError(Exception):
+    def __init__(self, message: str, retry_after: float):
+        super().__init__(message)
+        self.retry_after = retry_after
 
 
 class ApiLLMClient:
@@ -56,10 +64,11 @@ class ApiLLMClient:
         )
         text: str | None = None
         last_exc: Exception | None = None
-        for attempt in range(3):
+        token_attempt = 0
+        for attempt in range(6):
             current_max_tokens = (
-                effective_max_tokens * (2**attempt)
-                if attempt > 0
+                effective_max_tokens * (2**token_attempt)
+                if token_attempt > 0
                 else effective_max_tokens
             )
             if attempt > 0:
@@ -71,9 +80,20 @@ class ApiLLMClient:
                     current_max_tokens,
                 )
             except MaxTokensExceededError:
+                token_attempt += 1
                 last_exc = MaxTokensExceededError(
                     f"max_tokens={current_max_tokens} still insufficient"
                 )
+                continue
+            except RetryableRateLimitError as exc:
+                last_exc = exc
+                delay = min(65.0, max(1.0, exc.retry_after + 0.75))
+                logger.warning(
+                    "llm_rate_limit_wait attempt=%d seconds=%.3f",
+                    attempt,
+                    delay,
+                )
+                time.sleep(delay)
                 continue
             except Exception as package_exc:  # noqa: BLE001
                 logger.warning(
@@ -90,9 +110,20 @@ class ApiLLMClient:
                         current_max_tokens,
                     )
                 except MaxTokensExceededError:
+                    token_attempt += 1
                     last_exc = MaxTokensExceededError(
                         f"max_tokens={current_max_tokens} still insufficient"
                     )
+                    continue
+                except RetryableRateLimitError as exc:
+                    last_exc = exc
+                    delay = min(65.0, max(1.0, exc.retry_after + 0.75))
+                    logger.warning(
+                        "llm_rate_limit_wait attempt=%d seconds=%.3f",
+                        attempt,
+                        delay,
+                    )
+                    time.sleep(delay)
                     continue
                 except Exception as exc:  # noqa: BLE001
                     last_exc = exc
@@ -162,9 +193,9 @@ class ApiLLMClient:
                     finish_reason,
                     getattr(msg, "refusal", None),
                 )
-                if finish_reason == "length" and not msg.content:
+                if finish_reason == "length":
                     raise MaxTokensExceededError(
-                        f"finish_reason=length with empty content at max_tokens={max_tokens}"
+                        f"finish_reason=length at max_tokens={max_tokens}"
                     )
                 logger.info(
                     "llm_transport_ok transport=openai_package json_mode=%s seconds=%.6f",
@@ -180,7 +211,14 @@ class ApiLLMClient:
                     exc,
                 )
                 raise
+            except RetryableRateLimitError:
+                raise
             except Exception as exc:  # noqa: BLE001
+                if _is_max_tokens_error(exc):
+                    raise MaxTokensExceededError(str(exc)) from exc
+                retry_after = _rate_limit_retry_after(exc)
+                if retry_after is not None:
+                    raise RetryableRateLimitError(str(exc), retry_after) from exc
                 logger.warning(
                     "llm_transport_failed transport=openai_package json_mode=%s seconds=%.6f error=%s",
                     use_json_mode,
@@ -213,7 +251,14 @@ class ApiLLMClient:
                     exc,
                 )
                 raise
+            except RetryableRateLimitError:
+                raise
             except Exception as exc:  # noqa: BLE001
+                if _is_max_tokens_error(exc):
+                    raise MaxTokensExceededError(str(exc)) from exc
+                retry_after = _rate_limit_retry_after(exc)
+                if retry_after is not None:
+                    raise RetryableRateLimitError(str(exc), retry_after) from exc
                 logger.warning(
                     "llm_transport_failed transport=urllib json_mode=%s seconds=%.6f error=%s",
                     use_json_mode,
@@ -235,8 +280,14 @@ class ApiLLMClient:
             method="POST",
         )
         opener = urllib.request.build_opener(urllib.request.ProxyHandler({}))
-        with opener.open(request, timeout=self.settings.llm_timeout) as response:  # noqa: S310
-            data = json.loads(response.read().decode("utf-8"))
+        try:
+            with opener.open(request, timeout=self.settings.llm_timeout) as response:  # noqa: S310
+                data = json.loads(response.read().decode("utf-8"))
+        except urllib.error.HTTPError as exc:
+            retry_after = _rate_limit_retry_after(exc)
+            if retry_after is not None:
+                raise RetryableRateLimitError(str(exc), retry_after) from exc
+            raise
         choice = data["choices"][0]
         message = choice["message"]
         content = message.get("content")
@@ -248,9 +299,9 @@ class ApiLLMClient:
             finish_reason,
             message.get("refusal"),
         )
-        if finish_reason == "length" and not content:
+        if finish_reason == "length":
             raise MaxTokensExceededError(
-                f"finish_reason=length with empty content at max_tokens={payload.get('max_tokens')}"
+                f"finish_reason=length at max_tokens={payload.get('max_tokens')}"
             )
         return content or "{}"
 
@@ -265,6 +316,47 @@ def _chat_payload(settings: Settings, system_prompt: str, user_prompt: str, max_
         "temperature": settings.llm_temperature,
         "max_tokens": max_tokens or settings.llm_max_tokens,
     }
+
+
+def _rate_limit_retry_after(exc: Exception) -> float | None:
+    status_code = getattr(exc, "status_code", None)
+    response = getattr(exc, "response", None)
+    if status_code is None and response is not None:
+        status_code = getattr(response, "status_code", None)
+    if status_code is None:
+        status_code = getattr(exc, "code", None)
+
+    message = str(exc)
+    if status_code != 429 and "rate limit" not in message.casefold():
+        return None
+
+    headers = getattr(response, "headers", None) or getattr(exc, "headers", None)
+    if headers is not None:
+        raw_retry_after = headers.get("retry-after")
+        if raw_retry_after:
+            try:
+                return max(0.0, float(raw_retry_after))
+            except (TypeError, ValueError):
+                pass
+
+    match = re.search(
+        r"(?:try again in|retry after)\s*([0-9]+(?:\.[0-9]+)?)\s*(ms|s|sec|seconds)?",
+        message,
+        flags=re.IGNORECASE,
+    )
+    if match:
+        value = float(match.group(1))
+        return value / 1000.0 if match.group(2) == "ms" else value
+    return 8.0
+
+
+def _is_max_tokens_error(exc: Exception) -> bool:
+    message = str(exc).casefold()
+    return (
+        "max completion tokens reached" in message
+        or "maximum context length" in message
+        or ("max_tokens" in message and "exceed" in message)
+    )
 
 
 def _load_json_object(text: str) -> dict[str, Any]:

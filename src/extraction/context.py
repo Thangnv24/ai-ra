@@ -64,7 +64,14 @@ PRESENT_ILLNESS_RE = re.compile(
 
 
 class ContextDetector:
-    def assertions_for(self, text: str, start: int, end: int, concept_type: str) -> tuple[str, ...]:
+    def assertions_for(
+        self,
+        text: str,
+        start: int,
+        end: int,
+        concept_type: str,
+        structure_role: str = "document",
+    ) -> tuple[str, ...]:
         if concept_type not in ASSERTION_TYPES:
             return ()
 
@@ -86,7 +93,11 @@ class ContextDetector:
         assertions: list[str] = []
         if self._has_negation(clause_before, mention_key):
             assertions.append(ASSERTION_NEGATED)
-        if FAMILY_SUBJECT_RE.search(line_before[-180:]) or FAMILY_SUBJECT_RE.search(recent_before[-180:]):
+        if (
+            structure_role == "family_history"
+            or FAMILY_SUBJECT_RE.search(line_before[-180:])
+            or FAMILY_SUBJECT_RE.search(recent_before[-180:])
+        ):
             assertions.append(ASSERTION_FAMILY)
         if self._has_historical_context(
             concept_type=concept_type,
@@ -94,6 +105,7 @@ class ContextDetector:
             clause_before=clause_before,
             line_before=line_before,
             recent_before=recent_before,
+            structure_role=structure_role,
         ):
             assertions.append(ASSERTION_HISTORICAL)
         return tuple(assertions)
@@ -120,8 +132,16 @@ class ContextDetector:
         clause_before: str,
         line_before: str,
         recent_before: str,
+        structure_role: str = "document",
     ) -> bool:
         local_context = " ".join((line_before, clause_before))
+        if structure_role in {
+            "medical_history",
+            "personal_history",
+            "family_history",
+            "epidemiology_history",
+        }:
+            return True
         if concept_type == TYPE_DRUG:
             if CURRENT_TREATMENT_RE.search(local_context) or CURRENT_TREATMENT_RE.search(recent_before[-180:]):
                 return False

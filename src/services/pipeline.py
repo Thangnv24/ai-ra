@@ -9,7 +9,7 @@ import statistics
 import subprocess
 import sys
 import time
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from pathlib import Path
 
 from core.config import (
@@ -24,8 +24,9 @@ from core.config import (
 from core.io import discover_input_files, output_path_for, read_text, write_output
 from core.schema import Concept, validate_output
 from extraction.context import ContextDetector
-from extraction.llm_entities import LLMEntityExtractor
+from extraction.llm_entities import LLMEntityExtractor, _skip_non_patient_article
 from extraction.ner import MedicalNER, SpanCandidate, resolve_span_types
+from extraction.sectioning import split_chunks
 from integrations.openai_client import ApiLLMClient
 from knowledge.candidates import load_slim_candidate_index
 from knowledge.candidate_policy import load_candidate_emission_policy
@@ -163,6 +164,11 @@ class MedicalKGPipeline:
         )
 
         stage_start = time.perf_counter()
+        rule_spans_before_gate = len(rule_spans)
+        rule_spans = _gate_rule_spans_by_structure(text, rule_spans, llm_spans)
+        stages["rule_proposal"]["pre_structure_gate"] = rule_spans_before_gate
+        stages["rule_proposal"]["spans"] = len(rule_spans)
+        stages["rule_proposal"]["structure_gated"] = rule_spans_before_gate - len(rule_spans)
         spans, merge_summary = _merge_span_candidates_with_summary([*rule_spans, *llm_spans])
         stages["merge"] = {
             **merge_summary.to_dict(),
@@ -197,7 +203,13 @@ class MedicalKGPipeline:
         stage_start = time.perf_counter()
         concepts: list[Concept] = []
         for span in spans:
-            assertions = self.context.assertions_for(text, span.start, span.end, span.type)
+            assertions = self.context.assertions_for(
+                text,
+                span.start,
+                span.end,
+                span.type,
+                structure_role=span.structure_role,
+            )
             candidates = self.retriever.candidates_for(
                 span.text,
                 span.type,
@@ -249,7 +261,7 @@ class MedicalKGPipeline:
 
         stage_start = time.perf_counter()
         before_postprocess = len(concepts)
-        concepts = refine_concepts(text, concepts, retriever=self.retriever, context_detector=self.context)
+        concepts = refine_concepts(text, concepts, retriever=self.retriever)
         meta["postprocess"] = {
             "input_concepts": before_postprocess,
             "output_concepts": len(concepts),
@@ -337,6 +349,49 @@ def _percentile(values: list[float], q: float) -> float:
     upper = min(lower + 1, len(ordered) - 1)
     fraction = pos - lower
     return ordered[lower] * (1 - fraction) + ordered[upper] * fraction
+
+
+_LLM_CONFIRMATION_ROLES = frozenset({"question", "answer", "medical_article"})
+
+
+def _gate_rule_spans_by_structure(
+    text: str,
+    rule_spans: list[SpanCandidate],
+    llm_spans: list[SpanCandidate],
+) -> list[SpanCandidate]:
+    if not rule_spans:
+        return []
+    llm_keys = {(span.start, span.end, span.type) for span in llm_spans}
+    chunks = split_chunks(text, max_chars=650, overlap=0)
+    output: list[SpanCandidate] = []
+    for span in rule_spans:
+        containing = [
+            chunk
+            for chunk in chunks
+            if chunk.start <= span.start and span.end <= chunk.end
+        ]
+        role = (
+            min(containing, key=lambda chunk: (chunk.end - chunk.start, chunk.start)).structure_role
+            if containing
+            else "document"
+        )
+        key = (span.start, span.end, span.type)
+        chunk = min(containing, key=lambda item: (item.end - item.start, item.start)) if containing else None
+        non_patient_chunk = bool(chunk and _skip_non_patient_article(chunk))
+        needs_confirmation = role in _LLM_CONFIRMATION_ROLES or non_patient_chunk
+        high_confidence_allowed = (
+            span.score > 0.95
+            and role != "answer"
+            and not non_patient_chunk
+        )
+        assigned = replace(span, structure_role=role)
+        if (
+            not needs_confirmation
+            or high_confidence_allowed
+            or key in llm_keys
+        ):
+            output.append(assigned)
+    return output
 
 
 def _merge_span_candidates(spans: list[SpanCandidate]) -> list[SpanCandidate]:

@@ -1,0 +1,386 @@
+[
+  {
+    "text": "Đái tháo đường",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      31,
+      45
+    ],
+    "candidates": [
+      "E11.8"
+    ]
+  },
+  {
+    "text": "Đái tháo đường",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      55,
+      69
+    ],
+    "candidates": [
+      "E11.8"
+    ]
+  },
+  {
+    "text": "Tăng huyết áp",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      73,
+      86
+    ],
+    "candidates": [
+      "I10"
+    ]
+  },
+  {
+    "text": "tăng huyết áp",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      88,
+      101
+    ],
+    "candidates": [
+      "I10"
+    ]
+  },
+  {
+    "text": "bất thường",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      192,
+      202
+    ]
+  },
+  {
+    "text": "Thời điểm khởi phát triệu chứng",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      203,
+      234
+    ]
+  },
+  {
+    "text": "Hôm qua",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      236,
+      243
+    ]
+  },
+  {
+    "text": "không rõ ngày cụ thể",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      245,
+      265
+    ]
+  },
+  {
+    "text": "khó chịu vùng ngực gián đoạn",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      294,
+      322
+    ]
+  },
+  {
+    "text": "chóng mặt",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      325,
+      334
+    ]
+  },
+  {
+    "text": "khó thở (khó thở)",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      337,
+      354
+    ]
+  },
+  {
+    "text": "đổ mồ hôi",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      357,
+      366
+    ]
+  },
+  {
+    "text": "Vị trí: Không rõ (ngụ ý vùng ngực)",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      390,
+      424
+    ]
+  },
+  {
+    "text": "Mức độ nghiêm trọng: Không rõ",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      427,
+      456
+    ]
+  },
+  {
+    "text": "Thời gian: Không rõ",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      459,
+      478
+    ]
+  },
+  {
+    "text": "Tần suất: Gián đoạn",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      481,
+      500
+    ]
+  },
+  {
+    "text": "Chiếu r xạ: Không rõ",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      503,
+      523
+    ]
+  },
+  {
+    "text": "yếu",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      530,
+      533
+    ]
+  },
+  {
+    "text": "Hoạt động gắng sức",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      552,
+      570
+    ]
+  },
+  {
+    "text": "yếu",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      577,
+      580
+    ]
+  },
+  {
+    "text": "Nghỉ ngơi",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      598,
+      607
+    ]
+  },
+  {
+    "text": "chóng mặt",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      637,
+      646
+    ]
+  },
+  {
+    "text": "khó thở",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      648,
+      655
+    ]
+  },
+  {
+    "text": "đổ mồ hôi",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      657,
+      666
+    ]
+  },
+  {
+    "text": "bất thường",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      720,
+      730
+    ]
+  },
+  {
+    "text": "đau",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      796,
+      799
+    ]
+  },
+  {
+    "text": "điện tâm đồ",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      820,
+      831
+    ]
+  },
+  {
+    "text": "bình thường",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      832,
+      843
+    ]
+  },
+  {
+    "text": "Nhiệt độ 36.7°c",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      902,
+      917
+    ]
+  },
+  {
+    "text": "Huyết áp",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      919,
+      927
+    ]
+  },
+  {
+    "text": "Mạch 67 lần/phút",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      941,
+      957
+    ]
+  },
+  {
+    "text": "Nhịp thở 16 lần/phút",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      959,
+      979
+    ]
+  },
+  {
+    "text": "SpO2 100%",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      981,
+      990
+    ]
+  },
+  {
+    "text": "huyết áp",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1025,
+      1033
+    ]
+  },
+  {
+    "text": "nghiệm pháp gắng sức trên máy chạy bộ",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1172,
+      1209
+    ]
+  },
+  {
+    "text": "phát hiện chẩn đoán khác",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      1215,
+      1239
+    ],
+    "candidates": []
+  },
+  {
+    "text": "Liệu phát miễn dịch tiếp xúc",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      1250,
+      1278
+    ],
+    "candidates": []
+  },
+  {
+    "text": "ST chênh xuống kiểu xuống dốc xuất hiện trong giai đoạn hồi phục",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1307,
+      1371
+    ]
+  },
+  {
+    "text": "còn tồn tại sau 1 phút",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1373,
+      1395
+    ]
+  },
+  {
+    "text": "kéo dài đến sau 5 phút hồi phục",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1399,
+      1430
+    ]
+  }
+]

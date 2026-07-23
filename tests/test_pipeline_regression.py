@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import unittest
+from dataclasses import replace
 from pathlib import Path
 
 from core.config import (
@@ -26,7 +27,9 @@ from extraction.context import ContextDetector
 from extraction.llm_entities import (
     _chunk_payload,
     _chunk_units,
+    _mentions_from_payload,
     _neighbor_context,
+    _skip_non_patient_article,
     _span_from_mention_with_reason,
 )
 from extraction.ner import MedicalNER, SpanCandidate, resolve_span_types
@@ -40,8 +43,9 @@ from knowledge.candidates import (
 from knowledge.candidate_policy import CandidateEmissionPolicy, CandidatePolicyRule
 from knowledge.ontology import OntologyIndex
 from knowledge.retrieval import CandidateRetriever, _select_diagnosis_codes, _select_drug_code
-from services.pipeline import _merge_span_candidates_with_summary
+from services.pipeline import _gate_rule_spans_by_structure, _merge_span_candidates_with_summary
 from services.postprocess import refine_concepts
+from integrations.openai_client import _is_max_tokens_error, _rate_limit_retry_after
 from integrations.prompts import build_entity_extraction_prompt
 
 
@@ -172,6 +176,13 @@ class EntityOccurrenceTests(unittest.TestCase):
         self.assertIsNone(reason)
         self.assertEqual((span.text, span.type), (quote, TYPE_SYMPTOM))
 
+    def test_accepts_common_small_model_mentions_wrappers(self) -> None:
+        mentions = [["sốt", TYPE_SYMPTOM]]
+
+        self.assertEqual(_mentions_from_payload({"entities": mentions}), mentions)
+        self.assertEqual(_mentions_from_payload({"result": {"medical_mentions": mentions}}), mentions)
+        self.assertIsNone(_mentions_from_payload({"status": "ok"}))
+
     def test_prompt_separates_context_from_extraction_target(self) -> None:
         chunk = TextChunk(
             "c2",
@@ -193,14 +204,138 @@ class EntityOccurrenceTests(unittest.TestCase):
         self.assertIn("target_text", prompt)
         self.assertEqual(payload["structure_role"], "answer")
         self.assertEqual(prompt_data["target"]["structure_role"], "answer")
-        self.assertIn("clinical finding", prompt)
+        self.assertIn("clinical meaning", prompt)
         self.assertIn("must never be quoted", prompt)
-        self.assertIn("Be exhaustive", prompt)
-        self.assertIn("trầm cảm", prompt)
-        self.assertIn("CTM", prompt)
+        self.assertIn("Exclude general explanations", prompt)
+        self.assertIn("Never label a drug strength", prompt)
+        self.assertIn('Return exactly', prompt)
+        self.assertEqual(prompt_data["mention_format"], ["exact_quote", "type"])
+
+    def test_rate_limit_retry_parser_uses_provider_delay(self) -> None:
+        class RateLimitError(Exception):
+            status_code = 429
+
+        error = RateLimitError("Please try again in 3.25s")
+
+        self.assertEqual(_rate_limit_retry_after(error), 3.25)
+
+    def test_provider_json_truncation_is_classified_as_max_tokens(self) -> None:
+        error = RuntimeError("max completion tokens reached before generating a valid document")
+
+        self.assertTrue(_is_max_tokens_error(error))
 
 
 class SpanAndTypeTests(unittest.TestCase):
+    def test_low_trust_article_rules_require_llm_confirmation(self) -> None:
+        text = (ROOT / "input" / "72.txt").read_text(encoding="utf-8")
+        chunks = split_chunks(text, max_chars=650)
+        phrase = "lo âu"
+        article = next(
+            chunk
+            for chunk in chunks
+            if chunk.structure_role == "medical_article" and phrase in chunk.text.casefold()
+        )
+        start = text.casefold().index(phrase, article.start, article.end)
+        rule = SpanCandidate(
+            start,
+            start + len(phrase),
+            text[start : start + len(phrase)],
+            TYPE_SYMPTOM,
+            0.8,
+        )
+
+        self.assertEqual(_gate_rule_spans_by_structure(text, [rule], []), [])
+        self.assertEqual(
+            _gate_rule_spans_by_structure(text, [rule], [rule]),
+            [replace(rule, structure_role="medical_article")],
+        )
+
+    def test_high_confidence_article_rule_does_not_depend_on_small_llm_type(self) -> None:
+        text = (ROOT / "input" / "72.txt").read_text(encoding="utf-8")
+        chunks = split_chunks(text, max_chars=650)
+        phrase = "clonidine"
+        article = next(
+            chunk
+            for chunk in chunks
+            if chunk.structure_role == "medical_article" and phrase in chunk.text.casefold()
+        )
+        start = text.casefold().index(phrase, article.start, article.end)
+        rule = SpanCandidate(
+            start,
+            start + len(phrase),
+            text[start : start + len(phrase)],
+            TYPE_DRUG,
+            0.98,
+        )
+
+        self.assertEqual(_gate_rule_spans_by_structure(text, [rule], []), [replace(rule, structure_role="medical_article")])
+
+    def test_skips_only_non_patient_medical_article_chunks(self) -> None:
+        general = TextChunk(
+            "c1",
+            "case_1:document",
+            0,
+            40,
+            "Điều trị phụ thuộc vào mức độ nặng.",
+            structure_role="medical_article",
+        )
+        patient = TextChunk(
+            "c2",
+            "case_1:document",
+            0,
+            50,
+            "Thuốc đã điều trị trước khi nhập viện: clonidine",
+            structure_role="medical_article",
+        )
+
+        self.assertTrue(_skip_non_patient_article(general))
+        self.assertFalse(_skip_non_patient_article(patient))
+
+    def test_rule_extractor_handles_inline_labs_and_prescription_lines(self) -> None:
+        text = (
+            "XN: BC 5,38 G/l; N 51,4%\n"
+            "HBsAg (+), Anti HBe (-)\n"
+            "Creatinin: 89 micromol/l; GOT/GPT < 1\n"
+            "Điều trị:\n"
+            "  Glucose 5% x 1000ml truyền tĩnh mạch\n"
+            "  Philpovin 5g x 2 ống, pha vào dịch\n"
+            "  Vitamin 3B x 4 viên, sáng 2 viên"
+        )
+
+        spans = MedicalNER().extract(text)
+        tagged = {(span.text, span.type) for span in spans}
+
+        for expected in (
+            ("BC", TYPE_TEST_NAME),
+            ("5,38 G/l", TYPE_TEST_RESULT),
+            ("N", TYPE_TEST_NAME),
+            ("51,4%", TYPE_TEST_RESULT),
+            ("HBsAg", TYPE_TEST_NAME),
+            ("(+)", TYPE_TEST_RESULT),
+            ("Anti HBe", TYPE_TEST_NAME),
+            ("(-)", TYPE_TEST_RESULT),
+            ("Creatinin", TYPE_TEST_NAME),
+            ("89 micromol/l", TYPE_TEST_RESULT),
+            ("GOT/GPT < 1", TYPE_TEST_RESULT),
+            ("Glucose 5%", TYPE_DRUG),
+            ("Philpovin 5g x 2 ống", TYPE_DRUG),
+            ("Vitamin 3B x 4 viên", TYPE_DRUG),
+        ):
+            self.assertIn(expected, tagged)
+
+    def test_context_diagnosis_rejects_a_narrative_transfer_sentence(self) -> None:
+        text = (
+            "Chẩn đoán:\n"
+            "- Khi được chuyển vào khoa điều trị, bệnh nhân không còn cảm giác khó chịu vùng ngực"
+        )
+
+        diagnoses = [span.text for span in MedicalNER().extract(text) if span.type == TYPE_DIAGNOSIS]
+
+        self.assertNotIn(
+            "- Khi được chuyển vào khoa điều trị, bệnh nhân không còn cảm giác khó chịu vùng ngực",
+            diagnoses,
+        )
+
     def test_rule_span_wins_over_broad_llm_overlap(self) -> None:
         rule = SpanCandidate(5, 20, "rule", TYPE_SYMPTOM, 0.8, source="rule")
         broad_llm = SpanCandidate(0, 30, "llm", TYPE_SYMPTOM, 0.99, source="llm")

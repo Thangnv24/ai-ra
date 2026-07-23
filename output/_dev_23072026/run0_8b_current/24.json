@@ -1,0 +1,608 @@
+[
+  {
+    "text": "mệt mỏi",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      49,
+      56
+    ]
+  },
+  {
+    "text": "vàng da",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      58,
+      65
+    ]
+  },
+  {
+    "text": "nhiễm trùng",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      191,
+      202
+    ]
+  },
+  {
+    "text": "sốt",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      238,
+      241
+    ]
+  },
+  {
+    "text": "sốt",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      256,
+      259
+    ]
+  },
+  {
+    "text": "paracetamol",
+    "type": "THUỐC",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      320,
+      331
+    ],
+    "candidates": [
+      "161"
+    ]
+  },
+  {
+    "text": "sốt",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      382,
+      385
+    ]
+  },
+  {
+    "text": "vàng da",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      400,
+      407
+    ]
+  },
+  {
+    "text": "sốt",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      441,
+      444
+    ]
+  },
+  {
+    "text": "mệt mỏi",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      448,
+      455
+    ]
+  },
+  {
+    "text": "sốt",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      506,
+      509
+    ]
+  },
+  {
+    "text": "mệt mỏi",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      515,
+      522
+    ]
+  },
+  {
+    "text": "vàng da",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      667,
+      674
+    ]
+  },
+  {
+    "text": "sốt",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      741,
+      744
+    ]
+  },
+  {
+    "text": "vàng da",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      860,
+      867
+    ]
+  },
+  {
+    "text": "Bilirubin  toàn phần",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1053,
+      1073
+    ]
+  },
+  {
+    "text": "43 mmol/l",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1075,
+      1084
+    ]
+  },
+  {
+    "text": "trực tiếp",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1086,
+      1095
+    ]
+  },
+  {
+    "text": "27 mmol/l",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1097,
+      1106
+    ]
+  },
+  {
+    "text": "Ure",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1115,
+      1118
+    ]
+  },
+  {
+    "text": "5,9 mmol/l",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1120,
+      1130
+    ]
+  },
+  {
+    "text": "Hội chứng hủy hoại tế bào gan",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      1165,
+      1194
+    ],
+    "candidates": []
+  },
+  {
+    "text": "GOT",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1224,
+      1227
+    ]
+  },
+  {
+    "text": "542 U/l",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1229,
+      1236
+    ]
+  },
+  {
+    "text": "GPT",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1238,
+      1241
+    ]
+  },
+  {
+    "text": "628 U/l",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1243,
+      1250
+    ]
+  },
+  {
+    "text": "GGT",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1252,
+      1255
+    ]
+  },
+  {
+    "text": "234 U/l",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1257,
+      1264
+    ]
+  },
+  {
+    "text": "Chỉ số Deritis",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1273,
+      1287
+    ]
+  },
+  {
+    "text": "GOT/GPT",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1290,
+      1297
+    ]
+  },
+  {
+    "text": "< 1",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1298,
+      1301
+    ]
+  },
+  {
+    "text": "vàng da",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated",
+      "isHistorical"
+    ],
+    "position": [
+      1410,
+      1417
+    ]
+  },
+  {
+    "text": "uống rượu",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      1495,
+      1504
+    ]
+  },
+  {
+    "text": "viêm gan B",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated",
+      "isHistorical"
+    ],
+    "position": [
+      1578,
+      1588
+    ]
+  },
+  {
+    "text": "Tiền sử dịch tễ",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1601,
+      1616
+    ]
+  },
+  {
+    "text": "virus viêm gan B",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1647,
+      1663
+    ]
+  },
+  {
+    "text": "mệt mỏi",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1712,
+      1719
+    ]
+  },
+  {
+    "text": "vàng da",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1725,
+      1732
+    ]
+  },
+  {
+    "text": "ăn ngủ được",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1743,
+      1754
+    ]
+  },
+  {
+    "text": "chảy máu",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      1772,
+      1780
+    ]
+  },
+  {
+    "text": "tiểu tiện 1000ml/24h",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1782,
+      1802
+    ]
+  },
+  {
+    "text": "nước tiểu vàng nhẹ",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      1804,
+      1822
+    ]
+  },
+  {
+    "text": "đại tiện phân thành khuôn",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      1824,
+      1849
+    ]
+  },
+  {
+    "text": "Không xuất hiện thêm triệu chứng gì",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      1851,
+      1886
+    ]
+  },
+  {
+    "text": "- Khi được chuyển vào khoa điều trị, bệnh nhân không còn cảm giáckhó chịu vùng ngực",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      1905,
+      1988
+    ],
+    "candidates": []
+  },
+  {
+    "text": "Glucose",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1997,
+      2004
+    ]
+  },
+  {
+    "text": "5%",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      2005,
+      2007
+    ]
+  },
+  {
+    "text": "1000ml",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      2010,
+      2016
+    ]
+  },
+  {
+    "text": "truyền tĩnh mạch L giọt/phút",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      2017,
+      2045
+    ]
+  },
+  {
+    "text": "nước tiểu 1500ml/ngày",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      2060,
+      2081
+    ]
+  },
+  {
+    "text": "nước tiểu trong",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      2083,
+      2098
+    ]
+  },
+  {
+    "text": "Philpovin",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      2108,
+      2117
+    ]
+  },
+  {
+    "text": "5g",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      2118,
+      2120
+    ]
+  },
+  {
+    "text": "x 2 ống",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      2121,
+      2128
+    ]
+  },
+  {
+    "text": "pha vào **********",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      2130,
+      2148
+    ]
+  },
+  {
+    "text": "dùng đến khi ALT, AST trở về bình thường",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      2180,
+      2220
+    ]
+  },
+  {
+    "text": "Fortex",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      2230,
+      2236
+    ]
+  },
+  {
+    "text": "25mg",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      2237,
+      2241
+    ]
+  },
+  {
+    "text": "x 4 viên",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      2242,
+      2250
+    ]
+  },
+  {
+    "text": "sáng 2 viên",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      2252,
+      2263
+    ]
+  },
+  {
+    "text": "chiều 2v sau ăn",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      2265,
+      2280
+    ]
+  },
+  {
+    "text": "Vitamin 3B",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      2332,
+      2342
+    ]
+  },
+  {
+    "text": "chiều 2 viên sau ăn",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      2366,
+      2385
+    ]
+  },
+  {
+    "text": "cấp tính do virus B thể thông thường điển hình mức độ nặng giai đoạn toàn phát",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      2386,
+      2464
+    ],
+    "candidates": []
+  }
+]

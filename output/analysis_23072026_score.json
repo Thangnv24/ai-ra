@@ -1,0 +1,1713 @@
+{
+  "created_at": "2026-07-23T22:28:44",
+  "input_dir": "D:\\downloads\\ai-race\\input",
+  "gold_dir": "D:\\downloads\\ai-race\\data\\gold_manual\\review_20260722_145317_new_input",
+  "prediction_dir": "D:\\downloads\\ai-race\\output\\out_put_23072026",
+  "num_records": 100,
+  "text_score": 39.9321,
+  "J_assertion": 34.06,
+  "J_candidates": 22.2914,
+  "final_score_estimate": 31.1142,
+  "files": [
+    {
+      "file": "1.json",
+      "gold": 0,
+      "prediction": 68,
+      "matched": 0,
+      "missing": 0,
+      "extra": 68,
+      "text_score": 0.0,
+      "assertion_score": 0.0,
+      "candidate_score": 0.0,
+      "candidate_numerator": 0.0,
+      "candidate_denominator": 45.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "2.json",
+      "gold": 14,
+      "prediction": 79,
+      "matched": 14,
+      "missing": 0,
+      "extra": 65,
+      "text_score": 0.177215,
+      "assertion_score": 0.030303,
+      "candidate_score": 0.029412,
+      "candidate_numerator": 1.0,
+      "candidate_denominator": 34.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "3.json",
+      "gold": 59,
+      "prediction": 80,
+      "matched": 44,
+      "missing": 15,
+      "extra": 36,
+      "text_score": 0.388947,
+      "assertion_score": 0.283784,
+      "candidate_score": 0.2,
+      "candidate_numerator": 4.0,
+      "candidate_denominator": 20.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "4.json",
+      "gold": 82,
+      "prediction": 85,
+      "matched": 72,
+      "missing": 10,
+      "extra": 13,
+      "text_score": 0.717661,
+      "assertion_score": 0.5,
+      "candidate_score": 0.410256,
+      "candidate_numerator": 16.0,
+      "candidate_denominator": 39.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "5.json",
+      "gold": 42,
+      "prediction": 56,
+      "matched": 32,
+      "missing": 10,
+      "extra": 24,
+      "text_score": 0.429844,
+      "assertion_score": 0.328571,
+      "candidate_score": 0.285714,
+      "candidate_numerator": 4.0,
+      "candidate_denominator": 14.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "6.json",
+      "gold": 69,
+      "prediction": 86,
+      "matched": 54,
+      "missing": 15,
+      "extra": 32,
+      "text_score": 0.483357,
+      "assertion_score": 0.282051,
+      "candidate_score": 0.428571,
+      "candidate_numerator": 9.0,
+      "candidate_denominator": 21.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "7.json",
+      "gold": 29,
+      "prediction": 49,
+      "matched": 21,
+      "missing": 8,
+      "extra": 28,
+      "text_score": 0.31501,
+      "assertion_score": 0.297872,
+      "candidate_score": 0.545455,
+      "candidate_numerator": 12.0,
+      "candidate_denominator": 22.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "8.json",
+      "gold": 45,
+      "prediction": 91,
+      "matched": 41,
+      "missing": 4,
+      "extra": 50,
+      "text_score": 0.414737,
+      "assertion_score": 0.342105,
+      "candidate_score": 0.285714,
+      "candidate_numerator": 8.0,
+      "candidate_denominator": 28.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "9.json",
+      "gold": 31,
+      "prediction": 54,
+      "matched": 22,
+      "missing": 9,
+      "extra": 32,
+      "text_score": 0.30291,
+      "assertion_score": 0.276596,
+      "candidate_score": 0.481481,
+      "candidate_numerator": 13.0,
+      "candidate_denominator": 27.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "10.json",
+      "gold": 57,
+      "prediction": 62,
+      "matched": 57,
+      "missing": 0,
+      "extra": 5,
+      "text_score": 0.862903,
+      "assertion_score": 0.906977,
+      "candidate_score": 0.625,
+      "candidate_numerator": 10.0,
+      "candidate_denominator": 16.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "11.json",
+      "gold": 52,
+      "prediction": 62,
+      "matched": 34,
+      "missing": 18,
+      "extra": 28,
+      "text_score": 0.38256,
+      "assertion_score": 0.2,
+      "candidate_score": 0.173913,
+      "candidate_numerator": 4.0,
+      "candidate_denominator": 23.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "12.json",
+      "gold": 36,
+      "prediction": 41,
+      "matched": 28,
+      "missing": 8,
+      "extra": 13,
+      "text_score": 0.43424,
+      "assertion_score": 0.434783,
+      "candidate_score": 0.346154,
+      "candidate_numerator": 9.0,
+      "candidate_denominator": 26.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "13.json",
+      "gold": 4,
+      "prediction": 34,
+      "matched": 4,
+      "missing": 0,
+      "extra": 30,
+      "text_score": 0.085294,
+      "assertion_score": 0.121212,
+      "candidate_score": 0.0,
+      "candidate_numerator": 0.0,
+      "candidate_denominator": 15.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "14.json",
+      "gold": 23,
+      "prediction": 40,
+      "matched": 21,
+      "missing": 2,
+      "extra": 19,
+      "text_score": 0.440476,
+      "assertion_score": 0.525,
+      "candidate_score": 0.285714,
+      "candidate_numerator": 6.0,
+      "candidate_denominator": 21.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "15.json",
+      "gold": 34,
+      "prediction": 40,
+      "matched": 27,
+      "missing": 7,
+      "extra": 13,
+      "text_score": 0.435934,
+      "assertion_score": 0.5,
+      "candidate_score": 0.322581,
+      "candidate_numerator": 10.0,
+      "candidate_denominator": 31.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "16.json",
+      "gold": 5,
+      "prediction": 31,
+      "matched": 5,
+      "missing": 0,
+      "extra": 26,
+      "text_score": 0.150538,
+      "assertion_score": 0.166667,
+      "candidate_score": 0.086957,
+      "candidate_numerator": 2.0,
+      "candidate_denominator": 23.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "17.json",
+      "gold": 8,
+      "prediction": 68,
+      "matched": 7,
+      "missing": 1,
+      "extra": 61,
+      "text_score": 0.078261,
+      "assertion_score": 0.048387,
+      "candidate_score": 0.1,
+      "candidate_numerator": 3.0,
+      "candidate_denominator": 30.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "18.json",
+      "gold": 40,
+      "prediction": 62,
+      "matched": 34,
+      "missing": 6,
+      "extra": 28,
+      "text_score": 0.426225,
+      "assertion_score": 0.5,
+      "candidate_score": 0.090909,
+      "candidate_numerator": 1.0,
+      "candidate_denominator": 11.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "19.json",
+      "gold": 14,
+      "prediction": 48,
+      "matched": 10,
+      "missing": 4,
+      "extra": 38,
+      "text_score": 0.166667,
+      "assertion_score": 0.16,
+      "candidate_score": 0.285714,
+      "candidate_numerator": 6.0,
+      "candidate_denominator": 21.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "20.json",
+      "gold": 22,
+      "prediction": 42,
+      "matched": 18,
+      "missing": 4,
+      "extra": 24,
+      "text_score": 0.28913,
+      "assertion_score": 0.264706,
+      "candidate_score": 0.055556,
+      "candidate_numerator": 1.0,
+      "candidate_denominator": 18.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "21.json",
+      "gold": 23,
+      "prediction": 36,
+      "matched": 21,
+      "missing": 2,
+      "extra": 15,
+      "text_score": 0.453509,
+      "assertion_score": 0.46875,
+      "candidate_score": 0.0,
+      "candidate_numerator": 0.0,
+      "candidate_denominator": 21.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "22.json",
+      "gold": 45,
+      "prediction": 58,
+      "matched": 36,
+      "missing": 9,
+      "extra": 22,
+      "text_score": 0.401635,
+      "assertion_score": 0.485714,
+      "candidate_score": 0.285714,
+      "candidate_numerator": 2.0,
+      "candidate_denominator": 7.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "23.json",
+      "gold": 21,
+      "prediction": 30,
+      "matched": 13,
+      "missing": 8,
+      "extra": 17,
+      "text_score": 0.247525,
+      "assertion_score": 0.305556,
+      "candidate_score": 0.083333,
+      "candidate_numerator": 1.0,
+      "candidate_denominator": 12.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "24.json",
+      "gold": 87,
+      "prediction": 89,
+      "matched": 78,
+      "missing": 9,
+      "extra": 11,
+      "text_score": 0.748299,
+      "assertion_score": 0.807692,
+      "candidate_score": 0.666667,
+      "candidate_numerator": 8.0,
+      "candidate_denominator": 12.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "25.json",
+      "gold": 23,
+      "prediction": 46,
+      "matched": 17,
+      "missing": 6,
+      "extra": 29,
+      "text_score": 0.326923,
+      "assertion_score": 0.22,
+      "candidate_score": 0.1,
+      "candidate_numerator": 1.0,
+      "candidate_denominator": 10.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "26.json",
+      "gold": 12,
+      "prediction": 72,
+      "matched": 11,
+      "missing": 1,
+      "extra": 61,
+      "text_score": 0.135943,
+      "assertion_score": 0.153846,
+      "candidate_score": 0.105263,
+      "candidate_numerator": 4.0,
+      "candidate_denominator": 38.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "27.json",
+      "gold": 10,
+      "prediction": 54,
+      "matched": 5,
+      "missing": 5,
+      "extra": 49,
+      "text_score": 0.061259,
+      "assertion_score": 0.072727,
+      "candidate_score": 0.0,
+      "candidate_numerator": 0.0,
+      "candidate_denominator": 27.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "28.json",
+      "gold": 8,
+      "prediction": 40,
+      "matched": 7,
+      "missing": 1,
+      "extra": 33,
+      "text_score": 0.106998,
+      "assertion_score": 0.157895,
+      "candidate_score": 0.166667,
+      "candidate_numerator": 2.0,
+      "candidate_denominator": 12.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "29.json",
+      "gold": 33,
+      "prediction": 39,
+      "matched": 25,
+      "missing": 8,
+      "extra": 14,
+      "text_score": 0.438298,
+      "assertion_score": 0.341463,
+      "candidate_score": 0.222222,
+      "candidate_numerator": 4.0,
+      "candidate_denominator": 18.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "30.json",
+      "gold": 20,
+      "prediction": 33,
+      "matched": 18,
+      "missing": 2,
+      "extra": 15,
+      "text_score": 0.457143,
+      "assertion_score": 0.514286,
+      "candidate_score": 0.142857,
+      "candidate_numerator": 1.0,
+      "candidate_denominator": 7.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "31.json",
+      "gold": 38,
+      "prediction": 43,
+      "matched": 34,
+      "missing": 4,
+      "extra": 9,
+      "text_score": 0.594124,
+      "assertion_score": 0.558824,
+      "candidate_score": 0.0625,
+      "candidate_numerator": 1.0,
+      "candidate_denominator": 16.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "32.json",
+      "gold": 30,
+      "prediction": 36,
+      "matched": 28,
+      "missing": 2,
+      "extra": 8,
+      "text_score": 0.675439,
+      "assertion_score": 0.421053,
+      "candidate_score": 0.25,
+      "candidate_numerator": 6.0,
+      "candidate_denominator": 24.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "33.json",
+      "gold": 47,
+      "prediction": 48,
+      "matched": 38,
+      "missing": 9,
+      "extra": 10,
+      "text_score": 0.55614,
+      "assertion_score": 0.596491,
+      "candidate_score": 0.5,
+      "candidate_numerator": 9.0,
+      "candidate_denominator": 18.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "34.json",
+      "gold": 13,
+      "prediction": 48,
+      "matched": 10,
+      "missing": 3,
+      "extra": 38,
+      "text_score": 0.147059,
+      "assertion_score": 0.08,
+      "candidate_score": 0.285714,
+      "candidate_numerator": 4.0,
+      "candidate_denominator": 14.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "35.json",
+      "gold": 13,
+      "prediction": 35,
+      "matched": 13,
+      "missing": 0,
+      "extra": 22,
+      "text_score": 0.352381,
+      "assertion_score": 0.310345,
+      "candidate_score": 0.0,
+      "candidate_numerator": 0.0,
+      "candidate_denominator": 9.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "36.json",
+      "gold": 63,
+      "prediction": 74,
+      "matched": 61,
+      "missing": 2,
+      "extra": 13,
+      "text_score": 0.779386,
+      "assertion_score": 0.621622,
+      "candidate_score": 0.607143,
+      "candidate_numerator": 17.0,
+      "candidate_denominator": 28.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "37.json",
+      "gold": 18,
+      "prediction": 23,
+      "matched": 13,
+      "missing": 5,
+      "extra": 10,
+      "text_score": 0.428571,
+      "assertion_score": 0.230769,
+      "candidate_score": 0.5,
+      "candidate_numerator": 2.0,
+      "candidate_denominator": 4.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "38.json",
+      "gold": 54,
+      "prediction": 56,
+      "matched": 53,
+      "missing": 1,
+      "extra": 3,
+      "text_score": 0.815205,
+      "assertion_score": 0.829268,
+      "candidate_score": 0.272727,
+      "candidate_numerator": 6.0,
+      "candidate_denominator": 22.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "39.json",
+      "gold": 34,
+      "prediction": 38,
+      "matched": 24,
+      "missing": 10,
+      "extra": 14,
+      "text_score": 0.431548,
+      "assertion_score": 0.513514,
+      "candidate_score": 0.05,
+      "candidate_numerator": 1.0,
+      "candidate_denominator": 20.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "40.json",
+      "gold": 61,
+      "prediction": 64,
+      "matched": 50,
+      "missing": 11,
+      "extra": 14,
+      "text_score": 0.609651,
+      "assertion_score": 0.526316,
+      "candidate_score": 0.16,
+      "candidate_numerator": 4.0,
+      "candidate_denominator": 25.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "41.json",
+      "gold": 7,
+      "prediction": 36,
+      "matched": 4,
+      "missing": 3,
+      "extra": 32,
+      "text_score": 0.074359,
+      "assertion_score": 0.102564,
+      "candidate_score": 0.0,
+      "candidate_numerator": 0.0,
+      "candidate_denominator": 17.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "42.json",
+      "gold": 48,
+      "prediction": 54,
+      "matched": 41,
+      "missing": 7,
+      "extra": 13,
+      "text_score": 0.619204,
+      "assertion_score": 0.5,
+      "candidate_score": 0.238095,
+      "candidate_numerator": 5.0,
+      "candidate_denominator": 21.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "43.json",
+      "gold": 19,
+      "prediction": 28,
+      "matched": 19,
+      "missing": 0,
+      "extra": 9,
+      "text_score": 0.642857,
+      "assertion_score": 0.464286,
+      "candidate_score": 0.411765,
+      "candidate_numerator": 7.0,
+      "candidate_denominator": 17.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "44.json",
+      "gold": 22,
+      "prediction": 35,
+      "matched": 17,
+      "missing": 5,
+      "extra": 18,
+      "text_score": 0.395714,
+      "assertion_score": 0.020833,
+      "candidate_score": 0.090909,
+      "candidate_numerator": 1.0,
+      "candidate_denominator": 11.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "45.json",
+      "gold": 27,
+      "prediction": 34,
+      "matched": 20,
+      "missing": 7,
+      "extra": 14,
+      "text_score": 0.355981,
+      "assertion_score": 0.434783,
+      "candidate_score": 0.3,
+      "candidate_numerator": 3.0,
+      "candidate_denominator": 10.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "46.json",
+      "gold": 84,
+      "prediction": 71,
+      "matched": 59,
+      "missing": 25,
+      "extra": 12,
+      "text_score": 0.586806,
+      "assertion_score": 0.45,
+      "candidate_score": 0.37037,
+      "candidate_numerator": 10.0,
+      "candidate_denominator": 27.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "47.json",
+      "gold": 51,
+      "prediction": 59,
+      "matched": 45,
+      "missing": 6,
+      "extra": 14,
+      "text_score": 0.633883,
+      "assertion_score": 0.530612,
+      "candidate_score": 0.210526,
+      "candidate_numerator": 4.0,
+      "candidate_denominator": 19.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "48.json",
+      "gold": 17,
+      "prediction": 19,
+      "matched": 12,
+      "missing": 5,
+      "extra": 7,
+      "text_score": 0.5,
+      "assertion_score": 0.0,
+      "candidate_score": 0.0,
+      "candidate_numerator": 0.0,
+      "candidate_denominator": 4.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "49.json",
+      "gold": 6,
+      "prediction": 24,
+      "matched": 5,
+      "missing": 1,
+      "extra": 19,
+      "text_score": 0.2,
+      "assertion_score": 0.15,
+      "candidate_score": 0.3,
+      "candidate_numerator": 3.0,
+      "candidate_denominator": 10.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "50.json",
+      "gold": 16,
+      "prediction": 28,
+      "matched": 10,
+      "missing": 6,
+      "extra": 18,
+      "text_score": 0.21341,
+      "assertion_score": 0.285714,
+      "candidate_score": 0.1,
+      "candidate_numerator": 1.0,
+      "candidate_denominator": 10.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "51.json",
+      "gold": 26,
+      "prediction": 32,
+      "matched": 22,
+      "missing": 4,
+      "extra": 10,
+      "text_score": 0.586111,
+      "assertion_score": 0.558824,
+      "candidate_score": 0.25,
+      "candidate_numerator": 3.0,
+      "candidate_denominator": 12.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "52.json",
+      "gold": 9,
+      "prediction": 33,
+      "matched": 7,
+      "missing": 2,
+      "extra": 26,
+      "text_score": 0.121769,
+      "assertion_score": 0.142857,
+      "candidate_score": 0.272727,
+      "candidate_numerator": 3.0,
+      "candidate_denominator": 11.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "53.json",
+      "gold": 37,
+      "prediction": 51,
+      "matched": 35,
+      "missing": 2,
+      "extra": 16,
+      "text_score": 0.641509,
+      "assertion_score": 0.517241,
+      "candidate_score": 0.055556,
+      "candidate_numerator": 1.0,
+      "candidate_denominator": 18.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "54.json",
+      "gold": 25,
+      "prediction": 38,
+      "matched": 24,
+      "missing": 1,
+      "extra": 14,
+      "text_score": 0.555556,
+      "assertion_score": 0.387097,
+      "candidate_score": 0.4,
+      "candidate_numerator": 6.0,
+      "candidate_denominator": 15.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "55.json",
+      "gold": 27,
+      "prediction": 40,
+      "matched": 25,
+      "missing": 2,
+      "extra": 15,
+      "text_score": 0.595238,
+      "assertion_score": 0.529412,
+      "candidate_score": 0.5,
+      "candidate_numerator": 5.0,
+      "candidate_denominator": 10.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "56.json",
+      "gold": 7,
+      "prediction": 31,
+      "matched": 5,
+      "missing": 2,
+      "extra": 26,
+      "text_score": 0.136364,
+      "assertion_score": 0.041667,
+      "candidate_score": 0.0,
+      "candidate_numerator": 0.0,
+      "candidate_denominator": 13.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "57.json",
+      "gold": 49,
+      "prediction": 57,
+      "matched": 41,
+      "missing": 8,
+      "extra": 16,
+      "text_score": 0.589231,
+      "assertion_score": 0.385714,
+      "candidate_score": 0.081081,
+      "candidate_numerator": 3.0,
+      "candidate_denominator": 37.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "58.json",
+      "gold": 66,
+      "prediction": 68,
+      "matched": 59,
+      "missing": 7,
+      "extra": 9,
+      "text_score": 0.732889,
+      "assertion_score": 0.616667,
+      "candidate_score": 0.074074,
+      "candidate_numerator": 2.0,
+      "candidate_denominator": 27.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "59.json",
+      "gold": 21,
+      "prediction": 31,
+      "matched": 14,
+      "missing": 7,
+      "extra": 17,
+      "text_score": 0.328947,
+      "assertion_score": 0.2,
+      "candidate_score": 0.0,
+      "candidate_numerator": 0.0,
+      "candidate_denominator": 6.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "60.json",
+      "gold": 35,
+      "prediction": 40,
+      "matched": 28,
+      "missing": 7,
+      "extra": 12,
+      "text_score": 0.56383,
+      "assertion_score": 0.384615,
+      "candidate_score": 0.0,
+      "candidate_numerator": 0.0,
+      "candidate_denominator": 10.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "61.json",
+      "gold": 11,
+      "prediction": 15,
+      "matched": 9,
+      "missing": 2,
+      "extra": 6,
+      "text_score": 0.392157,
+      "assertion_score": 0.6,
+      "candidate_score": 0.0,
+      "candidate_numerator": 0.0,
+      "candidate_denominator": 2.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "62.json",
+      "gold": 40,
+      "prediction": 44,
+      "matched": 36,
+      "missing": 4,
+      "extra": 8,
+      "text_score": 0.695139,
+      "assertion_score": 0.555556,
+      "candidate_score": 0.222222,
+      "candidate_numerator": 2.0,
+      "candidate_denominator": 9.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "63.json",
+      "gold": 22,
+      "prediction": 26,
+      "matched": 21,
+      "missing": 1,
+      "extra": 5,
+      "text_score": 0.703704,
+      "assertion_score": 0.444444,
+      "candidate_score": 0.625,
+      "candidate_numerator": 10.0,
+      "candidate_denominator": 16.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "64.json",
+      "gold": 9,
+      "prediction": 22,
+      "matched": 9,
+      "missing": 0,
+      "extra": 13,
+      "text_score": 0.35,
+      "assertion_score": 0.142857,
+      "candidate_score": 0.266667,
+      "candidate_numerator": 4.0,
+      "candidate_denominator": 15.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "65.json",
+      "gold": 5,
+      "prediction": 20,
+      "matched": 3,
+      "missing": 2,
+      "extra": 17,
+      "text_score": 0.106061,
+      "assertion_score": 0.111111,
+      "candidate_score": 0.0,
+      "candidate_numerator": 0.0,
+      "candidate_denominator": 13.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "66.json",
+      "gold": 6,
+      "prediction": 34,
+      "matched": 3,
+      "missing": 3,
+      "extra": 31,
+      "text_score": 0.081081,
+      "assertion_score": 0.03125,
+      "candidate_score": 0.0,
+      "candidate_numerator": 0.0,
+      "candidate_denominator": 38.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "67.json",
+      "gold": 6,
+      "prediction": 27,
+      "matched": 5,
+      "missing": 1,
+      "extra": 22,
+      "text_score": 0.160714,
+      "assertion_score": 0.0,
+      "candidate_score": 0.333333,
+      "candidate_numerator": 5.0,
+      "candidate_denominator": 15.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "68.json",
+      "gold": 20,
+      "prediction": 25,
+      "matched": 12,
+      "missing": 8,
+      "extra": 13,
+      "text_score": 0.305051,
+      "assertion_score": 0.259259,
+      "candidate_score": 0.111111,
+      "candidate_numerator": 2.0,
+      "candidate_denominator": 18.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "69.json",
+      "gold": 14,
+      "prediction": 22,
+      "matched": 11,
+      "missing": 3,
+      "extra": 11,
+      "text_score": 0.313333,
+      "assertion_score": 0.3,
+      "candidate_score": 0.2,
+      "candidate_numerator": 2.0,
+      "candidate_denominator": 10.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "70.json",
+      "gold": 29,
+      "prediction": 37,
+      "matched": 25,
+      "missing": 4,
+      "extra": 12,
+      "text_score": 0.591463,
+      "assertion_score": 0.540541,
+      "candidate_score": 0.5,
+      "candidate_numerator": 7.0,
+      "candidate_denominator": 14.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "71.json",
+      "gold": 6,
+      "prediction": 19,
+      "matched": 4,
+      "missing": 2,
+      "extra": 15,
+      "text_score": 0.134921,
+      "assertion_score": 0.175,
+      "candidate_score": 0.0,
+      "candidate_numerator": 0.0,
+      "candidate_denominator": 8.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "72.json",
+      "gold": 18,
+      "prediction": 25,
+      "matched": 17,
+      "missing": 1,
+      "extra": 8,
+      "text_score": 0.653846,
+      "assertion_score": 0.461538,
+      "candidate_score": 0.647059,
+      "candidate_numerator": 11.0,
+      "candidate_denominator": 17.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "73.json",
+      "gold": 27,
+      "prediction": 39,
+      "matched": 23,
+      "missing": 4,
+      "extra": 16,
+      "text_score": 0.441473,
+      "assertion_score": 0.605263,
+      "candidate_score": 0.0,
+      "candidate_numerator": 0.0,
+      "candidate_denominator": 10.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "74.json",
+      "gold": 28,
+      "prediction": 33,
+      "matched": 24,
+      "missing": 4,
+      "extra": 9,
+      "text_score": 0.54009,
+      "assertion_score": 0.638889,
+      "candidate_score": 0.0,
+      "candidate_numerator": 0.0,
+      "candidate_denominator": 6.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "75.json",
+      "gold": 4,
+      "prediction": 15,
+      "matched": 4,
+      "missing": 0,
+      "extra": 11,
+      "text_score": 0.266667,
+      "assertion_score": 0.214286,
+      "candidate_score": 0.0,
+      "candidate_numerator": 0.0,
+      "candidate_denominator": 14.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "76.json",
+      "gold": 0,
+      "prediction": 9,
+      "matched": 0,
+      "missing": 0,
+      "extra": 9,
+      "text_score": 0.0,
+      "assertion_score": 0.0,
+      "candidate_score": 0.0,
+      "candidate_numerator": 0.0,
+      "candidate_denominator": 4.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "77.json",
+      "gold": 26,
+      "prediction": 27,
+      "matched": 21,
+      "missing": 5,
+      "extra": 6,
+      "text_score": 0.538021,
+      "assertion_score": 0.333333,
+      "candidate_score": 0.555556,
+      "candidate_numerator": 5.0,
+      "candidate_denominator": 9.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "78.json",
+      "gold": 12,
+      "prediction": 25,
+      "matched": 7,
+      "missing": 5,
+      "extra": 18,
+      "text_score": 0.183333,
+      "assertion_score": 0.25,
+      "candidate_score": 0.0,
+      "candidate_numerator": 0.0,
+      "candidate_denominator": 1.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "79.json",
+      "gold": 2,
+      "prediction": 17,
+      "matched": 1,
+      "missing": 1,
+      "extra": 16,
+      "text_score": 0.055556,
+      "assertion_score": 0.055556,
+      "candidate_score": 0.0,
+      "candidate_numerator": 0.0,
+      "candidate_denominator": 15.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "80.json",
+      "gold": 14,
+      "prediction": 33,
+      "matched": 14,
+      "missing": 0,
+      "extra": 19,
+      "text_score": 0.393939,
+      "assertion_score": 0.0,
+      "candidate_score": 0.181818,
+      "candidate_numerator": 2.0,
+      "candidate_denominator": 11.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "81.json",
+      "gold": 7,
+      "prediction": 24,
+      "matched": 5,
+      "missing": 2,
+      "extra": 19,
+      "text_score": 0.179487,
+      "assertion_score": 0.181818,
+      "candidate_score": 0.0,
+      "candidate_numerator": 0.0,
+      "candidate_denominator": 21.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "82.json",
+      "gold": 24,
+      "prediction": 29,
+      "matched": 23,
+      "missing": 1,
+      "extra": 6,
+      "text_score": 0.645238,
+      "assertion_score": 0.695652,
+      "candidate_score": 0.125,
+      "candidate_numerator": 1.0,
+      "candidate_denominator": 8.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "83.json",
+      "gold": 2,
+      "prediction": 17,
+      "matched": 2,
+      "missing": 0,
+      "extra": 15,
+      "text_score": 0.117647,
+      "assertion_score": 0.0,
+      "candidate_score": 0.0,
+      "candidate_numerator": 0.0,
+      "candidate_denominator": 3.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "84.json",
+      "gold": 1,
+      "prediction": 12,
+      "matched": 0,
+      "missing": 1,
+      "extra": 12,
+      "text_score": 0.0,
+      "assertion_score": 0.0,
+      "candidate_score": 0.0,
+      "candidate_numerator": 0.0,
+      "candidate_denominator": 9.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "85.json",
+      "gold": 41,
+      "prediction": 38,
+      "matched": 25,
+      "missing": 16,
+      "extra": 13,
+      "text_score": 0.365807,
+      "assertion_score": 0.4,
+      "candidate_score": 0.3125,
+      "candidate_numerator": 5.0,
+      "candidate_denominator": 16.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "86.json",
+      "gold": 5,
+      "prediction": 27,
+      "matched": 5,
+      "missing": 0,
+      "extra": 22,
+      "text_score": 0.17284,
+      "assertion_score": 0.2,
+      "candidate_score": 0.0,
+      "candidate_numerator": 0.0,
+      "candidate_denominator": 8.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "87.json",
+      "gold": 37,
+      "prediction": 46,
+      "matched": 33,
+      "missing": 4,
+      "extra": 13,
+      "text_score": 0.537381,
+      "assertion_score": 0.681818,
+      "candidate_score": 0.0,
+      "candidate_numerator": 0.0,
+      "candidate_denominator": 4.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "88.json",
+      "gold": 10,
+      "prediction": 17,
+      "matched": 7,
+      "missing": 3,
+      "extra": 10,
+      "text_score": 0.325,
+      "assertion_score": 0.384615,
+      "candidate_score": 0.4,
+      "candidate_numerator": 2.0,
+      "candidate_denominator": 5.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "89.json",
+      "gold": 41,
+      "prediction": 46,
+      "matched": 40,
+      "missing": 1,
+      "extra": 6,
+      "text_score": 0.815603,
+      "assertion_score": 0.764706,
+      "candidate_score": 0.0,
+      "candidate_numerator": 0.0,
+      "candidate_denominator": 4.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "90.json",
+      "gold": 46,
+      "prediction": 46,
+      "matched": 39,
+      "missing": 7,
+      "extra": 7,
+      "text_score": 0.700629,
+      "assertion_score": 0.586207,
+      "candidate_score": 0.294118,
+      "candidate_numerator": 5.0,
+      "candidate_denominator": 17.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "91.json",
+      "gold": 27,
+      "prediction": 33,
+      "matched": 23,
+      "missing": 4,
+      "extra": 10,
+      "text_score": 0.588803,
+      "assertion_score": 0.625,
+      "candidate_score": 0.625,
+      "candidate_numerator": 10.0,
+      "candidate_denominator": 16.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "92.json",
+      "gold": 39,
+      "prediction": 40,
+      "matched": 30,
+      "missing": 9,
+      "extra": 10,
+      "text_score": 0.509718,
+      "assertion_score": 0.475,
+      "candidate_score": 0.517241,
+      "candidate_numerator": 15.0,
+      "candidate_denominator": 29.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "93.json",
+      "gold": 22,
+      "prediction": 34,
+      "matched": 21,
+      "missing": 1,
+      "extra": 13,
+      "text_score": 0.566327,
+      "assertion_score": 0.307692,
+      "candidate_score": 0.25,
+      "candidate_numerator": 1.0,
+      "candidate_denominator": 4.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "94.json",
+      "gold": 2,
+      "prediction": 21,
+      "matched": 1,
+      "missing": 1,
+      "extra": 20,
+      "text_score": 0.045455,
+      "assertion_score": 0.0,
+      "candidate_score": 0.0,
+      "candidate_numerator": 0.0,
+      "candidate_denominator": 10.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "95.json",
+      "gold": 13,
+      "prediction": 35,
+      "matched": 13,
+      "missing": 0,
+      "extra": 22,
+      "text_score": 0.340816,
+      "assertion_score": 0.2,
+      "candidate_score": 0.214286,
+      "candidate_numerator": 3.0,
+      "candidate_denominator": 14.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "96.json",
+      "gold": 4,
+      "prediction": 10,
+      "matched": 2,
+      "missing": 2,
+      "extra": 8,
+      "text_score": 0.138889,
+      "assertion_score": 0.0,
+      "candidate_score": 0.0,
+      "candidate_numerator": 0.0,
+      "candidate_denominator": 4.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "97.json",
+      "gold": 25,
+      "prediction": 30,
+      "matched": 23,
+      "missing": 2,
+      "extra": 7,
+      "text_score": 0.682292,
+      "assertion_score": 0.583333,
+      "candidate_score": 0.583333,
+      "candidate_numerator": 7.0,
+      "candidate_denominator": 12.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "98.json",
+      "gold": 24,
+      "prediction": 27,
+      "matched": 20,
+      "missing": 4,
+      "extra": 7,
+      "text_score": 0.559857,
+      "assertion_score": 0.451613,
+      "candidate_score": 0.294118,
+      "candidate_numerator": 5.0,
+      "candidate_denominator": 17.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "99.json",
+      "gold": 44,
+      "prediction": 42,
+      "matched": 32,
+      "missing": 12,
+      "extra": 10,
+      "text_score": 0.583333,
+      "assertion_score": 0.484848,
+      "candidate_score": 0.157895,
+      "candidate_numerator": 3.0,
+      "candidate_denominator": 19.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    },
+    {
+      "file": "100.json",
+      "gold": 7,
+      "prediction": 14,
+      "matched": 6,
+      "missing": 1,
+      "extra": 8,
+      "text_score": 0.327778,
+      "assertion_score": 0.230769,
+      "candidate_score": 0.285714,
+      "candidate_numerator": 2.0,
+      "candidate_denominator": 7.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    }
+  ]
+}

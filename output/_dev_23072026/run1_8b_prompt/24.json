@@ -1,0 +1,531 @@
+[
+  {
+    "text": "mệt mỏi",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      49,
+      56
+    ]
+  },
+  {
+    "text": "vàng da",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      58,
+      65
+    ]
+  },
+  {
+    "text": "vàng mắt",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      67,
+      75
+    ]
+  },
+  {
+    "text": "nhiễm trùng",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      191,
+      202
+    ]
+  },
+  {
+    "text": "sốt",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      238,
+      241
+    ]
+  },
+  {
+    "text": "sốt",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      256,
+      259
+    ]
+  },
+  {
+    "text": "paracetamol",
+    "type": "THUỐC",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      320,
+      331
+    ],
+    "candidates": [
+      "161"
+    ]
+  },
+  {
+    "text": "sốt",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      382,
+      385
+    ]
+  },
+  {
+    "text": "vàng da",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      400,
+      407
+    ]
+  },
+  {
+    "text": "sốt",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      441,
+      444
+    ]
+  },
+  {
+    "text": "mệt mỏi",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      448,
+      455
+    ]
+  },
+  {
+    "text": "sốt",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      506,
+      509
+    ]
+  },
+  {
+    "text": "mệt mỏi",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      515,
+      522
+    ]
+  },
+  {
+    "text": "ăn ngủ tốt",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      524,
+      534
+    ]
+  },
+  {
+    "text": "BC 5,38 G/l",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      544,
+      555
+    ]
+  },
+  {
+    "text": "N 51,4%",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      557,
+      564
+    ]
+  },
+  {
+    "text": "HBsAg (+)",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      573,
+      582
+    ]
+  },
+  {
+    "text": "Anti HBe (-)",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      584,
+      596
+    ]
+  },
+  {
+    "text": "Anti HBc IgG (-)",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      605,
+      621
+    ]
+  },
+  {
+    "text": "Anti HBc IgM (+)",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      623,
+      639
+    ]
+  },
+  {
+    "text": "vàng da",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      667,
+      674
+    ]
+  },
+  {
+    "text": "Khởi phát bệnh từ từ",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      690,
+      710
+    ]
+  },
+  {
+    "text": "da niêm mạc vàng",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      712,
+      728
+    ]
+  },
+  {
+    "text": "sốt",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      741,
+      744
+    ]
+  },
+  {
+    "text": "nước tiểu ít hơn so với bình thường",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      758,
+      793
+    ]
+  },
+  {
+    "text": "vàng sậm như nước vối",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      795,
+      816
+    ]
+  },
+  {
+    "text": "vàng da",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      860,
+      867
+    ]
+  },
+  {
+    "text": "nước tiểu trong",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      874,
+      889
+    ]
+  },
+  {
+    "text": "số lượng đã nhiều hơn so với lúc vào viện",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      891,
+      932
+    ]
+  },
+  {
+    "text": "1000ml/24h",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      934,
+      944
+    ]
+  },
+  {
+    "text": "Gan to dưới bờ sườn 3cm",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      954,
+      977
+    ]
+  },
+  {
+    "text": "bờ tù",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      979,
+      984
+    ]
+  },
+  {
+    "text": "mật độ mềm",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      986,
+      996
+    ]
+  },
+  {
+    "text": "bề mặt nhẵn",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      998,
+      1009
+    ]
+  },
+  {
+    "text": "ấn tức",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1011,
+      1017
+    ]
+  },
+  {
+    "text": "Bilirubin  toàn phần",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1053,
+      1073
+    ]
+  },
+  {
+    "text": "43 mmol/l",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1075,
+      1084
+    ]
+  },
+  {
+    "text": "Ure",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1115,
+      1118
+    ]
+  },
+  {
+    "text": "5,9 mmol/l",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1120,
+      1130
+    ]
+  },
+  {
+    "text": "Hội chứng hủy hoại tế bào gan",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      1165,
+      1194
+    ],
+    "candidates": []
+  },
+  {
+    "text": "GOT",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1224,
+      1227
+    ]
+  },
+  {
+    "text": "542 U/l",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1229,
+      1236
+    ]
+  },
+  {
+    "text": "GPT",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1238,
+      1241
+    ]
+  },
+  {
+    "text": "628 U/l",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1243,
+      1250
+    ]
+  },
+  {
+    "text": "GGT",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1252,
+      1255
+    ]
+  },
+  {
+    "text": "234 U/l",
+    "type": "KẾT_QUẢ_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1257,
+      1264
+    ]
+  },
+  {
+    "text": "vàng da",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated",
+      "isHistorical"
+    ],
+    "position": [
+      1410,
+      1417
+    ]
+  },
+  {
+    "text": "uống rượu",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isHistorical"
+    ],
+    "position": [
+      1495,
+      1504
+    ]
+  },
+  {
+    "text": "không ai bị nhiễm virus viêm gan B, C",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated",
+      "isFamily",
+      "isHistorical"
+    ],
+    "position": [
+      1554,
+      1591
+    ]
+  },
+  {
+    "text": "Tiền sử dịch tễ: Trong đơn vị có 3 người mang virus viêm gan B",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      1601,
+      1663
+    ],
+    "candidates": []
+  },
+  {
+    "text": "mệt mỏi",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1712,
+      1719
+    ]
+  },
+  {
+    "text": "vàng da",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1725,
+      1732
+    ]
+  },
+  {
+    "text": "chảy máu",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      1772,
+      1780
+    ]
+  },
+  {
+    "text": "- Khi được chuyển vào khoa điều trị, bệnh nhân không còn cảm giáckhó chịu vùng ngực",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [
+      "isNegated"
+    ],
+    "position": [
+      1905,
+      1988
+    ],
+    "candidates": []
+  },
+  {
+    "text": "Glucose",
+    "type": "TÊN_XÉT_NGHIỆM",
+    "assertions": [],
+    "position": [
+      1997,
+      2004
+    ]
+  },
+  {
+    "text": "ALT, AST trở về bình thường",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      2295,
+      2322
+    ]
+  }
+]

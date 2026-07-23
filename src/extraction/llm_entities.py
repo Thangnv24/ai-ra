@@ -59,6 +59,8 @@ class LLMEntityExtractor:
         mention_count = 0
         rejection_reasons: Counter[str] = Counter()
         for chunk_index, chunk in enumerate(chunks):
+            if _skip_non_patient_article(chunk):
+                continue
             units = _chunk_units(chunk)
             context_before, context_after = _neighbor_context(chunks, chunk_index)
             result = self.llm_client.chat_json(
@@ -71,15 +73,20 @@ class LLMEntityExtractor:
                         context_after=context_after,
                     )
                 ),
+                max_tokens=1400,
             )
             if not result.ok or not isinstance(result.data, dict):
                 raise RuntimeError(
                     f"LLM entity extraction failed for {chunk.chunk_id}: "
                     f"{result.error or 'LLM returned no data'}"
                 )
-            mentions = result.data.get("mentions")
-            if not isinstance(mentions, list):
-                raise RuntimeError(f"LLM entity extraction failed for {chunk.chunk_id}: JSON has no mentions list")
+            mentions = _mentions_from_payload(result.data)
+            if mentions is None:
+                keys = ",".join(sorted(str(key) for key in result.data))
+                raise RuntimeError(
+                    f"LLM entity extraction failed for {chunk.chunk_id}: "
+                    f"JSON has no mentions list (keys={keys})"
+                )
             mention_count += len(mentions)
             used_occurrences: dict[tuple[str, str], set[int]] = {}
             for mention in mentions:
@@ -104,6 +111,25 @@ class LLMEntityExtractor:
             deduplicated=aligned_before_dedup - len(spans),
             rejection_reasons=tuple(sorted(rejection_reasons.items())),
         )
+
+
+def _mentions_from_payload(payload: dict[str, Any]) -> list[Any] | None:
+    for key in ("mentions", "medical_mentions", "entities"):
+        value = payload.get(key)
+        if isinstance(value, list):
+            return value
+
+    for key in ("result", "output", "data"):
+        nested = payload.get(key)
+        if not isinstance(nested, dict):
+            continue
+        for nested_key in ("mentions", "medical_mentions", "entities"):
+            value = nested.get(nested_key)
+            if isinstance(value, list):
+                return value
+
+    list_values = [value for value in payload.values() if isinstance(value, list)]
+    return list_values[0] if len(list_values) == 1 else None
 
 
 def align_quote_in_chunk(chunk: TextChunk, quote: str) -> tuple[int, int] | None:
@@ -209,14 +235,15 @@ def _span_from_mention_with_reason(
         return None, "quote_not_found"
 
     raw_occurrence_index = mention.get("occurrence_index")
+    occurrence_index: int | None = None
     if raw_occurrence_index is not None:
         try:
             occurrence_index = int(raw_occurrence_index)
         except (TypeError, ValueError):
-            return None, "invalid_occurrence_index"
-        if occurrence_index < 0 or occurrence_index >= len(occurrences):
-            return None, "occurrence_out_of_range"
-    else:
+            occurrence_index = None
+        if occurrence_index is not None and not 0 <= occurrence_index < len(occurrences):
+            occurrence_index = None
+    if occurrence_index is None:
         occurrence_key = (unit.unit_id, normalize_key(quote))
         consumed = (used_occurrences or {}).setdefault(occurrence_key, set())
         occurrence_index = next((index for index in range(len(occurrences)) if index not in consumed), 0)
@@ -238,17 +265,20 @@ def _span_from_mention_with_reason(
         concept_type,
         _confidence(mention.get("confidence")),
         source="llm",
+        structure_role=chunk.structure_role,
     ), None
 
 
 def _coerce_compact_mention(mention: Any) -> Any:
     if not isinstance(mention, list) or len(mention) < 2:
         return mention
-    return {
+    output = {
         "quote": mention[0],
         "type": mention[1],
-        "occurrence_index": mention[2] if len(mention) > 2 else 0,
     }
+    if len(mention) > 2:
+        output["occurrence_index"] = mention[2]
+    return output
 
 
 def _chunk_units(chunk: TextChunk) -> list[TextUnit]:
@@ -350,3 +380,24 @@ def _dedup_spans(spans: list[SpanCandidate]) -> list[SpanCandidate]:
         if current is None or span.score > current.score:
             best[key] = span
     return sorted(best.values(), key=lambda item: (item.start, item.end, item.type))
+
+
+def _skip_non_patient_article(chunk: TextChunk) -> bool:
+    if chunk.structure_role not in {"medical_article", "document"}:
+        return False
+    key = normalize_key(chunk.text)
+    patient_cues = (
+        "benh nhan",
+        "ly do nhap vien",
+        "benh su",
+        "tien su",
+        "cac benh man tinh",
+        "cac benh ly man tinh",
+        "thuoc da dieu tri",
+        "thuoc truoc khi nhap vien",
+        "trieu chung khi vao vien",
+        "danh gia tai benh vien",
+        "ket qua tham kham",
+        "chan doan:",
+    )
+    return not any(cue in key for cue in patient_cues)

@@ -1,0 +1,226 @@
+[
+  {
+    "text": "Điều trị phụ thuộc vào mức độ nặng và bệnh lý nền có liên quan",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      0,
+      75
+    ]
+  },
+  {
+    "text": "Cần lưu ý cân bằng giữa hiệu quả điều trị kiểm soát triệu chứng và những tác dụng gây độc của liệu pháp điều trị",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      77,
+      211
+    ]
+  },
+  {
+    "text": "thể hệ sau không gây buồn ngủ là lựa chọn hàng đầu sau đó đến",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      230,
+      302
+    ]
+  },
+  {
+    "text": "thể hệ 1",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      320,
+      330
+    ]
+  },
+  {
+    "text": "corticoid liều thấp cách ngày hoặc hàng ngày và giảm liều chậm 2,5 – 5mg mỗi 2-3 tuần",
+    "type": "THUỐC",
+    "assertions": [],
+    "position": [
+      332,
+      430
+    ],
+    "candidates": []
+  },
+  {
+    "text": "Rối loạn cảm xúc",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      581,
+      597
+    ],
+    "candidates": []
+  },
+  {
+    "text": "Rối loạn lưỡng cực",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      605,
+      623
+    ],
+    "candidates": []
+  },
+  {
+    "text": "lo âu",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      639,
+      644
+    ],
+    "candidates": []
+  },
+  {
+    "text": "clonidine",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      754,
+      763
+    ]
+  },
+  {
+    "text": "suboxone",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      821,
+      829
+    ]
+  },
+  {
+    "text": "Lạm dụng chất kích thích, chất gây nghiện opioid",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      953,
+      1001
+    ]
+  },
+  {
+    "text": "tự tử",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1053,
+      1058
+    ]
+  },
+  {
+    "text": "trầm cảm",
+    "type": "CHẨN_ĐOÁN",
+    "assertions": [],
+    "position": [
+      1112,
+      1120
+    ],
+    "candidates": []
+  },
+  {
+    "text": "hưng cảm",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1177,
+      1185
+    ]
+  },
+  {
+    "text": "giảm nhu cầu ngủ",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1220,
+      1236
+    ]
+  },
+  {
+    "text": "tự tử",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1279,
+      1284
+    ]
+  },
+  {
+    "text": "suboxone",
+    "type": "THUỐC",
+    "assertions": [],
+    "position": [
+      1343,
+      1351
+    ],
+    "candidates": [
+      "352990"
+    ]
+  },
+  {
+    "text": "ý nghĩ tự tử, có nghĩ tự bắn vào đầu",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1443,
+      1479
+    ]
+  },
+  {
+    "text": "lo âu",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1486,
+      1491
+    ]
+  },
+  {
+    "text": "hoảng sợ",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1492,
+      1500
+    ]
+  },
+  {
+    "text": "hoang tưởng như đang chiếm khí oxy của người khác",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1507,
+      1556
+    ]
+  },
+  {
+    "text": "Điều trị",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1558,
+      1566
+    ]
+  },
+  {
+    "text": "Hiện đang được chăm sóc tâm thần",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1573,
+      1605
+    ]
+  },
+  {
+    "text": "bởi bác sĩ",
+    "type": "TRIỆU_CHỨNG",
+    "assertions": [],
+    "position": [
+      1606,
+      1616
+    ]
+  }
+]

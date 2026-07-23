@@ -22,6 +22,7 @@ class SpanCandidate:
     type: str
     score: float = 1.0
     source: str = "rule"
+    structure_role: str = "document"
 
 
 SYMPTOM_TERMS = (
@@ -200,6 +201,9 @@ DIAGNOSIS_TERMS = (
     "u \u00e1c tr\u1ef1c tr\u00e0ng",
     "kh\u1ed1i u tr\u1ef1c tr\u00e0ng",
     "u tuy\u1ebfn",
+    "\u0111\u1ea1i tr\u00e0ng gi\u00e3n",
+    "virus vi\u00eam gan b",
+    "virus vi\u00eam gan c",
 )
 
 TEST_TERMS = (
@@ -217,6 +221,30 @@ TEST_TERMS = (
     "crp",
     "glucose",
     "creatinine",
+    "xn",
+    "bc",
+    "hbsag",
+    "anti hbe",
+    "anti hbc igg",
+    "anti hbc igm",
+    "ha",
+    "huy\u1ebft \u00e1p",
+    "nhi\u1ec7t \u0111\u1ed9",
+    "m\u1ea1ch",
+    "nh\u1ecbp tim",
+    "nh\u1ecbp th\u1edf",
+    "spo2",
+    "\u0111\u1ed9 b\u00e3o h\u00f2a oxy",
+    "x\u00e9t nghi\u1ec7m g\u1eafng s\u1ee9c",
+    "nghi\u1ec7m ph\u00e1p g\u1eafng s\u1ee9c tr\u00ean m\u00e1y ch\u1ea1y b\u1ed9",
+    "ch\u1ee5p ct",
+    "ast",
+    "alt",
+    "got",
+    "gpt",
+    "ggt",
+    "ure",
+    "creatinin",
     "monitor holter",
     "si\u00eau \u00e2m tim qua th\u00e0nh ng\u1ef1c",
     "ch\u1ee5p x-quang ng\u1ef1c",
@@ -250,6 +278,10 @@ TEST_TERMS = (
 )
 
 RESULT_TERMS = (
+    "ch\u01b0a ph\u00e1t hi\u1ec7n b\u1ea5t th\u01b0\u1eddng tr\u00ean phim ch\u1ee5p",
+    "st ch\u00eanh xu\u1ed1ng ki\u1ec3u xu\u1ed1ng d\u1ed1c",
+    "tr\u1edf v\u1ec1 b\u00ecnh th\u01b0\u1eddng",
+    "\u0111\u1ec1u t\u0103ng",
     "kh\u00f4ng ghi nh\u1eadn g\u00ec b\u1ea5t th\u01b0\u1eddng",
     "kh\u00f4ng c\u00f3 g\u00ec \u0111\u00e1ng ch\u00fa \u00fd",
     "nh\u1ecbp xoang chi\u1ebfm \u01b0u th\u1ebf",
@@ -261,6 +293,26 @@ RESULT_TERMS = (
     "d\u01b0\u01a1ng t\u00ednh",
     "b\u00ecnh th\u01b0\u1eddng",
     "b\u1ea5t th\u01b0\u1eddng",
+)
+
+_HIGH_PRECISION_TEST_TERMS = (
+    "ha",
+    "xn",
+    "huy\u1ebft \u00e1p",
+    "nhi\u1ec7t \u0111\u1ed9",
+    "m\u1ea1ch",
+    "nh\u1ecbp tim",
+    "nh\u1ecbp th\u1edf",
+    "spo2",
+    "\u0111\u1ed9 b\u00e3o h\u00f2a oxy",
+    "x\u00e9t nghi\u1ec7m g\u1eafng s\u1ee9c",
+    "nghi\u1ec7m ph\u00e1p g\u1eafng s\u1ee9c tr\u00ean m\u00e1y ch\u1ea1y b\u1ed9",
+    "ch\u1ee5p ct",
+    "ast",
+    "alt",
+    "got",
+    "gpt",
+    "ggt",
 )
 
 DRUG_BASE_TERMS = (
@@ -394,6 +446,39 @@ _CONTEXT_HEADING_RESETS = (
     "dieu tri",
 )
 
+_PRESCRIPTION_STRENGTH_RE = re.compile(
+    r"^[ \t*•-]*(?P<drug>[A-Za-zÀ-ỹ][\w.+/-]*"
+    r"(?:\s+[A-Za-zÀ-ỹ][\w.+/-]*){0,2}\s+"
+    r"\d+(?:[,.]\d+)?\s*(?:mcg|mg|g|iu|%)"
+    r"(?:\s*/\s*ml)?"
+    r"(?:\s*x\s*\d+\s*(?:viên|vien|ống|ong|lọ|lo|gói|goi|vỉ|vi))?)",
+    re.IGNORECASE | re.MULTILINE,
+)
+_PRESCRIPTION_COUNT_RE = re.compile(
+    r"^[ \t*•-]*(?P<drug>[A-Za-zÀ-ỹ][\w.+/-]*"
+    r"(?:\s+[A-Za-zÀ-ỹ0-9][\w.+/-]*){0,2}\s+"
+    r"x\s*\d+\s*(?:viên|vien|ống|ong|lọ|lo|gói|goi|vỉ|vi))",
+    re.IGNORECASE | re.MULTILINE,
+)
+_PRESCRIPTION_CONTEXT_CUES = (
+    "thuoc",
+    "dieu tri",
+    "truyen",
+    "tiem",
+    "uong",
+    "pha vao",
+    "vien",
+    "ong",
+    "sang",
+    "chieu",
+)
+_GLUED_TEST_RESULT_RE = re.compile(
+    r"(?P<name>ch\u1ee5p\s*ct)"
+    r"(?P<result>ch\u01b0a\s+ph\u00e1t\s+hi\u1ec7n\s+b\u1ea5t\s+th\u01b0\u1eddng"
+    r"(?:\s+tr\u00ean\s+phim\s+ch\u1ee5p)?)",
+    re.IGNORECASE,
+)
+
 
 class MedicalNER:
     def __init__(self, lexicon_paths: tuple[Path, ...] = ()) -> None:
@@ -402,6 +487,7 @@ class MedicalNER:
         self._symptom_patterns = _compile_terms(SYMPTOM_TERMS + tuple(extra.get(TYPE_SYMPTOM, ())))
         self._diagnosis_patterns = _compile_terms(DIAGNOSIS_TERMS + tuple(extra.get(TYPE_DIAGNOSIS, ())))
         self._test_patterns = _compile_terms(self._test_terms)
+        self._high_precision_test_patterns = _compile_terms(_HIGH_PRECISION_TEST_TERMS)
         self._result_patterns = _compile_terms(RESULT_TERMS)
         self._drug_patterns = _compile_terms(DRUG_BASE_TERMS + tuple(extra.get(TYPE_DRUG, ())))
 
@@ -409,10 +495,13 @@ class MedicalNER:
         spans: list[SpanCandidate] = []
         spans.extend(self._extract_lab_pairs(text))
         spans.extend(self._extract_known_lab_values(text))
+        spans.extend(self._extract_glued_test_results(text))
         spans.extend(self._extract_drugs(text))
+        spans.extend(self._extract_prescription_drugs(text))
         spans.extend(self._extract_context_diagnoses(text))
         spans.extend(_extract_phrase_matches(text, self._diagnosis_patterns, TYPE_DIAGNOSIS, 0.95))
         spans.extend(_extract_phrase_matches(text, self._symptom_patterns, TYPE_SYMPTOM, 0.8))
+        spans.extend(_extract_phrase_matches(text, self._high_precision_test_patterns, TYPE_TEST_NAME, 0.97))
         spans.extend(_extract_phrase_matches(text, self._test_patterns, TYPE_TEST_NAME, 0.7))
         spans.extend(self._extract_contextual_results(text))
         return _resolve_overlaps(spans)
@@ -461,6 +550,33 @@ class MedicalNER:
                 start, end, span_text = trim_span_text(text, start, end)
                 if span_text:
                     spans.append(SpanCandidate(start, end, span_text, TYPE_DRUG, 0.98))
+        return spans
+
+    def _extract_glued_test_results(self, text: str) -> list[SpanCandidate]:
+        spans: list[SpanCandidate] = []
+        for match in _GLUED_TEST_RESULT_RE.finditer(text):
+            for group, concept_type in (
+                ("name", TYPE_TEST_NAME),
+                ("result", TYPE_TEST_RESULT),
+            ):
+                start, end, span_text = trim_span_text(text, *match.span(group))
+                if span_text:
+                    spans.append(SpanCandidate(start, end, span_text, concept_type, 0.995))
+        return spans
+
+    def _extract_prescription_drugs(self, text: str) -> list[SpanCandidate]:
+        spans: list[SpanCandidate] = []
+        for pattern in (_PRESCRIPTION_STRENGTH_RE, _PRESCRIPTION_COUNT_RE):
+            for match in pattern.finditer(text):
+                start, end = match.span("drug")
+                if re.match(r"\s*/\s*(?:l|dl)\b", text[end : end + 6], re.IGNORECASE):
+                    continue
+                context = normalize_key(text[max(0, start - 140) : min(len(text), end + 100)])
+                if not any(cue in context for cue in _PRESCRIPTION_CONTEXT_CUES):
+                    continue
+                start, end, span_text = trim_span_text(text, start, end)
+                if span_text:
+                    spans.append(SpanCandidate(start, end, span_text, TYPE_DRUG, 0.995))
         return spans
 
     def _extract_context_diagnoses(self, text: str) -> list[SpanCandidate]:
@@ -536,6 +652,17 @@ def _looks_like_lab_name(name: str) -> bool:
 
 def _bad_context_diagnosis(text: str) -> bool:
     key = normalize_key(text)
+    words = key.split()
+    if len(words) > 10 and any(
+        cue in key
+        for cue in (
+            "benh nhan",
+            "khi duoc chuyen",
+            "khong con cam giac",
+            "vao khoa dieu tri",
+        )
+    ):
+        return True
     if len(key.split()) <= 2 and key in {"khac", "tham do", "va dieu tri", "hinh anh"}:
         return True
     bad_prefixes = (
@@ -725,5 +852,17 @@ def _looks_like_result_context(context: str) -> bool:
         "sinh thiet",
         "choc hut",
         "choc do",
+        "ha",
+        "huyet ap",
+        "nhiet do",
+        "mach",
+        "nhip tim",
+        "nhip tho",
+        "spo2",
+        "alt",
+        "ast",
+        "got",
+        "gpt",
+        "ggt",
     )
     return any(cue in context for cue in cues)

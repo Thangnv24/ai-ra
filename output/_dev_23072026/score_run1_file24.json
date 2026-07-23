@@ -1,0 +1,30 @@
+{
+  "created_at": "2026-07-23T23:24:26",
+  "input_dir": "D:\\downloads\\ai-race\\output\\_dev_23072026\\input",
+  "gold_dir": "D:\\downloads\\ai-race\\output\\_dev_23072026\\gold_one",
+  "prediction_dir": "D:\\downloads\\ai-race\\output\\_dev_23072026\\run1_8b_prompt",
+  "num_records": 1,
+  "text_score": 40.5724,
+  "J_assertion": 57.1429,
+  "J_candidates": 23.0769,
+  "final_score_estimate": 38.5454,
+  "files": [
+    {
+      "file": "24.json",
+      "gold": 87,
+      "prediction": 56,
+      "matched": 44,
+      "missing": 43,
+      "extra": 12,
+      "text_score": 0.405724,
+      "assertion_score": 0.571429,
+      "candidate_score": 0.230769,
+      "candidate_numerator": 3.0,
+      "candidate_denominator": 13.0,
+      "validation": {
+        "gold": [],
+        "prediction": []
+      }
+    }
+  ]
+}
