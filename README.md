@@ -9,12 +9,12 @@ pip install -r requirements.txt
 pip install -e .
 ```
 
-Mặc định hiện tại chỉ chạy luồng LLM nội bộ. Cấu hình runtime nằm trực tiếp trong `.env` với các biến không có prefix:
+Mặc định hiện tại chỉ chạy luồng LLM qua API tương thích OpenAI. Sao chép `.env.example` thành `.env`, sau đó điền endpoint, model và API key của bạn. File `.env` chứa thông tin bí mật và không được commit:
 
 ```text
-API_KEY=<internal_key>
-BASE_URL=http://10.221.58.70:8402
-MODEL=thangnv108
+API_KEY=replace_with_your_api_key
+BASE_URL=https://your-openai-compatible-endpoint.example/v1
+MODEL=your_model_name
 TEMPERATURE=0
 MAX_TOKENS=4096
 TIMEOUT=120
